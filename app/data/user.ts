@@ -1,6 +1,6 @@
 import { auth } from '@/auth'
 import { db } from '@/lib/db'
-import { User } from '@prisma/client'
+import { User } from '@/type'
 
 export const getCurrentUser = async (): Promise<User> => {
   try {
@@ -12,6 +12,12 @@ export const getCurrentUser = async (): Promise<User> => {
     const user = await db.user.findUnique({
       where: {
         email,
+      },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        image: true,
       },
     })
 
