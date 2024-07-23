@@ -16,17 +16,19 @@ export default auth((req) => {
 
   if (isAuthRoute) {
     if (isLoggedIn) {
-      return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
+      Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
+      return;
     }
     return;
   }
 
   if (!isLoggedIn && !isPublicRoute) {
-    return Response.redirect(new URL('/sign-in', nextUrl));
+    Response.redirect(new URL('/sign-in', nextUrl));
+    return;
   }
 
   if (isLoggedIn && isMainPage) {
-    return Response.redirect(new URL('/activity', nextUrl));
+    Response.redirect(new URL('/activity', nextUrl));
   }
 });
 
