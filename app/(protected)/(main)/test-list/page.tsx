@@ -1,8 +1,8 @@
 import React from 'react';
-import ActivityListCard from '@/app/(public)/(main)/_components/activity-list-card';
-import QuestionListCard from './question-list-card';
+import ActivityListCard from '@/app/(protected)/(main)/activity-list/_components/activity-list-card';
+import QuestionListCard from '@/app/(protected)/(main)/question-list/_components/question-list-card';
 
-export default function ActivityList() {
+export default function Page() {
   return (
     <div className="p-5">
       <div className="flex justify-between items-center mb-8">
