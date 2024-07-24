@@ -5,9 +5,10 @@ import Link from 'next/link';
 
 interface Props {
   page: number;
+  tagList: string[];
 }
 
-export default function TagFooter({ page }: Props) {
+export default function TagFooter({ page, tagList }: Props) {
   const processStatus = page * (100 / TAGS.length);
   const lastTagPage = TAGS.length;
 
@@ -17,7 +18,7 @@ export default function TagFooter({ page }: Props) {
         <Link href="/main">건너뛰기</Link>
       </Button>
       <Progress value={processStatus} className="w-[40%] bg-gray_100 h-1" />
-      <Button className="w-20" disabled={page !== lastTagPage}>
+      <Button className="w-20" disabled={page !== lastTagPage} onClick={() => console.log(tagList)}>
         제출하기
       </Button>
     </div>
