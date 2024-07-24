@@ -2,17 +2,17 @@ import { Heart } from 'lucide-react';
 
 interface Props {
   title: string;
-  reviewCount: number;
+  likes: number;
 }
 
-export default function CarouselText({ title, reviewCount }: Props) {
+export default function CarouselText({ title, likes }: Props) {
   return (
     <div className="absolute w-full left-4 bottom-4">
       <p className="font-bold">인기 약속 BEST 5</p>
       <p>{title}</p>
       <div className="flex gap-2">
         <Heart />
-        <p>{reviewCount}</p>
+        <p>{likes}</p>
       </div>
     </div>
   );
