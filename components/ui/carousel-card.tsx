@@ -8,11 +8,6 @@ import Autoplay from 'embla-carousel-autoplay';
 import { Card, CardContent } from '@/components/ui/card';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import CarouselText from '@/components/ui/carousel-text';
-// import { ActivityItem } from '@/type/activities';
-
-// interface Props {
-//   activities: ActivityItem[];
-// }
 
 // eslint-disable-next-line import/prefer-default-export
 export function CarouselCard({ activities }) {
