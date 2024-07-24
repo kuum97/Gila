@@ -1,3 +1,12 @@
+import List from './_components/list';
+
 export default async function Home() {
-  return <div>매인페이지</div>;
+  return (
+    <div>
+      <div>
+        메인 페이지
+        <List />
+      </div>
+    </div>
+  );
 }
