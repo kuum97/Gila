@@ -31,12 +31,12 @@ export function DetailCarousel({ subImages }: Props) {
       ]}
     >
       <CarouselContent>
-        {subImages.map(({ id }) => (
+        {subImages.map(({ id, title, thumbnails }) => (
           <CarouselItem key={id}>
             <Card>
               <CardContent className="relative p-0">
-                <div className="w-full h-96">
-                  {/* <Image src={imageUrl} alt="이미지" fill /> */}
+                <div className="w-full h-64">
+                  {/* <Image src={thumbnails} alt={title} fill /> */}
                 </div>
               </CardContent>
             </Card>
