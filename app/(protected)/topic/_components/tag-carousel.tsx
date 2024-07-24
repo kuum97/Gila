@@ -10,7 +10,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
-import TagContainer from './tag-container';
+import TagContainer from '@/app/(protected)/topic/_components/tag-container';
 
 interface Props {
   addTag: (tagName: string) => void;

@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import TagFooter from './_components/tag-footer';
-import TagCarousel from './_components/tag-carousel';
+import TagFooter from '@/app/(protected)/topic/_components/tag-footer';
+import TagCarousel from '@/app/(protected)/topic/_components/tag-carousel';
 
 export default function Page() {
   const [tagList, setTagList] = useState<string[]>([]);

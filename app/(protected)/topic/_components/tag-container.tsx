@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import TagSelectButton from './tagSelectButton';
+import TagSelectButton from '@/app/(protected)/topic/_components/tagSelectButton';
 
 interface Props {
   tag: string[];
