@@ -1,16 +1,19 @@
-import { db } from "@/lib/db";
-import { Answer } from "@prisma/client";
+import { db } from '@/lib/db';
+import { Answer } from '@prisma/client';
 
-export const getAnswers = async (questionId: string): Promise<{ answers: Answer[], cursorId: string | null }> => {
+// eslint-disable-next-line import/prefer-default-export
+export const getAnswers = async (
+  questionId: string,
+): Promise<{ answers: Answer[]; cursorId: string | null }> => {
   try {
     const answers = await db.answer.findMany({
       where: { questionId },
       include: {
-        user: true,  
+        user: true,
       },
       take: 10,
       orderBy: {
-        createdAt: 'asc', 
+        createdAt: 'asc',
       },
     });
 

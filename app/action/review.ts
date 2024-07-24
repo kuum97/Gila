@@ -1,9 +1,9 @@
-'use server'
+'use server';
 
-import { db } from '@/lib/db'
-import { ActionType } from '@/type'
-import { Review } from '@prisma/client'
-import { getCurrentUserId } from '@/app/data/user'
+import { db } from '@/lib/db';
+import { ActionType } from '@/type';
+import { Review } from '@prisma/client';
+import { getCurrentUserId } from '@/app/data/user';
 
 // score limit 100
 export const createReview = async ({
@@ -11,12 +11,12 @@ export const createReview = async ({
   activityId,
   rating,
 }: {
-  userId: string
-  activityId: string
-  rating: number
+  userId: string;
+  activityId: string;
+  rating: number;
 }): Promise<ActionType<Review>> => {
   if (rating > 100) {
-    return { success: false, message: '점수는 100을 초과할 수 없습니다.' }
+    return { success: false, message: '점수는 100을 초과할 수 없습니다.' };
   }
 
   try {
@@ -26,22 +26,23 @@ export const createReview = async ({
         rating,
         activityId,
       },
-    })
+    });
 
-    if (!newReview)
-      return { success: false, message: '리뷰 생성에 실패하였습니다.' }
+    if (!newReview) return { success: false, message: '리뷰 생성에 실패하였습니다.' };
 
     return {
       success: true,
       message: '리뷰 생성에 성공하였습니다.',
       data: newReview,
-    }
+    };
   } catch (error) {
-    return { success: false, message: '리뷰 생성 중에 에러가 발생하였습니다.' }
+    return { success: false, message: '리뷰 생성 중에 에러가 발생하였습니다.' };
   }
-}
+};
 
-export const loadMoreAvailableReviews = async (cursorId: string | null): Promise<{ reviews: Review[], cursorId: string | null }> => {
+export const loadMoreAvailableReviews = async (
+  cursorId: string | null,
+): Promise<{ reviews: Review[]; cursorId: string | null }> => {
   try {
     const userId = await getCurrentUserId();
     const currentDate = new Date();

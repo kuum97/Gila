@@ -1,8 +1,11 @@
-import { Activity } from '@prisma/client'
-import { getCurrentUserId } from '@/app/data/user'
-import { db } from '@/lib/db'
+import { Activity } from '@prisma/client';
+import { getCurrentUserId } from '@/app/data/user';
+import { db } from '@/lib/db';
 
-export const getMyActivities = async (): Promise<{ activities: Activity[], cursorId: string | null }> => {
+export const getMyActivities = async (): Promise<{
+  activities: Activity[];
+  cursorId: string | null;
+}> => {
   try {
     const userId = await getCurrentUserId();
 
@@ -21,15 +24,27 @@ export const getMyActivities = async (): Promise<{ activities: Activity[], curso
   } catch (error) {
     throw new Error('활동을 가져오는 중에 에러가 발생하였습니다.');
   }
-}
+};
 
-
-export const getActivities = async ({ type, location, cursorId, size = 10 }: {
-  type: 'recent' | 'popular' | 'related' | 'mostViewed' | 'recentByLocation' | 'popularByLocation' | 'relatedByLocation' | 'mostViewedByLocation';
+export const getActivities = async ({
+  type,
+  location,
+  cursorId,
+  size = 10,
+}: {
+  type:
+    | 'recent'
+    | 'popular'
+    | 'related'
+    | 'mostViewed'
+    | 'recentByLocation'
+    | 'popularByLocation'
+    | 'relatedByLocation'
+    | 'mostViewedByLocation';
   location?: string;
   cursorId?: string | null;
   size?: number;
-}): Promise<{ activities: Activity[], cursorId: string | null }> => {
+}): Promise<{ activities: Activity[]; cursorId: string | null }> => {
   try {
     const userId = await getCurrentUserId();
     let currentUser;
@@ -96,7 +111,7 @@ export const getActivities = async ({ type, location, cursorId, size = 10 }: {
     if (type === 'popular' || type === 'popularByLocation') {
       const scoredActivities = activities.map((activity) => ({
         ...activity,
-        score: activity.views ,
+        score: activity.views,
       }));
 
       finalActivities = scoredActivities.sort((a, b) => b.score - a.score).slice(0, size);
@@ -112,7 +127,9 @@ export const getActivities = async ({ type, location, cursorId, size = 10 }: {
         };
       });
 
-      finalActivities = scoredActivities.sort((a, b) => b.matchingScore - a.matchingScore).slice(0, size);
+      finalActivities = scoredActivities
+        .sort((a, b) => b.matchingScore - a.matchingScore)
+        .slice(0, size);
     }
 
     const lastActivity = finalActivities[finalActivities.length - 1];
@@ -124,19 +141,18 @@ export const getActivities = async ({ type, location, cursorId, size = 10 }: {
   }
 };
 
-
 export const getActivityById = async (id: string): Promise<Activity | null> => {
   try {
     const activity = await db.activity.findUnique({
       where: { id },
-    })
+    });
 
     if (!activity) {
-      throw new Error('활동을 찾을 수 없습니다.')
+      throw new Error('활동을 찾을 수 없습니다.');
     }
 
-    return activity
+    return activity;
   } catch (error) {
-    throw new Error('활동을 가져오는 중에 에러가 발생하였습니다.')
+    throw new Error('활동을 가져오는 중에 에러가 발생하였습니다.');
   }
-}
+};

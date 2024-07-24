@@ -1,9 +1,9 @@
-'use server'
+'use server';
 
-import { db } from '@/lib/db'
-import { ActionType } from '@/type'
-import { Activity } from '@prisma/client'
-import { getCurrentUserId } from '../data/user'
+import { db } from '@/lib/db';
+import { ActionType } from '@/type';
+import { Activity } from '@prisma/client';
+import { getCurrentUserId } from '../data/user';
 
 export const createActivity = async ({
   title,
@@ -15,17 +15,17 @@ export const createActivity = async ({
   locations,
   maximumCount,
 }: {
-  title: string
-  description: string
-  thumbnails: string[]
-  tags: string[]
-  startDate: Date
-  endDate: Date
-  locations: string[]
-  maximumCount: number
+  title: string;
+  description: string;
+  thumbnails: string[];
+  tags: string[];
+  startDate: Date;
+  endDate: Date;
+  locations: string[];
+  maximumCount: number;
 }): Promise<ActionType<Activity>> => {
   try {
-    const userId = await getCurrentUserId()
+    const userId = await getCurrentUserId();
 
     const newActivity = await db.activity.create({
       data: {
@@ -39,20 +39,19 @@ export const createActivity = async ({
         tags,
         locations,
       },
-    })
+    });
 
-    if (!newActivity)
-      return { success: false, message: '활동 생성에 실패하였습니다.' }
+    if (!newActivity) return { success: false, message: '활동 생성에 실패하였습니다.' };
 
     return {
       success: true,
       message: '활동 생성에 성공하였습니다.',
       data: newActivity,
-    }
+    };
   } catch (error) {
-    return { success: false, message: '활동 생성 중에 에러가 발생하였습니다.' }
+    return { success: false, message: '활동 생성 중에 에러가 발생하였습니다.' };
   }
-}
+};
 
 export const editActivity = async ({
   activityId,
@@ -65,18 +64,18 @@ export const editActivity = async ({
   locations,
   maximumCount,
 }: {
-  activityId: string
-  title: string
-  description: string
-  thumbnails: string[]
-  tags: string[]
-  startDate: Date
-  endDate: Date
-  locations: string[]
-  maximumCount: number
+  activityId: string;
+  title: string;
+  description: string;
+  thumbnails: string[];
+  tags: string[];
+  startDate: Date;
+  endDate: Date;
+  locations: string[];
+  maximumCount: number;
 }): Promise<ActionType<Activity>> => {
   try {
-    const userId = await getCurrentUserId()
+    const userId = await getCurrentUserId();
 
     const updatedActivity = await db.activity.update({
       where: { id: activityId },
@@ -91,44 +90,52 @@ export const editActivity = async ({
         tags,
         locations,
       },
-    })
+    });
 
-    if (!updatedActivity)
-      return { success: false, message: '활동 수정에 실패하였습니다.' }
+    if (!updatedActivity) return { success: false, message: '활동 수정에 실패하였습니다.' };
 
     return {
       success: true,
       message: '활동 수정에 성공하였습니다.',
       data: updatedActivity,
-    }
+    };
   } catch (error) {
-    return { success: false, message: '활동 수정 중에 에러가 발생하였습니다.' }
+    return { success: false, message: '활동 수정 중에 에러가 발생하였습니다.' };
   }
-}
-export const deleteActivity = async (
-  activityId: string,
-): Promise<ActionType<Activity>> => {
+};
+export const deleteActivity = async (activityId: string): Promise<ActionType<Activity>> => {
   try {
     const deletedActivity = await db.activity.delete({
       where: { id: activityId },
-    })
+    });
 
-    if (!deletedActivity)
-      return { success: false, message: '활동 삭제에 실패하였습니다.' }
+    if (!deletedActivity) return { success: false, message: '활동 삭제에 실패하였습니다.' };
 
-    return { success: true, message: '활동 삭제에 성공하였습니다.' }
+    return { success: true, message: '활동 삭제에 성공하였습니다.' };
   } catch (error) {
-    return { success: false, message: '활동 삭제 중에 에러가 발생하였습니다.' }
+    return { success: false, message: '활동 삭제 중에 에러가 발생하였습니다.' };
   }
-}
+};
 
-
-export const loadMoreActivities = async ({ type, location, cursorId, size = 10 }: {
-  type: 'recent' | 'popular' | 'related' | 'mostViewed' | 'recentByLocation' | 'popularByLocation' | 'relatedByLocation' | 'mostViewedByLocation';
+export const loadMoreActivities = async ({
+  type,
+  location,
+  cursorId,
+  size = 10,
+}: {
+  type:
+    | 'recent'
+    | 'popular'
+    | 'related'
+    | 'mostViewed'
+    | 'recentByLocation'
+    | 'popularByLocation'
+    | 'relatedByLocation'
+    | 'mostViewedByLocation';
   location?: string;
   cursorId?: string | null;
   size?: number;
-}): Promise<{ activities: Activity[], cursorId: string | null }> => {
+}): Promise<{ activities: Activity[]; cursorId: string | null }> => {
   try {
     const userId = await getCurrentUserId();
     let currentUser;
@@ -195,7 +202,7 @@ export const loadMoreActivities = async ({ type, location, cursorId, size = 10 }
     if (type === 'popular' || type === 'popularByLocation') {
       const scoredActivities = activities.map((activity) => ({
         ...activity,
-        score: activity.views ,
+        score: activity.views,
       }));
 
       finalActivities = scoredActivities.sort((a, b) => b.score - a.score).slice(0, size);
@@ -211,7 +218,9 @@ export const loadMoreActivities = async ({ type, location, cursorId, size = 10 }
         };
       });
 
-      finalActivities = scoredActivities.sort((a, b) => b.matchingScore - a.matchingScore).slice(0, size);
+      finalActivities = scoredActivities
+        .sort((a, b) => b.matchingScore - a.matchingScore)
+        .slice(0, size);
     }
 
     const lastActivity = finalActivities[finalActivities.length - 1];

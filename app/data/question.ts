@@ -1,28 +1,33 @@
 // 10개
 // 스킵
 
-import { db } from "@/lib/db";
-import { Question } from "@prisma/client";
+import { db } from '@/lib/db';
+import { Question } from '@prisma/client';
 
-
-export const getQuestions = async ({ order, location, cursorId }: {
+// eslint-disable-next-line import/prefer-default-export
+export const getQuestions = async ({
+  order,
+  location,
+  cursorId,
+}: {
   order: 'answerLen' | 'recent';
   location?: string;
   cursorId?: string | null;
-}): Promise<{ questions: Question[], cursorId: string | null }> => {
+}): Promise<{ questions: Question[]; cursorId: string | null }> => {
   try {
     const whereClause = location ? { location } : {};
 
-    let orderByClause
+    let orderByClause;
 
-    switch (order){
+    switch (order) {
       case 'recent':
-        orderByClause = {createdAt: 'desc' as const}
-        break
+        orderByClause = { createdAt: 'desc' as const };
+        break;
       case 'answerLen':
-        orderByClause = { answers: { _count: 'desc' as const } }
-      default: 
-        throw new Error('order값이 잘못 되었습니다')
+        orderByClause = { answers: { _count: 'desc' as const } };
+        break;
+      default:
+        throw new Error('order값이 잘못 되었습니다');
     }
 
     const questions = await db.question.findMany({
@@ -38,7 +43,7 @@ export const getQuestions = async ({ order, location, cursorId }: {
         },
         skip: 1,
       }),
-      orderBy: orderByClause
+      orderBy: orderByClause,
     });
 
     const lastQuestion = questions[questions.length - 1];

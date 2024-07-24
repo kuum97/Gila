@@ -1,19 +1,23 @@
-import { Favorite } from "@prisma/client";
-import { getCurrentUserId } from "@/app/data/user";
-import { db } from "@/lib/db";
+import { Favorite } from '@prisma/client';
+import { getCurrentUserId } from '@/app/data/user';
+import { db } from '@/lib/db';
 
-export const getMyFavorites = async (): Promise<{ favorites: Favorite[], cursorId: string | null }> => {
+// eslint-disable-next-line import/prefer-default-export
+export const getMyFavorites = async (): Promise<{
+  favorites: Favorite[];
+  cursorId: string | null;
+}> => {
   try {
     const userId = await getCurrentUserId();
 
     const favorites = await db.favorite.findMany({
       where: { userId },
       include: {
-        activity: true,  
+        activity: true,
       },
       take: 10,
       orderBy: {
-        createdAt: 'asc',  
+        createdAt: 'asc',
       },
     });
 

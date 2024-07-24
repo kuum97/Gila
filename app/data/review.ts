@@ -1,10 +1,14 @@
 // 현재 유저가 activity의 신청이 승인되고 activity의 endDate가 지나면 조건
 
-import { getCurrentUserId } from '@/app/data/user'
-import { db } from '@/lib/db'
-import { Review } from '@prisma/client'
+import { getCurrentUserId } from '@/app/data/user';
+import { db } from '@/lib/db';
+import { Review } from '@prisma/client';
 
-export const getAvailableReviews = async (): Promise<{ reviews: Review[], cursorId: string | null }> => {
+// eslint-disable-next-line import/prefer-default-export
+export const getAvailableReviews = async (): Promise<{
+  reviews: Review[];
+  cursorId: string | null;
+}> => {
   try {
     const userId = await getCurrentUserId();
     const currentDate = new Date();
