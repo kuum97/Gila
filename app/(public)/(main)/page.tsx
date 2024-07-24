@@ -1,4 +1,4 @@
-import List from './_components/list';
+import List from '@/app/(public)/(main)/_components/list';
 
 export default async function Home() {
   return (
