@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { LoginSchema, RegisterSchema } from './schema';
 import { Activity, ActivityRequest, User as DbUser } from '@prisma/client';
+import { LoginSchema, RegisterSchema } from '@/schema';
 
 export type ActionType<T> = {
   success: boolean;

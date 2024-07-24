@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { auth } from '@/auth';
 import { db } from '@/lib/db';
 import { User } from '@/type';
