@@ -1,4 +1,4 @@
-import { Bookmark } from 'lucide-react';
+import { Heart } from 'lucide-react';
 
 interface Props {
   title: string;
@@ -11,7 +11,7 @@ export default function CarouselText({ title, reviewCount }: Props) {
       <p className="font-bold">인기 약속 BEST 5</p>
       <p>{title}</p>
       <div className="flex gap-2">
-        <Bookmark />
+        <Heart />
         <p>{reviewCount}</p>
       </div>
     </div>
