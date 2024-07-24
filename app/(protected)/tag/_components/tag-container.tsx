@@ -1,30 +1,31 @@
-import Image from 'next/image';
-import Logo from '@/public/logo.png';
-import TAGS from '@/constants/tag';
-import { ReactNode } from 'react';
+import { useState } from 'react';
+import TagSelectButton from './tagSelectButton';
 
 interface Props {
-  page: number;
+  tag: string[];
+  addTag: (tagName: string) => void;
+  changeTag: (list: string[]) => void;
+  tagList: string[];
 }
 
-function TagSelectButton({ children }: { children: ReactNode }) {
-  return (
-    <div className="flex flex-col items-center justify-center w-40 h-40 rounded-xl bg-gray_100 hover:bg-primary">
-      <p className="text-2xl font-bold">{children}</p>
-    </div>
-  );
-}
+export default function TagContainer({ tag, addTag, changeTag, tagList }: Props) {
+  const [isSelected, setIsSelected] = useState('');
 
-export default function TagContainer({ page }: Props) {
-  const tagContent = TAGS.find((tag) => tag.id === page);
+  const selectTag = (tagName: string) => {
+    setIsSelected(tagName);
+    if (!isSelected) {
+      addTag(tagName);
+    } else {
+      const deleteTagList = tagList.filter((item) => item !== isSelected);
+      const editList = [...deleteTagList, tagName];
+      changeTag(editList);
+    }
+  };
 
   return (
-    <div className="flex flex-col items-center justify-center w-full gap-10">
-      <TagSelectButton>{tagContent?.tag[0]}</TagSelectButton>
-      <div className="flex flex-col items-center justify-center">
-        <Image src={Logo} alt="로고 이미지" width={80} />
-      </div>
-      <TagSelectButton>{tagContent?.tag[1]}</TagSelectButton>
+    <div className="flex flex-col items-center justify-center w-full gap-20">
+      <TagSelectButton isSelected={isSelected} tag={tag[0]} onClick={selectTag} />
+      <TagSelectButton isSelected={isSelected} tag={tag[1]} onClick={selectTag} />
     </div>
   );
 }
