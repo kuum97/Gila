@@ -27,20 +27,20 @@ export function CarouselCard({ activities }) {
       ]}
     >
       <CarouselContent>
-        {activities.map(({ id, title, reviewCount }) => (
+        {activities.map(({ id, title, likes, thumbnails }) => (
           <CarouselItem key={id}>
             <Card className="rounded-none">
               <CardContent className="relative p-0 ">
                 <Link href={`/${id}`} passHref>
                   <div className="w-full h-64">
                     {/* <Image
-                      src={bannerImageUrl}
+                      src={thumbnails}
                       alt={title}
                       fill
                       className="object-cover w-full h-full"
                     /> */}
                   </div>
-                  <CarouselText title={title} reviewCount={reviewCount} />
+                  <CarouselText title={title} likes={likes} />
                 </Link>
               </CardContent>
             </Card>
