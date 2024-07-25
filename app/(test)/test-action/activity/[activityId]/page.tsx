@@ -7,6 +7,8 @@ export default async function Page({ params }: { params: { activityId: string } 
 
   const activityRequestsRes = await getActivityRequestsByActivityId(activityId);
   const activityRequests = activityRequestsRes.requests;
+
+  // const reviews = await
   return (
     <div className="space-y-4">
       <div className="space-y-4">

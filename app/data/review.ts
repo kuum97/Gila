@@ -44,3 +44,37 @@ export const getAvailableReviews = async (): Promise<{
     throw new Error('리뷰를 가져오는 중에 에러가 발생하였습니다.');
   }
 };
+
+export const getReviewsByActivityId = async ({
+  activityId,
+  size = 10,
+}: {
+  activityId: string;
+  size?: number;
+}): Promise<{
+  reviews: Review[];
+  cursorId: string | null;
+}> => {
+  try {
+    const reviews = await db.review.findMany({
+      where: { activityId },
+      include: {
+        user: true,
+      },
+      take: size,
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+
+    const lastReview = reviews[reviews.length - 1];
+    const newCursorId = lastReview ? lastReview.id : null;
+
+    return {
+      reviews,
+      cursorId: newCursorId,
+    };
+  } catch (error) {
+    throw new Error('리뷰를 가져오는 중에 에러가 발생하였습니다.');
+  }
+};
