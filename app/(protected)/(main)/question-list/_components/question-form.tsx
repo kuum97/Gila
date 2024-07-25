@@ -52,7 +52,7 @@ export default function QuestionForm() {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const onSubmit = (values: z.infer<typeof FormSchema>) => {
-    console.log('테스트입니다.');
+    // console.log('테스트입니다.');
   };
 
   return (
