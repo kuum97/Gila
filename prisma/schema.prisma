@@ -161,6 +161,8 @@ model ActivityRequest {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@unique([requestUserId, activityId])
 }
 
 model Like {
