@@ -7,6 +7,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import AnswerList from './answer-list';
+import AnswerForm from './answer-form';
 
 export default function QuestionDetailModal() {
   return (
@@ -22,7 +23,7 @@ export default function QuestionDetailModal() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <p>00시 00구</p>
-              <p className="text-xs">1</p>
+              <p className="text-xs">1시간 전</p>
             </div>
             <p className="text-sm">박상준</p>
           </div>
@@ -30,14 +31,8 @@ export default function QuestionDetailModal() {
             ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
           </DialogDescription>
         </DialogHeader>
-        <div className="flex flex-col gap-5">
-          <form className="flex items-start gap-5">
-            <textarea
-              className="border w-full h-20 rounded-md p-2 text-xs"
-              placeholder="답변을 작성해주세요!"
-            />
-            <Button className="w-24">답변하기</Button>
-          </form>
+        <div className="flex flex-col">
+          <AnswerForm />
           <AnswerList />
         </div>
       </DialogContent>
