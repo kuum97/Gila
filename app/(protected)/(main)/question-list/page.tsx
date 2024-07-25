@@ -1,3 +1,5 @@
+import QuestionForm from "./_components/question-form";
+
 export default function Page() {
-  return <div>질문 메인 페이지</div>;
+  return <QuestionForm />;
 }
