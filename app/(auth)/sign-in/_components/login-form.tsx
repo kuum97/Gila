@@ -14,11 +14,12 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { useTransition } from 'react';
+import { useState, useTransition } from 'react';
 import { LoginSchemaType } from '@/type';
 import { toast } from 'sonner';
 import { login } from '@/app/action/user';
 import { useRouter } from 'next/navigation';
+import PasswordInput from '@/components/ui/password-input';
 
 const loginFields = [
   { name: 'email', label: 'Email', placeholder: 'test@test.com', type: 'text' },
@@ -31,6 +32,7 @@ const loginFields = [
 ];
 
 export default function LoginForm() {
+  const [isVisible, setIsVisible] = useState(false);
   const router = useRouter();
 
   const [isPending, startTransition] = useTransition();
@@ -42,6 +44,10 @@ export default function LoginForm() {
       password: '',
     },
   });
+
+  const handleVisibility = () => {
+    setIsVisible(!isVisible);
+  };
 
   function onSubmit(values: LoginSchemaType) {
     startTransition(async () => {
@@ -64,10 +70,19 @@ export default function LoginForm() {
             control={form.control}
             name={field.name as keyof LoginSchemaType}
             render={({ field: controllerField }) => (
-              <FormItem>
+              <FormItem className="relative">
                 <FormLabel>{field.label}</FormLabel>
                 <FormControl>
-                  <Input placeholder={field.placeholder} type={field.type} {...controllerField} />
+                  {field.type === 'password' ? (
+                    <PasswordInput
+                      type={isVisible ? 'text' : 'password'}
+                      handleToggle={handleVisibility}
+                      placeholder={field.placeholder}
+                      {...controllerField}
+                    />
+                  ) : (
+                    <Input type={field.type} placeholder={field.placeholder} {...controllerField} />
+                  )}
                 </FormControl>
                 <div className="h-5">
                   <FormMessage className="text-xs text-red" />
