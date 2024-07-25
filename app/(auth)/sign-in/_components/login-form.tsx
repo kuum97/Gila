@@ -38,8 +38,8 @@ export default function LoginForm() {
   const form = useForm<LoginSchemaType>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
-      email: 'test@mail.com',
-      password: 'test1234',
+      email: '',
+      password: '',
     },
   });
 
@@ -51,13 +51,13 @@ export default function LoginForm() {
         return;
       }
       toast.success(action.message);
-      router.replace('/activity');
+      router.replace('/activity-list');
     });
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 w-full">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
         {loginFields.map((field) => (
           <FormField
             key={field.name}
@@ -69,7 +69,9 @@ export default function LoginForm() {
                 <FormControl>
                   <Input placeholder={field.placeholder} type={field.type} {...controllerField} />
                 </FormControl>
-                <FormMessage />
+                <div className="h-5">
+                  <FormMessage className="text-xs text-red" />
+                </div>
               </FormItem>
             )}
           />
