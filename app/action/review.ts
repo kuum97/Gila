@@ -5,19 +5,17 @@ import { ActionType } from '@/type';
 import { Review } from '@prisma/client';
 import { getCurrentUserId } from '@/app/data/user';
 
-// score limit 100
 export const createReview = async ({
-  userId,
   activityId,
   rating,
 }: {
-  userId: string;
   activityId: string;
   rating: number;
 }): Promise<ActionType<Review>> => {
   if (rating > 100) {
     return { success: false, message: '점수는 100을 초과할 수 없습니다.' };
   }
+  const userId = await getCurrentUserId();
 
   try {
     const newReview = await db.review.create({
