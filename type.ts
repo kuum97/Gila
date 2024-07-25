@@ -17,3 +17,7 @@ export type User = Pick<DbUser, 'id' | 'nickname' | 'email' | 'image'>;
 export type ActivityRequestWithActivity = ActivityRequest & {
   activity: Activity;
 };
+
+export type ActivityRequestWithUser = ActivityRequest & {
+  requestUser: User;
+};
