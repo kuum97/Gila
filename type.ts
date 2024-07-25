@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { Activity, ActivityRequest, User as DbUser } from '@prisma/client';
+import { Activity, ActivityRequest, User as DbUser, Favorite } from '@prisma/client';
 import { LoginSchema, RegisterSchema } from '@/schema';
 
 export type ActionType<T> = {
@@ -20,4 +20,8 @@ export type ActivityRequestWithActivity = ActivityRequest & {
 
 export type ActivityRequestWithUser = ActivityRequest & {
   requestUser: User;
+};
+
+export type ActivityWithFavorites = Activity & {
+  favorites: Favorite[];
 };

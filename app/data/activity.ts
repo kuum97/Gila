@@ -44,19 +44,23 @@ export const getActivities = async ({
   location?: string;
   cursorId?: string | null;
   size?: number;
-}): Promise<{ activities: Activity[]; cursorId: string | null }> => {
+}): Promise<{ activities: (Activity & { isFavorited: boolean })[]; cursorId: string | null }> => {
   try {
     const userId = await getCurrentUserId();
     let currentUser;
-    if (type === 'related' || type.includes('relatedByLocation')) {
+    let favoritedActivityIds: Set<string> = new Set();
+
+    if (userId) {
       currentUser = await db.user.findUnique({
         where: { id: userId },
-        select: { tags: true },
+        select: { tags: true, favorites: { select: { activityId: true } } },
       });
 
       if (!currentUser) {
         throw new Error('사용자를 찾을 수 없습니다.');
       }
+
+      favoritedActivityIds = new Set(currentUser.favorites.map((fav) => fav.activityId));
     }
 
     const whereClause = location ? { locations: { has: location } } : {};
@@ -135,7 +139,12 @@ export const getActivities = async ({
     const lastActivity = finalActivities[finalActivities.length - 1];
     const newCursorId = lastActivity ? lastActivity.id : null;
 
-    return { activities: finalActivities, cursorId: newCursorId };
+    const activitiesWithFavoriteStatus = finalActivities.map((activity) => ({
+      ...activity,
+      isFavorited: favoritedActivityIds.has(activity.id),
+    }));
+
+    return { activities: activitiesWithFavoriteStatus, cursorId: newCursorId };
   } catch (error) {
     throw new Error('활동을 가져오는 중에 에러가 발생하였습니다.');
   }
