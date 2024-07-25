@@ -45,13 +45,9 @@ export const getAvailableReviews = async (): Promise<{
   }
 };
 
-export const getReviewsByActivityId = async ({
-  activityId,
-  size = 10,
-}: {
-  activityId: string;
-  size?: number;
-}): Promise<{
+export const getReviewsByActivityId = async (
+  activityId: string,
+): Promise<{
   reviews: Review[];
   cursorId: string | null;
 }> => {
@@ -61,7 +57,7 @@ export const getReviewsByActivityId = async ({
       include: {
         user: true,
       },
-      take: size,
+      take: 10,
       orderBy: {
         createdAt: 'desc',
       },
