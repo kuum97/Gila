@@ -14,11 +14,12 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { useTransition } from 'react';
+import { useState, useTransition } from 'react';
 import { RegisterSchemaType } from '@/type';
 import { register } from '@/app/action/user';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
+import PasswordInput from '@/components/ui/password-input';
 
 const fields = [
   { name: 'email', label: 'Email', placeholder: 'test@test.com', type: 'text' },
@@ -37,6 +38,8 @@ const fields = [
 ];
 
 export default function RegisterForm() {
+  const [isVisible, setIsVisible] = useState(false);
+  const [isConfirmVisible, setIsConfirmVisible] = useState(false);
   const router = useRouter();
 
   const [isPending, startTransition] = useTransition();
@@ -62,9 +65,22 @@ export default function RegisterForm() {
     });
   }
 
+  const handleVisibility = (name: string) => {
+    if (name === 'password') {
+      setIsVisible(!isVisible);
+    } else {
+      setIsConfirmVisible(!isConfirmVisible);
+    }
+  };
+
+  const settingPasswordInputType = (name: string) => {
+    if (name === 'password') return isVisible;
+    return isConfirmVisible;
+  };
+
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 w-full">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
         {fields.map((field) => (
           <FormField
             key={field.name}
@@ -74,14 +90,25 @@ export default function RegisterForm() {
               <FormItem>
                 <FormLabel>{field.label}</FormLabel>
                 <FormControl>
-                  <Input placeholder={field.placeholder} type={field.type} {...controllerField} />
+                  {field.type === 'password' ? (
+                    <PasswordInput
+                      type={settingPasswordInputType(field.name) ? 'text' : 'password'}
+                      handleToggle={() => handleVisibility(field.name)}
+                      placeholder={field.placeholder}
+                      {...controllerField}
+                    />
+                  ) : (
+                    <Input type={field.type} placeholder={field.placeholder} {...controllerField} />
+                  )}
                 </FormControl>
-                <FormMessage />
+                <div className="h-5">
+                  <FormMessage className="text-xs text-red" />
+                </div>
               </FormItem>
             )}
           />
         ))}
-        <Button disabled={isPending || !form.formState.isValid} type="submit" className="w-full">
+        <Button disabled={isPending} type="submit" className="w-full">
           회원가입
         </Button>
       </form>

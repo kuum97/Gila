@@ -91,7 +91,7 @@ export default function LoginForm() {
             )}
           />
         ))}
-        <Button disabled={isPending || !form.formState.isValid} type="submit" className="w-full">
+        <Button disabled={isPending} type="submit" className="w-full">
           로그인
         </Button>
       </form>
