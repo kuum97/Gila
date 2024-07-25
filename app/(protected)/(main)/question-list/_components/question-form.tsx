@@ -31,7 +31,10 @@ const FormFields = [
 ];
 
 const FormSchema = z.object({
-  title: z.string().min(1, { message: '제목을 입력해 주세요.' }),
+  title: z
+    .string()
+    .min(1, { message: '제목을 입력해 주세요.' })
+    .max(20, { message: '제목은 20자 이내로 입력해 주세요.' }),
   content: z
     .string()
     .min(1, { message: '내용을 입력해 주세요.' })
