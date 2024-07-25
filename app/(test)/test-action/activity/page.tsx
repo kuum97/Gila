@@ -13,7 +13,7 @@ export default async function Page() {
         <div className="flex flex-col gap-y-2">
           {activities.map((activity) => (
             <Link
-              href={`/test-action/${activity.id}`}
+              href={`/test-action/activity/${activity.id}`}
               key={activity.id}
               className="bg-slate-300 p-2 rounded-md"
             >
