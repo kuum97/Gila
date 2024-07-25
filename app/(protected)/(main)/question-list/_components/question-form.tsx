@@ -35,7 +35,7 @@ const FormSchema = z.object({
   content: z.string().min(1, { message: '내용을 입력해 주세요' }),
 });
 
-export default function AskForm() {
+export default function QuestionForm() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {

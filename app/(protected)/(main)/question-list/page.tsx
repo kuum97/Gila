@@ -1,5 +1,5 @@
-import AskForm from '@/app/(protected)/(main)/question-list/_components/ask-form';
+import QuestionForm from '@/app/(protected)/(main)/question-list/_components/question-form';
 
 export default function Page() {
-  return <AskForm />;
+  return <QuestionForm />;
 }
