@@ -11,6 +11,19 @@ export const createActivityRequest = async (
   try {
     const userId = await getCurrentUserId();
 
+    const existingRequest = await db.activityRequest.findUnique({
+      where: {
+        requestUserId_activityId: {
+          requestUserId: userId,
+          activityId: activityId,
+        },
+      },
+    });
+
+    if (existingRequest) {
+      return { success: false, message: '이미 생성된 요청이 있습니다.' };
+    }
+
     const activityRequest = await db.activityRequest.create({
       data: {
         requestUserId: userId,
@@ -22,7 +35,7 @@ export const createActivityRequest = async (
 
     return { success: true, message: '요청 생성에 성공하였습니다.' };
   } catch (error) {
-    return { success: false, message: '요청 생성중에 에러가 발생하였습니다.' };
+    return { success: false, message: '요청 생성 중에 에러가 발생하였습니다.' };
   }
 };
 
