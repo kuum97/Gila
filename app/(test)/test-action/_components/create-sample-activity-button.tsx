@@ -6,6 +6,7 @@ import { createActivity } from '@/app/action/activity';
 import { Button } from '@/components/ui/button';
 import { useTransition } from 'react';
 import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 const seoulDistricts = [
   '종로구',
@@ -36,18 +37,20 @@ const seoulDistricts = [
 ];
 const tagList = ['내향', '즉흥적', '도시', '랜드마크', '홀로', '액티비티', '느긋하기'];
 
-function getRandomDistricts(districts: string[]) {
-  const numToSelect = Math.floor(Math.random() * 4) + 3;
-  const shuffled = districts.sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, numToSelect);
-}
-
 function getRandomTags(tags: string[]) {
   const numToSelect = Math.floor(Math.random() * 6) + 2;
   const shuffled = tags.sort(() => 0.5 - Math.random());
   return shuffled.slice(0, numToSelect);
 }
+
+function getRandomDistricts(districts: string[]) {
+  const numToSelect = Math.floor(Math.random() * 4) + 3;
+  const shuffled = districts.sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, numToSelect);
+}
 export default function CreateSampleActivityButton() {
+  const router = useRouter();
+
   const [isPending, startTransition] = useTransition();
 
   const createSampleActivity = () => {
@@ -75,6 +78,7 @@ export default function CreateSampleActivityButton() {
         return;
       }
       toast.success(action.message);
+      router.refresh();
     });
   };
 
