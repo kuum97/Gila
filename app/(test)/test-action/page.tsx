@@ -1,6 +1,7 @@
 import { getActivities } from '@/app/data/activity';
 import CreateSampleActivityButton from './_components/create-sample-activity-button';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default async function Page() {
   const activitiesRes = await getActivities({ type: 'recent' });
@@ -8,11 +9,15 @@ export default async function Page() {
   return (
     <div className="space-y-4">
       <CreateSampleActivityButton />
-      <div className="space-y-2">
+      <div className="flex flex-col gap-y-2">
         {activities.map((activity) => (
-          <div key={activity.id} className="bg-slate-300 p-2 rounded-md">
-            <div>{activity.title}</div>
-          </div>
+          <Link
+            href={`/test-action/${activity.id}`}
+            key={activity.id}
+            className="bg-slate-300 p-2 rounded-md"
+          >
+            {activity.title}
+          </Link>
         ))}
       </div>
     </div>
