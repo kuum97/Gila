@@ -15,9 +15,23 @@ export const createReview = async ({
   if (rating > 100) {
     return { success: false, message: '점수는 100을 초과할 수 없습니다.' };
   }
+
   const userId = await getCurrentUserId();
 
   try {
+    const existingReview = await db.review.findUnique({
+      where: {
+        userId_activityId: {
+          userId,
+          activityId,
+        },
+      },
+    });
+
+    if (existingReview) {
+      return { success: false, message: '이미 이 활동에 대한 리뷰를 남기셨습니다.' };
+    }
+
     const newReview = await db.review.create({
       data: {
         userId,
