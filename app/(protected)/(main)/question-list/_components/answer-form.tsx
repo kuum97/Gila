@@ -16,8 +16,8 @@ import { z } from 'zod';
 
 const FormFields = {
   name: 'content',
-  label: '답변',
-  placeholder: '내용을 입력해 주세요',
+  label: '답변하기',
+  placeholder: '답변을 입력해 주세요',
   type: 'textarea',
 };
 
@@ -62,7 +62,7 @@ export default function AnswerForm() {
           />
         </div>
         <Button type="submit" className="px-4 py-1 text-sm rounded-md mb-6">
-          답변하기
+          제출하기
         </Button>
       </form>
     </Form>

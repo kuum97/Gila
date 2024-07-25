@@ -28,7 +28,8 @@ export default function QuestionDetailModal() {
             <p className="text-sm">박상준</p>
           </div>
           <DialogDescription className="text-left">
-            ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+            부모님이랑 맛있는 식당가고 싶어요ㅜㅜ 조용하고 부모님 모시고가기 좋은곳 알려주세요!
+            그리고 카페도 알려주시면 좋을것 더 감사하겠습니다!
           </DialogDescription>
         </DialogHeader>
         <div className="flex flex-col">
