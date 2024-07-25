@@ -26,17 +26,17 @@ export const createQuestion = async ({
       },
     });
 
-    if (!question) return { success: false, message: '질문 요청 생성에 실패하였습니다.' };
+    if (!question) return { success: false, message: '질문 생성에 실패하였습니다.' };
 
     return {
       success: true,
-      message: '질문 요청 생성에 성공하였습니다.',
+      message: '질문 생성에 성공하였습니다.',
       data: question,
     };
   } catch (error) {
     return {
       success: false,
-      message: '질문 요청 생성 중에 에러가 발생하였습니다.',
+      message: '질문 생성 중에 에러가 발생하였습니다.',
     };
   }
 };
@@ -59,17 +59,17 @@ export const editQuestion = async ({
       },
     });
 
-    if (!question) return { success: false, message: '질문 요청 수정에 실패하였습니다.' };
+    if (!question) return { success: false, message: '질문 수정에 실패하였습니다.' };
 
     return {
       success: true,
-      message: '질문 요청 수정에 성공하였습니다.',
+      message: '질문 수정에 성공하였습니다.',
       data: question,
     };
   } catch (error) {
     return {
       success: false,
-      message: '질문 요청 수정 중에 에러가 발생하였습니다.',
+      message: '질문 수정 중에 에러가 발생하였습니다.',
     };
   }
 };
@@ -80,13 +80,13 @@ export const deleteQuestion = async (requestId: string): Promise<ActionType<Ques
       where: { id: requestId },
     });
 
-    if (!question) return { success: false, message: '질문 요청 삭제에 실패하였습니다.' };
+    if (!question) return { success: false, message: '질문 삭제에 실패하였습니다.' };
 
-    return { success: true, message: '질문 요청 삭제에 성공하였습니다.' };
+    return { success: true, message: '질문 삭제에 성공하였습니다.' };
   } catch (error) {
     return {
       success: false,
-      message: '질문 요청 삭제 중에 에러가 발생하였습니다.',
+      message: '질문 삭제 중에 에러가 발생하였습니다.',
     };
   }
 };
