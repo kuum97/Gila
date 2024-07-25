@@ -1,12 +1,11 @@
-import getCurrentUser from '@/app/data/user';
-import LogoutButton from '@/components/logout-button';
+import MainCarousel from '@/app/(protected)/(main)/_components/main-carousel';
+import ActivityList from '@/app/(protected)/(main)/activity-list/_components/activity-list';
 
 export default async function Page() {
-  const user = await getCurrentUser();
   return (
-    <div>
-      <LogoutButton />
-      {JSON.stringify(user)}
-    </div>
+    <main>
+      <MainCarousel />
+      <ActivityList />
+    </main>
   );
 }
