@@ -68,7 +68,7 @@ export default function QuestionForm() {
                       <Input type={type} placeholder={placeholder} {...field} className="text-xs" />
                     )}
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-xs text-red" />
                 </FormItem>
               )}
             />
