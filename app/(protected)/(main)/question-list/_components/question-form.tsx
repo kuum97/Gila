@@ -31,8 +31,11 @@ const FormFields = [
 ];
 
 const FormSchema = z.object({
-  title: z.string().min(1, { message: '제목을 입력해 주세요' }),
-  content: z.string().min(1, { message: '내용을 입력해 주세요' }),
+  title: z.string().min(1, { message: '제목을 입력해 주세요.' }),
+  content: z
+    .string()
+    .min(1, { message: '내용을 입력해 주세요.' })
+    .max(200, { message: '내용은 200자 이내로 입력해 주세요.' }),
 });
 
 export default function QuestionForm() {
@@ -46,7 +49,7 @@ export default function QuestionForm() {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const onSubmit = (values: z.infer<typeof FormSchema>) => {
-    // console.log('테스트입니다.');
+    console.log('테스트입니다.');
   };
 
   return (
