@@ -1,8 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Check, ChevronsUpDown } from 'lucide-react';
-
+import { Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import {
@@ -47,17 +46,16 @@ export default function LocationCombobox() {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between rounded-3xl"
+          className="w-full shadow-sm rounded-3xl"
         >
           {subLocation
             ? `${location} ${LOCATIONS[location].find(
                 (currentSubLocation) => currentSubLocation === subLocation,
               )}`
             : '어디로 떠나시나요?'}
-          <ChevronsUpDown className="w-4 h-4 ml-2 opacity-50 shrink-0" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
+      <PopoverContent className="w-full p-0 bg-white">
         <Command>
           <CommandInput placeholder="목적지를 찾아보세요!" />
           <CommandEmpty>그런 지역은 없어요</CommandEmpty>
