@@ -1,6 +1,7 @@
+import Image from 'next/image';
 import React from 'react';
 
-export default function WishListCard() {
+export default function PromiseListCard() {
   return (
     <div className="w-full border p-3 rounded-lg flex gap-6 relative">
       <div className="w-[110px] h-[110px] relative rounded-lg overflow-hidden flex-shrink-0">
@@ -13,11 +14,11 @@ export default function WishListCard() {
           <p>16 : 00 ~ 18 : 00</p>
           <p className="text-sm font-bold">10 명</p>
         </div>
-        <div className="text-xs flex gap-2 justify-end">
-          <button className="flex items-center gap-1" type="button">
-            <Heart size={15} />4
+        <div className="flex justify-between items-center">
+          <div className="text-xs text-green">수락됨</div>
+          <button type="button" className="text-xs text-white rounded-md bg-primary px-2 py-1">
+            취소
           </button>
-          <p>조회수 14</p>
         </div>
       </div>
     </div>

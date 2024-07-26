@@ -13,21 +13,23 @@ export default function PromisedListCard() {
         <div className="text-xs flex flex-col gap-[1px]">
           <p>2024-07-19 ~ 2024-07-19</p>
           <p>16 : 00 ~ 18 : 00</p>
+        </div>
+        <div className="flex text-xs items-center">
           <div className="flex items-center gap-1">
             <Avatar className="w-5 h-5">
               <AvatarImage src="/test.png" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
-            <span className="font-bold">성재</span>
+            <span className="font-bold flex-shrink-0">성재</span>
           </div>
-        </div>
-        <div className="flex gap-2">
-          <button type="button" className="text-xs text-white rounded-md bg-green px-2 py-1">
-            수락
-          </button>
-          <button type="button" className="text-xs text-white rounded-md bg-red px-2 py-1">
-            거절
-          </button>
+          <div className="flex gap-2 justify-end w-full">
+            <button type="button" className="text-white rounded-md bg-green px-2 py-1">
+              수락
+            </button>
+            <button type="button" className="text-white rounded-md bg-red px-2 py-1">
+              거절
+            </button>
+          </div>
         </div>
       </div>
     </div>

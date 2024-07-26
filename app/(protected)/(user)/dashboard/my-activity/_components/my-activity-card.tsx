@@ -28,7 +28,7 @@ export default function MyActivityCard() {
           <p>조회수 14</p>
         </div>
       </div>
-      <div className="absolute top-2 right-2 z-50">
+      <div className="absolute top-3 right-2">
         <DropdownMenu>
           <DropdownMenuTrigger>
             <EllipsisVertical size={15} />
