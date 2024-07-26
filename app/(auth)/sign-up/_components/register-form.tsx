@@ -21,6 +21,7 @@ import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 
 const fields = [
+  { name: 'nickname', label: 'Nickname', placeholder: 'kkkk', type: 'text' },
   { name: 'email', label: 'Email', placeholder: 'test@test.com', type: 'text' },
   {
     name: 'password',
@@ -64,7 +65,7 @@ export default function RegisterForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 w-full">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4">
         {fields.map((field) => (
           <FormField
             key={field.name}
