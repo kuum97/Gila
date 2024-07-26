@@ -22,6 +22,7 @@ import { useRouter } from 'next/navigation';
 import PasswordInput from '@/components/ui/password-input';
 
 const fields = [
+  { name: 'nickname', label: 'Nickname', placeholder: 'kkkk', type: 'text' },
   { name: 'email', label: 'Email', placeholder: 'test@test.com', type: 'text' },
   {
     name: 'password',

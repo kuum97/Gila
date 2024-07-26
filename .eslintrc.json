@@ -42,6 +42,7 @@
       { "selector": "interface", "format": ["PascalCase"] } // interface 네이밍 컨벤션 : pascal
     ],
     "react/require-default-props": 0, // optional prop 유형에 해당 defaultProps값이 있는지 확인 off
-    "react/jsx-no-constructed-context-values": "off"
+    "react/jsx-no-constructed-context-values": "off",
+    "react/prop-types": "off"
   }
 }
