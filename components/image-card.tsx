@@ -32,8 +32,9 @@ export default function ImageCard({
         <div className="text-xs flex flex-col gap-[1px]">
           <p>{date}</p>
           <p>{time}</p>
-          {participants && <p className="text-sm font-bold">{participants} 명</p>}
-          {extraContent}
+          <div className="flex gap-3 items-center">
+            {extraContent} •{participants && <p className="text-sm font-bold">{participants} 명</p>}
+          </div>
         </div>
         {bottomContent && <div>{bottomContent}</div>}
       </div>

@@ -1,5 +1,5 @@
 import MyQuestionCard from '@/app/(protected)/(user)/dashboard/my-question/_components/my-question-card';
-import PlusButton from '../_components/plus-button';
+import PlusButton from '@/app/(protected)/(user)/dashboard/_components/plus-button';
 
 export default function Page() {
   return (

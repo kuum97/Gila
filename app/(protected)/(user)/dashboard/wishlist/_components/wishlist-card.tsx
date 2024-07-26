@@ -9,9 +9,9 @@ export default function WishListCard() {
       date="2024-07-19 ~ 2024-07-19"
       time="16 : 00 ~ 18 : 00"
       participants={10}
+      extraContent={<UserIcon imageSrc="/test.png" name="성재" />}
       bottomContent={
-        <div className="flex justify-between">
-          <UserIcon imageSrc="/test.png" name="성재" />
+        <div className="flex justify-end">
           <button className=" hover:text-red" type="button" aria-label="찜하기">
             <Heart size={20} />
           </button>
