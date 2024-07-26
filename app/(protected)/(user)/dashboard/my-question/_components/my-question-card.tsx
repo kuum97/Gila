@@ -1,11 +1,6 @@
-import { EllipsisVertical, MessageCircle } from 'lucide-react';
+import { MessageCircle } from 'lucide-react';
 import React from 'react';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+import DropdownKebab from '@/components/dropdown-kebab';
 
 export default function MyQuestionCard() {
   return (
@@ -17,15 +12,7 @@ export default function MyQuestionCard() {
           <p>24</p>
         </div>
         <div className="top-2 right-2 z-50">
-          <DropdownMenu>
-            <DropdownMenuTrigger>
-              <EllipsisVertical size={15} />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="z-50 mr-9">
-              <DropdownMenuItem>수정</DropdownMenuItem>
-              <DropdownMenuItem>삭제</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <DropdownKebab />
         </div>
       </div>
     </div>

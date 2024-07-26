@@ -3,7 +3,7 @@ import PromiseListCard from '@/app/(protected)/(user)/dashboard/promise-list/_co
 export default function Page() {
   return (
     <div className="flex flex-col gap-3">
-      <div>내가 신청한 활동 리스트</div>
+      <h1 className="text-lg font-bold">내가 신청한 활동</h1>
       <PromiseListCard />
       <PromiseListCard />
       <PromiseListCard />
