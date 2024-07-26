@@ -1,7 +1,6 @@
 'use client';
 
 import { useTransition } from 'react';
-import { signOut } from '@/auth';
 import { useRouter } from 'next/navigation';
 import { logout } from '@/app/action/user';
 import { toast } from 'sonner';
