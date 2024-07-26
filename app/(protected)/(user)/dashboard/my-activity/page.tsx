@@ -1,5 +1,5 @@
 import MyActivityCard from '@/app/(protected)/(user)/dashboard/my-activity/_components/my-activity-card';
-import { Plus } from 'lucide-react';
+import PlusButton from '../_components/plus-button';
 
 export default function Page() {
   return (
@@ -13,14 +13,8 @@ export default function Page() {
         <MyActivityCard />
         <MyActivityCard />
       </div>
-      <div className="fixed bottom-0 left-0 w-full p-2 z-100">
-        <button
-          type="button"
-          className="w-full p-2 bg-primary flex justify-center rounded-md"
-          aria-label="추가하기"
-        >
-          <Plus className="text-white" />
-        </button>
+      <div className="z-100">
+        <PlusButton />
       </div>
     </>
   );
