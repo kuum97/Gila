@@ -22,11 +22,11 @@ import { useRouter } from 'next/navigation';
 import PasswordInput from '@/components/ui/password-input';
 
 const loginFields = [
-  { name: 'email', label: 'Email', placeholder: 'test@test.com', type: 'text' },
+  { name: 'email', label: '이메일', placeholder: '이메일을 입력해 주세요', type: 'text' },
   {
     name: 'password',
-    label: 'Password',
-    placeholder: '********',
+    label: '비밀번호',
+    placeholder: '비밀번호를 입력해 주세요',
     type: 'password',
   },
 ];
@@ -43,6 +43,7 @@ export default function LoginForm() {
       email: '',
       password: '',
     },
+    mode: 'onBlur',
   });
 
   const handleVisibility = () => {
@@ -78,10 +79,16 @@ export default function LoginForm() {
                       type={isVisible ? 'text' : 'password'}
                       handleToggle={handleVisibility}
                       placeholder={field.placeholder}
+                      className="border-none shadow-md"
                       {...controllerField}
                     />
                   ) : (
-                    <Input type={field.type} placeholder={field.placeholder} {...controllerField} />
+                    <Input
+                      type={field.type}
+                      placeholder={field.placeholder}
+                      className="border-none shadow-md"
+                      {...controllerField}
+                    />
                   )}
                 </FormControl>
                 <div className="h-5">
@@ -91,7 +98,11 @@ export default function LoginForm() {
             )}
           />
         ))}
-        <Button disabled={isPending} type="submit" className="w-full">
+        <Button
+          disabled={isPending}
+          type="submit"
+          className="w-full py-3 text-base font-semibold shadow-lg hover:bg-primary_dark active:bg-primary_dark"
+        >
           로그인
         </Button>
       </form>
