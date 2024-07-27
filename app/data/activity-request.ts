@@ -56,7 +56,16 @@ export const getRequestsByActivityId = async ({
       where: { activityId },
       include: {
         activity: true,
-        requestUser: true,
+        requestUser: {
+          select: {
+            id: true,
+            nickname: true,
+            email: true,
+            image: true,
+            tags: true,
+            createdAt: true,
+          },
+        },
       },
       cursor: cursor ? { id: cursor } : undefined,
       skip: cursor ? 1 : 0,

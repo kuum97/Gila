@@ -69,7 +69,16 @@ export const getReviewsByActivityId = async ({
     const reviews = await db.review.findMany({
       where: { activityId },
       include: {
-        user: true,
+        user: {
+          select: {
+            id: true,
+            nickname: true,
+            email: true,
+            image: true,
+            tags: true,
+            createdAt: true,
+          },
+        },
       },
       take,
       cursor: cursor ? { id: cursor } : undefined,
@@ -80,11 +89,11 @@ export const getReviewsByActivityId = async ({
     });
 
     const lastReview = reviews[reviews.length - 1];
-    const newCursorId = lastReview ? lastReview.id : null;
+    const cursorId = lastReview ? lastReview.id : null;
 
     return {
       reviews,
-      cursorId: newCursorId,
+      cursorId,
     };
   } catch (error) {
     throw new Error('리뷰를 가져오는 중에 에러가 발생하였습니다.');

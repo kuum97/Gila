@@ -17,7 +17,16 @@ export const getAnswers = async ({
     const answers = await db.answer.findMany({
       where: { questionId },
       include: {
-        user: true,
+        user: {
+          select: {
+            id: true,
+            nickname: true,
+            email: true,
+            image: true,
+            tags: true,
+            createdAt: true,
+          },
+        },
       },
       cursor: cursor ? { id: cursor } : undefined,
       skip: cursor ? 1 : 0,

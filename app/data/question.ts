@@ -1,20 +1,20 @@
 'use server';
 
 import { db } from '@/lib/db';
-import { Question } from '@prisma/client';
+import { QuestionWithUser } from '@/type';
 
 // eslint-disable-next-line import/prefer-default-export
 export const getQuestions = async ({
-  order,
+  order = 'recent',
   location,
   take = 10,
   cursor,
 }: {
-  order: 'answerLen' | 'recent';
+  order?: 'answerLen' | 'recent';
   location?: string;
   take?: number;
   cursor?: string | null;
-}): Promise<{ questions: Question[]; cursorId: string | null }> => {
+}): Promise<{ questions: QuestionWithUser[]; cursorId: string | null }> => {
   try {
     let questions;
     switch (order) {
@@ -22,8 +22,21 @@ export const getQuestions = async ({
         questions = await db.question.findMany({
           where: { location },
           include: {
-            user: true,
-            answers: true,
+            user: {
+              select: {
+                id: true,
+                nickname: true,
+                email: true,
+                image: true,
+                tags: true,
+                createdAt: true,
+              },
+            },
+            _count: {
+              select: {
+                answers: true,
+              },
+            },
           },
           take,
           cursor: cursor ? { id: cursor } : undefined,
@@ -35,13 +48,26 @@ export const getQuestions = async ({
         questions = await db.question.findMany({
           where: { location },
           include: {
-            user: true,
-            answers: true,
+            user: {
+              select: {
+                id: true,
+                nickname: true,
+                email: true,
+                image: true,
+                tags: true,
+                createdAt: true,
+              },
+            },
+            _count: {
+              select: {
+                answers: true,
+              },
+            },
           },
           take,
           cursor: cursor ? { id: cursor } : undefined,
           skip: cursor ? 1 : 0,
-          orderBy: { answers: { _count: 'desc' as const } },
+          orderBy: { answers: { _count: 'desc' } },
         });
         break;
       default:

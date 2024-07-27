@@ -65,7 +65,16 @@ export const getActivities = async ({
             createdAt: 'desc',
           },
           include: {
-            user: true,
+            user: {
+              select: {
+                id: true,
+                nickname: true,
+                email: true,
+                image: true,
+                tags: true,
+                createdAt: true,
+              },
+            },
           },
         });
         break;
@@ -82,7 +91,16 @@ export const getActivities = async ({
             },
           },
           include: {
-            user: true,
+            user: {
+              select: {
+                id: true,
+                nickname: true,
+                email: true,
+                image: true,
+                tags: true,
+                createdAt: true,
+              },
+            },
           },
         });
         break;
@@ -106,7 +124,16 @@ export const getActivities = async ({
             createdAt: 'desc',
           },
           include: {
-            user: true,
+            user: {
+              select: {
+                id: true,
+                nickname: true,
+                email: true,
+                image: true,
+                tags: true,
+                createdAt: true,
+              },
+            },
           },
         });
 
@@ -122,7 +149,16 @@ export const getActivities = async ({
             views: 'desc',
           },
           include: {
-            user: true,
+            user: {
+              select: {
+                id: true,
+                nickname: true,
+                email: true,
+                image: true,
+                tags: true,
+                createdAt: true,
+              },
+            },
           },
         });
         break;
@@ -146,7 +182,18 @@ export const getActivityById = async (id: string): Promise<ActivityWithUser> => 
   try {
     const activity = await db.activity.findUnique({
       where: { id },
-      include: { user: true },
+      include: {
+        user: {
+          select: {
+            id: true,
+            nickname: true,
+            email: true,
+            image: true,
+            tags: true,
+            createdAt: true,
+          },
+        },
+      },
     });
 
     if (!activity) {
