@@ -14,8 +14,13 @@ export type LoginSchemaType = z.infer<typeof LoginSchema>;
 
 export type User = Pick<DbUser, 'id' | 'nickname' | 'email' | 'image'>;
 
-export type ActivityRequestWithActivity = ActivityRequest & {
+export type RequestWithActivity = ActivityRequest & {
   activity: Activity;
+};
+
+export type RequestWithActivityAndReqUser = ActivityRequest & {
+  activity: Activity;
+  requestUser: DbUser;
 };
 
 export type ActivityRequestWithUser = ActivityRequest & {
@@ -25,3 +30,5 @@ export type ActivityRequestWithUser = ActivityRequest & {
 export type ActivityWithFavorites = Activity & {
   favorites: Favorite[];
 };
+
+export type ActivityWithUser = Activity & { user: DbUser };
