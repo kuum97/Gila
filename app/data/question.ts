@@ -1,5 +1,4 @@
-// 10개
-// 스킵
+'use server';
 
 import { db } from '@/lib/db';
 import { Question } from '@prisma/client';
@@ -8,43 +7,46 @@ import { Question } from '@prisma/client';
 export const getQuestions = async ({
   order,
   location,
-  cursorId,
+  take = 10,
+  cursor,
 }: {
   order: 'answerLen' | 'recent';
   location?: string;
-  cursorId?: string | null;
+  take?: number;
+  cursor?: string | null;
 }): Promise<{ questions: Question[]; cursorId: string | null }> => {
   try {
-    const whereClause = location ? { location } : {};
-
-    let orderByClause;
-
+    let questions;
     switch (order) {
       case 'recent':
-        orderByClause = { createdAt: 'desc' as const };
+        questions = await db.question.findMany({
+          where: { location },
+          include: {
+            user: true,
+            answers: true,
+          },
+          take,
+          cursor: cursor ? { id: cursor } : undefined,
+          skip: cursor ? 1 : 0,
+          orderBy: { createdAt: 'desc' },
+        });
         break;
       case 'answerLen':
-        orderByClause = { answers: { _count: 'desc' as const } };
+        questions = await db.question.findMany({
+          where: { location },
+          include: {
+            user: true,
+            answers: true,
+          },
+          take,
+          cursor: cursor ? { id: cursor } : undefined,
+          skip: cursor ? 1 : 0,
+          orderBy: { answers: { _count: 'desc' as const } },
+        });
         break;
       default:
         throw new Error('order값이 잘못 되었습니다');
     }
-
-    const questions = await db.question.findMany({
-      where: whereClause,
-      include: {
-        user: true,
-        answers: true,
-      },
-      take: 10,
-      ...(cursorId && {
-        cursor: {
-          id: cursorId,
-        },
-        skip: 1,
-      }),
-      orderBy: orderByClause,
-    });
 
     const lastQuestion = questions[questions.length - 1];
     const newCursorId = lastQuestion ? lastQuestion.id : null;

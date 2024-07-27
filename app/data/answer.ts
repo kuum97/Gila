@@ -1,17 +1,27 @@
+'use server';
+
 import { db } from '@/lib/db';
 import { Answer } from '@prisma/client';
 
 // eslint-disable-next-line import/prefer-default-export
-export const getAnswers = async (
-  questionId: string,
-): Promise<{ answers: Answer[]; cursorId: string | null }> => {
+export const getAnswers = async ({
+  questionId,
+  cursor,
+  take = 10,
+}: {
+  questionId: string;
+  cursor?: string;
+  take?: number;
+}): Promise<{ answers: Answer[]; cursorId: string | null }> => {
   try {
     const answers = await db.answer.findMany({
       where: { questionId },
       include: {
         user: true,
       },
-      take: 10,
+      cursor: cursor ? { id: cursor } : undefined,
+      skip: cursor ? 1 : 0,
+      take,
       orderBy: {
         createdAt: 'asc',
       },

@@ -1,11 +1,17 @@
-// 현재 유저가 activity의 신청이 승인되고 activity의 endDate가 지나면 조건
+'use server';
 
 import { getCurrentUserId } from '@/app/data/user';
 import { db } from '@/lib/db';
 import { Review } from '@prisma/client';
 
 // eslint-disable-next-line import/prefer-default-export
-export const getAvailableReviews = async (): Promise<{
+export const getAvailableReviews = async ({
+  cursor,
+  take = 10,
+}: {
+  cursor?: string;
+  take?: number;
+}): Promise<{
   reviews: Review[];
   cursorId: string | null;
 }> => {
@@ -28,7 +34,9 @@ export const getAvailableReviews = async (): Promise<{
       include: {
         reviews: true,
       },
-      take: 10,
+      take,
+      cursor: cursor ? { id: cursor } : undefined,
+      skip: cursor ? 1 : 0,
       orderBy: {
         createdAt: 'asc',
       },
@@ -45,9 +53,15 @@ export const getAvailableReviews = async (): Promise<{
   }
 };
 
-export const getReviewsByActivityId = async (
-  activityId: string,
-): Promise<{
+export const getReviewsByActivityId = async ({
+  activityId,
+  cursor,
+  take = 10,
+}: {
+  activityId: string;
+  cursor?: string;
+  take?: number;
+}): Promise<{
   reviews: Review[];
   cursorId: string | null;
 }> => {
@@ -57,7 +71,9 @@ export const getReviewsByActivityId = async (
       include: {
         user: true,
       },
-      take: 10,
+      take,
+      cursor: cursor ? { id: cursor } : undefined,
+      skip: cursor ? 1 : 0,
       orderBy: {
         createdAt: 'desc',
       },

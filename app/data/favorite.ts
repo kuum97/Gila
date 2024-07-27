@@ -1,9 +1,17 @@
+'use server';
+
 import { Favorite } from '@prisma/client';
 import { getCurrentUserId } from '@/app/data/user';
 import { db } from '@/lib/db';
 
 // eslint-disable-next-line import/prefer-default-export
-export const getMyFavorites = async (): Promise<{
+export const getMyFavorites = async ({
+  cursor,
+  take = 10,
+}: {
+  cursor?: string;
+  take?: number;
+}): Promise<{
   favorites: Favorite[];
   cursorId: string | null;
 }> => {
@@ -15,7 +23,9 @@ export const getMyFavorites = async (): Promise<{
       include: {
         activity: true,
       },
-      take: 10,
+      cursor: cursor ? { id: cursor } : undefined,
+      skip: cursor ? 1 : 0,
+      take,
       orderBy: {
         createdAt: 'asc',
       },
