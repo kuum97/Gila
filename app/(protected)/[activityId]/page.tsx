@@ -1,17 +1,17 @@
 import DetailContent from '@/app/(protected)/[activityId]/_components/detail-content';
-import BottomNav from '@/app/(protected)/[activityId]/_components/bottom-nav';
+import PromiseRequestForm from '@/app/(protected)/[activityId]/_components/promise-request-form';
 
-interface Props {
-  params: { activityId: number };
+interface Params {
+  activityId: string;
 }
 
-export default async function Page({ params }: Props) {
+export default async function Page({ params }: { params: Params }) {
   const id = Number(params.activityId);
 
   return (
     <div>
       <DetailContent />
-      <BottomNav />
+      <PromiseRequestForm />
     </div>
   );
 }
