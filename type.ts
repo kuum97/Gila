@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { Activity, ActivityRequest, User as DbUser, Favorite } from '@prisma/client';
+import { Activity, ActivityRequest, User as DbUser, Favorite, Question } from '@prisma/client';
 import { LoginSchema, RegisterSchema } from '@/schema';
 
 export type ActionType<T> = {
@@ -12,7 +12,7 @@ export type RegisterSchemaType = z.infer<typeof RegisterSchema>;
 export type LoginSchemaType = z.infer<typeof LoginSchema>;
 // type User = Omit<DbUser, 'password' | 'emailVerified' | 'accounts' | 'sessions'>;
 
-export type User = Pick<DbUser, 'id' | 'nickname' | 'email' | 'image'>;
+export type User = Pick<DbUser, 'id' | 'nickname' | 'email' | 'image' | 'createdAt' | 'tags'>;
 
 export type RequestWithActivity = ActivityRequest & {
   activity: Activity;
@@ -20,7 +20,7 @@ export type RequestWithActivity = ActivityRequest & {
 
 export type RequestWithActivityAndReqUser = ActivityRequest & {
   activity: Activity;
-  requestUser: DbUser;
+  requestUser: User;
 };
 
 export type ActivityRequestWithUser = ActivityRequest & {
@@ -31,4 +31,6 @@ export type ActivityWithFavorites = Activity & {
   favorites: Favorite[];
 };
 
-export type ActivityWithUser = Activity & { user: DbUser };
+export type ActivityWithUser = Activity & { user: User };
+
+export type QuestionWithUser = Question & { user: User; _count: { answers: number } };
