@@ -39,8 +39,8 @@ export default function DetailContent({}) {
           tags={['내향', '계획적', '홀로', '액티비티']}
           likes={4}
           views={14}
-          startDate={startDate}
-          endDate={endDate}
+          // startDate={startDate}
+          // endDate={endDate}
         />
         <DetailDescription
           description="함께 요리하고 맛있게 먹어요"
