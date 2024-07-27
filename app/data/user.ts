@@ -1,7 +1,8 @@
+'use server';
 /* eslint-disable no-underscore-dangle */
 import { auth } from '@/auth';
 import { db } from '@/lib/db';
-import { User } from '@/type';
+import { User } from '@prisma/client';
 
 export const getCurrentUserEmail = async (): Promise<string> => {
   try {
@@ -23,12 +24,6 @@ export const getCurrentUser = async (): Promise<User> => {
     const user = await db.user.findUnique({
       where: {
         email,
-      },
-      select: {
-        id: true,
-        email: true,
-        nickname: true,
-        image: true,
       },
     });
 
