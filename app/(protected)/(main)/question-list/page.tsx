@@ -1,3 +1,9 @@
+import QuestionForm from '@/app/(protected)/(main)/question-list/_components/question-form';
+
 export default function Page() {
-  return <div>질문 메인 페이지</div>;
+  return (
+    <div>
+      <QuestionForm />
+    </div>
+  );
 }
