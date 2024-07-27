@@ -29,20 +29,24 @@ export default function DetailTitle({ title, tags, likes, views }) {
 
       <h1 className="mt-1 text-2xl font-bold leading-normal">{title}</h1>
       <div className="flex items-center gap-3 my-2">
-        <div className="flex gap-2">
+        <div className="flex gap-4">
           <div className="flex gap-1">
             <Heart color="#FF4242" size={20} fill="#FF4242" />
-            <p className="ml-1 text-sm font-normal leading-normal">{likes}</p>
+            <p className="ml-1 text-xs font-normal leading-normal">{likes}</p>
           </div>
           <div className="flex gap-1">
-            <p className="text-sm">조회수</p>
-            <p className="text-sm">{views}</p>
+            <p className="text-xs">조회수</p>
+            <p className="text-xs">{views}</p>
           </div>
         </div>
       </div>
       <div className="flex flex-col justify-center mx-0">
-        <p className="text-sm">2024.07.19 - 2024.07.19</p>
-        <p className="text-sm">16:00 - 18:00</p>
+        <p className="text-xs">
+          <span className="text-[#949694] mr-1">기간</span> 2024.07.19 - 2024.07.19
+        </p>
+        <p className="text-xs">
+          <span className="text-[#949694] mr-1">시간</span> 16:00 - 18:00
+        </p>
       </div>
     </div>
   );
