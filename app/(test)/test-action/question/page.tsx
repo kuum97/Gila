@@ -9,6 +9,13 @@ export default async function Page() {
   return (
     <div className="space-y-4">
       <div className="space-y-4">
+        <div>
+          recent
+          <div>question title</div>
+          <div>user 전부</div>
+          <div>answer count</div>
+        </div>
+
         <CreateSampleQuestionButton />
         <div className="flex flex-col gap-y-2">
           {questions.map((question) => (
@@ -17,7 +24,9 @@ export default async function Page() {
               key={question.id}
               className="bg-slate-300 p-2 rounded-md"
             >
-              {question.title}
+              <div>제목 {question.title}</div>
+              <div>유저닉네임 {question.user.nickname}</div>
+              <div>answer 숫자 {question._count.answers}</div>
             </Link>
           ))}
         </div>

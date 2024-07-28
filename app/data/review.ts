@@ -90,7 +90,7 @@ export const getReviewsByActivityId = async ({
 
     const lastReview = reviews[reviews.length - 1];
     const cursorId = lastReview ? lastReview.id : null;
-
+    
     return {
       reviews,
       cursorId,

@@ -1,6 +1,6 @@
 'use client';
 
-import { fa, faker } from '@faker-js/faker';
+import { faker } from '@faker-js/faker';
 
 import { createActivity } from '@/app/action/activity';
 import { Button } from '@/components/ui/button';
@@ -37,17 +37,17 @@ const seoulDistricts = [
 ];
 const tagList = ['내향', '즉흥적', '도시', '랜드마크', '홀로', '액티비티', '느긋하기'];
 
+function getRandomDistrict(districts: string[]) {
+  const randomIndex = Math.floor(Math.random() * districts.length);
+  return districts[randomIndex];
+}
+
 function getRandomTags(tags: string[]) {
   const numToSelect = Math.floor(Math.random() * 6) + 2;
   const shuffled = tags.sort(() => 0.5 - Math.random());
   return shuffled.slice(0, numToSelect);
 }
 
-function getRandomDistricts(districts: string[]) {
-  const numToSelect = Math.floor(Math.random() * 4) + 3;
-  const shuffled = districts.sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, numToSelect);
-}
 export default function CreateSampleActivityButton() {
   const router = useRouter();
 
@@ -60,7 +60,7 @@ export default function CreateSampleActivityButton() {
       const description = faker.word.words(6);
       const startDate = faker.date.past();
       const endDate = faker.date.future();
-      const locations = getRandomDistricts(seoulDistricts);
+      const location = getRandomDistrict(seoulDistricts);
       const maximumCount = Math.floor(Math.random() * 4) + 3;
       const tags = getRandomTags(tagList);
       const action = await createActivity({
@@ -69,7 +69,7 @@ export default function CreateSampleActivityButton() {
         description,
         endDate,
         startDate,
-        locations,
+        location,
         maximumCount,
         tags,
       });
