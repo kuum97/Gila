@@ -1,7 +1,7 @@
 'use server';
 
 import { db } from '@/lib/db';
-import { Answer } from '@prisma/client';
+import { AnswerWithUser } from '@/type';
 
 // eslint-disable-next-line import/prefer-default-export
 export const getAnswers = async ({
@@ -12,7 +12,7 @@ export const getAnswers = async ({
   questionId: string;
   cursor?: string;
   take?: number;
-}): Promise<{ answers: Answer[]; cursorId: string | null }> => {
+}): Promise<{ answers: AnswerWithUser[]; cursorId: string | null }> => {
   try {
     const answers = await db.answer.findMany({
       where: { questionId },
