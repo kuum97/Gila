@@ -2,45 +2,29 @@ import { getRequestsByActivityId } from '@/app/data/activity-request';
 import CreateSampleActivityRequestButton from './_components/create-sample-activity-request-button';
 import CreateSampleReviewButton from './_components/create-sample-review-button';
 import { getReviewsByActivityId } from '@/app/data/review';
+import { getActivityById } from '@/app/data/activity';
 
 export default async function Page({ params }: { params: { activityId: string } }) {
   const activityId = params.activityId;
 
+  const activity = await getActivityById(activityId);
+
   const activityRequestsRes = await getRequestsByActivityId({ activityId });
   const activityRequests = activityRequestsRes.requests;
+  const singleRequest = activityRequests[0];
 
   const reviewsRes = await getReviewsByActivityId({ activityId });
   const reviews = reviewsRes.reviews;
+  const singleReview = reviews[0];
+
   return (
     <div className="space-y-4">
-      <div>
-        <div>activity thumbnails</div>
-        <div>activity tags</div>
-        <div>activity title</div>
-        <div>activity startDate</div>
-        <div>activity endDate</div>
-        <div>activity favorite count</div>
-        <div>activity description</div>
-        <div>activity location</div>
-        <div>user 전부</div>
-      </div>
-      <div>
-        <div>내가 신청한 request목록</div>
-        <div>activity thumbnails[0]</div>
-        <div>activity title</div>
-        <div>activity startDate, endDate</div>
-        <div>activity request status</div>
-      </div>
-      <div>
-        해당 activity에 신청 된 request
-        <div>
-          <div>activity thumbnails[0]</div>
-          <div>activity title</div>
-          <div>activity startDate, endDate</div>
-          <div>activity request status</div>
-          <div>신청한 유저</div>
-        </div>
-      </div>
+      <div className="font-bold text-2xl">Activity</div>
+      <pre>{JSON.stringify(activity, null, 2)}</pre>
+      <div className="font-bold text-2xl">Request</div>
+      <pre>{JSON.stringify(singleRequest, null, 2)}</pre>
+      <div className="font-bold text-2xl">review</div>
+      <pre>{JSON.stringify(singleReview, null, 2)}</pre>
       <div className="space-y-4">
         <CreateSampleActivityRequestButton activityId={activityId} />
         <div className="space-y-2">
