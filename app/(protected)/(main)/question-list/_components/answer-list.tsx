@@ -7,11 +7,13 @@ export default function AnswerList() {
       <div className="flex items-center gap-3">
         <p className="text-lg font-semibold">받은 답변 {mockAnswer.length}</p>
       </div>
-      <div className="flex flex-col overflow-y-scroll h-96 gap-2">
+      <ul className="flex flex-col overflow-y-scroll h-96 gap-2">
         {mockAnswer.map((item) => (
-          <AnswerItem key={item} />
+          <li key={item}>
+            <AnswerItem />
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 }
