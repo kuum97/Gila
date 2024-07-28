@@ -1,6 +1,6 @@
 'use server';
 
-import { Activity, User } from '@prisma/client';
+import { Activity } from '@prisma/client';
 import { getCurrentUser, getCurrentUserId } from '@/app/data/user';
 import { db } from '@/lib/db';
 import { ActivityWithUser } from '@/type';
@@ -52,12 +52,10 @@ export const getActivities = async ({
     const currentUser = await getCurrentUser();
     let activities;
 
-    const commonWhereClause = location ? { location } : {};
-
     switch (type) {
       case 'recent':
         activities = await db.activity.findMany({
-          where: commonWhereClause,
+          where: { location },
           take: size,
           cursor: cursor ? { id: cursor } : undefined,
           skip: cursor ? 1 : 0,
@@ -81,7 +79,7 @@ export const getActivities = async ({
 
       case 'mostFavorite':
         activities = await db.activity.findMany({
-          where: commonWhereClause,
+          where: { location },
           take: size,
           cursor: cursor ? { id: cursor } : undefined,
           skip: cursor ? 1 : 0,
@@ -112,7 +110,7 @@ export const getActivities = async ({
 
         activities = await db.activity.findMany({
           where: {
-            ...commonWhereClause,
+            location,
             tags: {
               hasSome: currentUser.tags,
             },
@@ -141,7 +139,7 @@ export const getActivities = async ({
 
       case 'mostViewed':
         activities = await db.activity.findMany({
-          where: commonWhereClause,
+          where: { location },
           take: size,
           cursor: cursor ? { id: cursor } : undefined,
           skip: cursor ? 1 : 0,
