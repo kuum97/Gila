@@ -28,7 +28,7 @@ export default auth((req) => {
   }
 
   if (isLoggedIn && isMainPage) {
-    Response.redirect(new URL('/activity', nextUrl));
+    Response.redirect(new URL('/activity-list', nextUrl));
   }
 });
 
