@@ -13,6 +13,7 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import { z } from 'zod';
 
 const FormFields = {
@@ -37,9 +38,14 @@ export default function AnswerForm({ questionId }: { questionId: string }) {
     },
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const onSubmit = (values: z.infer<typeof FormSchema>) => {
-    createAnswer({ questionId, content: values.content });
+  const onSubmit = async (values: z.infer<typeof FormSchema>) => {
+    const result = await createAnswer({ questionId, content: values.content });
+    if (!result.success) {
+      toast.error(result.message);
+      return;
+    }
+    toast.success(result.message);
+    form.setValue('content', '');
   };
 
   return (

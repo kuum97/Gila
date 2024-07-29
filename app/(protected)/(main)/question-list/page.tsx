@@ -3,7 +3,7 @@ import { getQuestions } from '@/app/data/question';
 import QuestionList from './_components/question-list';
 
 export default async function Page() {
-  const qusetionList = await getQuestions({ take: 10 });
+  const qusetionList = await getQuestions({ take: 7 });
 
   return (
     <div className="flex flex-col items-center gap-3 p-6">

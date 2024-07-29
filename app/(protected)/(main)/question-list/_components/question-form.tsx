@@ -17,6 +17,7 @@ import { z } from 'zod';
 import { createQuestion } from '@/app/action/question';
 import QuestionTipPopOver from '@/app/(protected)/(main)/question-list/_components/qusetion-tip-popover';
 import QuestionLocationPopover from '@/app/(protected)/(main)/question-list/_components/question-location-popover';
+import { toast } from 'sonner';
 
 const FormFields = [
   {
@@ -69,8 +70,20 @@ export default function QuestionForm() {
     form.clearErrors('location');
   };
 
-  const onSubmit = (values: z.infer<typeof FormSchema>) => {
-    createQuestion({ title: values.title, content: values.content, location: values.location });
+  const onSubmit = async (values: z.infer<typeof FormSchema>) => {
+    const result = await createQuestion({
+      title: values.title,
+      content: values.content,
+      location: values.location,
+    });
+    if (!result.success) {
+      toast.error(result.message);
+      return;
+    }
+    toast.success(result.message);
+    form.setValue('content', '');
+    form.setValue('title', '');
+    form.setValue('location', '');
   };
 
   return (

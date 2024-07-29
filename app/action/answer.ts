@@ -4,6 +4,7 @@ import { ActionType } from '@/type';
 import { Answer } from '@prisma/client';
 import { getCurrentUserId } from '@/app/data/user';
 import { db } from '@/lib/db';
+import { revalidatePath } from 'next/cache';
 
 export const createAnswer = async ({
   questionId,
@@ -27,6 +28,8 @@ export const createAnswer = async ({
     });
 
     if (!newAnswer) return { success: false, message: '답변 생성에 실패하였습니다.' };
+
+    revalidatePath('/question-list');
 
     return {
       success: true,
