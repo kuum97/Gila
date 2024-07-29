@@ -47,7 +47,7 @@ export default async function QuestionDetailModal({
           <DialogDescription className="text-left">{question.content}</DialogDescription>
         </DialogHeader>
         <div className="flex flex-col">
-          <AnswerForm />
+          <AnswerForm questionId={question.id} />
           <AnswerList answerList={answerList.answers} totalCount={question._count.answers} />
         </div>
       </DialogContent>

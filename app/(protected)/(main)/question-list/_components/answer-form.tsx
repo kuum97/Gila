@@ -1,5 +1,6 @@
 'use client';
 
+import { createAnswer } from '@/app/action/answer';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -28,7 +29,7 @@ const FormSchema = z.object({
     .max(200, { message: '답변은 200자 이내로 입력해 주세요.' }),
 });
 
-export default function AnswerForm() {
+export default function AnswerForm({ questionId }: { questionId: string }) {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -38,7 +39,7 @@ export default function AnswerForm() {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const onSubmit = (values: z.infer<typeof FormSchema>) => {
-    console.log(values);
+    createAnswer({ questionId, content: values.content });
   };
 
   return (
