@@ -14,6 +14,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import QuestionTipPopOver from './qusetion-tip-popover';
 
 const FormFields = [
   {
@@ -59,7 +60,7 @@ export default function QuestionForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex items-end w-full gap-6 px-4 pt-4 border rounded-lg shadow-md"
+        className="relative flex items-end w-full gap-6 px-4 pt-4 border rounded-lg shadow-md"
       >
         <div className="flex flex-col w-full">
           {FormFields.map(({ name, label, placeholder, type }) => (
@@ -88,6 +89,7 @@ export default function QuestionForm() {
         <Button type="submit" className="px-4 py-1 mb-6 text-sm rounded-md">
           물어보기
         </Button>
+        <QuestionTipPopOver />
       </form>
     </Form>
   );
