@@ -1,10 +1,4 @@
-import React from 'react';
-
-interface Props {
-  color: string;
-  name: string;
-  onClick?: () => void;
-}
+interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
 export default function SmallButton({ color, name, onClick }: Props) {
   return (

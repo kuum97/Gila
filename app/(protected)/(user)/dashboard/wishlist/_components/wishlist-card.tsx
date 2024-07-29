@@ -11,11 +11,9 @@ export default function WishListCard() {
       participants={10}
       extraContent={<UserIcon imageSrc="/test.png" name="성재" />}
       bottomContent={
-        <div className="flex justify-end">
-          <button className=" hover:text-red" type="button" aria-label="찜하기">
-            <Heart size={20} />
-          </button>
-        </div>
+        <button className="absolute bottom-3 right-3" type="button" aria-label="찜하기">
+          <Heart size={20} />
+        </button>
       }
     />
   );

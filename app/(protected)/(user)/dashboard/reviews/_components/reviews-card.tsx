@@ -1,19 +1,30 @@
 'use client';
 
+/* eslint-disable no-console */
+
 import React, { useState } from 'react';
 import UserIcon from '@/components/user-icon';
 import SmallButton from '@/components/small-button';
 import RatingSelector from '@/app/(protected)/(user)/dashboard/reviews/_components/rating-selector';
 
 export default function ReviewsCard() {
-  const [selectedRating, setSelectedRating] = useState('');
+  const [selectedRating, setSelectedRating] = useState<number>(-1);
 
-  const handleRatingClick = (rating: string) => {
+  const handleRatingClick = (rating: number) => {
     if (selectedRating === rating) {
-      setSelectedRating(''); // 동일한 값을 클릭하면 선택 해제
+      setSelectedRating(-1); // 동일한 값을 클릭하면 선택 해제
     } else {
       setSelectedRating(rating); // 새로운 값을 클릭하면 선택
     }
+  };
+
+  // 리뷰 제출 테스트
+  const handleSubmit = () => {
+    if (selectedRating === -1) {
+      console.log('리뷰를 눌러주세요!');
+      return;
+    }
+    console.log(`rating: ${selectedRating}`);
   };
 
   return (
@@ -29,7 +40,7 @@ export default function ReviewsCard() {
         <RatingSelector selectedRating={selectedRating} onRatingClick={handleRatingClick} />
       </div>
       <div className="absolute top-3 right-3">
-        <SmallButton name="제출" color="bg-primary" />
+        <SmallButton name="제출" color="bg-primary" onClick={handleSubmit} />
       </div>
     </div>
   );

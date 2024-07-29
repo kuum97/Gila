@@ -7,7 +7,7 @@ interface Props {
   time: string;
   participants?: number;
   extraContent?: ReactNode;
-  dropdownMenu?: ReactNode;
+  topContent?: ReactNode;
   bottomContent?: ReactNode;
   imageSrc?: string;
 }
@@ -18,7 +18,7 @@ export default function ImageCard({
   time,
   participants,
   extraContent,
-  dropdownMenu,
+  topContent,
   bottomContent,
   imageSrc = '/test.png',
 }: Props) {
@@ -40,7 +40,7 @@ export default function ImageCard({
         </div>
         {bottomContent && <div>{bottomContent}</div>}
       </div>
-      {dropdownMenu && <div className="absolute top-3 right-2">{dropdownMenu}</div>}
+      {topContent && <div className="absolute top-0 right-0">{topContent}</div>}
     </div>
   );
 }

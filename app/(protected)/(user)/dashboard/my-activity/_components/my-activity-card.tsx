@@ -9,9 +9,13 @@ export default function MyActivityCard() {
       date="2024-07-19 ~ 2024-07-19"
       time="16 : 00 ~ 18 : 00"
       participants={10}
-      dropdownMenu={<DropdownKebab />}
+      topContent={
+        <div className="absolute top-1 right-1">
+          <DropdownKebab />
+        </div>
+      }
       bottomContent={
-        <div className="text-xs flex gap-2 justify-end">
+        <div className="w-full text-xs flex gap-2 justify-end">
           <button className="flex items-center gap-1" type="button">
             <Heart size={15} />4
           </button>

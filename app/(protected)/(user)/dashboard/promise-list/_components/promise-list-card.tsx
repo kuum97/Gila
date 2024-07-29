@@ -4,6 +4,7 @@ import UserIcon from '@/components/user-icon';
 import PromiseStatus from '@/app/(protected)/(user)/dashboard/promise-list/_components/promise-status';
 
 export default function PromiseListCard() {
+  // 예시용
   const status = 'REJECT';
   return (
     <ImageCard
@@ -13,9 +14,13 @@ export default function PromiseListCard() {
       participants={10}
       extraContent={<UserIcon name="Sjae" />}
       bottomContent={
-        <div className="flex items-center w-full justify-between">
-          <PromiseStatus status={status} />
+        <div className="absolute right-3 bottom-3">
           <SmallButton color="bg-primary" name="취소" />
+        </div>
+      }
+      topContent={
+        <div className="absolute top-1 right-1">
+          <PromiseStatus status={status} />
         </div>
       }
     />
