@@ -1,7 +1,10 @@
 import QuestionForm from '@/app/(protected)/(main)/question-list/_components/question-form';
+import { getQuestions } from '@/app/data/question';
 import QuestionList from './_components/question-list';
 
-export default function Page() {
+export default async function Page() {
+  const qusetionList = await getQuestions({ take: 10 });
+
   return (
     <div className="flex flex-col items-center gap-3 p-6">
       <div className="relative flex flex-col items-center w-full gap-4">
@@ -12,7 +15,7 @@ export default function Page() {
       </div>
       <div className="flex flex-col items-start w-full gap-2">
         <h2 className="font-semibold">질문 목록</h2>
-        <QuestionList />
+        <QuestionList questionList={qusetionList.questions} />
       </div>
     </div>
   );
