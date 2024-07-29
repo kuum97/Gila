@@ -29,6 +29,8 @@ export const getCurrentUser = async (): Promise<User> => {
         email: true,
         nickname: true,
         image: true,
+        tags: true,
+        createdAt: true,
       },
     });
 

@@ -1,50 +1,78 @@
-// 10개
-// 스킵
+'use server';
 
 import { db } from '@/lib/db';
-import { Question } from '@prisma/client';
+import { QuestionWithUserAndCount } from '@/type';
 
 // eslint-disable-next-line import/prefer-default-export
 export const getQuestions = async ({
-  order,
+  order = 'recent',
   location,
-  cursorId,
+  take = 10,
+  cursor,
 }: {
-  order: 'answerLen' | 'recent';
+  order?: 'answerLen' | 'recent';
   location?: string;
-  cursorId?: string | null;
-}): Promise<{ questions: Question[]; cursorId: string | null }> => {
+  take?: number;
+  cursor?: string | null;
+}): Promise<{ questions: QuestionWithUserAndCount[]; cursorId: string | null }> => {
   try {
-    const whereClause = location ? { location } : {};
-
-    let orderByClause;
-
+    let questions;
     switch (order) {
       case 'recent':
-        orderByClause = { createdAt: 'desc' as const };
+        questions = await db.question.findMany({
+          where: { location },
+          include: {
+            user: {
+              select: {
+                id: true,
+                nickname: true,
+                email: true,
+                image: true,
+                tags: true,
+                createdAt: true,
+              },
+            },
+            _count: {
+              select: {
+                answers: true,
+              },
+            },
+          },
+          take,
+          cursor: cursor ? { id: cursor } : undefined,
+          skip: cursor ? 1 : 0,
+          orderBy: { createdAt: 'desc' },
+        });
         break;
       case 'answerLen':
-        orderByClause = { answers: { _count: 'desc' as const } };
+        questions = await db.question.findMany({
+          where: { location },
+          include: {
+            user: {
+              select: {
+                id: true,
+                nickname: true,
+                email: true,
+                image: true,
+                tags: true,
+                createdAt: true,
+              },
+            },
+            _count: {
+              select: {
+                answers: true,
+              },
+            },
+          },
+          take,
+          cursor: cursor ? { id: cursor } : undefined,
+          skip: cursor ? 1 : 0,
+          orderBy: { answers: { _count: 'desc' } },
+        });
         break;
       default:
         throw new Error('order값이 잘못 되었습니다');
     }
-
-    const questions = await db.question.findMany({
-      where: whereClause,
-      include: {
-        user: true,
-        answers: true,
-      },
-      take: 10,
-      ...(cursorId && {
-        cursor: {
-          id: cursorId,
-        },
-        skip: 1,
-      }),
-      orderBy: orderByClause,
-    });
 
     const lastQuestion = questions[questions.length - 1];
     const newCursorId = lastQuestion ? lastQuestion.id : null;
@@ -52,5 +80,37 @@ export const getQuestions = async ({
     return { questions, cursorId: newCursorId };
   } catch (error) {
     throw new Error('질문 요청을 가져오는 중에 에러가 발생하였습니다.');
+  }
+};
+
+export const getQuestionById = async (questionId: string): Promise<QuestionWithUserAndCount> => {
+  try {
+    const question = await db.question.findUnique({
+      where: {
+        id: questionId,
+      },
+      include: {
+        user: {
+          select: {
+            id: true,
+            nickname: true,
+            email: true,
+            image: true,
+            tags: true,
+            createdAt: true,
+          },
+        },
+        _count: {
+          select: {
+            answers: true,
+          },
+        },
+      },
+    });
+    if (!question) throw new Error('해당 질문이 존재하지 않습니다.');
+
+    return question;
+  } catch (error) {
+    throw new Error('질문을 가져오는중에 에러가 발생 하였습니다.');
   }
 };
