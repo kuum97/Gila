@@ -58,7 +58,7 @@ export default function QuestionForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex items-end gap-6 w-full">
-        <div className="flex flex-col gap-4 w-full">
+        <div className="flex flex-col w-full">
           {FormFields.map(({ name, label, placeholder, type }) => (
             <FormField
               key={name}
@@ -74,13 +74,15 @@ export default function QuestionForm() {
                       <Input type={type} placeholder={placeholder} {...field} className="text-xs" />
                     )}
                   </FormControl>
-                  <FormMessage className="text-xs text-red" />
+                  <div className="h-4">
+                    <FormMessage className="text-xs text-red" />
+                  </div>
                 </FormItem>
               )}
             />
           ))}
         </div>
-        <Button type="submit" className="px-4 py-1 text-sm rounded-md">
+        <Button type="submit" className="px-4 py-1 text-sm rounded-md mb-6">
           물어보기
         </Button>
       </form>
