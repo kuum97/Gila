@@ -15,7 +15,7 @@ const PasswordInput = forwardRef<HTMLInputElement, Props>(
 
     return (
       <div className="relative">
-        <Input ref={ref} {...props} />
+        <Input className={className} ref={ref} {...props} />
         <Button
           type="button"
           variant="ghost"
