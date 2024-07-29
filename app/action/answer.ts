@@ -12,7 +12,7 @@ export const createAnswer = async ({
 }: {
   questionId: string;
   content: string;
-  images: string[];
+  images?: string[];
 }): Promise<ActionType<Answer>> => {
   try {
     const userId = await getCurrentUserId();
