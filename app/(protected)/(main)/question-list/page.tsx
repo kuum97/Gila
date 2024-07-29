@@ -3,12 +3,17 @@ import QuestionList from './_components/question-list';
 
 export default function Page() {
   return (
-    <div className="flex flex-col items-center p-6 gap-6">
-      <QuestionForm />
-      <div className="w-full items-start">
-        <h1 className="font-semibold">질문 목록</h1>
+    <div className="flex flex-col items-center gap-3 p-6">
+      <div className="flex flex-col items-center w-full gap-4">
+        <h1 className="text-xl font-semibold">
+          <span className="text-2xl font-bold text-primary">길라</span>에게 바로 물어보세요!
+        </h1>
+        <QuestionForm />
       </div>
-      <QuestionList />
+      <div className="flex flex-col items-start w-full gap-2">
+        <h2 className="font-semibold">질문 목록</h2>
+        <QuestionList />
+      </div>
     </div>
   );
 }

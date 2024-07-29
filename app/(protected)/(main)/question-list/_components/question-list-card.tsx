@@ -5,7 +5,7 @@ import QuestionDetailModal from './question-detail-modal';
 
 export default function QuestionListCard() {
   return (
-    <div className="w-full border rounded-md flex justify-between items-center p-3 text-xs overflow-hidden gap-2">
+    <div className="flex items-center justify-between w-full gap-2 p-3 overflow-hidden text-xs border border-none rounded-md shadow-md">
       <h1 className="w-[160px] truncate">이거 글 등록 어떻게 해요????????????????</h1>
       <div className="flex items-center gap-1">
         <div className="relative w-[20px] h-[20px] flex overflow-hidden rounded-full">
