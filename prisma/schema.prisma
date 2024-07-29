@@ -48,7 +48,7 @@ model VerificationToken {
 
 model User {
   id               String            @id @default(cuid())
-  nickname         String            @default("user")
+  nickname         String
   email            String            @unique
   password         String
   emailVerified    DateTime?         @map("email_verified")

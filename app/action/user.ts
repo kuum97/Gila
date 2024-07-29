@@ -13,7 +13,7 @@ export const register = async (form: RegisterSchemaType): Promise<ActionType<Use
     const validate = RegisterSchema.safeParse(form);
     if (!validate.success) return { success: false, message: '올바른 값을 입력해 주세요.' };
 
-    const { email, password } = validate.data;
+    const { email, password, nickname } = validate.data;
 
     const checkExistingUser = await db.user.findUnique({
       where: {
@@ -27,6 +27,7 @@ export const register = async (form: RegisterSchemaType): Promise<ActionType<Use
     const createUser = await db.user.create({
       data: {
         email,
+        nickname,
         password: hashedPassword,
       },
     });
