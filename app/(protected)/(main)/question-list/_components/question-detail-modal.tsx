@@ -4,6 +4,7 @@ import {
   DialogContent,
   DialogDescription,
   DialogHeader,
+  DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
 import AnswerList from '@/app/(protected)/(main)/question-list/_components/answer-list';
@@ -27,7 +28,9 @@ export default async function QuestionDetailModal({
       </DialogTrigger>
       <DialogContent className="bg-white h-screen flex flex-col justify-start pt-14">
         <DialogHeader className="h-fit gap-2">
-          <p className="text-left text-4xl font-semibold leading-tight">{question.title}</p>
+          <DialogTitle>
+            <p className="text-left text-4xl font-semibold leading-tight">{question.title}</p>
+          </DialogTitle>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <p className="text-sm font-semibold">{question.location}</p>
