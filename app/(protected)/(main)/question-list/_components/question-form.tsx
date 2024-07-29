@@ -66,6 +66,7 @@ export default function QuestionForm() {
 
   const selectLocation = (location: string) => {
     form.setValue('location', location);
+    form.clearErrors('location');
   };
 
   const onSubmit = (values: z.infer<typeof FormSchema>) => {
