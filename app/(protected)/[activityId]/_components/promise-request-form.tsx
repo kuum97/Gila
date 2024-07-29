@@ -60,7 +60,7 @@ export default function PromiseRequestForm() {
                   />
                 </FormControl>
               </div>
-              <FormMessage className="text-xs text-red" />
+              <FormMessage className="text-xs text-red text-[9px]" />
             </FormItem>
           )}
         />
