@@ -15,8 +15,15 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import QuestionTipPopOver from './qusetion-tip-popover';
+import QuestionLocationPopover from './question-location-popover';
 
 const FormFields = [
+  {
+    name: 'location',
+    label: '장소',
+    placeholder: '장소를 입력해 주세요',
+    type: 'text',
+  },
   {
     name: 'title',
     label: '제목',
@@ -40,6 +47,10 @@ const FormSchema = z.object({
     .string()
     .min(1, { message: '내용을 입력해 주세요.' })
     .max(200, { message: '내용은 200자 이내로 입력해 주세요.' }),
+  location: z
+    .string()
+    .min(1, { message: '장소를 선택해 주세요.' })
+    .max(20, { message: '내용은 20자 이내로 입력해 주세요.' }),
 });
 
 export default function QuestionForm() {
@@ -48,47 +59,92 @@ export default function QuestionForm() {
     defaultValues: {
       title: '',
       content: '',
+      location: '',
     },
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const onSubmit = (values: z.infer<typeof FormSchema>) => {
-    // console.log('테스트입니다.');
+  const selectLocation = (location: string) => {
+    form.setValue('location', location);
   };
+
+  const onSubmit = (values: z.infer<typeof FormSchema>) => {};
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="relative flex items-end w-full gap-6 px-4 pt-4 border rounded-lg shadow-md"
+        className="relative flex items-end w-full h-full gap-6 px-4 pt-4 border rounded-lg shadow-md"
       >
         <div className="flex flex-col w-full">
-          {FormFields.map(({ name, label, placeholder, type }) => (
-            <FormField
-              key={name}
-              control={form.control}
-              name={name as 'title' | 'content'}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-sm">{label}</FormLabel>
-                  <FormControl>
-                    {type === 'textarea' ? (
-                      <Textarea placeholder={placeholder} {...field} className="text-xs" />
-                    ) : (
-                      <Input type={type} placeholder={placeholder} {...field} className="text-xs" />
-                    )}
-                  </FormControl>
-                  <div className="h-4">
-                    <FormMessage className="text-xs text-red" />
+          <FormField
+            control={form.control}
+            name="location"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-sm">{FormFields[0].label}</FormLabel>
+                <FormControl>
+                  <div className="relative">
+                    <Input
+                      type={FormFields[0].type}
+                      placeholder={FormFields[0].placeholder}
+                      {...field}
+                      className="text-xs"
+                      disabled
+                    />
+                    <QuestionLocationPopover selectLocation={selectLocation} />
                   </div>
-                </FormItem>
-              )}
-            />
-          ))}
+                </FormControl>
+                <div className="h-4">
+                  <FormMessage className="text-xs text-red" />
+                </div>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="title"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-sm">{FormFields[1].label}</FormLabel>
+                <FormControl>
+                  <Input
+                    type={FormFields[1].type}
+                    placeholder={FormFields[1].placeholder}
+                    {...field}
+                    className="text-xs"
+                  />
+                </FormControl>
+                <div className="h-4">
+                  <FormMessage className="text-xs text-red" />
+                </div>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="content"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-sm">{FormFields[2].label}</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder={FormFields[2].placeholder}
+                    {...field}
+                    className="text-xs"
+                  />
+                </FormControl>
+                <div className="h-4">
+                  <FormMessage className="text-xs text-red" />
+                </div>
+              </FormItem>
+            )}
+          />
         </div>
-        <Button type="submit" className="px-4 py-1 mb-6 text-sm rounded-md">
-          물어보기
-        </Button>
+        <div>
+          <Button type="submit" className="px-4 py-1 mb-6 text-sm rounded-md">
+            물어보기
+          </Button>
+        </div>
         <QuestionTipPopOver />
       </form>
     </Form>
