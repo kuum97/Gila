@@ -2,15 +2,17 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-// import Image from 'next/image';
-// eslint-disable-next-line import/no-extraneous-dependencies
+import Image from 'next/image';
 import Autoplay from 'embla-carousel-autoplay';
 import { Card, CardContent } from '@/components/ui/card';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
-import CarouselText from '@/components/ui/carousel-text';
+import CarouselText from '@/app/(protected)/(main)/_components/carousel-text';
 
-// eslint-disable-next-line import/prefer-default-export
-export function CarouselCard({ activities }) {
+interface Props {
+  activities: { id: number; title: string; likes: number; thumbnails: string[] }[];
+}
+
+export default function CarouselCard({ activities }: Props) {
   return (
     <Carousel
       plugins={[
@@ -27,13 +29,14 @@ export function CarouselCard({ activities }) {
             <Card className="rounded-none">
               <CardContent className="relative p-0 ">
                 <Link href={`/${id}`} passHref>
-                  <div className="w-full h-64">
-                    {/* <Image
-                      src={thumbnails}
+                  <div className="w-full relative h-64">
+                    <Image
+                      key={thumbnails[0]}
+                      src={thumbnails[0]}
                       alt={title}
                       fill
                       className="object-cover w-full h-full"
-                    /> */}
+                    />
                   </div>
                   <CarouselText title={title} likes={likes} />
                 </Link>
