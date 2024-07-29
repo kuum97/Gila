@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 import { MessageCircle } from 'lucide-react';
-import QuestionDetailModal from './question-detail-modal';
+import QuestionDetailModal from '@/app/(protected)/(main)/question-list/_components/question-detail-modal';
 
 export default function QuestionListCard() {
   return (

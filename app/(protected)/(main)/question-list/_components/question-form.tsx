@@ -14,8 +14,9 @@ import { Textarea } from '@/components/ui/textarea';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import QuestionTipPopOver from './qusetion-tip-popover';
-import QuestionLocationPopover from './question-location-popover';
+import { createQuestion } from '@/app/action/question';
+import QuestionTipPopOver from '@/app/(protected)/(main)/question-list/_components/qusetion-tip-popover';
+import QuestionLocationPopover from '@/app/(protected)/(main)/question-list/_components/question-location-popover';
 
 const FormFields = [
   {
@@ -67,7 +68,9 @@ export default function QuestionForm() {
     form.setValue('location', location);
   };
 
-  const onSubmit = (values: z.infer<typeof FormSchema>) => {};
+  const onSubmit = (values: z.infer<typeof FormSchema>) => {
+    createQuestion({ title: values.title, content: values.content, location: values.location });
+  };
 
   return (
     <Form {...form}>

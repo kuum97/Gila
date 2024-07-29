@@ -6,8 +6,8 @@ import {
   DialogHeader,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import AnswerList from './answer-list';
-import AnswerForm from './answer-form';
+import AnswerList from '@/app/(protected)/(main)/question-list/_components/answer-list';
+import AnswerForm from '@/app/(protected)/(main)/question-list/_components/answer-form';
 
 export default function QuestionDetailModal() {
   return (

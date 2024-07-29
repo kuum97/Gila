@@ -1,4 +1,4 @@
-import QuestionListCard from './question-list-card';
+import QuestionListCard from '@/app/(protected)/(main)/question-list/_components/question-list-card';
 
 export default function QuestionList() {
   const mockList = [1, 2, 3, 4, 5, 6, 7, 8, 9];

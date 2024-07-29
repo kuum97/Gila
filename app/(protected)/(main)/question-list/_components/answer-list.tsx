@@ -1,4 +1,4 @@
-import AnswerItem from './answer-item';
+import AnswerItem from '@/app/(protected)/(main)/question-list/_components/answer-item';
 
 export default function AnswerList() {
   const mockAnswer = [1, 2, 3, 4, 5, 6, 7, 8, 9];
