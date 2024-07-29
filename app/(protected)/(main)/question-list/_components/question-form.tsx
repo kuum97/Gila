@@ -57,8 +57,8 @@ export default function QuestionForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex items-end gap-6">
-        <div className="flex flex-col gap-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex items-end gap-6 w-full">
+        <div className="flex flex-col gap-4 w-full">
           {FormFields.map(({ name, label, placeholder, type }) => (
             <FormField
               key={name}
