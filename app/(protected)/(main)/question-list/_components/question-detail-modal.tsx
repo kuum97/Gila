@@ -13,7 +13,9 @@ export default function QuestionDetailModal() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">자세히 보기</Button>
+        <Button variant="outline" className="bg-primary">
+          보기
+        </Button>
       </DialogTrigger>
       <DialogContent className="bg-white h-screen flex flex-col justify-start pt-14">
         <DialogHeader className="h-fit gap-2">

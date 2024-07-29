@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 import { MessageCircle } from 'lucide-react';
+import QuestionDetailModal from './question-detail-modal';
 
 export default function QuestionListCard() {
   return (
@@ -16,12 +17,7 @@ export default function QuestionListCard() {
         <MessageCircle size={13} />
         <p>24</p>
       </div>
-      <button
-        type="button"
-        className="border border-none bg-primary text-white px-2 py-1 rounded-md"
-      >
-        보기
-      </button>
+      <QuestionDetailModal />
     </div>
   );
 }
