@@ -1,3 +1,18 @@
+import MyQuestionCard from '@/app/(protected)/(user)/dashboard/my-question/_components/my-question-card';
+import PlusButton from '@/app/(protected)/(user)/dashboard/_components/plus-button';
+
 export default function Page() {
-  return <div>내가 한 질문</div>;
+  return (
+    <>
+      <div className="flex flex-col gap-3">
+        <h1 className="text-lg font-bold">내 질문</h1>
+        <MyQuestionCard />
+        <MyQuestionCard />
+        <MyQuestionCard />
+        <MyQuestionCard />
+        <MyQuestionCard />
+      </div>
+      <PlusButton />
+    </>
+  );
 }
