@@ -48,7 +48,7 @@ export const editAnswer = async ({
 }: {
   answerId: string;
   content: string;
-  images: string[];
+  images?: string[];
 }): Promise<ActionType<Answer>> => {
   try {
     const updatedAnswer = await db.answer.update({
@@ -60,6 +60,8 @@ export const editAnswer = async ({
     });
 
     if (!updatedAnswer) return { success: false, message: '답변 수정에 실패하였습니다.' };
+
+    revalidatePath('/question-list');
 
     return {
       success: true,

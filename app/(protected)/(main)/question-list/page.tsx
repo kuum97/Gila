@@ -1,6 +1,6 @@
 import QuestionForm from '@/app/(protected)/(main)/question-list/_components/question-form';
 import { getQuestions } from '@/app/data/question';
-import QuestionList from './_components/question-list';
+import QuestionList from '@/app/(protected)/(main)/question-list/_components/question-list';
 
 export default async function Page() {
   const qusetionList = await getQuestions({ take: 10 });
