@@ -4,8 +4,9 @@ import QuestionList from '@/app/(protected)/(main)/question-list/_components/que
 import QuestionSortDropdown from './_components/question-sort-dropdown';
 
 export default async function Page({ searchParams }: { searchParams: { sort: string } }) {
-  const qusetionList = await getQuestions({ take: 10 });
   const { sort } = searchParams;
+  const listOrder = sort ? 'answerLen' : 'recent';
+  const qusetionList = await getQuestions({ take: 10, order: listOrder });
 
   return (
     <div className="flex flex-col items-center gap-3 p-6">
