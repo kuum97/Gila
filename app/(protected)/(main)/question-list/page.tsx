@@ -1,9 +1,11 @@
 import QuestionForm from '@/app/(protected)/(main)/question-list/_components/question-form';
 import { getQuestions } from '@/app/data/question';
 import QuestionList from '@/app/(protected)/(main)/question-list/_components/question-list';
+import QuestionSortDropdown from './_components/question-sort-dropdown';
 
-export default async function Page() {
+export default async function Page({ searchParams }: { searchParams: { sort: string } }) {
   const qusetionList = await getQuestions({ take: 10 });
+  const { sort } = searchParams;
 
   return (
     <div className="flex flex-col items-center gap-3 p-6">
@@ -14,7 +16,10 @@ export default async function Page() {
         <QuestionForm />
       </div>
       <div className="flex flex-col items-start w-full gap-2">
-        <h2 className="font-semibold">질문 목록</h2>
+        <div className="flex items-center justify-between w-full">
+          <h2 className="font-semibold">질문 목록</h2>
+          <QuestionSortDropdown sortValue={sort} />
+        </div>
         <QuestionList questionList={qusetionList.questions} />
       </div>
     </div>

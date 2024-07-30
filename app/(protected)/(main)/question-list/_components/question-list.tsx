@@ -7,7 +7,7 @@ export default function QuestionList({
   questionList: QuestionWithUserAndCount[];
 }) {
   return (
-    <div className="h-[450px] w-full overflow-y-auto">
+    <div className="h-[450px] w-full overflow-y-scroll overflow-x-hidden">
       <ul className="flex flex-col items-center gap-2">
         {questionList.map((question) => (
           <li key={question.id}>

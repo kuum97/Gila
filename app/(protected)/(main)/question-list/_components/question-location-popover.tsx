@@ -51,8 +51,8 @@ export default function QuestionLocationPopover({
       <PopoverContent className="w-full p-0 bg-white">
         <Command>
           <CommandInput placeholder="목적지를 찾아보세요!" />
-          <CommandEmpty>그런 지역은 없어요</CommandEmpty>
           <CommandList className="flex justify-center w-[350x] p-1 relative">
+            <CommandEmpty>그런 지역은 없어요</CommandEmpty>
             {location || (
               <CommandGroup heading="도・광역시・특별시">
                 <ul className="grid grid-cols-3 gap-3 mt-1">
