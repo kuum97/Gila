@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/form';
 import { Textarea } from '@/components/ui/textarea';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
@@ -31,6 +32,7 @@ const FormSchema = z.object({
 });
 
 export default function AnswerForm({ questionId }: { questionId: string }) {
+  const [isPending, startTransition] = useTransition();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -38,14 +40,16 @@ export default function AnswerForm({ questionId }: { questionId: string }) {
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof FormSchema>) => {
-    const result = await createAnswer({ questionId, content: values.content });
-    if (!result.success) {
-      toast.error(result.message);
-      return;
-    }
-    toast.success(result.message);
-    form.setValue('content', '');
+  const onSubmit = (values: z.infer<typeof FormSchema>) => {
+    startTransition(async () => {
+      const result = await createAnswer({ questionId, content: values.content });
+      if (!result.success) {
+        toast.error(result.message);
+        return;
+      }
+      toast.success(result.message);
+      form.setValue('content', '');
+    });
   };
 
   return (
@@ -68,7 +72,7 @@ export default function AnswerForm({ questionId }: { questionId: string }) {
             )}
           />
         </div>
-        <Button type="submit" className="px-4 py-1 text-sm rounded-md mb-6">
+        <Button disabled={isPending} type="submit" className="px-4 py-1 text-sm rounded-md mb-6">
           제출하기
         </Button>
       </form>

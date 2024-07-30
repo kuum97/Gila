@@ -18,6 +18,7 @@ import { createQuestion } from '@/app/action/question';
 import QuestionTipPopOver from '@/app/(protected)/(main)/question-list/_components/qusetion-tip-popover';
 import QuestionLocationPopover from '@/app/(protected)/(main)/question-list/_components/question-location-popover';
 import { toast } from 'sonner';
+import { useTransition } from 'react';
 
 const FormFields = [
   {
@@ -56,6 +57,7 @@ const FormSchema = z.object({
 });
 
 export default function QuestionForm() {
+  const [isPending, startTransition] = useTransition();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -70,20 +72,20 @@ export default function QuestionForm() {
     form.clearErrors('location');
   };
 
-  const onSubmit = async (values: z.infer<typeof FormSchema>) => {
-    const result = await createQuestion({
-      title: values.title,
-      content: values.content,
-      location: values.location,
+  const onSubmit = (values: z.infer<typeof FormSchema>) => {
+    startTransition(async () => {
+      const result = await createQuestion({
+        title: values.title,
+        content: values.content,
+        location: values.location,
+      });
+      if (!result.success) {
+        toast.error(result.message);
+        return;
+      }
+      toast.success(result.message);
+      form.reset();
     });
-    if (!result.success) {
-      toast.error(result.message);
-      return;
-    }
-    toast.success(result.message);
-    form.setValue('content', '');
-    form.setValue('title', '');
-    form.setValue('location', '');
   };
 
   return (
@@ -158,7 +160,7 @@ export default function QuestionForm() {
           />
         </div>
         <div>
-          <Button type="submit" className="px-4 py-1 mb-6 text-sm rounded-md">
+          <Button disabled={isPending} type="submit" className="px-4 py-1 mb-6 text-sm rounded-md">
             물어보기
           </Button>
         </div>
