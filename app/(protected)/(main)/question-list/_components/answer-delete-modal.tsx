@@ -10,6 +10,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
+import { AlertDialogDescription } from '@radix-ui/react-alert-dialog';
 
 export default function AnswerDeleteModal({ isDeleteAnswer }: { isDeleteAnswer: () => void }) {
   return (
@@ -20,16 +21,11 @@ export default function AnswerDeleteModal({ isDeleteAnswer }: { isDeleteAnswer: 
       <AlertDialogContent className="bg-white w-80 rounded-lg">
         <AlertDialogHeader>
           <AlertDialogTitle>정말 삭제하시나요?</AlertDialogTitle>
+          <AlertDialogDescription aria-describedby={undefined} />
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>돌아가기</AlertDialogCancel>
-          <AlertDialogAction
-            onClick={() => {
-              isDeleteAnswer();
-            }}
-          >
-            삭제하기
-          </AlertDialogAction>
+          <AlertDialogAction onClick={isDeleteAnswer}>삭제하기</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
