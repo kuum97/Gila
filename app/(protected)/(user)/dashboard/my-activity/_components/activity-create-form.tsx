@@ -1,3 +1,100 @@
+'use client';
+
+import { Button } from '@/components/ui/button';
+import { Form } from '@/components/ui/form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm, UseFormReturn } from 'react-hook-form';
+import { z } from 'zod';
+import { Accordion } from '@/components/ui/accordion';
+import { Undo2 } from 'lucide-react';
+import LocationSelectSection from '@/app/(protected)/(user)/dashboard/my-activity/_components/location-select-section';
+import ScheduleSection from '@/app/(protected)/(user)/dashboard/my-activity/_components/schedule-section';
+import DetailInfoSection from '@/app/(protected)/(user)/dashboard/my-activity/_components/detail-info-section';
+import { useTransition } from 'react';
+import { createActivity } from '@/app/action/activity';
+import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
+
+const ActivityCreateFormSchema = z.object({
+  title: z.string(),
+  tags: z.string().array(),
+  description: z.string(),
+  schedule: z.object({ from: z.date(), to: z.date() }),
+  location: z.string(),
+  // images: z.instanceof(FileList).nullable(),
+});
+
+export type ActivityCreateFormData = z.infer<typeof ActivityCreateFormSchema>;
+
+export interface ActivityCreateFormProps {
+  form: UseFormReturn<ActivityCreateFormData>;
+}
+
 export default function ActivityCreateForm() {
-  return <form>활동생성</form>;
+  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
+  const form = useForm<ActivityCreateFormData>({
+    resolver: zodResolver(ActivityCreateFormSchema),
+    defaultValues: {
+      title: '',
+      description: '',
+      location: '',
+      tags: [],
+      // images: null,
+    },
+  });
+
+  const selectLocation = (location: string) => {
+    form.setValue('location', location);
+    form.clearErrors('location');
+  };
+
+  const onSubmit = (data: ActivityCreateFormData) => {
+    startTransition(async () => {
+      const action = await createActivity(data);
+      if (!action.success) {
+        toast.error(action.message);
+        return;
+      }
+      toast.success(action.message);
+      router.replace('/');
+    });
+  };
+
+  return (
+    <Form {...form}>
+      <main className="h-screen bg-white">
+        <div className="px-5 pt-5">
+          <button
+            type="button"
+            aria-label="back-btn"
+            className="bg-[#ffffff] p-1 rounded-full shadow-md border hover:bg-slate-200"
+          >
+            <Undo2 />
+          </button>
+        </div>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="relative">
+          <Accordion
+            type="single"
+            className="flex flex-col gap-5 p-5"
+            collapsible
+            defaultValue="item-1"
+          >
+            <LocationSelectSection form={form} selectLocation={selectLocation} />
+            <ScheduleSection form={form} />
+            <DetailInfoSection form={form} />
+          </Accordion>
+          <section className="fixed bottom-0 flex justify-end w-full p-5 border-t bg-slate-900 bg-opacity-90">
+            <Button
+              disabled={isPending}
+              type="submit"
+              className="p-5 text-base font-semibold text-black"
+            >
+              제출
+            </Button>
+          </section>
+        </form>
+      </main>
+    </Form>
+  );
 }
