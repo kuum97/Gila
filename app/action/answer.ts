@@ -79,6 +79,8 @@ export const deleteAnswer = async (answerId: string): Promise<ActionType<Answer>
 
     if (!deletedAnswer) return { success: false, message: '답변 삭제에 실패하였습니다.' };
 
+    revalidatePath('/question-list');
+
     return { success: true, message: '답변 삭제에 성공하였습니다.' };
   } catch (error) {
     return { success: false, message: '답변 삭제 중에 에러가 발생하였습니다.' };

@@ -1,6 +1,3 @@
-'use client';
-
-import { deleteAnswer } from '@/app/action/answer';
 import { AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { AnswerWithUser } from '@/type';
 import { Avatar } from '@radix-ui/react-avatar';
@@ -12,10 +9,6 @@ interface Props {
 }
 
 export default function AnswerItem({ answer, userId }: Props) {
-  const isDeleteAnswer = () => {
-    deleteAnswer(answer.id);
-  };
-
   return (
     <div className="flex flex-col border rounded-md p-3 gap-2">
       <div className="flex items-center gap-2">
@@ -27,7 +20,7 @@ export default function AnswerItem({ answer, userId }: Props) {
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
         <p className="text-base">{answer.user.nickname}</p>
-        {userId === answer.userId && <AnswerButtonContainer isDeleteAnswer={isDeleteAnswer} />}
+        {userId === answer.userId && <AnswerButtonContainer answerId={answer.id} />}
       </div>
       <div className="flex flex-col gap-2">
         <div className="w-full">
