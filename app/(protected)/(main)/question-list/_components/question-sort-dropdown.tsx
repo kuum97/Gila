@@ -18,13 +18,13 @@ export default function QuestionSortDropdown({ sortValue }: { sortValue: string 
       <DropdownMenuContent className="bg-white flex flex-col items-center">
         <DropdownMenuItem
           asChild
-          className={`${!sortValue && 'border rounded-md shadow-md'} w-full flex justify-center`}
+          className={`${!sortValue && 'rounded-md shadow-md bg-orange-100'} w-full flex justify-center`}
         >
           <Link href="/question-list">최신순</Link>
         </DropdownMenuItem>
         <DropdownMenuItem
           asChild
-          className={`${sortValue && 'border rounded-md shadow-md'} w-full flex justify-center`}
+          className={`${sortValue && 'rounded-md shadow-md bg-orange-100'} w-full flex justify-center`}
         >
           <Link href="/question-list?sort=answerLen">답변순</Link>
         </DropdownMenuItem>
