@@ -1,12 +1,14 @@
 import QuestionForm from '@/app/(protected)/(main)/question-list/_components/question-form';
 import { getQuestions } from '@/app/data/question';
 import QuestionList from '@/app/(protected)/(main)/question-list/_components/question-list';
+import { getCurrentUserId } from '@/app/data/user';
 import QuestionSortDropdown from './_components/question-sort-dropdown';
 
 export default async function Page({ searchParams }: { searchParams: { sort: string } }) {
   const { sort } = searchParams;
   const listOrder = sort ? 'answerLen' : 'recent';
   const qusetionList = await getQuestions({ take: 10, order: listOrder });
+  const userId = await getCurrentUserId();
 
   return (
     <div className="flex flex-col items-center gap-3 p-6">
@@ -21,7 +23,7 @@ export default async function Page({ searchParams }: { searchParams: { sort: str
           <h2 className="font-semibold">질문 목록</h2>
           <QuestionSortDropdown sortValue={sort} />
         </div>
-        <QuestionList questionList={qusetionList.questions} />
+        <QuestionList questions={qusetionList.questions} userId={userId} />
       </div>
     </div>
   );

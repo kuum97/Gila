@@ -1,3 +1,7 @@
+/* eslint-disable no-underscore-dangle */
+
+'use client';
+
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -9,16 +13,18 @@ import {
 } from '@/components/ui/dialog';
 import AnswerList from '@/app/(protected)/(main)/question-list/_components/answer-list';
 import AnswerForm from '@/app/(protected)/(main)/question-list/_components/answer-form';
-import { QuestionWithUserAndCount } from '@/type';
-import { getAnswers } from '@/app/data/answer';
+import { AnswerWithUser, QuestionWithUserAndCount } from '@/type';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { useState } from 'react';
 
-export default async function QuestionDetailModal({
-  question,
-}: {
+interface Props {
+  userId: string;
   question: QuestionWithUserAndCount;
-}) {
-  const answerList = await getAnswers({ questionId: question.id });
+}
+
+export default function QuestionDetailModal({ question, userId }: Props) {
+  const [answerList, setAnswerList] = useState<AnswerWithUser[]>([]);
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -51,7 +57,7 @@ export default async function QuestionDetailModal({
         </DialogHeader>
         <div className="flex flex-col">
           <AnswerForm questionId={question.id} />
-          <AnswerList answerList={answerList.answers} totalCount={question._count.answers} />
+          <AnswerList answers={answerList} totalCount={question._count.answers} userId={userId} />
         </div>
       </DialogContent>
     </Dialog>

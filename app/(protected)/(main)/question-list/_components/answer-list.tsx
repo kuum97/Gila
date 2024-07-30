@@ -1,14 +1,17 @@
+'use client';
+
 import AnswerItem from '@/app/(protected)/(main)/question-list/_components/answer-item';
-import { getCurrentUserId } from '@/app/data/user';
 import { AnswerWithUser } from '@/type';
+import { useState } from 'react';
 
 interface Props {
-  answerList: AnswerWithUser[];
+  answers: AnswerWithUser[];
   totalCount: number;
+  userId: string;
 }
 
-export default async function AnswerList({ answerList, totalCount }: Props) {
-  const userId = await getCurrentUserId();
+export default function AnswerList({ answers, totalCount, userId }: Props) {
+  const [answerList, setAnswerList] = useState(answers);
 
   return (
     <div className="flex flex-col gap-3 h-full">
