@@ -21,7 +21,7 @@ const ActivityCreateFormSchema = z.object({
   description: z.string(),
   schedule: z.object({ from: z.date(), to: z.date() }),
   location: z.string(),
-  // images: z.instanceof(FileList).nullable(),
+  images: z.string().array(),
 });
 
 export type ActivityCreateFormData = z.infer<typeof ActivityCreateFormSchema>;
@@ -40,7 +40,7 @@ export default function ActivityCreateForm() {
       description: '',
       location: '',
       tags: [],
-      // images: null,
+      images: [],
     },
   });
 
@@ -49,21 +49,31 @@ export default function ActivityCreateForm() {
     form.clearErrors('location');
   };
 
-  const onSubmit = (data: ActivityCreateFormData) => {
+  const onSubmit = ({ title, description, schedule, tags, location }: ActivityCreateFormData) => {
     startTransition(async () => {
-      const action = await createActivity(data);
+      const { from, to } = schedule;
+
+      const action = await createActivity({
+        title,
+        description,
+        tags,
+        location,
+        startDate: from,
+        endDate: to,
+        maximumCount: 2,
+      });
       if (!action.success) {
         toast.error(action.message);
         return;
       }
       toast.success(action.message);
-      router.replace('/');
+      router.replace('/activity-list');
     });
   };
 
   return (
     <Form {...form}>
-      <main className="h-screen bg-white">
+      <main className="h-screen bg-white mb-20">
         <div className="px-5 pt-5">
           <button
             type="button"
@@ -76,13 +86,17 @@ export default function ActivityCreateForm() {
         <form onSubmit={form.handleSubmit(onSubmit)} className="relative">
           <Accordion
             type="single"
-            className="flex flex-col gap-5 p-5"
+            className="flex flex-col gap-5 p-5 snap-y"
             collapsible
             defaultValue="item-1"
           >
-            <LocationSelectSection form={form} selectLocation={selectLocation} />
-            <ScheduleSection form={form} />
-            <DetailInfoSection form={form} />
+            <LocationSelectSection
+              className="bg-[#ffffff] snap-center"
+              form={form}
+              selectLocation={selectLocation}
+            />
+            <ScheduleSection className="bg-[#ffffff] snap-center" form={form} />
+            <DetailInfoSection className="bg-[#ffffff] snap-center" form={form} />
           </Accordion>
           <section className="fixed bottom-0 flex justify-end w-full p-5 border-t bg-slate-900 bg-opacity-90">
             <Button
