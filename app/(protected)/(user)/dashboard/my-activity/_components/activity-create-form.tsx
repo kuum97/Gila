@@ -22,6 +22,7 @@ const ActivityCreateFormSchema = z.object({
   schedule: z.object({ from: z.date(), to: z.date() }),
   location: z.string(),
   images: z.string().array(),
+  maximumCount: z.number().min(1),
 });
 
 export type ActivityCreateFormData = z.infer<typeof ActivityCreateFormSchema>;
@@ -41,6 +42,7 @@ export default function ActivityCreateForm() {
       location: '',
       tags: [],
       images: [],
+      maximumCount: 1,
     },
   });
 
@@ -49,7 +51,14 @@ export default function ActivityCreateForm() {
     form.clearErrors('location');
   };
 
-  const onSubmit = ({ title, description, schedule, tags, location }: ActivityCreateFormData) => {
+  const onSubmit = ({
+    title,
+    description,
+    schedule,
+    tags,
+    location,
+    maximumCount,
+  }: ActivityCreateFormData) => {
     startTransition(async () => {
       const { from, to } = schedule;
 
@@ -57,10 +66,11 @@ export default function ActivityCreateForm() {
         title,
         description,
         tags,
+        thumbnails: [],
         location,
         startDate: from,
         endDate: to,
-        maximumCount: 2,
+        maximumCount,
       });
       if (!action.success) {
         toast.error(action.message);
@@ -73,7 +83,7 @@ export default function ActivityCreateForm() {
 
   return (
     <Form {...form}>
-      <main className="h-screen bg-white">
+      <main className="min-h-screen bg-white">
         <div className="px-5 pt-5">
           <button
             type="button"
@@ -83,10 +93,10 @@ export default function ActivityCreateForm() {
             <Undo2 />
           </button>
         </div>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="relative">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 p-5">
           <Accordion
             type="single"
-            className="flex flex-col gap-5 p-5"
+            className="flex flex-col gap-5"
             collapsible
             defaultValue="item-1"
           >
@@ -98,15 +108,13 @@ export default function ActivityCreateForm() {
             <ScheduleSection className="bg-[#ffffff]" form={form} />
             <DetailInfoSection className="bg-[#ffffff]" form={form} />
           </Accordion>
-          <section className="fixed bottom-0 flex justify-end w-full p-5 border-t bg-slate-900 bg-opacity-90">
-            <Button
-              disabled={isPending}
-              type="submit"
-              className="p-5 text-base font-semibold text-black"
-            >
-              제출
-            </Button>
-          </section>
+          <Button
+            disabled={isPending}
+            type="submit"
+            className="w-full text-xl font-semibold text-black shadow-md py-7"
+          >
+            제출
+          </Button>
         </form>
       </main>
     </Form>
