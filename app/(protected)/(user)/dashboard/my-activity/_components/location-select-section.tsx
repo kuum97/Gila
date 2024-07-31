@@ -2,7 +2,7 @@
 
 import { AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { FormControl, FormField, FormItem } from '@/components/ui/form';
+import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { ActivityCreateFormProps } from '@/app/(protected)/(user)/dashboard/my-activity/_components/activity-create-form';
 import {
   Command,
@@ -36,7 +36,7 @@ export default function LocationSelectSection({ form, selectLocation, className 
   const handleSelectSubLocation = useCallback(
     (currentValue: string) => {
       setSubLocation(currentValue === subLocation ? '' : currentValue);
-      selectLocation(`${location} ${currentValue}`);
+      selectLocation(subLocation ? `${location} ${currentValue}` : `${location}`);
     },
     [subLocation, location, selectLocation],
   ); // 세부 행정구역 결정
@@ -62,27 +62,28 @@ export default function LocationSelectSection({ form, selectLocation, className 
                 <FormItem>
                   <FormControl>
                     <h2 className="text-lg font-semibold">
-                      {field.value &&
-                        subLocation &&
-                        `${location} ${LOCATIONS[location].find(
-                          (currentSubLocation) => currentSubLocation === subLocation,
-                        )}`}
+                      {field.value && subLocation
+                        ? `${location} ${LOCATIONS[location].find(
+                            (currentSubLocation) => currentSubLocation === subLocation,
+                          )}`
+                        : `${location}`}
                     </h2>
                   </FormControl>
+                  <FormMessage />
                   <Command>
                     <Card>
                       <CommandInput className="bg-[#ffffff]" placeholder="지역을 검색해 보세요!" />
-                      <CommandList className="flex justify-center w-[350x] p-1 relative">
-                        <CommandEmpty>그런 지역은 없어요</CommandEmpty>
+                      <CommandList className="flex justify-center p-1 relative shadow-[inset_0_0_5px_rgb(0,0,0,0.08)]">
+                        <CommandEmpty>디폴트 이미지 넣을 예정</CommandEmpty>
                         {!location ? (
                           <CommandGroup heading="도・광역시・특별시">
-                            <ul className="grid grid-cols-3 gap-3 mt-1">
+                            <ul className="flex flex-wrap gap-3">
                               {Object.keys(LOCATIONS).map((province) => (
                                 <CommandItem
                                   key={province}
                                   value={province}
                                   onSelect={handleSelectValue}
-                                  className="flex items-center justify-center w-full border rounded-lg hover:bg-gray-100"
+                                  className="flex items-center justify-center p-2 border rounded-lg hover:bg-gray-100"
                                 >
                                   {province}
                                 </CommandItem>
@@ -91,13 +92,13 @@ export default function LocationSelectSection({ form, selectLocation, className 
                           </CommandGroup>
                         ) : (
                           <CommandGroup>
-                            <ul className="grid grid-cols-3 gap-3 mt-1">
+                            <ul className="flex flex-wrap gap-3">
                               {subLocations.map((city) => (
                                 <CommandItem
                                   key={city}
                                   value={city}
                                   onSelect={handleSelectSubLocation}
-                                  className="flex items-center justify-center w-full border rounded-lg hover:bg-gray-100"
+                                  className="flex items-center justify-center p-2 border rounded-lg hover:bg-gray-100"
                                 >
                                   {city}
                                 </CommandItem>
@@ -105,7 +106,7 @@ export default function LocationSelectSection({ form, selectLocation, className 
                             </ul>
                           </CommandGroup>
                         )}
-                        <div className="absolute flex justify-end right-3 top-1.5">
+                        <div className="absolute flex justify-end right-1.5 top-1.5">
                           <Button
                             type="button"
                             onClick={() => {
