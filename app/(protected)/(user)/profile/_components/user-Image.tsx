@@ -8,9 +8,9 @@ import { Pencil } from 'lucide-react';
 
 export default function UserImage({ edit = false }) {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [imageFile, setImageFile] = useState<string | null>(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
 
-  const fileInputRef = useRef(null);
+  // const fileInputRef = useRef(null);
 
   // const handleIconClick = () => {
   //   fileInputRef.current.click();
@@ -34,28 +34,13 @@ export default function UserImage({ edit = false }) {
         <div className="relative w-32 h-32">
           <Avatar className="w-full h-full">
             <AvatarImage
-              src={imagePreview || '/test.png'}
+              src={imagePreview || '/profile.png'}
               alt="Profile"
               className="object-cover w-full h-full border border-gray-300 rounded-full"
             />
             <AvatarFallback>U</AvatarFallback>
           </Avatar>
           {edit && (
-            // <div className="relative">
-            //   <div
-            //     className="absolute bottom-0 right-0 p-2 bg-white border border-gray-300 rounded-full shadow-lg cursor-pointer"
-            //     onClick={handleIconClick}
-            //   >
-            //     <Pencil className="text-gray-600" size={20} />
-            //   </div>
-            //   <div className="hidden">
-            //     <Label htmlFor="picture" className="sr-only">
-            //       Picture
-            //     </Label>
-            //     <Input id="picture" type="file" ref={fileInputRef} onChange={handleFileChange} />
-            //   </div>
-            // </div>
-
             <div className="relative">
               <Label
                 htmlFor="picture"
