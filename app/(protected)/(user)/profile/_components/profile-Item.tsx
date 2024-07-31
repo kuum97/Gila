@@ -3,11 +3,8 @@
 import ProfileTopic from '@/app/(protected)/(user)/profile/_components/profile-topic';
 
 export default function ProfileItem() {
-  // <p className="w-20 text-sm text-black cursor-pointer">{triggerText}</p>
-  //       <div className="flex items-center justify-between w-full mx-3">
-  //         <p className="text-sm font-bold">{displayText}</p>
   return (
-    <div className="flex flex-col gap-8 mt-8">
+    <div className="flex flex-col gap-8 mt-12">
       <div className="flex w-full gap-4 pb-4 border-b border-gray-200 mx-1flex">
         <p className="text-sm">닉네임</p>
         <p className="text-sm font-bold">닉네임 테스트</p>
