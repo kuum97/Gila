@@ -1,7 +1,7 @@
 import { AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Calendar } from '@/components/ui/calendar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { FormField, FormItem, FormMessage } from '@/components/ui/form';
+import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { ActivityCreateFormProps } from './activity-create-form';
 
 interface Props extends ActivityCreateFormProps {
@@ -29,24 +29,28 @@ export default function ScheduleSection({ form, className }: Props) {
         </AccordionTrigger>
         <AccordionContent>
           <CardContent>
-            <FormField
-              control={form.control}
-              name="schedule"
-              render={({ field }) => (
-                <FormItem>
-                  <Calendar
-                    mode="range"
-                    defaultMonth={field.value?.from}
-                    selected={field.value}
-                    onSelect={field.onChange}
-                    numberOfMonths={2}
-                    disabled={isDisabled}
-                    initialFocus
-                  />
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <Card className="shadow-[inset_0_0_5px_rgb(0,0,0,0.08)]">
+              <FormField
+                control={form.control}
+                name="schedule"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Calendar
+                        mode="range"
+                        defaultMonth={field.value?.from}
+                        selected={field.value}
+                        onSelect={field.onChange}
+                        numberOfMonths={2}
+                        disabled={isDisabled}
+                        initialFocus
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </Card>
           </CardContent>
         </AccordionContent>
       </Card>

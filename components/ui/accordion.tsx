@@ -24,14 +24,14 @@ const AccordionTrigger = React.forwardRef<
     <AccordionPrimitive.Trigger
       ref={ref}
       className={cn(
-        'flex flex-1 items-center justify-between py-4 font-medium transition-all [&[data-state=open]>svg]:rotate-180',
+        'flex flex-1 items-center justify-between py-4 font-medium transition-all hover:text-primary [&[data-state=open]>svg]:rotate-180',
         className,
       )}
       {...props}
     >
       {children}
-      <ChevronDown className="h-4 w-4 shrink-0 transition-transform duration-200 mr-5" />
-      {/* 해당 아이콘에 오른쪽 마진 추가해둔거 추후에 고려해봐야합니다, 그리고 트리거 텍스트에 호버 상태에서 언더라인 주는 것도 빼두었는데 회의 후에 결정해보죠 */}
+      <ChevronDown className="h-4 w-4 shrink-0 transition-transform duration-200 mr-6" />
+      {/* 해당 아이콘에 오른쪽 마진 추가해둔거 추후에 고려해봐야합니다 */}
     </AccordionPrimitive.Trigger>
   </AccordionPrimitive.Header>
 ));

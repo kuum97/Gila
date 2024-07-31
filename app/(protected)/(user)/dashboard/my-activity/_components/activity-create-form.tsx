@@ -73,7 +73,7 @@ export default function ActivityCreateForm() {
 
   return (
     <Form {...form}>
-      <main className="h-screen bg-white mb-20">
+      <main className="h-screen bg-white">
         <div className="px-5 pt-5">
           <button
             type="button"
@@ -86,17 +86,17 @@ export default function ActivityCreateForm() {
         <form onSubmit={form.handleSubmit(onSubmit)} className="relative">
           <Accordion
             type="single"
-            className="flex flex-col gap-5 p-5 snap-y"
+            className="flex flex-col gap-5 p-5"
             collapsible
             defaultValue="item-1"
           >
             <LocationSelectSection
-              className="bg-[#ffffff] snap-center"
+              className="bg-[#ffffff]"
               form={form}
               selectLocation={selectLocation}
             />
-            <ScheduleSection className="bg-[#ffffff] snap-center" form={form} />
-            <DetailInfoSection className="bg-[#ffffff] snap-center" form={form} />
+            <ScheduleSection className="bg-[#ffffff]" form={form} />
+            <DetailInfoSection className="bg-[#ffffff]" form={form} />
           </Accordion>
           <section className="fixed bottom-0 flex justify-end w-full p-5 border-t bg-slate-900 bg-opacity-90">
             <Button
