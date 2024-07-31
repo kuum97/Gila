@@ -1,7 +1,6 @@
 'use client';
 
-import { AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Avatar } from '@radix-ui/react-avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useState } from 'react';
 import AnswerButtonContainer from '@/app/(protected)/(main)/question-list/_components/answer-button-container';
 import AnswerEditForm from '@/app/(protected)/(main)/question-list/_components/answer-edit-form';
