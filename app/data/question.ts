@@ -42,7 +42,7 @@ export const getQuestions = async ({
               },
               take: answerTake,
               orderBy: {
-                createdAt: 'asc',
+                createdAt: 'desc',
               },
             },
             user: {
@@ -86,7 +86,7 @@ export const getQuestions = async ({
               },
               take: answerTake,
               orderBy: {
-                createdAt: 'asc',
+                createdAt: 'desc',
               },
             },
             user: {

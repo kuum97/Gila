@@ -32,7 +32,7 @@ export const getAnswers = async ({
       skip: cursor ? 1 : 0,
       take,
       orderBy: {
-        createdAt: 'asc',
+        createdAt: 'desc',
       },
     });
 
