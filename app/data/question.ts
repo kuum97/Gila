@@ -28,6 +28,18 @@ export const getQuestions = async ({
           where: { location },
           include: {
             answers: {
+              include: {
+                user: {
+                  select: {
+                    id: true,
+                    nickname: true,
+                    email: true,
+                    image: true,
+                    tags: true,
+                    createdAt: true,
+                  },
+                },
+              },
               take: answerTake,
               orderBy: {
                 createdAt: 'asc',
@@ -60,6 +72,18 @@ export const getQuestions = async ({
           where: { location },
           include: {
             answers: {
+              include: {
+                user: {
+                  select: {
+                    id: true,
+                    nickname: true,
+                    email: true,
+                    image: true,
+                    tags: true,
+                    createdAt: true,
+                  },
+                },
+              },
               take: answerTake,
               orderBy: {
                 createdAt: 'asc',
@@ -101,6 +125,7 @@ export const getQuestions = async ({
         answerCursorId: lastAnswer ? lastAnswer.id : null,
       };
     });
+    questions[0].answers[0].user.email;
 
     return { questions: questionsWithAnswerCursorId, cursorId: newCursorId };
   } catch (error) {
@@ -117,7 +142,20 @@ export const getQuestionById = async (
         id: questionId,
       },
       include: {
-        answers: true,
+        answers: {
+          include: {
+            user: {
+              select: {
+                id: true,
+                nickname: true,
+                email: true,
+                image: true,
+                tags: true,
+                createdAt: true,
+              },
+            },
+          },
+        },
         user: {
           select: {
             id: true,

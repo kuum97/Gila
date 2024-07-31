@@ -42,7 +42,7 @@ export type ActivityWithUser = Activity & { user: User };
 
 export type QuestionWithUserAndAnswerAndCount = Question & {
   user: User;
-  answers: Answer[];
+  answers: (Answer & { user: User })[];
   _count: { answers: number };
 };
 
