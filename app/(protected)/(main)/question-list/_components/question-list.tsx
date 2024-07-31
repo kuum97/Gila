@@ -10,12 +10,11 @@ interface Props {
   userId: string;
   questions: QuestionWithUserAndAnswerAndCount[];
   questionCursorId: string | null;
-  listOrder: 'answerLen' | 'recent';
 }
 
 export default function QuestionList({ questions, userId, questionCursorId }: Props) {
   const [questionList, setQuestionList] = useState<QuestionWithUserAndAnswerAndCount[]>([]);
-  const [cursorId, setCursorId] = useState<string | null>('');
+  const [cursorId, setCursorId] = useState(questionCursorId);
   const [isPending, startTransition] = useTransition();
   const query = useSearchParams();
   const obsRef = useRef(null);

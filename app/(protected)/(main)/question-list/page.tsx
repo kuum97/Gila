@@ -7,9 +7,8 @@ import QuestionSortDropdown from './_components/question-sort-dropdown';
 export default async function Page({ searchParams }: { searchParams: { sort: string } }) {
   const { sort } = searchParams;
   const listOrder = sort ? 'answerLen' : 'recent';
-  const qusetions = await getQuestions({ take: 15, order: listOrder, answerTake: 7 });
+  const qusetions = await getQuestions({ take: 7, order: listOrder, answerTake: 7 });
   const userId = await getCurrentUserId();
-  console.log(qusetions.cursorId);
 
   return (
     <div className="flex flex-col items-center gap-3 p-6">
@@ -28,7 +27,6 @@ export default async function Page({ searchParams }: { searchParams: { sort: str
           questions={qusetions.questions}
           userId={userId}
           questionCursorId={qusetions.cursorId}
-          listOrder={listOrder}
         />
       </div>
     </div>

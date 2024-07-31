@@ -108,7 +108,12 @@ export const getQuestions = async ({
           take,
           cursor: cursor ? { id: cursor } : undefined,
           skip: cursor ? 1 : 0,
-          orderBy: { answers: { _count: 'desc' } },
+          orderBy: [
+            { answers: { _count: 'desc' } },
+            {
+              createdAt: 'desc',
+            },
+          ],
         });
         break;
       default:
