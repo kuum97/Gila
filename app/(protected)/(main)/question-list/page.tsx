@@ -7,7 +7,7 @@ import QuestionSortDropdown from './_components/question-sort-dropdown';
 export default async function Page({ searchParams }: { searchParams: { sort: string } }) {
   const { sort } = searchParams;
   const listOrder = sort ? 'answerLen' : 'recent';
-  const qusetionList = await getQuestions({ take: 10, order: listOrder });
+  const qusetions = await getQuestions({ take: 7, order: listOrder, answerTake: 7 });
   const userId = await getCurrentUserId();
 
   return (
@@ -23,7 +23,11 @@ export default async function Page({ searchParams }: { searchParams: { sort: str
           <h2 className="font-semibold">질문 목록</h2>
           <QuestionSortDropdown sortValue={sort} />
         </div>
-        <QuestionList questions={qusetionList.questions} userId={userId} />
+        <QuestionList
+          questions={qusetions.questions}
+          userId={userId}
+          questionCursorId={qusetions.cursorId}
+        />
       </div>
     </div>
   );

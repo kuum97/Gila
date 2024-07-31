@@ -3,10 +3,10 @@ import Image from 'next/image';
 import React from 'react';
 import { MessageCircle } from 'lucide-react';
 import QuestionDetailModal from '@/app/(protected)/(main)/question-list/_components/question-detail-modal';
-import { QuestionWithUserAndCount } from '@/type';
+import { QuestionWithUserAndAnswerAndCount } from '@/type';
 
 interface Props {
-  questionItem: QuestionWithUserAndCount;
+  questionItem: QuestionWithUserAndAnswerAndCount;
   userId: string;
 }
 

@@ -125,7 +125,6 @@ export const getQuestions = async ({
         answerCursorId: lastAnswer ? lastAnswer.id : null,
       };
     });
-    questions[0].answers[0].user.email;
 
     return { questions: questionsWithAnswerCursorId, cursorId: newCursorId };
   } catch (error) {

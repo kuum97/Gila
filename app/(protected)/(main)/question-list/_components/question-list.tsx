@@ -1,16 +1,17 @@
 'use client';
 
 import QuestionListCard from '@/app/(protected)/(main)/question-list/_components/question-list-card';
-import { QuestionWithUserAndCount } from '@/type';
+import { QuestionWithUserAndAnswerAndCount } from '@/type';
 import { useEffect, useState } from 'react';
 
 interface Props {
   userId: string;
-  questions: QuestionWithUserAndCount[];
+  questions: QuestionWithUserAndAnswerAndCount[];
+  questionCursorId: string | null;
 }
 
-export default function QuestionList({ questions, userId }: Props) {
-  const [questionList, setQuestionList] = useState<QuestionWithUserAndCount[]>([]);
+export default function QuestionList({ questions, userId, questionCursorId }: Props) {
+  const [questionList, setQuestionList] = useState<QuestionWithUserAndAnswerAndCount[]>([]);
 
   useEffect(() => {
     setQuestionList([...questions]);

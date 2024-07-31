@@ -13,18 +13,15 @@ import {
 } from '@/components/ui/dialog';
 import AnswerList from '@/app/(protected)/(main)/question-list/_components/answer-list';
 import AnswerForm from '@/app/(protected)/(main)/question-list/_components/answer-form';
-import { AnswerWithUser, QuestionWithUserAndCount } from '@/type';
+import { QuestionWithUserAndAnswerAndCount } from '@/type';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { useState } from 'react';
 
 interface Props {
   userId: string;
-  question: QuestionWithUserAndCount;
+  question: QuestionWithUserAndAnswerAndCount;
 }
 
 export default function QuestionDetailModal({ question, userId }: Props) {
-  const [answerList, setAnswerList] = useState<AnswerWithUser[]>([]);
-
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -57,7 +54,11 @@ export default function QuestionDetailModal({ question, userId }: Props) {
         </DialogHeader>
         <div className="flex flex-col">
           <AnswerForm questionId={question.id} />
-          <AnswerList answers={answerList} totalCount={question._count.answers} userId={userId} />
+          <AnswerList
+            answers={question.answers}
+            totalCount={question._count.answers}
+            userId={userId}
+          />
         </div>
       </DialogContent>
     </Dialog>
