@@ -1,12 +1,26 @@
 import { AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Calendar } from '@/components/ui/calendar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { FormField, FormItem } from '@/components/ui/form';
+import { FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { ActivityCreateFormProps } from './activity-create-form';
 
-export default function ScheduleSection({ form }: ActivityCreateFormProps) {
+interface Props extends ActivityCreateFormProps {
+  className?: string;
+}
+
+export default function ScheduleSection({ form, className }: Props) {
+  const isDisabled = (date: Date) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const compareDate = new Date(date);
+    compareDate.setHours(0, 0, 0, 0);
+
+    return compareDate < today;
+  };
+
   return (
-    <AccordionItem className="bg-[#ffffff]" value="item-2" asChild>
+    <AccordionItem className={className} value="item-2" asChild>
       <Card className="shadow-md">
         <AccordionTrigger className="p-0">
           <CardHeader>
@@ -26,9 +40,10 @@ export default function ScheduleSection({ form }: ActivityCreateFormProps) {
                     selected={field.value}
                     onSelect={field.onChange}
                     numberOfMonths={2}
-                    disabled={(date) => date < new Date()}
+                    disabled={isDisabled}
                     initialFocus
                   />
+                  <FormMessage />
                 </FormItem>
               )}
             />
