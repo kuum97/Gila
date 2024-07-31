@@ -4,7 +4,7 @@ import AnswerItem from '@/app/(protected)/(main)/question-list/_components/answe
 import { getAnswers } from '@/app/data/answer';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { AnswerWithUser } from '@/type';
-import { useCallback, useState, useTransition } from 'react';
+import { useCallback, useEffect, useState, useTransition } from 'react';
 
 interface Props {
   answers: AnswerWithUser[];
@@ -32,6 +32,10 @@ export default function AnswerList({
       setAnswerList((prev) => [...prev, ...result.answers]);
     });
   }, [cursorId, questionId]);
+
+  useEffect(() => {
+    setAnswerList([...answers]);
+  }, [answers]);
 
   const observer = useInfiniteScroll({
     callback: loadMoreAnswer,
