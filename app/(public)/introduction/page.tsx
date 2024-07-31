@@ -1,3 +1,9 @@
+import UserImage from '@/app/(protected)/(user)/profile/_components/user-Image';
+
 export default function Page() {
-  <div>유저 프로필 소개</div>;
+  return (
+    <div>
+      <UserImage />
+    </div>
+  );
 }
