@@ -3,8 +3,8 @@
 import { Accordion } from '@/components/ui/accordion';
 import { z } from 'zod';
 import { useState } from 'react';
-import ProfileAccordionItem from './profile-accordion-item';
-import ProfileTopic from '../../_components/profile-topic';
+import ProfileAccordionItem from '@/app/(protected)/(user)/profile/edit/_components/profile-accordion-item';
+import ProfileTopic from '@/app/(protected)/(user)/profile/_components/profile-topic';
 
 export default function EditProfileItem() {
   const [editNickname, setEditNickname] = useState('닉네임 테스트');
