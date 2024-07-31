@@ -4,7 +4,7 @@ import UserImage from '@/app/(protected)/(user)/profile/_components/user-Image';
 export default function Page() {
   return (
     <div className="m-8">
-      <UserImage edit={true} />
+      <UserImage edit />
       <EditProfileItem />
     </div>
   );
