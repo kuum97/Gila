@@ -47,7 +47,7 @@ export default function ProfileForm({
             )}
           />
         </div>
-        <Button type="submit" className="mt-4 text-sm">
+        <Button type="submit" className="mt-4 text-sm font-bold">
           저장하기
         </Button>
       </form>
