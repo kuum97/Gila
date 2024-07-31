@@ -2,9 +2,10 @@
 
 import QuestionListCard from '@/app/(protected)/(main)/question-list/_components/question-list-card';
 import { getQuestions } from '@/app/data/question';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { QuestionWithUserAndAnswerAndCount } from '@/type';
 import { useSearchParams } from 'next/navigation';
-import { useCallback, useEffect, useRef, useState, useTransition } from 'react';
+import { useCallback, useEffect, useState, useTransition } from 'react';
 
 interface Props {
   userId: string;
@@ -19,7 +20,6 @@ export default function QuestionList({ questions, userId, questionCursorId }: Pr
   const [cursorId, setCursorId] = useState(questionCursorId);
   const [isPending, startTransition] = useTransition();
   const query = useSearchParams();
-  const obsRef = useRef(null);
 
   const loadMoreQuestion = useCallback(async () => {
     const listOrder = query.get('sort') ? 'answerLen' : 'recent';
@@ -40,22 +40,11 @@ export default function QuestionList({ questions, userId, questionCursorId }: Pr
     setCursorId(questionCursorId);
   }, [questionCursorId, questions]);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !isPending && cursorId) {
-          loadMoreQuestion();
-        }
-      },
-      { threshold: 1 },
-    );
-
-    if (obsRef.current) observer.observe(obsRef.current);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [cursorId, isPending, loadMoreQuestion]);
+  const observer = useInfiniteScroll({
+    callback: loadMoreQuestion,
+    cursorId,
+    isLoading: isPending,
+  });
 
   return (
     <div className="h-[450px] w-full overflow-y-scroll overflow-x-hidden">
@@ -65,7 +54,7 @@ export default function QuestionList({ questions, userId, questionCursorId }: Pr
             <QuestionListCard questionItem={question} userId={userId} />
           </li>
         ))}
-        <div ref={obsRef} />
+        <div ref={observer} />
       </ul>
     </div>
   );

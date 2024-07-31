@@ -2,8 +2,9 @@
 
 import AnswerItem from '@/app/(protected)/(main)/question-list/_components/answer-item';
 import { getAnswers } from '@/app/data/answer';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { AnswerWithUser } from '@/type';
-import { useCallback, useEffect, useRef, useState, useTransition } from 'react';
+import { useCallback, useState, useTransition } from 'react';
 
 interface Props {
   answers: AnswerWithUser[];
@@ -23,7 +24,6 @@ export default function AnswerList({
   const [answerList, setAnswerList] = useState(answers);
   const [cursorId, setCursorId] = useState(answerCursorId);
   const [isPending, startTransition] = useTransition();
-  const obsRef = useRef(null);
 
   const loadMoreAnswer = useCallback(async () => {
     startTransition(async () => {
@@ -33,22 +33,11 @@ export default function AnswerList({
     });
   }, [cursorId, questionId]);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !isPending && cursorId) {
-          loadMoreAnswer();
-        }
-      },
-      { threshold: 1 },
-    );
-
-    if (obsRef.current) observer.observe(obsRef.current);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [cursorId, isPending, loadMoreAnswer]);
+  const observer = useInfiniteScroll({
+    callback: loadMoreAnswer,
+    isLoading: isPending,
+    cursorId,
+  });
 
   return (
     <div className="flex flex-col gap-3 h-full">
@@ -61,7 +50,7 @@ export default function AnswerList({
             <AnswerItem answer={answer} userId={userId} />
           </li>
         ))}
-        <div ref={obsRef} />
+        <div ref={observer} />
       </ul>
     </div>
   );
