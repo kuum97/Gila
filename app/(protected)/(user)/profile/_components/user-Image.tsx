@@ -34,7 +34,7 @@ export default function UserImage({ edit = false }) {
         <div className="relative w-32 h-32">
           <Avatar className="w-full h-full">
             <AvatarImage
-              src={imagePreview || '/profile.png'}
+              src={imagePreview || '/default-profile-image.png'}
               alt="Profile"
               className="object-cover w-full h-full border border-gray-300 rounded-full"
             />
