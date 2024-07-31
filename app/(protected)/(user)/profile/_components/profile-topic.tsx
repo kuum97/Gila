@@ -1,7 +1,12 @@
 import Link from 'next/link';
 import TAGS from '@/constants/tag';
 
-export default function ProfileTopic({ tags, edit = false }) {
+interface Props {
+  tags: string[];
+  edit?: boolean;
+}
+
+export default function ProfileTopic({ tags, edit = false }: Props) {
   const getTagColor = (item: string) => {
     const tagInfo = TAGS.find((tagItem) => tagItem.tag.includes(item));
     return tagInfo ? tagInfo.color : '#FFB800';
@@ -13,7 +18,7 @@ export default function ProfileTopic({ tags, edit = false }) {
         {tags.map((item: string) => (
           <span
             key={item}
-            className="px-2 py-1 text-xs font-bold text-black rounded-3xl"
+            className="flex justify-center items-center px-2 py-1 text-xs font-bold text-black rounded-3xl"
             style={{ backgroundColor: getTagColor(item) }}
           >
             {item}
@@ -21,7 +26,7 @@ export default function ProfileTopic({ tags, edit = false }) {
         ))}
       </div>
       {edit && (
-        <Link href="/topic" className="mr-8 text-xs text-gray-400">
+        <Link href="/topic" className="mr-6 text-xs text-gray-400 w-16">
           수정하기
         </Link>
       )}
