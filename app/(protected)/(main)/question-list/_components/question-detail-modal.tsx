@@ -18,7 +18,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 interface Props {
   userId: string;
-  question: QuestionWithUserAndAnswerAndCount;
+  question: QuestionWithUserAndAnswerAndCount & { answerCursorId: string | null };
 }
 
 export default function QuestionDetailModal({ question, userId }: Props) {
@@ -58,6 +58,8 @@ export default function QuestionDetailModal({ question, userId }: Props) {
             answers={question.answers}
             totalCount={question._count.answers}
             userId={userId}
+            answerCursorId={question.answerCursorId}
+            questionId={question.id}
           />
         </div>
       </DialogContent>

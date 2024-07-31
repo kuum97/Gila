@@ -6,7 +6,7 @@ import QuestionDetailModal from '@/app/(protected)/(main)/question-list/_compone
 import { QuestionWithUserAndAnswerAndCount } from '@/type';
 
 interface Props {
-  questionItem: QuestionWithUserAndAnswerAndCount;
+  questionItem: QuestionWithUserAndAnswerAndCount & { answerCursorId: string | null };
   userId: string;
 }
 
