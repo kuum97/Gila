@@ -5,24 +5,20 @@ interface Props {
   rating: number;
 }
 
-export default function ProfileRank({ rating }: Props) {
-  let rank = '';
+const getRank = (rating: number): string => {
+  if (rating >= 80) return 'diamond';
+  if (rating >= 60) return 'red';
+  if (rating >= 40) return 'emerald';
+  if (rating >= 20) return 'silver';
+  return 'bronze';
+};
 
-  if (rating >= 80) {
-    rank = 'diamond';
-  } else if (rating >= 60) {
-    rank = 'red';
-  } else if (rating >= 40) {
-    rank = 'orange';
-  } else if (rating >= 20) {
-    rank = 'gold';
-  } else {
-    rank = 'silver';
-  }
+export default function ProfileRank({ rating }: Props) {
+  const rank = getRank(rating);
 
   return (
     <div className="w-20 h-20 relative">
-      <Image src={`/rank/${rank}.svg`} alt="랭크 이미지" fill />
+      <Image src={`/rank/${rank}.svg`} alt={`${rank} rank`} fill />
     </div>
   );
 }
