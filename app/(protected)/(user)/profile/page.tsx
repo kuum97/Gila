@@ -1,3 +1,11 @@
+import ProfileItem from '@/app/(protected)/(user)/profile/_components/profile-Item';
+import UserImage from './_components/user-Image';
+
 export default function Page() {
-  <div>유저 프로필 수정</div>;
+  return (
+    <div className="m-8">
+      <UserImage />
+      <ProfileItem />
+    </div>
+  );
 }
