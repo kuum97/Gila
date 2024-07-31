@@ -19,9 +19,10 @@ import { LOCATIONS } from '@/constants/locations';
 
 interface Props extends ActivityCreateFormProps {
   selectLocation: (location: string) => void;
+  className?: string;
 }
 
-export default function LocationSelectSection({ form, selectLocation }: Props) {
+export default function LocationSelectSection({ form, selectLocation, className }: Props) {
   const [location, setLocation] = useState<string>('');
   const [subLocation, setSubLocation] = useState<string>('');
 
@@ -45,7 +46,7 @@ export default function LocationSelectSection({ form, selectLocation }: Props) {
   }, [location]);
 
   return (
-    <AccordionItem className="bg-[#ffffff]" value="item-1" asChild>
+    <AccordionItem className={className} value="item-1" asChild>
       <Card className="shadow-md">
         <AccordionTrigger className="p-0">
           <CardHeader>
