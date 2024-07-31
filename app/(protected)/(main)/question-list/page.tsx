@@ -2,7 +2,7 @@ import QuestionForm from '@/app/(protected)/(main)/question-list/_components/que
 import { getQuestions } from '@/app/data/question';
 import QuestionList from '@/app/(protected)/(main)/question-list/_components/question-list';
 import { getCurrentUserId } from '@/app/data/user';
-import QuestionSortDropdown from './_components/question-sort-dropdown';
+import QuestionSortDropdown from '@/app/(protected)/(main)/question-list/_components/question-sort-dropdown';
 
 export default async function Page({ searchParams }: { searchParams: { sort: string } }) {
   const { sort } = searchParams;
