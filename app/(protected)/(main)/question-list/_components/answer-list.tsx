@@ -27,11 +27,11 @@ export default function AnswerList({
 
   const loadMoreAnswer = useCallback(async () => {
     startTransition(async () => {
-      const result = await getAnswers({ questionId, cursor: answerCursorId, take: 3 });
+      const result = await getAnswers({ questionId, cursor: cursorId, take: 3 });
       setCursorId(result.cursorId);
       setAnswerList((prev) => [...prev, ...result.answers]);
     });
-  }, [answerCursorId, questionId]);
+  }, [cursorId, questionId]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

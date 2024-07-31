@@ -7,7 +7,7 @@ import QuestionSortDropdown from './_components/question-sort-dropdown';
 export default async function Page({ searchParams }: { searchParams: { sort: string } }) {
   const { sort } = searchParams;
   const listOrder = sort ? 'answerLen' : 'recent';
-  const qusetions = await getQuestions({ take: 7, order: listOrder, answerTake: 7 });
+  const qusetions = await getQuestions({ take: 7, order: listOrder, answerTake: 5 });
   const userId = await getCurrentUserId();
 
   return (
