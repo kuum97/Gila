@@ -20,7 +20,7 @@ export default function QuestionListCard({ questionItem, userId }: Props) {
         <MessageCircle size={13} />
         <p className="w-2 text-center">{questionItem._count.answers}</p>
       </div>
-      <QuestionDetailModal question={questionItem} userId={userId} />
+      <QuestionDetailModal question={questionItem} userId={userId} createaAt={createaAt} />
     </div>
   );
 }

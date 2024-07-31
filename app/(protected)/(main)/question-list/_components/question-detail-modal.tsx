@@ -19,9 +19,13 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 interface Props {
   userId: string;
   question: QuestionWithUserAndAnswerAndCount & { answerCursorId: string | null };
+  createaAt: {
+    time: number;
+    result: string;
+  };
 }
 
-export default function QuestionDetailModal({ question, userId }: Props) {
+export default function QuestionDetailModal({ question, userId, createaAt }: Props) {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -37,7 +41,7 @@ export default function QuestionDetailModal({ question, userId }: Props) {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <p className="text-sm font-semibold">{question.location}</p>
-              {/* <p className="text-xs">{String(question.createdAt)}</p> */}
+              <p className="text-[10px] text-nowrap w-10 text-center text-gray_500">{`${createaAt.time}${createaAt.result}전`}</p>
             </div>
             <div className="flex justify-center items-center gap-2">
               <Avatar className="w-7 h-7">
