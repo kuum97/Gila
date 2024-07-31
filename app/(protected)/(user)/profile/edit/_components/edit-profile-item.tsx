@@ -2,28 +2,34 @@
 
 import { Accordion } from '@/components/ui/accordion';
 import { z } from 'zod';
+import { useState } from 'react';
 import ProfileAccordionItem from './profile-accordion-item';
 import ProfileTopic from '../../_components/profile-topic';
 
-const nicknameSchema = z.object({
-  nickname: z.string().min(1, { message: '닉네임을 입력해 주세요.' }),
-});
-
-const passwordSchema = z.object({
-  password: z.string().min(1, { message: '비밀번호를 입력해 주세요.' }),
-});
-
 export default function EditProfileItem() {
-  const onSubmitNickname = () => {
-    console.log('테스트입니다.');
+  const [editNickname, setEditNickname] = useState('닉네임 테스트');
+  const [editPassword, setEditPassword] = useState('test0444');
+
+  const nicknameSchema = z.object({
+    nickname: z.string().min(1, { message: '닉네임을 입력해 주세요.' }),
+  });
+
+  const passwordSchema = z.object({
+    password: z.string().min(1, { message: '비밀번호를 입력해 주세요.' }),
+  });
+
+  const onSubmitNickname = (values: z.infer<typeof nicknameSchema>) => {
+    console.log(values);
+    setEditNickname(values.nickname);
   };
 
-  const onSubmitPassword = () => {
-    console.log('테스트입니다.');
+  const onSubmitPassword = (values: z.infer<typeof passwordSchema>) => {
+    console.log(values);
+    setEditPassword(values.password);
   };
 
   return (
-    <div className="flex flex-col gap-8 mt-8">
+    <div className="flex flex-col gap-8 mt-12">
       <div className="flex w-full gap-4 pb-4 mx-1 border-b border-gray-200">
         <p className="text-sm">이메일</p>
         <p className="text-sm font-bold">test@test.com</p>
@@ -32,7 +38,7 @@ export default function EditProfileItem() {
         <ProfileAccordionItem
           value="nickname"
           triggerText="닉네임"
-          displayText="닉네임 테스트"
+          displayText={editNickname}
           schema={nicknameSchema}
           defaultValues={{ nickname: '' }}
           name="nickname"
@@ -40,11 +46,12 @@ export default function EditProfileItem() {
           placeholder="닉네임을 입력해 주세요"
           type="text"
           onSubmit={onSubmitNickname}
+          setValue={setEditNickname}
         />
         <ProfileAccordionItem
           value="password"
           triggerText="비밀번호"
-          displayText="test0444"
+          displayText={editPassword}
           schema={passwordSchema}
           defaultValues={{ password: '' }}
           name="password"
@@ -52,6 +59,7 @@ export default function EditProfileItem() {
           placeholder="비밀번호를 입력해 주세요"
           type="password"
           onSubmit={onSubmitPassword}
+          setValue={setEditPassword}
         />
       </Accordion>
       <ProfileTopic tags={['내향', '계획적', '홀로', '액티비티']} edit={true} />

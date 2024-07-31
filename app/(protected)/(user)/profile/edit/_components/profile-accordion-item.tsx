@@ -15,6 +15,7 @@ export default function ProfileAccordionItem({
   placeholder,
   type,
   onSubmit,
+  setValue,
 }) {
   return (
     <AccordionItem value={value}>
@@ -34,6 +35,7 @@ export default function ProfileAccordionItem({
           placeholder={placeholder}
           type={type}
           onSubmit={onSubmit}
+          setValue={setValue}
         />
       </AccordionContent>
     </AccordionItem>
