@@ -26,6 +26,8 @@ const config = {
         green: '#00C308',
         yellow: '#FFC23D',
       },
+      animation: {
+        spin: 'spin 2s linear infinite',
       keyframes: {
         'accordion-down': {
           from: { height: '0' },
