@@ -1,6 +1,6 @@
 import type { Config } from 'tailwindcss';
 
-const config = {
+const config: Config = {
   darkMode: ['class'],
   content: [
     './pages/**/*.{ts,tsx}',
@@ -28,6 +28,9 @@ const config = {
       },
       animation: {
         spin: 'spin 2s linear infinite',
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
+      },
       keyframes: {
         'accordion-down': {
           from: { height: '0' },
@@ -38,12 +41,8 @@ const config = {
           to: { height: '0' },
         },
       },
-      animation: {
-        'accordion-down': 'accordion-down 0.2s ease-out',
-        'accordion-up': 'accordion-up 0.2s ease-out',
-      },
     },
   },
-} satisfies Config;
+};
 
 export default config;
