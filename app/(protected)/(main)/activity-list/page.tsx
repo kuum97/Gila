@@ -1,11 +1,16 @@
+import { getActivities } from '@/app/data/activity';
 import MainCarousel from '@/app/(protected)/(main)/_components/main-carousel';
-import ActivityList from '@/app/(protected)/(main)/activity-list/_components/activity-list';
+import ActivityContainer from '@/app/(protected)/(main)/activity-list/_components/activity-container';
 
-export default async function Page() {
+type Sort = 'recent' | 'mostFavorite' | 'mostViewed';
+
+export default async function Page({ searchParams: { sort } }: { searchParams: { sort: Sort } }) {
+  const { activities } = await getActivities({ type: sort });
+
   return (
     <main>
       <MainCarousel />
-      <ActivityList />
+      <ActivityContainer activities={activities} />
     </main>
   );
 }
