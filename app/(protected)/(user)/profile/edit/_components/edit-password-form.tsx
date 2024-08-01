@@ -11,6 +11,8 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Button } from '@/components/ui/button';
+import { toast } from 'sonner';
+import { editPassword } from '@/app/action/user';
 
 interface Props {
   setValue: (value: string) => void;
@@ -21,8 +23,22 @@ export default function EditPasswordForm({ setValue }: Props) {
     password: z.string().min(1, { message: '비밀번호를 입력해 주세요.' }),
   });
 
-  const onSubmit = (values: z.infer<typeof passwordSchema>) => {
-    setValue(values.password);
+  const onSubmit = async (values: z.infer<typeof passwordSchema>) => {
+    try {
+      const result = await editPassword({
+        newPassword: values.password,
+      });
+
+      if (!result.success) {
+        toast.error(result.message);
+        return;
+      }
+
+      toast.success(result.message);
+      setValue(values.password);
+    } catch (error) {
+      toast.error('비밀번호 수정 중에 문제가 발생하였습니다.');
+    }
   };
 
   const form = useForm({

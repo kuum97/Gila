@@ -11,6 +11,8 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Button } from '@/components/ui/button';
+import { toast } from 'sonner';
+import { editNickname } from '@/app/action/user';
 
 interface Props {
   setValue: (value: string) => void;
@@ -21,8 +23,22 @@ export default function EditNicknameForm({ setValue }: Props) {
     nickname: z.string().min(1, { message: '닉네임을 입력해 주세요.' }),
   });
 
-  const onSubmit = (values: z.infer<typeof nicknameSchema>) => {
-    setValue(values.nickname);
+  const onSubmit = async (values: z.infer<typeof nicknameSchema>) => {
+    try {
+      const result = await editNickname({
+        newNickname: values.nickname,
+      });
+
+      if (!result.success) {
+        toast.error(result.message);
+        return;
+      }
+
+      toast.success(result.message);
+      setValue(values.nickname);
+    } catch (error) {
+      toast.error('닉네임 수정 중에 문제가 발생하였습니다.');
+    }
   };
 
   const form = useForm({
