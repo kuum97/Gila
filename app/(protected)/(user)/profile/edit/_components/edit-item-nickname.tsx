@@ -6,8 +6,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import EditNicknameForm from './edit-nickname-form';
+import { getCurrentUserEmail } from '@/app/data/user';
 
 interface Props {
   value: string;
@@ -15,7 +16,7 @@ interface Props {
 }
 
 export default function EditItemNickname({ value, triggerText }: Props) {
-  const [editNickname, setEditNickname] = useState('닉네임 테스트');
+  const [editNickname, setEditNickname] = useState(value);
 
   return (
     <Accordion type="single" collapsible className="flex flex-col gap-8">

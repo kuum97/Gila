@@ -15,7 +15,7 @@ interface Props {
 }
 
 export default function EditItemPassword({ value, triggerText }: Props) {
-  const [editPassword, setEditPassword] = useState('test0444');
+  const [editPassword, setEditPassword] = useState(value);
 
   return (
     <Accordion type="single" collapsible className="flex flex-col gap-8">
