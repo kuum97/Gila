@@ -18,7 +18,7 @@ export default function DetailContent({ detail }: { detail: ActivityWithUserAndF
           endDate={detail.endDate}
         />
         <DetailDescription description={detail.description} locations={detail.location} />
-        <AuthorInfo />
+        <AuthorInfo owner={detail.user} />
       </div>
     </div>
   );
