@@ -7,13 +7,14 @@ import { LoginSchema, RegisterSchema } from '@/schema';
 import { ActionType, LoginSchemaType, RegisterSchemaType } from '@/type';
 import { User } from '@prisma/client';
 import { AuthError } from 'next-auth';
+import { getCurrentUserId } from '../data/user';
 
 export const register = async (form: RegisterSchemaType): Promise<ActionType<User>> => {
   try {
     const validate = RegisterSchema.safeParse(form);
     if (!validate.success) return { success: false, message: '올바른 값을 입력해 주세요.' };
 
-    const { email, password } = validate.data;
+    const { email, password, nickname } = validate.data;
 
     const checkExistingUser = await db.user.findUnique({
       where: {
@@ -27,6 +28,7 @@ export const register = async (form: RegisterSchemaType): Promise<ActionType<Use
     const createUser = await db.user.create({
       data: {
         email,
+        nickname,
         password: hashedPassword,
       },
     });
@@ -139,14 +141,10 @@ export const editPassword = async ({
   }
 };
 
-export const editTags = async ({
-  userId,
-  tags,
-}: {
-  userId: string;
-  tags: string[];
-}): Promise<ActionType<User>> => {
+export const editTags = async ({ tags }: { tags: string[] }): Promise<ActionType<User>> => {
   try {
+    const userId = await getCurrentUserId();
+
     const updatedUser = await db.user.update({
       where: { id: userId },
       data: { tags },

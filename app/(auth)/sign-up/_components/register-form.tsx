@@ -21,19 +21,19 @@ import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import PasswordInput from '@/components/ui/password-input';
 
-const fields = [
-  { name: 'nickname', label: 'Nickname', placeholder: 'kkkk', type: 'text' },
-  { name: 'email', label: 'Email', placeholder: 'test@test.com', type: 'text' },
+const registerFields = [
+  { name: 'nickname', label: '닉네임', placeholder: '닉네임을 입력해 주세요', type: 'text' },
+  { name: 'email', label: '이메일', placeholder: '이메일을 입력해 주세요', type: 'text' },
   {
     name: 'password',
-    label: 'Password',
-    placeholder: '********',
+    label: '비밀번호',
+    placeholder: '비밀번호를 입력해 주세요',
     type: 'password',
   },
   {
     name: 'confirmPassword',
-    label: 'Confirm Password',
-    placeholder: '********',
+    label: '비밀번호 확인',
+    placeholder: '비밀번호를 한 번 더 입력해 주세요',
     type: 'password',
   },
 ];
@@ -48,10 +48,12 @@ export default function RegisterForm() {
   const form = useForm<RegisterSchemaType>({
     resolver: zodResolver(RegisterSchema),
     defaultValues: {
+      nickname: '',
       email: '',
       password: '',
       confirmPassword: '',
     },
+    mode: 'onBlur',
   });
 
   function onSubmit(values: RegisterSchemaType) {
@@ -82,7 +84,7 @@ export default function RegisterForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
-        {fields.map((field) => (
+        {registerFields.map((field) => (
           <FormField
             key={field.name}
             control={form.control}
@@ -96,10 +98,16 @@ export default function RegisterForm() {
                       type={settingPasswordInputType(field.name) ? 'text' : 'password'}
                       handleToggle={() => handleVisibility(field.name)}
                       placeholder={field.placeholder}
+                      className="border-none shadow-md"
                       {...controllerField}
                     />
                   ) : (
-                    <Input type={field.type} placeholder={field.placeholder} {...controllerField} />
+                    <Input
+                      type={field.type}
+                      placeholder={field.placeholder}
+                      className="border-none shadow-md"
+                      {...controllerField}
+                    />
                   )}
                 </FormControl>
                 <div className="h-5">
@@ -109,7 +117,11 @@ export default function RegisterForm() {
             )}
           />
         ))}
-        <Button disabled={isPending} type="submit" className="w-full">
+        <Button
+          disabled={isPending}
+          type="submit"
+          className="w-full py-3 text-base font-semibold shadow-lg hover:bg-primary_dark active:bg-primary_dark"
+        >
           회원가입
         </Button>
       </form>

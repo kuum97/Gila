@@ -1,58 +1,133 @@
-import { ActivityRequest } from '@prisma/client';
+'use server';
+
 import { getCurrentUserId } from '@/app/data/user';
 import { db } from '@/lib/db';
-import { ActivityRequestWithActivity } from '@/type';
+import { RequestWithActivity, RequestWithActivityAndReqUser } from '@/type';
 
-// 전부 10개
-export const getRegisteredActivities = async (): Promise<{
-  activities: ActivityRequest[];
+export const getMyRequests = async ({
+  cursor,
+  take = 10,
+}: {
+  cursor?: string;
+  take?: number;
+}): Promise<{
+  requests: RequestWithActivity[];
   cursorId: string | null;
 }> => {
   try {
     const userId = await getCurrentUserId();
 
-    const registeredActivityRequests = await db.activityRequest.findMany({
+    const requests = await db.activityRequest.findMany({
       where: { requestUserId: userId },
       include: {
         activity: true,
       },
-      take: 10,
+      cursor: cursor ? { id: cursor } : undefined,
+      skip: cursor ? 1 : 0,
+      take,
       orderBy: {
         id: 'asc',
       },
     });
 
-    const lastActivityRequest = registeredActivityRequests[registeredActivityRequests.length - 1];
+    const lastActivityRequest = requests[requests.length - 1];
     const cursorId = lastActivityRequest ? lastActivityRequest.id : null;
 
-    return { activities: registeredActivityRequests, cursorId };
+    return { requests, cursorId };
   } catch (error) {
     throw new Error('활동 요청을 가져오는 중에 에러가 발생하였습니다.');
   }
 };
 
-export const getRequestedActivities = async (): Promise<{
-  activities: ActivityRequestWithActivity[];
+export const getMyReceivedRequests = async ({
+  cursor,
+  take = 10,
+}: {
+  cursor?: string;
+  take?: number;
+}) => {
+  try {
+    const currentUserId = await getCurrentUserId();
+    const userRequests = await db.user.findUnique({
+      where: { id: currentUserId },
+      select: {
+        activityRequests: {
+          include: {
+            requestUser: {
+              select: {
+                id: true,
+                nickname: true,
+                email: true,
+                image: true,
+                tags: true,
+                createdAt: true,
+              },
+            },
+          },
+          orderBy: {
+            id: 'asc',
+          },
+          ...(cursor && { cursor: { id: cursor } }),
+          skip: cursor ? 1 : 0,
+          take,
+        },
+      },
+    });
+
+    if (!userRequests) {
+      throw new Error('사용자를 찾을 수 없습니다.');
+    }
+
+    const requests = userRequests.activityRequests;
+    const lastRequest = requests[requests.length - 1];
+    const cursorId = lastRequest ? lastRequest.id : null;
+
+    return { requests, cursorId };
+  } catch (error) {
+    throw new Error('신청한 활동을 가져오는 중에 에러가 발생했습니다.');
+  }
+};
+
+export const getRequestsByActivityId = async ({
+  activityId,
+  cursor,
+  take = 10,
+}: {
+  activityId: string;
+  cursor?: string;
+  take?: number;
+}): Promise<{
+  requests: RequestWithActivityAndReqUser[];
   cursorId: string | null;
 }> => {
   try {
-    const userId = await getCurrentUserId();
-
-    const requestedActivities = await db.activityRequest.findMany({
-      where: { requestUserId: userId },
+    const requests = await db.activityRequest.findMany({
+      where: { activityId },
       include: {
         activity: true,
+        requestUser: {
+          select: {
+            id: true,
+            nickname: true,
+            email: true,
+            image: true,
+            tags: true,
+            createdAt: true,
+          },
+        },
       },
-      take: 10,
+      cursor: cursor ? { id: cursor } : undefined,
+      skip: cursor ? 1 : 0,
+      take,
       orderBy: {
         id: 'asc',
       },
     });
 
-    const lastActivityRequest = requestedActivities[requestedActivities.length - 1];
+    const lastActivityRequest = requests[requests.length - 1];
     const cursorId = lastActivityRequest ? lastActivityRequest.id : null;
 
-    return { activities: requestedActivities, cursorId };
+    return { requests, cursorId };
   } catch (error) {
     throw new Error('신청한 활동을 가져오는 중에 에러가 발생하였습니다.');
   }

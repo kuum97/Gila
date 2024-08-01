@@ -1,4 +1,5 @@
 import { DEFAULT_LOGIN_REDIRECT, apiAuthPrefix, authRoutes, publicRoutes } from '@/routes';
+import { NextResponse } from 'next/server';
 import { auth } from './auth';
 
 export default auth((req) => {
@@ -16,19 +17,17 @@ export default auth((req) => {
 
   if (isAuthRoute) {
     if (isLoggedIn) {
-      Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
-      return;
+      return NextResponse.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
     }
     return;
   }
 
   if (!isLoggedIn && !isPublicRoute) {
-    Response.redirect(new URL('/sign-in', nextUrl));
-    return;
+    return NextResponse.redirect(new URL('/sign-in', nextUrl));
   }
 
   if (isLoggedIn && isMainPage) {
-    Response.redirect(new URL('/activity-list', nextUrl));
+    return NextResponse.redirect(new URL('/activity-list', nextUrl));
   }
 });
 
