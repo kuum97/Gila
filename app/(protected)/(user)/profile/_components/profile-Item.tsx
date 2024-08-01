@@ -1,8 +1,19 @@
 'use client';
 
 import ProfileTopic from '@/app/(protected)/(user)/profile/_components/profile-topic';
+import { User } from '@/type';
 
-export default function ProfileItem({ userData }) {
+interface Props {
+  userData: {
+    user: User;
+    averageReviewScore: number;
+    totalReviewCount: number;
+    activityCount: number;
+    questionCount: number;
+  };
+}
+
+export default function ProfileItem({ userData }: Props) {
   const { user, activityCount, questionCount } = userData;
   const { nickname, tags } = user;
 
