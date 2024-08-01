@@ -8,7 +8,7 @@ import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carouse
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 
 // eslint-disable-next-line import/prefer-default-export
-export function DetailCarousel({ thumbnails }) {
+export function DetailCarousel({ thumbnails }: { thumbnails: string[] }) {
   const [selectedImage, setSelectedImage] = React.useState<string | null>(null);
 
   const handleImageClick = (imageUrl: string) => {
@@ -31,8 +31,8 @@ export function DetailCarousel({ thumbnails }) {
         ]}
       >
         <CarouselContent>
-          {thumbnails.map(({ id, imageUrl }) => (
-            <CarouselItem key={id}>
+          {thumbnails.map((imageUrl) => (
+            <CarouselItem key={imageUrl}>
               <Card onClick={() => handleImageClick(imageUrl)}>
                 <CardContent className="relative p-0">
                   <div className="w-full h-60">

@@ -1,7 +1,18 @@
-import TAGS from '@/constants/tag';
+import { TAGS } from '@/constants/tag';
 import { Heart, ExternalLink } from 'lucide-react';
 
-export default function DetailTitle({ title, tags, likes, views }) {
+interface Props {
+  title: string;
+  tags: string[];
+  likes: number;
+  views: number;
+  startDate: Date;
+  endDate: Date;
+}
+
+// fns 설치후 날짜 수정
+
+export default function DetailTitle({ title, tags, likes, views, startDate, endDate }: Props) {
   const getTagColor = (item: string) => {
     const tagInfo = TAGS.find((tagItem) => tagItem.tag.includes(item));
     return tagInfo ? tagInfo.color : '#FFB800';
@@ -26,26 +37,22 @@ export default function DetailTitle({ title, tags, likes, views }) {
           <ExternalLink size={20} />
         </div>
       </div>
-
       <h1 className="mt-1 text-2xl font-bold leading-normal">{title}</h1>
       <div className="flex items-center gap-3 my-2">
         <div className="flex gap-4">
           <div className="flex gap-1">
             <Heart color="#FF4242" size={20} fill="#FF4242" />
-            <p className="ml-1 text-xs font-normal leading-normal">{likes}</p>
+            <p className="ml-1 text-xs font-normal leading-relaxed">{likes}</p>
           </div>
-          <div className="flex gap-1">
+          <div className="flex gap-1 items-center">
             <p className="text-xs">조회수</p>
             <p className="text-xs">{views}</p>
           </div>
         </div>
       </div>
-      <div className="flex flex-col justify-center mx-0">
+      <div className="flex items-center mx-0">
         <p className="text-xs">
           <span className="text-[#949694] mr-1">기간</span> 2024.07.19 - 2024.07.19
-        </p>
-        <p className="text-xs">
-          <span className="text-[#949694] mr-1">시간</span> 16:00 - 18:00
         </p>
       </div>
     </div>
