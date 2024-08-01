@@ -37,7 +37,7 @@ export default auth((req) => {
   }
 
   if (isLoggedIn && isMainPage) {
-    return NextResponse.redirect(new URL('/activity', nextUrl));
+    return NextResponse.redirect(new URL('/activity-list', nextUrl));
   }
 
   return NextResponse.next();

@@ -3,9 +3,13 @@
 import { useState } from 'react';
 import TagFooter from '@/app/(protected)/topic/_components/tag-footer';
 import TagCarousel from '@/app/(protected)/topic/_components/tag-carousel';
+import { editTags } from '@/app/action/user';
+import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 export default function Page() {
   const [tagList, setTagList] = useState<string[]>([]);
+  const router = useRouter();
 
   const addTag = (tagName: string) => {
     setTagList((prev) => [...prev, tagName]);
@@ -13,6 +17,12 @@ export default function Page() {
 
   const changeTag = (list: string[]) => {
     setTagList([...list]);
+  };
+
+  const editTag = async () => {
+    const result = await editTags({ tags: tagList });
+    toast.message(result.message);
+    router.replace('/activity-list');
   };
 
   return (
@@ -25,7 +35,7 @@ export default function Page() {
         </p>
       </div>
       <TagCarousel addTag={addTag} changeTag={changeTag} tagList={tagList} />
-      <TagFooter page={tagList.length} tagList={tagList} />
+      <TagFooter page={tagList.length} tagList={tagList} editTag={editTag} />
     </div>
   );
 }
