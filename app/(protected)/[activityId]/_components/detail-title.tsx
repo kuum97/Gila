@@ -2,8 +2,9 @@
 
 import { toggleFavorite } from '@/app/action/favorite';
 import { TAGS } from '@/constants/tag';
-import { Heart, ExternalLink } from 'lucide-react';
+import { Heart, ExternalLink, Eye } from 'lucide-react';
 import { toast } from 'sonner';
+import SharePopover from './share-popover';
 
 interface Props {
   title: string;
@@ -52,18 +53,18 @@ export default function DetailTitle({
         </div>
         <div className="flex items-center gap-4">
           <Heart size={20} onClick={isActivityLike} />
-          <ExternalLink size={20} />
+          <SharePopover />
         </div>
       </div>
       <h1 className="mt-1 text-2xl font-bold leading-normal">{title}</h1>
       <div className="flex items-center gap-3 my-2">
         <div className="flex gap-4">
-          <div className="flex gap-1">
+          <div className="flex gap-1 items-center">
             <Heart color="#FF4242" size={20} fill="#FF4242" />
             <p className="ml-1 text-xs font-normal leading-relaxed">{likes}</p>
           </div>
           <div className="flex gap-1 items-center">
-            <p className="text-xs">조회수</p>
+            <Eye width={20} />
             <p className="text-xs">{views}</p>
           </div>
         </div>
