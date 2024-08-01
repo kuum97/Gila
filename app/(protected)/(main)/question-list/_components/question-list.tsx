@@ -2,6 +2,7 @@
 
 import QuestionListCard from '@/app/(protected)/(main)/question-list/_components/question-list-card';
 import { getQuestions } from '@/app/data/question';
+import Spinner from '@/components/ui/spinner';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { QuestionWithUserAndAnswerAndCount } from '@/type';
 import { useSearchParams } from 'next/navigation';
@@ -47,7 +48,7 @@ export default function QuestionList({ questions, userId, questionCursorId }: Pr
   });
 
   return (
-    <div className="h-[450px] w-full overflow-y-scroll overflow-x-hidden">
+    <div className="h-[450px] w-full overflow-y-scroll overflow-x-hidden flex flex-col items-center">
       <ul className="flex flex-col items-center gap-2">
         {questionList.map((question) => (
           <li key={question.id}>
@@ -56,6 +57,7 @@ export default function QuestionList({ questions, userId, questionCursorId }: Pr
         ))}
         <div ref={observer} />
       </ul>
+      {isPending && <Spinner />}
     </div>
   );
 }
