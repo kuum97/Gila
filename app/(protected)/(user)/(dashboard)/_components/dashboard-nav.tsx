@@ -13,12 +13,12 @@ interface Route {
 }
 
 const routes: Route[] = [
-  { icon: Edit, label: '등록한 활동', href: '/dashboard/my-activity' },
-  { icon: Clipboard, label: '신청한 활동', href: '/dashboard/promise-list' },
-  { icon: CheckCircle, label: '신청 현황', href: '/dashboard/promised-list' },
-  { icon: Heart, label: '찜 목록', href: '/dashboard/wishlist' },
-  { icon: HelpCircle, label: '내 질문', href: '/dashboard/my-question' },
-  { icon: Star, label: '리뷰', href: '/dashboard/reviews' },
+  { icon: Edit, label: '등록한 활동', href: '/my-activity' },
+  { icon: Clipboard, label: '신청한 활동', href: '/promise-list' },
+  { icon: CheckCircle, label: '신청 현황', href: '/promised-list' },
+  { icon: Heart, label: '찜 목록', href: '/wishlist' },
+  { icon: HelpCircle, label: '내 질문', href: '/my-question' },
+  { icon: Star, label: '리뷰', href: '/reviews' },
 ];
 
 export default function DashboardNav() {

@@ -1,4 +1,4 @@
-import WishListCard from '@/app/(protected)/(user)/dashboard/wishlist/_components/wishlist-card';
+import WishListCard from '@/app/(protected)/(user)/(dashboard)/wishlist/_components/wishlist-card';
 
 export default function Page() {
   return (
