@@ -1,11 +1,14 @@
 import ProfileItem from '@/app/(protected)/(user)/profile/_components/profile-Item';
 import UserImage from './_components/user-Image';
+import { getUserProfileWithIntroducedInfos } from '@/app/data/user';
 
-export default function Page() {
+export default async function Page() {
+  const userData = await getUserProfileWithIntroducedInfos();
+
   return (
     <div className="m-8">
-      <UserImage />
-      <ProfileItem />
+      <UserImage userData={userData.user} />
+      <ProfileItem userData={userData} />
     </div>
   );
 }
