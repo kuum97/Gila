@@ -79,9 +79,7 @@ export const getCurrentUserProfile = async (): Promise<User | null> => {
   }
 };
 
-export const getUserProfileWithIntroducedInfos = async (
-  userId: string,
-): Promise<{
+export const getUserProfileWithIntroducedInfos = async (): Promise<{
   user: User;
   averageReviewScore: number;
   totalReviewCount: number;
@@ -89,6 +87,7 @@ export const getUserProfileWithIntroducedInfos = async (
   questionCount: number;
 }> => {
   try {
+    const userId = await getCurrentUserId();
     const [user, reviewStats, activityCount, questionCount] = await db.$transaction([
       db.user.findUnique({
         where: { id: userId },
