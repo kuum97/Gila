@@ -16,6 +16,7 @@ export default async function Page({ params }: { params: Params }) {
         startDate={activity.startDate}
         endDate={activity.endDate}
         maxCount={activity.maximumCount}
+        activityId={activity.id}
       />
     </>
   );

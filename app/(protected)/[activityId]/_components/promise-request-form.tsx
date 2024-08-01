@@ -1,20 +1,24 @@
 'use client';
 
+import { createActivityRequest } from '@/app/action/activity-request';
 import { Button } from '@/components/ui/button';
 import { useTransition } from 'react';
+import { toast } from 'sonner';
 
 interface Props {
   startDate: Date;
   endDate: Date;
   maxCount: number;
+  activityId: string;
 }
 
-export default function PromiseRequestForm({ startDate, endDate, maxCount }: Props) {
+export default function PromiseRequestForm({ startDate, endDate, maxCount, activityId }: Props) {
   const [isPending, startTransition] = useTransition();
 
   const applyActivity = () => {
     startTransition(async () => {
-      console.log('테스트입니다.');
+      const result = await createActivityRequest(activityId);
+      toast.message(result.message);
     });
   };
 

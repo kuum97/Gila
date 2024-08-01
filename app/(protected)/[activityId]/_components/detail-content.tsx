@@ -1,10 +1,11 @@
+/* eslint-disable no-underscore-dangle */
 import DetailTitle from '@/app/(protected)/[activityId]/_components/detail-title';
 import DetailDescription from '@/app/(protected)/[activityId]/_components/detail-description';
 import { DetailCarousel } from '@/app/(protected)/[activityId]/_components/detail-carousel';
-import { ActivityWithUserAndFavorite } from '@/type';
+import { ActivityWithFavoCount } from '@/type';
 import AuthorInfo from './author-info';
 
-export default function DetailContent({ detail }: { detail: ActivityWithUserAndFavorite }) {
+export default function DetailContent({ detail }: { detail: ActivityWithFavoCount }) {
   return (
     <div>
       <DetailCarousel thumbnails={detail.thumbnails} />
@@ -12,13 +13,13 @@ export default function DetailContent({ detail }: { detail: ActivityWithUserAndF
         <DetailTitle
           title={detail.title}
           tags={detail.tags}
-          likes={4}
+          likes={detail._count.favorites}
           views={detail.views}
           startDate={detail.startDate}
           endDate={detail.endDate}
         />
         <DetailDescription description={detail.description} locations={detail.location} />
-        <AuthorInfo owner={detail.user} />
+        <AuthorInfo ownerId={detail.userId} />
       </div>
     </div>
   );
