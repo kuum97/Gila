@@ -6,11 +6,11 @@ import EditItemPassword from '@/app/(protected)/(user)/profile/edit/_components/
 import { User } from '@/type';
 
 interface Props {
-  user: User;
+  userData: User;
 }
 
-export default function EditProfileItem({ user }) {
-  const { email, nickname, password, tags } = user;
+export default function EditProfileItem({ userData }: Props) {
+  const { email, nickname, password, tags } = userData;
 
   return (
     <div className="flex flex-col gap-8 mt-12">
@@ -22,7 +22,7 @@ export default function EditProfileItem({ user }) {
         <EditItemNickname value={nickname} triggerText="닉네임" />
         <EditItemPassword value={password} triggerText="비밀번호" />
       </div>
-      <ProfileTopic tags={tags} edit />
+      <ProfileTopic tags={tags} />
     </div>
   );
 }

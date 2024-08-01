@@ -6,9 +6,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { useEffect, useState } from 'react';
-import EditNicknameForm from './edit-nickname-form';
-import { getCurrentUserEmail } from '@/app/data/user';
+import { useState } from 'react';
+import EditNicknameForm from '@/app/(protected)/(user)/profile/edit/_components/edit-nickname-form';
 
 interface Props {
   value: string;
