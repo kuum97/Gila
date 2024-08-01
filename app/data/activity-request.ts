@@ -2,18 +2,16 @@
 
 import { getCurrentUserId } from '@/app/data/user';
 import { db } from '@/lib/db';
-import { RequestWithActivity, RequestWithActivityAndReqUser } from '@/type';
+import { RequestWithActivity, RequestWithReqUser } from '@/type';
+import { RequestStatus } from '@prisma/client';
 
-export const getMyRequests = async ({
+export const getMySentRequests = async ({
   cursor,
   take = 10,
 }: {
   cursor?: string;
   take?: number;
-}): Promise<{
-  requests: RequestWithActivity[];
-  cursorId: string | null;
-}> => {
+}): Promise<{ requests: RequestWithActivity[]; cursorId: string | null }> => {
   try {
     const userId = await getCurrentUserId();
 
@@ -45,7 +43,7 @@ export const getMyReceivedRequests = async ({
 }: {
   cursor?: string;
   take?: number;
-}) => {
+}): Promise<{ requests: RequestWithReqUser[]; cursorId: string | null }> => {
   try {
     const currentUserId = await getCurrentUserId();
     const userRequests = await db.user.findUnique({
@@ -85,50 +83,5 @@ export const getMyReceivedRequests = async ({
     return { requests, cursorId };
   } catch (error) {
     throw new Error('신청한 활동을 가져오는 중에 에러가 발생했습니다.');
-  }
-};
-
-export const getRequestsByActivityId = async ({
-  activityId,
-  cursor,
-  take = 10,
-}: {
-  activityId: string;
-  cursor?: string;
-  take?: number;
-}): Promise<{
-  requests: RequestWithActivityAndReqUser[];
-  cursorId: string | null;
-}> => {
-  try {
-    const requests = await db.activityRequest.findMany({
-      where: { activityId },
-      include: {
-        activity: true,
-        requestUser: {
-          select: {
-            id: true,
-            nickname: true,
-            email: true,
-            image: true,
-            tags: true,
-            createdAt: true,
-          },
-        },
-      },
-      cursor: cursor ? { id: cursor } : undefined,
-      skip: cursor ? 1 : 0,
-      take,
-      orderBy: {
-        id: 'asc',
-      },
-    });
-
-    const lastActivityRequest = requests[requests.length - 1];
-    const cursorId = lastActivityRequest ? lastActivityRequest.id : null;
-
-    return { requests, cursorId };
-  } catch (error) {
-    throw new Error('신청한 활동을 가져오는 중에 에러가 발생하였습니다.');
   }
 };
