@@ -12,7 +12,11 @@ export default async function Page({ params }: { params: Params }) {
   return (
     <>
       <DetailContent detail={activity} />
-      <PromiseRequestForm />
+      <PromiseRequestForm
+        startDate={activity.startDate}
+        endDate={activity.endDate}
+        maxCount={activity.maximumCount}
+      />
     </>
   );
 }
