@@ -6,8 +6,9 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { useRef, useState } from 'react';
 import { Pencil } from 'lucide-react';
 
-export default function UserImage({ edit = false }) {
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
+export default function UserImage({ userData = '', edit = false }) {
+  const { image } = userData;
+  const [imagePreview, setImagePreview] = useState<string | null>(image);
   const [imageFile, setImageFile] = useState<File | null>(null);
 
   // const fileInputRef = useRef(null);
