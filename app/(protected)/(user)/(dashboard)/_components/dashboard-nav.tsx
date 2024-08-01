@@ -1,10 +1,9 @@
 'use client';
 
-import { cn } from '@/lib/utils';
 import { CheckCircle, Clipboard, Edit, Heart, HelpCircle, Star, LucideIcon } from 'lucide-react';
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
+import NavIconLink from '@/app/(protected)/(user)/(dashboard)/_components/nav-icon-link';
 
 interface Route {
   icon: LucideIcon;
@@ -28,19 +27,14 @@ export default function DashboardNav() {
     <div className="overflow-x-auto whitespace-nowrap border-b border-gray-300 bg-white hide-scrollbar">
       <div className="flex">
         {routes.map((route) => {
-          const isActive = pathname === route.href;
           return (
-            <Link key={route.label} href={route.href}>
-              <div
-                className={cn(
-                  'flex flex-col items-center gap-2 text-xs p-3 w-20',
-                  isActive && 'border-b border-primary text-primary',
-                )}
-              >
-                <route.icon size={20} />
-                <span>{route.label}</span>
-              </div>
-            </Link>
+            <NavIconLink
+              key={route.label}
+              navLabel={route.label}
+              navHref={route.href}
+              pathname={pathname}
+              NavIcon={route.icon}
+            />
           );
         })}
       </div>
