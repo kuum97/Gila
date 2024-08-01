@@ -1,4 +1,4 @@
-import ReviewsCard from '@/app/(protected)/(user)/dashboard/reviews/_components/reviews-card';
+import ReviewsCard from '@/app/(protected)/(user)/(dashboard)/reviews/_components/reviews-card';
 
 export default function Page() {
   return (

@@ -1,4 +1,4 @@
-import PromisedListCard from '@/app/(protected)/(user)/dashboard/promised-list/_components/promised-list-card';
+import PromisedListCard from '@/app/(protected)/(user)/(dashboard)/promised-list/_components/promised-list-card';
 
 export default function Page() {
   return (

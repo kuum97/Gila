@@ -11,15 +11,12 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { EllipsisVertical } from 'lucide-react';
 
-export default function DropdownKebab() {
-  const handleEdit = () => {
-    console.log('수정');
-  };
+interface Props {
+  handleEdit?: () => void;
+  handleDelete?: () => void;
+}
 
-  const handleDelete = () => {
-    console.log('삭제');
-  };
-
+export default function DropdownKebab({ handleEdit, handleDelete }: Props) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>

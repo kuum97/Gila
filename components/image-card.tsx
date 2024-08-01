@@ -4,7 +4,6 @@ import React, { ReactNode } from 'react';
 interface Props {
   title: string;
   date: string;
-  time: string;
   participants?: number;
   extraContent?: ReactNode;
   topContent?: ReactNode;
@@ -15,7 +14,6 @@ interface Props {
 export default function ImageCard({
   title,
   date,
-  time,
   participants,
   extraContent,
   topContent,
@@ -29,9 +27,8 @@ export default function ImageCard({
       </div>
       <div className="flex flex-col justify-center gap-2 w-full overflow-hidden">
         <h1 className="text-sm font-bold truncate w-full">{title}</h1>
-        <div className="text-xs flex flex-col gap-[1px]">
+        <div className="text-xs flex flex-col gap-[3px]">
           <p>{date}</p>
-          <p>{time}</p>
           <div className="flex gap-3 items-center">
             {extraContent}
             {extraContent && <span>•</span>}
