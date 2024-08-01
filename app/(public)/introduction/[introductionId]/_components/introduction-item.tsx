@@ -1,10 +1,23 @@
 'use client';
 
 import ProfileTopic from '@/app/(protected)/(user)/profile/_components/profile-topic';
+import { FileUpload } from '@/components/file-upload';
+import { useState } from 'react';
 
 export default function IntroductionItem({ userData }) {
   const { user, activityCount, questionCount } = userData;
   const { nickname, tags } = user;
+
+  const [imageUrl, setImageUrl] = useState<string>('');
+
+  const handleImageChange = (url?: string) => {
+    setImageUrl(url || '');
+  };
+
+  const handleFileChange = () => {
+    // 파일 업로드 후 추가 로직
+    console.log('File uploaded successfully');
+  };
 
   return (
     <div className="flex flex-col gap-8 mt-12">
@@ -26,6 +39,13 @@ export default function IntroductionItem({ userData }) {
           <p className="text-sm font-bold">{questionCount}</p>
         </div>
       </div>
+
+      <FileUpload
+        onChange={handleImageChange}
+        value={imageUrl}
+        className="border-b border-gray-200"
+        changeEvent={handleFileChange}
+      />
     </div>
   );
 }

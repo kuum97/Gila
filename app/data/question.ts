@@ -1,20 +1,25 @@
 'use server';
 
 import { db } from '@/lib/db';
-import { QuestionWithUserAndCount } from '@/type';
+import { QuestionWithUserAndAnswerAndCount } from '@/type';
 
 // eslint-disable-next-line import/prefer-default-export
 export const getQuestions = async ({
   order = 'recent',
   location,
   take = 10,
+  answerTake = 10,
   cursor,
 }: {
   order?: 'answerLen' | 'recent';
   location?: string;
   take?: number;
+  answerTake?: number;
   cursor?: string | null;
-}): Promise<{ questions: QuestionWithUserAndCount[]; cursorId: string | null }> => {
+}): Promise<{
+  questions: (QuestionWithUserAndAnswerAndCount & { answerCursorId: string | null })[];
+  cursorId: string | null;
+}> => {
   try {
     let questions;
     switch (order) {
@@ -22,6 +27,24 @@ export const getQuestions = async ({
         questions = await db.question.findMany({
           where: { location },
           include: {
+            answers: {
+              include: {
+                user: {
+                  select: {
+                    id: true,
+                    nickname: true,
+                    email: true,
+                    image: true,
+                    tags: true,
+                    createdAt: true,
+                  },
+                },
+              },
+              take: answerTake,
+              orderBy: {
+                createdAt: 'desc',
+              },
+            },
             user: {
               select: {
                 id: true,
@@ -48,6 +71,24 @@ export const getQuestions = async ({
         questions = await db.question.findMany({
           where: { location },
           include: {
+            answers: {
+              include: {
+                user: {
+                  select: {
+                    id: true,
+                    nickname: true,
+                    email: true,
+                    image: true,
+                    tags: true,
+                    createdAt: true,
+                  },
+                },
+              },
+              take: answerTake,
+              orderBy: {
+                createdAt: 'desc',
+              },
+            },
             user: {
               select: {
                 id: true,
@@ -67,7 +108,12 @@ export const getQuestions = async ({
           take,
           cursor: cursor ? { id: cursor } : undefined,
           skip: cursor ? 1 : 0,
-          orderBy: { answers: { _count: 'desc' } },
+          orderBy: [
+            { answers: { _count: 'desc' } },
+            {
+              createdAt: 'desc',
+            },
+          ],
         });
         break;
       default:
@@ -77,19 +123,43 @@ export const getQuestions = async ({
     const lastQuestion = questions[questions.length - 1];
     const newCursorId = lastQuestion ? lastQuestion.id : null;
 
-    return { questions, cursorId: newCursorId };
+    const questionsWithAnswerCursorId = questions.map((question) => {
+      const lastAnswer = question.answers[question.answers.length - 1];
+      return {
+        ...question,
+        answerCursorId: lastAnswer ? lastAnswer.id : null,
+      };
+    });
+
+    return { questions: questionsWithAnswerCursorId, cursorId: newCursorId };
   } catch (error) {
     throw new Error('질문 요청을 가져오는 중에 에러가 발생하였습니다.');
   }
 };
 
-export const getQuestionById = async (questionId: string): Promise<QuestionWithUserAndCount> => {
+export const getQuestionById = async (
+  questionId: string,
+): Promise<QuestionWithUserAndAnswerAndCount> => {
   try {
     const question = await db.question.findUnique({
       where: {
         id: questionId,
       },
       include: {
+        answers: {
+          include: {
+            user: {
+              select: {
+                id: true,
+                nickname: true,
+                email: true,
+                image: true,
+                tags: true,
+                createdAt: true,
+              },
+            },
+          },
+        },
         user: {
           select: {
             id: true,

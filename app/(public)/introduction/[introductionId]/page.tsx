@@ -1,5 +1,5 @@
 import UserImage from '@/app/(protected)/(user)/profile/_components/user-Image';
-import IntroductionItem from '@/app/(public)/introduction/_components/introduction-item';
+import IntroductionItem from '@/app/(public)/introduction/[introductionId]/_components/introduction-item';
 import { getUserProfileWithIntroducedInfos } from '@/app/data/user';
 
 export default async function Page() {

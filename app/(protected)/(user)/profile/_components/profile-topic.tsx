@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import TAGS from '@/constants/tag';
+import { TAGS } from '@/constants/tag';
 
 interface Props {
   tags: string[];

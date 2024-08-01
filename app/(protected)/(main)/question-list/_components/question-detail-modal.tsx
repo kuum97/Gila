@@ -1,40 +1,67 @@
+/* eslint-disable no-underscore-dangle */
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
+  DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import AnswerList from './answer-list';
-import AnswerForm from './answer-form';
+import AnswerList from '@/app/(protected)/(main)/question-list/_components/answer-list';
+import AnswerForm from '@/app/(protected)/(main)/question-list/_components/answer-form';
+import { QuestionWithUserAndAnswerAndCount } from '@/type';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
-export default function QuestionDetailModal() {
+interface Props {
+  userId: string;
+  question: QuestionWithUserAndAnswerAndCount & { answerCursorId: string | null };
+  createaAt: {
+    time: number;
+    result: string;
+  };
+}
+
+export default function QuestionDetailModal({ question, userId, createaAt }: Props) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">자세히 보기</Button>
+        <Button variant="outline" className="bg-primary">
+          보기
+        </Button>
       </DialogTrigger>
       <DialogContent className="bg-white h-screen flex flex-col justify-start pt-14">
         <DialogHeader className="h-fit gap-2">
-          <p className="text-left text-4xl font-semibold leading-tight">
-            이 동네에 맛난거 있나요? 추천 부탁드립니다!
-          </p>
+          <DialogTitle>
+            <p className="text-left text-4xl font-semibold leading-tight">{question.title}</p>
+          </DialogTitle>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <p>00시 00구</p>
-              <p className="text-xs">1시간 전</p>
+              <p className="text-sm font-semibold">{question.location}</p>
+              <p className="text-[10px] text-nowrap w-10 text-center text-gray_500">{`${createaAt.time}${createaAt.result}전`}</p>
             </div>
-            <p className="text-sm">박상준</p>
+            <div className="flex justify-center items-center gap-2">
+              <Avatar className="w-7 h-7">
+                <AvatarImage
+                  src={question.user.image ? question.user.image : '/test.png'}
+                  className="object-cover w-7 h-7 rounded-full"
+                />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+              <p className="text-sm">{question.user.nickname}</p>
+            </div>
           </div>
-          <DialogDescription className="text-left">
-            부모님이랑 맛있는 식당가고 싶어요ㅜㅜ 조용하고 부모님 모시고가기 좋은곳 알려주세요!
-            그리고 카페도 알려주시면 좋을것 더 감사하겠습니다!
-          </DialogDescription>
+          <DialogDescription className="text-left">{question.content}</DialogDescription>
         </DialogHeader>
         <div className="flex flex-col">
-          <AnswerForm />
-          <AnswerList />
+          <AnswerForm questionId={question.id} />
+          <AnswerList
+            answers={question.answers}
+            totalCount={question._count.answers}
+            userId={userId}
+            answerCursorId={question.answerCursorId}
+            questionId={question.id}
+          />
         </div>
       </DialogContent>
     </Dialog>

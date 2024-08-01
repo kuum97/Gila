@@ -3,14 +3,9 @@
 import ProfileTopic from '@/app/(protected)/(user)/profile/_components/profile-topic';
 import EditItemNickname from '@/app/(protected)/(user)/profile/edit/_components/edit-item-nickname';
 import EditItemPassword from '@/app/(protected)/(user)/profile/edit/_components/edit-item-password';
-import { User } from '@/type';
 
-interface Props {
-  user: User;
-}
-
-export default function EditProfileItem({ user }) {
-  const { email, nickname, password, tags } = user;
+export default function EditProfileItem({ userData }) {
+  const { email, nickname, password, tags } = userData;
 
   return (
     <div className="flex flex-col gap-8 mt-12">

@@ -3,30 +3,28 @@
 import { Input } from '@/components/ui/input';
 import Label from '@/components/ui/label';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import { useRef, useState } from 'react';
+import { useState, useEffect } from 'react';
+import { toast } from 'sonner';
 import { Pencil } from 'lucide-react';
+import { editImage } from '@/app/action/user';
+import { FileUpload } from '@/components/file-upload';
 
-export default function UserImage({ userData = '', edit = false }) {
-  const { image } = userData;
-  const [imagePreview, setImagePreview] = useState<string | null>(image);
-  const [imageFile, setImageFile] = useState<File | null>(null);
+interface UserData {
+  image?: string;
+}
 
-  // const fileInputRef = useRef(null);
+export default function UserImage({
+  userData = {},
+  edit = false,
+}: {
+  userData?: UserData;
+  edit?: boolean;
+}) {
+  const [url, setUrl] = useState('');
 
-  // const handleIconClick = () => {
-  //   fileInputRef.current.click();
-  // };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files?.[0]) {
-      const file = e.target.files[0];
-      setImageFile(file);
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
+  const onChange = (src?: string) => {
+    if (!src) return;
+    setUrl(src);
   };
 
   return (
@@ -35,7 +33,7 @@ export default function UserImage({ userData = '', edit = false }) {
         <div className="relative w-32 h-32">
           <Avatar className="w-full h-full">
             <AvatarImage
-              src={imagePreview || '/default-profile-image.png'}
+              src=""
               alt="Profile"
               className="object-cover w-full h-full border border-gray-300 rounded-full"
             />
@@ -49,7 +47,7 @@ export default function UserImage({ userData = '', edit = false }) {
               >
                 <Pencil className="text-gray-600" size={20} />
               </Label>
-              <Input id="picture" type="file" className="hidden" onChange={handleFileChange} />
+              <FileUpload onChange={onChange} value={url} />
             </div>
           )}
         </div>
