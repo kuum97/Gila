@@ -4,7 +4,7 @@ import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/comp
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { SELECT_TAGS, SelectTag } from '@/constants/tag';
-import { ActivityCreateFormProps } from '@/app/(protected)/(user)/dashboard/my-activity/_components/activity-create-form';
+import { ActivityCreateFormProps } from '@/app/(protected)/(user)/(dashboard)/my-activity/_components/activity-create-form';
 import Select, { MultiValue } from 'react-select';
 
 interface Props extends ActivityCreateFormProps {

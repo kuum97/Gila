@@ -23,7 +23,7 @@ export default function ImageCard({
   return (
     <div className="w-full border p-3 rounded-lg flex gap-6 relative">
       <div className="w-[110px] h-[110px] relative rounded-lg overflow-hidden flex-shrink-0">
-        <Image src={imageSrc} alt="썸네일" layout="fill" objectFit="cover" />
+        <Image src={imageSrc} alt="썸네일" fill style={{ objectFit: 'cover' }} />
       </div>
       <div className="flex flex-col justify-center gap-2 w-full overflow-hidden">
         <h1 className="text-sm font-bold truncate w-full">{title}</h1>

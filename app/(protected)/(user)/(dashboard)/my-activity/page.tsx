@@ -1,9 +1,9 @@
-import PlusButton from '@/app/(protected)/(user)/(dashboard)/_components/plus-button';
 import { getMyActivities } from '@/app/data/activity';
 import MyActivityList from '@/app/(protected)/(user)/(dashboard)/my-activity/_components/my-activity-list';
+import ActivityCreateModal from './_components/activity-create-modal';
 
 export default async function Page() {
-  const myActivities = await getMyActivities({});
+  const myActivities = await getMyActivities({ take: 30 });
   return (
     <>
       <ul className="flex flex-col gap-3">
@@ -11,7 +11,7 @@ export default async function Page() {
         <MyActivityList myActivities={myActivities.activities} />
       </ul>
       <div className="z-100">
-        <PlusButton />
+        <ActivityCreateModal />
       </div>
     </>
   );
