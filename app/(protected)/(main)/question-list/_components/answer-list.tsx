@@ -2,6 +2,7 @@
 
 import AnswerItem from '@/app/(protected)/(main)/question-list/_components/answer-item';
 import { getAnswers } from '@/app/data/answer';
+import Spinner from '@/components/ui/spinner';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { AnswerWithUser } from '@/type';
 import { useCallback, useEffect, useState, useTransition } from 'react';
@@ -44,18 +45,21 @@ export default function AnswerList({
   });
 
   return (
-    <div className="flex flex-col gap-3 h-full">
-      <div className="flex items-center gap-3">
-        <p className="text-lg font-semibold">받은 답변 {totalCount}</p>
+    <div className="flex flex-col gap-3 h-full items-center w-full">
+      <div className="w-full">
+        <p className="text-lg font-semibold text-left">받은 답변 {totalCount}</p>
       </div>
-      <ul className="flex flex-col overflow-y-scroll h-96 gap-2">
-        {answerList.map((answer) => (
-          <li key={answer.id}>
-            <AnswerItem answer={answer} userId={userId} />
-          </li>
-        ))}
-        <div ref={observer} />
-      </ul>
+      <div className="w-full">
+        <ul className="flex flex-col overflow-y-scroll h-96 gap-2">
+          {answerList.map((answer) => (
+            <li key={answer.id}>
+              <AnswerItem answer={answer} userId={userId} />
+            </li>
+          ))}
+          <div ref={observer} />
+        </ul>
+      </div>
+      {isPending && <Spinner />}
     </div>
   );
 }
