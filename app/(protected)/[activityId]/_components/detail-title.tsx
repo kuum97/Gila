@@ -1,4 +1,4 @@
-import TAGS from '@/constants/tag';
+import { TAGS } from '@/constants/tag';
 import { Heart, ExternalLink } from 'lucide-react';
 
 export default function DetailTitle({ title, tags, likes, views }) {
