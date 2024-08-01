@@ -17,6 +17,7 @@ export default function DetailContent({ detail }: { detail: ActivityWithFavoCoun
           views={detail.views}
           startDate={detail.startDate}
           endDate={detail.endDate}
+          activityId={detail.id}
         />
         <DetailDescription description={detail.description} locations={detail.location} />
         <AuthorInfo ownerId={detail.userId} />

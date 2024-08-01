@@ -1,5 +1,9 @@
+'use client';
+
+import { toggleFavorite } from '@/app/action/favorite';
 import { TAGS } from '@/constants/tag';
 import { Heart, ExternalLink } from 'lucide-react';
+import { toast } from 'sonner';
 
 interface Props {
   title: string;
@@ -8,14 +12,28 @@ interface Props {
   views: number;
   startDate: Date;
   endDate: Date;
+  activityId: string;
 }
 
 // fns 설치후 날짜 수정
 
-export default function DetailTitle({ title, tags, likes, views, startDate, endDate }: Props) {
+export default function DetailTitle({
+  title,
+  tags,
+  likes,
+  views,
+  startDate,
+  endDate,
+  activityId,
+}: Props) {
   const getTagColor = (item: string) => {
     const tagInfo = TAGS.find((tagItem) => tagItem.tag.includes(item));
     return tagInfo ? tagInfo.color : '#FFB800';
+  };
+
+  const isActivityLike = async () => {
+    const result = await toggleFavorite(activityId);
+    toast.message(result.message);
   };
 
   return (
@@ -33,7 +51,7 @@ export default function DetailTitle({ title, tags, likes, views, startDate, endD
           ))}
         </div>
         <div className="flex items-center gap-4">
-          <Heart size={20} />
+          <Heart size={20} onClick={isActivityLike} />
           <ExternalLink size={20} />
         </div>
       </div>
