@@ -53,7 +53,7 @@ export default function DetailTitle({
         </div>
         <div className="flex items-center gap-4">
           <Heart size={20} onClick={isActivityLike} />
-          <SharePopover />
+          <SharePopover activityId={activityId} />
         </div>
       </div>
       <h1 className="mt-1 text-2xl font-bold leading-normal">{title}</h1>
