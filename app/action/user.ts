@@ -86,13 +86,13 @@ export const logout = async (): Promise<ActionType<null>> => {
 };
 
 export const editNickname = async ({
-  userId,
   newNickname,
 }: {
-  userId: string;
   newNickname: string;
 }): Promise<ActionType<User>> => {
   try {
+    const userId = await getCurrentUserId();
+
     const updatedUser = await db.user.update({
       where: { id: userId },
       data: { nickname: newNickname },
@@ -114,13 +114,13 @@ export const editNickname = async ({
 };
 
 export const editPassword = async ({
-  userId,
   newPassword,
 }: {
-  userId: string;
   newPassword: string;
 }): Promise<ActionType<User>> => {
   try {
+    const userId = await getCurrentUserId();
+
     const updatedUser = await db.user.update({
       where: { id: userId },
       data: { password: newPassword },
@@ -162,14 +162,10 @@ export const editTags = async ({ tags }: { tags: string[] }): Promise<ActionType
   }
 };
 
-export const editImage = async ({
-  userId,
-  url,
-}: {
-  userId: string;
-  url: string;
-}): Promise<ActionType<User>> => {
+export const editImage = async ({ url }: { url: string }): Promise<ActionType<User>> => {
   try {
+    const userId = await getCurrentUserId();
+
     const updatedUser = await db.user.update({
       where: { id: userId },
       data: { image: url },
