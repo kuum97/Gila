@@ -7,6 +7,7 @@ import { LoginSchema, RegisterSchema } from '@/schema';
 import { ActionType, LoginSchemaType, RegisterSchemaType } from '@/type';
 import { User } from '@prisma/client';
 import { AuthError } from 'next-auth';
+import { getCurrentUserId } from '../data/user';
 
 export const register = async (form: RegisterSchemaType): Promise<ActionType<User>> => {
   try {
@@ -140,14 +141,10 @@ export const editPassword = async ({
   }
 };
 
-export const editTags = async ({
-  userId,
-  tags,
-}: {
-  userId: string;
-  tags: string[];
-}): Promise<ActionType<User>> => {
+export const editTags = async ({ tags }: { tags: string[] }): Promise<ActionType<User>> => {
   try {
+    const userId = await getCurrentUserId();
+
     const updatedUser = await db.user.update({
       where: { id: userId },
       data: { tags },

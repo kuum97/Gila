@@ -40,6 +40,10 @@ export type ActivityWithFavorites = Activity & {
 
 export type ActivityWithUser = Activity & { user: User };
 
-export type QuestionWithUserAndCount = Question & { user: User; _count: { answers: number } };
+export type QuestionWithUserAndAnswerAndCount = Question & {
+  user: User;
+  answers: (Answer & { user: User })[];
+  _count: { answers: number };
+};
 
 export type AnswerWithUser = Answer & { user: User };
