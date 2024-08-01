@@ -1,10 +1,11 @@
+import Link from 'next/link';
 import { TAGS } from '@/constants/tag';
 
 interface Props {
   tags: string[];
 }
 
-export default function ProfileTopic({ tags = [] }: Props) {
+export default function EditProfileTopic({ tags = [] }: Props) {
   const getTagColor = (item: string) => {
     const tagInfo = TAGS.find((tagItem) => tagItem.tag.includes(item));
     return tagInfo ? tagInfo.color : '#FFB800';
@@ -27,6 +28,10 @@ export default function ProfileTopic({ tags = [] }: Props) {
           ))
         )}
       </div>
+
+      <Link href="/topic" className="w-16 mr-6 text-xs text-gray-400">
+        수정하기
+      </Link>
     </div>
   );
 }
