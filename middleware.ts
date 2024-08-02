@@ -19,8 +19,10 @@ export default auth(async (req) => {
   const isMainPage = nextUrl.pathname === '/';
 
   const isFirst = req.cookies.has('isFirstLogin');
-  if (isLoggedIn && isFirst) {
-    return NextResponse.redirect(new URL('/topic', nextUrl));
+  if (nextUrl.pathname !== '/topic') {
+    if (isLoggedIn && isFirst) {
+      return NextResponse.redirect(new URL('/topic', nextUrl));
+    }
   }
 
   if (isApiAuthRoute) {
