@@ -4,6 +4,7 @@ import ProfileTopic from '@/app/(protected)/(user)/profile/_components/profile-t
 import EditItemNickname from '@/app/(protected)/(user)/profile/edit/_components/edit-item-nickname';
 import EditItemPassword from '@/app/(protected)/(user)/profile/edit/_components/edit-item-password';
 import { User } from '@/type';
+import EditProfileTopic from '@/app/(protected)/(user)/profile/edit/_components/edit-profile-topic';
 
 interface Props {
   userData: User;
@@ -22,7 +23,7 @@ export default function EditProfileItem({ userData }: Props) {
         <EditItemNickname value={nickname} triggerText="닉네임" />
         <EditItemPassword value={password} triggerText="비밀번호" />
       </div>
-      <ProfileTopic tags={tags} />
+      <EditProfileTopic tags={tags} />
     </div>
   );
 }

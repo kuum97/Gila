@@ -28,7 +28,6 @@ export default function EditProfileTopic({ tags = [] }: Props) {
           ))
         )}
       </div>
-
       <Link href="/topic" className="w-16 mr-6 text-xs text-gray-400">
         수정하기
       </Link>
