@@ -53,13 +53,14 @@ model User {
   password         String
   emailVerified    DateTime?         @map("email_verified")
   image            String?
+  isFirstLogin     Boolean           @default(true)
   tags             String[]
   accounts         Account[]
   sessions         Session[]
   activities       Activity[]
   reviews          Review[]
   favorites        Favorite[]
-  questionRequests Question[]
+  questions        Question[]
   answers          Answer[]
   activityRequests ActivityRequest[]
 

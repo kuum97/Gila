@@ -131,3 +131,20 @@ export const getUserProfileWithIntroducedInfos = async (
     throw new Error('유저 프로필 정보를 가져오는 중에 에러가 발생하였습니다.');
   }
 };
+
+export const getIsFirstLogin = async (): Promise<boolean> => {
+  try {
+    const userId = await getCurrentUserId();
+
+    const user = await db.user.findUnique({
+      where: { id: userId },
+    });
+    if (!user) throw new Error('해당 유저 정보가 존재하지 않습니다.');
+
+    const { isFirstLogin } = user;
+
+    return isFirstLogin;
+  } catch (error) {
+    throw new Error('첫 로그인 여부를 가져오는 중에 에러가 발생하였습니다.');
+  }
+};

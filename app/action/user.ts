@@ -85,14 +85,10 @@ export const logout = async (): Promise<ActionType<null>> => {
   }
 };
 
-export const editNickname = async ({
-  userId,
-  newNickname,
-}: {
-  userId: string;
-  newNickname: string;
-}): Promise<ActionType<User>> => {
+export const editNickname = async (newNickname: string): Promise<ActionType<User>> => {
   try {
+    const userId = await getCurrentUserId();
+
     const updatedUser = await db.user.update({
       where: { id: userId },
       data: { nickname: newNickname },
@@ -113,14 +109,10 @@ export const editNickname = async ({
   }
 };
 
-export const editPassword = async ({
-  userId,
-  newPassword,
-}: {
-  userId: string;
-  newPassword: string;
-}): Promise<ActionType<User>> => {
+export const editPassword = async (newPassword: string): Promise<ActionType<User>> => {
   try {
+    const userId = await getCurrentUserId();
+
     const updatedUser = await db.user.update({
       where: { id: userId },
       data: { password: newPassword },
@@ -141,7 +133,7 @@ export const editPassword = async ({
   }
 };
 
-export const editTags = async ({ tags }: { tags: string[] }): Promise<ActionType<User>> => {
+export const editTags = async (tags: string[]): Promise<ActionType<User>> => {
   try {
     const userId = await getCurrentUserId();
 
@@ -162,14 +154,10 @@ export const editTags = async ({ tags }: { tags: string[] }): Promise<ActionType
   }
 };
 
-export const editImage = async ({
-  userId,
-  url,
-}: {
-  userId: string;
-  url: string;
-}): Promise<ActionType<User>> => {
+export const editImage = async (url: string): Promise<ActionType<User>> => {
   try {
+    const userId = await getCurrentUserId();
+
     const updatedUser = await db.user.update({
       where: { id: userId },
       data: { image: url },
@@ -186,6 +174,30 @@ export const editImage = async ({
     return {
       success: false,
       message: '프로필 이미지 수정 중에 에러가 발생하였습니다.',
+    };
+  }
+};
+
+export const setFirstLoginToFalse = async (): Promise<ActionType<null>> => {
+  try {
+    const userId = await getCurrentUserId();
+
+    const user = await db.user.update({
+      where: { id: userId },
+      data: {
+        isFirstLogin: false,
+      },
+    });
+    if (!user) return { success: false, message: '수정에 실패하였습니다.' };
+
+    return {
+      success: true,
+      message: '수정에 성공하였습니다.',
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: '수정 중에 에러가 발생하였습니다.',
     };
   }
 };
