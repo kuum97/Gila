@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import ProfileLink from './profile-link';
 
 export default function ProfileNavgationRoute() {
   const pathname = usePathname();
@@ -12,7 +11,9 @@ export default function ProfileNavgationRoute() {
       <div
         className={`w-[50%] border-b py-2 flex justify-center border-gray-300 items-center ${pathname === '/profile' ? 'text-primary' : 'text-black'}`}
       >
-        <ProfileLink />
+        <Link href="/profile" className="w-full h-full text-center">
+          프로필
+        </Link>
       </div>
       <div
         className={`w-[50%] border-b py-2 flex justify-center items-center border-l border-gray-300 ${pathname === '/profile/edit' ? 'text-primary' : 'text-black'}`}
