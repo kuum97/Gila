@@ -41,7 +41,7 @@ export default function EditImageForm({ userImg }: Props) {
       return;
     }
     startTransition(async () => {
-      const action = await editImage({ url: imageUrl });
+      const action = await editImage(imageUrl);
       if (!action.success) {
         toast.error(action.message);
         return;
