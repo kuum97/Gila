@@ -7,9 +7,10 @@ import Autoplay from 'embla-carousel-autoplay';
 import { Card, CardContent } from '@/components/ui/card';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import CarouselText from '@/app/(protected)/(main)/_components/carousel-text';
+import { ActivityWithUserAndFavoCount } from '@/type';
 
 interface Props {
-  activities: { id: number; title: string; likes: number; thumbnails: string[] }[];
+  activities: ActivityWithUserAndFavoCount[];
 }
 
 export default function CarouselCard({ activities }: Props) {
@@ -24,21 +25,22 @@ export default function CarouselCard({ activities }: Props) {
       ]}
     >
       <CarouselContent>
-        {activities.map(({ id, title, likes, thumbnails }) => (
+        {activities.map(({ id, title, _count, thumbnails }) => (
           <CarouselItem key={id}>
             <Card className="rounded-none">
               <CardContent className="relative p-0 ">
                 <Link href={`/${id}`} passHref>
-                  <div className="w-full relative h-64">
+                  <div className="relative w-full h-64 overflow-hidden">
                     <Image
-                      key={thumbnails[0]}
-                      src={thumbnails[0]}
+                      src={thumbnails[0] || `/test.png`}
                       alt={title}
                       fill
-                      className="object-cover w-full h-full"
+                      style={{
+                        objectFit: 'cover',
+                      }}
                     />
                   </div>
-                  <CarouselText title={title} likes={likes} />
+                  <CarouselText title={title} likes={_count.favorites} />
                 </Link>
               </CardContent>
             </Card>
