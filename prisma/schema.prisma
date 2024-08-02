@@ -59,7 +59,7 @@ model User {
   activities       Activity[]
   reviews          Review[]
   favorites        Favorite[]
-  questionRequests Question[]
+  questions        Question[]
   answers          Answer[]
   activityRequests ActivityRequest[]
 

@@ -1,17 +1,27 @@
-import { DEFAULT_LOGIN_REDIRECT, apiAuthPrefix, authRoutes, publicRoutes } from '@/routes';
-import { NextResponse } from 'next/server';
+import {
+  DEFAULT_LOGIN_REDIRECT,
+  apiAuthPrefix,
+  apiUploadThingPrefix,
+  authRoutes,
+  publicRoutes,
+} from '@/routes';
 import { auth } from './auth';
+import { NextResponse } from 'next/server';
 
 export default auth((req) => {
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
 
-  const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
+  const isApiAuthRoute = nextUrl.pathname.startsWith(`/${apiAuthPrefix}`);
+  const isApiUploadthingRoute = nextUrl.pathname.startsWith(`/${apiUploadThingPrefix}`);
   const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
   const isMainPage = nextUrl.pathname === '/';
 
   if (isApiAuthRoute) {
+    return;
+  }
+  if (isApiUploadthingRoute) {
     return;
   }
 
@@ -29,6 +39,8 @@ export default auth((req) => {
   if (isLoggedIn && isMainPage) {
     return NextResponse.redirect(new URL('/activity-list', nextUrl));
   }
+
+  return NextResponse.next();
 });
 
 export const config = {

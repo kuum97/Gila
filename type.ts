@@ -17,32 +17,31 @@ export type ActionType<T> = {
 
 export type RegisterSchemaType = z.infer<typeof RegisterSchema>;
 export type LoginSchemaType = z.infer<typeof LoginSchema>;
-// type User = Omit<DbUser, 'password' | 'emailVerified' | 'accounts' | 'sessions'>;
 
-export type User = Pick<
-  DbUser,
-  'id' | 'nickname' | 'email' | 'password' | 'image' | 'createdAt' | 'tags'
->;
+// User
+export type User = Pick<DbUser, 'id' | 'nickname' | 'email' | 'image' | 'createdAt' | 'tags'>;
 
-export type RequestWithActivity = ActivityRequest & {
-  activity: Activity;
-};
+// ActivityRequest
+export type RequestWithActivity = ActivityRequest & { activity: Activity };
+export type RequestWithReqUser = ActivityRequest & { requestUser: User };
 
-export type RequestWithActivityAndReqUser = ActivityRequest & {
-  activity: Activity;
-  requestUser: User;
-};
-
-export type ActivityRequestWithUser = ActivityRequest & {
-  requestUser: User;
-};
-
-export type ActivityWithFavorites = Activity & {
-  favorites: Favorite[];
-};
-
+// Activity
+export type ActivityWithFavoCount = Activity & { _count: { favorites: number } };
+export type ActivityWithUserAndFavoCount = Activity & { user: User; _count: { favorites: number } };
 export type ActivityWithUser = Activity & { user: User };
 
-export type QuestionWithUserAndCount = Question & { user: User; _count: { answers: number } };
-
+// Answer
 export type AnswerWithUser = Answer & { user: User };
+
+// Favorite
+export type FavoriteWithActivity = Favorite & { activity: Activity };
+
+// Question
+export type QuestionWithUserAndAnswers = Question & {
+  user: User;
+  answers: (Answer & { user: User })[];
+  _count: {
+    answers: number;
+  };
+  answerCursorId: string | null;
+};

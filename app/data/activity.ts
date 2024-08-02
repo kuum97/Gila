@@ -1,9 +1,9 @@
 'use server';
 
-import { Activity } from '@prisma/client';
 import { getCurrentUser, getCurrentUserId } from '@/app/data/user';
 import { db } from '@/lib/db';
-import { ActivityWithUser } from '@/type';
+import { ActivityWithFavoCount, ActivityWithUser, ActivityWithUserAndFavoCount } from '@/type';
+import { RequestStatus } from '@prisma/client';
 
 export const getMyActivities = async ({
   cursor,
@@ -11,20 +11,22 @@ export const getMyActivities = async ({
 }: {
   cursor?: string;
   take?: number;
-}): Promise<{
-  activities: Activity[];
-  cursorId: string | null;
-}> => {
+}): Promise<{ activities: ActivityWithFavoCount[]; cursorId: string | null }> => {
   try {
     const userId = await getCurrentUserId();
 
     const myActivities = await db.activity.findMany({
       where: { userId },
+      include: {
+        _count: {
+          select: { favorites: true },
+        },
+      },
       take,
       cursor: cursor ? { id: cursor } : undefined,
       skip: cursor ? 1 : 0,
       orderBy: {
-        id: 'asc',
+        createdAt: 'asc',
       },
     });
 
@@ -47,7 +49,7 @@ export const getActivities = async ({
   location?: string;
   size?: number;
   cursor?: string;
-}): Promise<{ activities: ActivityWithUser[]; cursorId: string | null }> => {
+}): Promise<{ activities: ActivityWithUserAndFavoCount[]; cursorId: string | null }> => {
   try {
     const currentUser = await getCurrentUser();
     let activities;
@@ -71,6 +73,11 @@ export const getActivities = async ({
                 image: true,
                 tags: true,
                 createdAt: true,
+              },
+            },
+            _count: {
+              select: {
+                favorites: true,
               },
             },
           },
@@ -97,6 +104,11 @@ export const getActivities = async ({
                 image: true,
                 tags: true,
                 createdAt: true,
+              },
+            },
+            _count: {
+              select: {
+                favorites: true,
               },
             },
           },
@@ -132,6 +144,11 @@ export const getActivities = async ({
                 createdAt: true,
               },
             },
+            _count: {
+              select: {
+                favorites: true,
+              },
+            },
           },
         });
 
@@ -157,6 +174,11 @@ export const getActivities = async ({
                 createdAt: true,
               },
             },
+            _count: {
+              select: {
+                favorites: true,
+              },
+            },
           },
         });
         break;
@@ -176,7 +198,7 @@ export const getActivities = async ({
   }
 };
 
-export const getActivityById = async (id: string): Promise<ActivityWithUser> => {
+export const getActivityById = async (id: string): Promise<ActivityWithFavoCount> => {
   try {
     const activity = await db.activity.findUnique({
       where: { id },
@@ -191,6 +213,11 @@ export const getActivityById = async (id: string): Promise<ActivityWithUser> => 
             createdAt: true,
           },
         },
+        _count: {
+          select: {
+            favorites: true,
+          },
+        },
       },
     });
 
@@ -201,5 +228,60 @@ export const getActivityById = async (id: string): Promise<ActivityWithUser> => 
     return activity;
   } catch (error) {
     throw new Error('활동을 가져오는 중에 에러가 발생하였습니다.');
+  }
+};
+
+export const getAvailableReviewActivities = async ({
+  cursor,
+  take = 10,
+}: {
+  cursor?: string;
+  take?: number;
+}): Promise<{
+  activities: ActivityWithUser[];
+  cursorId: string | null;
+}> => {
+  try {
+    const userId = await getCurrentUserId();
+    const currentDate = new Date();
+
+    const activities = await db.activity.findMany({
+      where: {
+        endDate: {
+          lt: currentDate,
+        },
+        activityRequests: {
+          some: {
+            requestUserId: userId,
+            status: RequestStatus.APPROVE,
+          },
+        },
+      },
+      include: {
+        user: {
+          select: {
+            id: true,
+            nickname: true,
+            email: true,
+            image: true,
+            tags: true,
+            createdAt: true,
+          },
+        },
+      },
+      take,
+      cursor: cursor ? { id: cursor } : undefined,
+      skip: cursor ? 1 : 0,
+      orderBy: {
+        createdAt: 'asc',
+      },
+    });
+
+    const lastActivity = activities[activities.length - 1];
+    const cursorId = lastActivity ? lastActivity.id : null;
+
+    return { activities, cursorId };
+  } catch (error) {
+    throw new Error('리뷰를 가져오는 중에 에러가 발생하였습니다.');
   }
 };
