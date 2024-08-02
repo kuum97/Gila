@@ -1,3 +1,4 @@
+import ProfileRank from '@/app/(public)/introduction/_components/profile-rank';
 import { getUserProfileWithIntroducedInfos } from '@/app/data/user';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import Link from 'next/link';
@@ -23,9 +24,9 @@ export default async function AuthorInfo({ ownerId }: Props) {
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
           </div>
-          <div className="flex flex-col justify-between">
+          <div className="flex justify-center items-center gap-2">
             <p className="text-sm">{owner.user.nickname}</p>
-            <p className="text-sm">{owner.averageReviewScore}</p>
+            <ProfileRank rating={owner.averageReviewScore} />
           </div>
         </div>
       </Link>
