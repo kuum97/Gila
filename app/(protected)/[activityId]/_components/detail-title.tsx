@@ -4,6 +4,7 @@ import { toggleFavorite } from '@/app/action/favorite';
 import { TAGS } from '@/constants/tag';
 import { Heart, Eye } from 'lucide-react';
 import { toast } from 'sonner';
+import { format } from 'date-fns';
 import SharePopover from './share-popover';
 
 interface Props {
@@ -16,8 +17,6 @@ interface Props {
   activityId: string;
   isFavorite: boolean;
 }
-
-// fns 설치후 날짜 수정
 
 export default function DetailTitle({
   title,
@@ -38,6 +37,9 @@ export default function DetailTitle({
     const result = await toggleFavorite(activityId);
     toast.message(result.message);
   };
+
+  const start = format(startDate, 'yyyy.MM.dd');
+  const end = format(endDate, 'yyyy.MM.dd');
 
   return (
     <div>
@@ -77,7 +79,7 @@ export default function DetailTitle({
       </div>
       <div className="flex items-center mx-0">
         <p className="text-xs">
-          <span className="text-[#949694] mr-1">기간</span> 2024.07.19 - 2024.07.19
+          <span className="text-[#949694] mr-1">기간</span> {start} ~ {end}
         </p>
       </div>
     </div>

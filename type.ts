@@ -19,7 +19,10 @@ export type RegisterSchemaType = z.infer<typeof RegisterSchema>;
 export type LoginSchemaType = z.infer<typeof LoginSchema>;
 
 // User
-export type User = Pick<DbUser, 'id' | 'nickname' | 'email' | 'image' | 'createdAt' | 'tags'>;
+export type User = Pick<
+  DbUser,
+  'id' | 'nickname' | 'email' | 'image' | 'createdAt' | 'tags' | 'isFirstLogin'
+>;
 
 // ActivityRequest
 export type RequestWithActivity = ActivityRequest & { activity: Activity };
