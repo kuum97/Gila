@@ -2,7 +2,7 @@
 
 import { toggleFavorite } from '@/app/action/favorite';
 import { TAGS } from '@/constants/tag';
-import { Heart, ExternalLink, Eye } from 'lucide-react';
+import { Heart, Eye } from 'lucide-react';
 import { toast } from 'sonner';
 import SharePopover from './share-popover';
 
@@ -14,6 +14,7 @@ interface Props {
   startDate: Date;
   endDate: Date;
   activityId: string;
+  isFavorite: boolean;
 }
 
 // fns 설치후 날짜 수정
@@ -26,6 +27,7 @@ export default function DetailTitle({
   startDate,
   endDate,
   activityId,
+  isFavorite,
 }: Props) {
   const getTagColor = (item: string) => {
     const tagInfo = TAGS.find((tagItem) => tagItem.tag.includes(item));
@@ -52,7 +54,11 @@ export default function DetailTitle({
           ))}
         </div>
         <div className="flex items-center gap-4">
-          <Heart size={20} onClick={isActivityLike} />
+          {isFavorite ? (
+            <Heart size={20} onClick={isActivityLike} color="#FF4242" fill="#FF4242" />
+          ) : (
+            <Heart size={20} onClick={isActivityLike} />
+          )}
           <SharePopover activityId={activityId} />
         </div>
       </div>
@@ -60,7 +66,7 @@ export default function DetailTitle({
       <div className="flex items-center gap-3 my-2">
         <div className="flex gap-4">
           <div className="flex gap-1 items-center">
-            <Heart color="#FF4242" size={20} fill="#FF4242" />
+            <Heart size={20} />
             <p className="ml-1 text-xs font-normal leading-relaxed">{likes}</p>
           </div>
           <div className="flex gap-1 items-center">

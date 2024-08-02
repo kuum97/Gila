@@ -2,10 +2,10 @@
 import DetailTitle from '@/app/(protected)/[activityId]/_components/detail-title';
 import DetailDescription from '@/app/(protected)/[activityId]/_components/detail-description';
 import { DetailCarousel } from '@/app/(protected)/[activityId]/_components/detail-carousel';
-import { ActivityWithFavoCount } from '@/type';
+import { ActivityWithUserAndFavorite } from '@/type';
 import AuthorInfo from './author-info';
 
-export default function DetailContent({ detail }: { detail: ActivityWithFavoCount }) {
+export default function DetailContent({ detail }: { detail: ActivityWithUserAndFavorite }) {
   return (
     <div>
       <DetailCarousel thumbnails={detail.thumbnails} />
@@ -18,6 +18,7 @@ export default function DetailContent({ detail }: { detail: ActivityWithFavoCoun
           startDate={detail.startDate}
           endDate={detail.endDate}
           activityId={detail.id}
+          isFavorite={detail.isFavorite}
         />
         <DetailDescription description={detail.description} locations={detail.location} />
         <AuthorInfo ownerId={detail.userId} />
