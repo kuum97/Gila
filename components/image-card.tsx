@@ -21,7 +21,7 @@ export default function ImageCard({
   imageSrc = '/test.png',
 }: Props) {
   return (
-    <div className="w-full border p-3 rounded-lg flex gap-6 relative">
+    <div className="w-full border p-3 rounded-lg flex gap-6 relative shadow-md">
       <div className="w-[110px] h-[110px] relative rounded-lg overflow-hidden flex-shrink-0">
         <Image src={imageSrc} alt="썸네일" fill style={{ objectFit: 'cover' }} />
       </div>
