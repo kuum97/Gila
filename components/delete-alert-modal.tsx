@@ -12,10 +12,17 @@ import {
 } from '@/components/ui/alert-dialog';
 import { AlertDialogDescription } from '@radix-ui/react-alert-dialog';
 
-export default function DeleteAlertModal({ deleteAction }: { deleteAction: () => void }) {
+interface Props {
+  deleteAction: () => void;
+  isButton: boolean;
+}
+
+export default function DeleteAlertModal({ deleteAction, isButton }: Props) {
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="bg-primary text-xs py-1 px-2 h-fit rounded-md">
+      <AlertDialogTrigger
+        className={`${isButton ? 'bg-primary text-xs' : 'text-sm w-full'} py-1 px-2 h-fit rounded-md`}
+      >
         삭제
       </AlertDialogTrigger>
       <AlertDialogContent className="bg-white w-80 rounded-lg">

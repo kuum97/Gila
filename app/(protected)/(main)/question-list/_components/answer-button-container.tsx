@@ -21,7 +21,7 @@ export default function AnswerButtonContainer({ answerId, handleEditAnswer }: Pr
       <Button className="text-xs py-1 px-2 h-fit" onClick={handleEditAnswer}>
         수정
       </Button>
-      <DeleteAlertModal deleteAction={isDeleteAnswer} />
+      <DeleteAlertModal deleteAction={isDeleteAnswer} isButton />
     </div>
   );
 }
