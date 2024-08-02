@@ -3,14 +3,16 @@
 import ProfileTopic from '@/app/(protected)/(user)/profile/_components/profile-topic';
 import { User } from '@/type';
 
+interface UserData {
+  user: User;
+  averageReviewScore: number;
+  totalReviewCount: number;
+  activityCount: number;
+  questionCount: number;
+}
+
 interface Props {
-  userData: {
-    user: User;
-    averageReviewScore: number;
-    totalReviewCount: number;
-    activityCount: number;
-    questionCount: number;
-  };
+  userData: UserData;
 }
 
 export default function ProfileItem({ userData }: Props) {
