@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { deleteAnswer } from '@/app/action/answer';
 import { toast } from 'sonner';
-import AnswerDeleteModal from '@/app/(protected)/(main)/question-list/_components/answer-delete-modal';
+import DeleteAlertModal from '@/components/delete-alert-modal';
 
 interface Props {
   answerId: string;
@@ -21,7 +21,7 @@ export default function AnswerButtonContainer({ answerId, handleEditAnswer }: Pr
       <Button className="text-xs py-1 px-2 h-fit" onClick={handleEditAnswer}>
         수정
       </Button>
-      <AnswerDeleteModal isDeleteAnswer={isDeleteAnswer} />
+      <DeleteAlertModal deleteAction={isDeleteAnswer} />
     </div>
   );
 }
