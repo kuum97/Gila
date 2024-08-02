@@ -11,8 +11,6 @@ export default async function Page({ params }: { params: Params }) {
 
   const userData = await getUserProfileWithIntroducedInfos(id);
 
-  console.log(id);
-
   return (
     <div className="m-8">
       <UserImage userData={userData.user} />

@@ -7,6 +7,8 @@ interface Props {
 export default function ProfileTopic({ tags = [] }: Props) {
   const getTagColor = (item: string) => {
     const tagInfo = TAGS.find((tagItem) => tagItem.tag.includes(item));
+
+    // 기본 색상을 '#FFB800'로 설정
     return tagInfo ? tagInfo.color : '#FFB800';
   };
 

@@ -1,6 +1,5 @@
 'use client';
 
-import ProfileTopic from '@/app/(protected)/(user)/profile/_components/profile-topic';
 import EditItemNickname from '@/app/(protected)/(user)/profile/edit/_components/edit-item-nickname';
 import EditItemPassword from '@/app/(protected)/(user)/profile/edit/_components/edit-item-password';
 import { User } from '@/type';

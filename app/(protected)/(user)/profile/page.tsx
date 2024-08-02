@@ -6,8 +6,6 @@ export default async function Page() {
   const userId = await getCurrentUserId();
   const userData = await getUserProfileWithIntroducedInfos(userId);
 
-  console.log(userData);
-
   return (
     <div className="m-8">
       <UserImage userData={userData.user} />
