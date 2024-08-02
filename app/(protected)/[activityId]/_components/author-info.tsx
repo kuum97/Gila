@@ -13,7 +13,7 @@ export default async function AuthorInfo({ ownerId }: Props) {
   return (
     <div className="flex flex-col justify-start gap-2">
       <p className="text-sm font-bold">등록한 길라</p>
-      <Link href={`/introduction?userId=${ownerId}`} className="h-fit">
+      <Link href={`/introduction/${ownerId}`} className="h-fit">
         <div className="flex items-center gap-4 p-4 mt-1 mb-28 border border-solid rounded-lg">
           <div className="flex items-center gap-1 text-xs">
             <Avatar>

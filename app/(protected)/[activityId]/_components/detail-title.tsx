@@ -5,6 +5,8 @@ import { TAGS } from '@/constants/tag';
 import { Heart, Eye } from 'lucide-react';
 import { toast } from 'sonner';
 import { format } from 'date-fns';
+import { useEffect } from 'react';
+import { increaseActivityCount } from '@/app/action/activity';
 import SharePopover from './share-popover';
 
 interface Props {
@@ -41,6 +43,13 @@ export default function DetailTitle({
   const start = format(startDate, 'yyyy.MM.dd');
   const end = format(endDate, 'yyyy.MM.dd');
 
+  useEffect(() => {
+    const action = async () => {
+      await increaseActivityCount(activityId);
+    };
+    action();
+  }, [activityId]);
+
   return (
     <div>
       <div className="flex justify-between">
@@ -73,7 +82,7 @@ export default function DetailTitle({
           </div>
           <div className="flex gap-1 items-center">
             <Eye width={20} />
-            <p className="text-xs">{views}</p>
+            <p className="text-xs">{views + 1}</p>
           </div>
         </div>
       </div>
