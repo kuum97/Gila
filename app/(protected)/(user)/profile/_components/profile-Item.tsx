@@ -21,7 +21,7 @@ export default function ProfileItem({ userData }: Props) {
 
   return (
     <div className="flex flex-col gap-8 mt-12">
-      <div className="flex w-full gap-4 pb-4 border-b border-gray-200 mx-1flex">
+      <div className="flex w-full gap-4 pb-4 mx-1 border-b border-gray-200">
         <p className="text-sm">닉네임</p>
         <p className="text-sm font-bold">{nickname}</p>
       </div>
