@@ -14,7 +14,7 @@ export default function ProfileTopic({ tags = [] }: Props) {
 
   return (
     <div className="flex justify-between w-full pb-4 mx-1 border-b border-gray-200">
-      <div className="flex flex-wrap gap-1 w-80">
+      <div className="flex flex-wrap w-full gap-1">
         {tags.length === 0 ? (
           <p className="text-sm text-gray-400">토픽이 없습니다.</p>
         ) : (

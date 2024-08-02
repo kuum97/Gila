@@ -1,5 +1,5 @@
 import ProfileItem from '@/app/(protected)/(user)/profile/_components/profile-Item';
-import ProfileImage from '@/app/(protected)/(user)/profile/_components/profile-Image';
+import ProfileImage from '@/app/(protected)/(user)/profile/_components/profile-image';
 import {
   getCurrentUser,
   getCurrentUserId,

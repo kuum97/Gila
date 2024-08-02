@@ -1,4 +1,4 @@
-import ProfileImage from '@/app/(protected)/(user)/profile/_components/profile-Image';
+import ProfileImage from '@/app/(protected)/(user)/profile/_components/profile-image';
 import IntroductionItem from '@/app/(public)/introduction/[introductionId]/_components/introduction-item';
 import { getCurrentUser, getUserProfileWithIntroducedInfos } from '@/app/data/user';
 
