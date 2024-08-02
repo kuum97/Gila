@@ -1,6 +1,6 @@
 'use client';
 
-import { createAnswer } from '@/app/action/answer';
+import { editAnswer } from '@/app/action/answer';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -17,9 +17,15 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
 
+interface Props {
+  defaultValue: string;
+  answerId: string;
+  handleEditAnswer: () => void;
+}
+
 const FormFields = {
   name: 'content',
-  label: '답변하기',
+  label: '수정하기',
   placeholder: '답변을 입력해 주세요',
   type: 'textarea',
 };
@@ -31,24 +37,25 @@ const FormSchema = z.object({
     .max(200, { message: '답변은 200자 이내로 입력해 주세요.' }),
 });
 
-export default function AnswerForm({ questionId }: { questionId: string }) {
+export default function AnswerEditForm({ answerId, defaultValue, handleEditAnswer }: Props) {
   const [isPending, startTransition] = useTransition();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      content: '',
+      content: defaultValue,
     },
   });
 
   const onSubmit = (values: z.infer<typeof FormSchema>) => {
     startTransition(async () => {
-      const result = await createAnswer({ questionId, content: values.content });
+      const result = await editAnswer({ answerId, content: values.content });
       if (!result.success) {
         toast.error(result.message);
         return;
       }
       toast.success(result.message);
       form.setValue('content', '');
+      handleEditAnswer();
     });
   };
 
@@ -72,9 +79,18 @@ export default function AnswerForm({ questionId }: { questionId: string }) {
             )}
           />
         </div>
-        <Button disabled={isPending} type="submit" className="px-4 py-1 text-sm rounded-md mb-6">
-          제출하기
-        </Button>
+        <div className="flex flex-col gap-3">
+          <Button
+            type="button"
+            className="px-4 py-1 text-sm rounded-md h-fit"
+            onClick={handleEditAnswer}
+          >
+            취소
+          </Button>
+          <Button disabled={isPending} type="submit" className="px-4 py-1 text-sm rounded-md mb-6">
+            수정하기
+          </Button>
+        </div>
       </form>
     </Form>
   );
