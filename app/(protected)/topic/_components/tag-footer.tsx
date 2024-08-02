@@ -1,15 +1,14 @@
 import { Button } from '@/components/ui/button';
 import Progress from '@/components/ui/progress';
-import TAGS from '@/constants/tag';
+import { TAGS } from '@/constants/tag';
 import Link from 'next/link';
 
 interface Props {
   page: number;
-  tagList: string[];
   editTag: () => void;
 }
 
-export default function TagFooter({ page, tagList, editTag }: Props) {
+export default function TagFooter({ page, editTag }: Props) {
   const processStatus = page * (100 / TAGS.length);
   const lastTagPage = TAGS.length;
 

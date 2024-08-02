@@ -6,6 +6,7 @@ import TagCarousel from '@/app/(protected)/topic/_components/tag-carousel';
 import { editTags } from '@/app/action/user';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
+import { getIsFirstLogin } from '@/app/data/user';
 
 export default function Page() {
   const [tagList, setTagList] = useState<string[]>([]);
@@ -20,9 +21,14 @@ export default function Page() {
   };
 
   const editTag = async () => {
-    const result = await editTags({ tags: tagList });
+    const result = await editTags(tagList);
     toast.message(result.message);
-    router.replace('/activity-list');
+    const isFirst = await getIsFirstLogin();
+    if (isFirst) {
+      router.replace('/activity-list');
+    } else {
+      router.replace('/profile');
+    }
   };
 
   return (
@@ -35,7 +41,7 @@ export default function Page() {
         </p>
       </div>
       <TagCarousel addTag={addTag} changeTag={changeTag} tagList={tagList} />
-      <TagFooter page={tagList.length} tagList={tagList} editTag={editTag} />
+      <TagFooter page={tagList.length} editTag={editTag} />
     </div>
   );
 }

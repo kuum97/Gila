@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Logo from '@/public/logo.png';
-import TAGS from '@/constants/tag';
+import { TAGS } from '@/constants/tag';
 import {
   Carousel,
   CarouselContent,
