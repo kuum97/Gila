@@ -25,9 +25,7 @@ export default function EditPasswordForm({ setValue }: Props) {
 
   const onSubmit = async (values: z.infer<typeof passwordSchema>) => {
     try {
-      const result = await editPassword({
-        newPassword: values.password,
-      });
+      const result = await editPassword(values.password);
 
       if (!result.success) {
         toast.error(result.message);

@@ -25,9 +25,7 @@ export default function EditNicknameForm({ setValue }: Props) {
 
   const onSubmit = async (values: z.infer<typeof nicknameSchema>) => {
     try {
-      const result = await editNickname({
-        newNickname: values.nickname,
-      });
+      const result = await editNickname(values.nickname);
 
       if (!result.success) {
         toast.error(result.message);
