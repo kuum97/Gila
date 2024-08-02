@@ -4,6 +4,7 @@ import { db } from '@/lib/db';
 import { ActionType } from '@/type';
 import { Activity } from '@prisma/client';
 import { getCurrentUserId } from '../data/user';
+import { cookies } from 'next/headers';
 
 export const createActivity = async ({
   title,
@@ -114,5 +115,27 @@ export const deleteActivity = async (activityId: string): Promise<ActionType<Act
     return { success: true, message: '활동 삭제에 성공하였습니다.' };
   } catch (error) {
     return { success: false, message: '활동 삭제 중에 에러가 발생하였습니다.' };
+  }
+};
+
+export const increaseActivityCount = async (activityId: string): Promise<ActionType<null>> => {
+  try {
+    const cookieStore = cookies();
+    const viewCookie = cookieStore.get(`viewed_${activityId}`);
+
+    if (viewCookie) {
+      return { success: false, message: '이미 조회수를 올린 유저입니다.' };
+    }
+
+    const activity = await db.activity.update({
+      where: { id: activityId },
+      data: { views: { increment: 1 } },
+    });
+
+    cookies().set(`viewed_${activityId}`, 'true', { maxAge: 30 * 60 });
+
+    return { success: true, message: '조회수 증가' };
+  } catch (error) {
+    return { success: false, message: '에러 발생' };
   }
 };

@@ -29,6 +29,9 @@ export type RequestWithReqUser = ActivityRequest & { requestUser: User };
 export type ActivityWithFavoCount = Activity & { _count: { favorites: number } };
 export type ActivityWithUserAndFavoCount = Activity & { user: User; _count: { favorites: number } };
 export type ActivityWithUser = Activity & { user: User };
+export type ActivityWithUserAndFavorite = ActivityWithFavoCount & {
+  isFavorite: boolean;
+};
 
 // Answer
 export type AnswerWithUser = Answer & { user: User };
