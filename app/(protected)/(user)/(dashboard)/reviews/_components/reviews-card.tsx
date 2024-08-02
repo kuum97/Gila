@@ -5,7 +5,7 @@
 import React, { useState } from 'react';
 import UserIcon from '@/components/user-icon';
 import SmallButton from '@/components/small-button';
-import RatingSelector from '@/app/(protected)/(user)/dashboard/reviews/_components/rating-selector';
+import RatingSelector from '@/app/(protected)/(user)/(dashboard)/reviews/_components/rating-selector';
 
 export default function ReviewsCard() {
   const [selectedRating, setSelectedRating] = useState<number>(-1);

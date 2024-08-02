@@ -1,7 +1,7 @@
 import ImageCard from '@/components/image-card';
 import SmallButton from '@/components/small-button';
 import UserIcon from '@/components/user-icon';
-import PromiseStatus from '@/app/(protected)/(user)/dashboard/promise-list/_components/promise-status';
+import PromiseStatus from '@/app/(protected)/(user)/(dashboard)/promise-list/_components/promise-status';
 
 export default function PromiseListCard() {
   // 예시용
