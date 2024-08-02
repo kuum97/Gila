@@ -2,7 +2,12 @@
 
 import { getCurrentUser, getCurrentUserId } from '@/app/data/user';
 import { db } from '@/lib/db';
-import { ActivityWithFavoCount, ActivityWithUser, ActivityWithUserAndFavoCount } from '@/type';
+import {
+  ActivityWithFavoCount,
+  ActivityWithUser,
+  ActivityWithUserAndFavoCount,
+  ActivityWithUserAndFavorite,
+} from '@/type';
 import { RequestStatus } from '@prisma/client';
 
 export const getMyActivities = async ({
@@ -198,8 +203,10 @@ export const getActivities = async ({
   }
 };
 
-export const getActivityById = async (id: string): Promise<ActivityWithFavoCount> => {
+export const getActivityById = async (id: string): Promise<ActivityWithUserAndFavorite> => {
   try {
+    const userId = await getCurrentUserId();
+
     const activity = await db.activity.findUnique({
       where: { id },
       include: {
@@ -211,6 +218,14 @@ export const getActivityById = async (id: string): Promise<ActivityWithFavoCount
             image: true,
             tags: true,
             createdAt: true,
+          },
+        },
+        favorites: {
+          where: {
+            userId: userId,
+          },
+          select: {
+            id: true,
           },
         },
         _count: {
@@ -225,7 +240,10 @@ export const getActivityById = async (id: string): Promise<ActivityWithFavoCount
       throw new Error('활동을 찾을 수 없습니다.');
     }
 
-    return activity;
+    return {
+      ...activity,
+      isFavorite: activity.favorites.length > 0,
+    };
   } catch (error) {
     throw new Error('활동을 가져오는 중에 에러가 발생하였습니다.');
   }
