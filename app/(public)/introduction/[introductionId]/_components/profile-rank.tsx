@@ -27,7 +27,7 @@ const getRank = (rating: number) => {
 export default function ProfileRank({ rating }: Props) {
   const userRank = getRank(rating);
   return (
-    <div className="w-20 h-20 relative">
+    <div className="relative w-20 h-20">
       <Image src={`/rank/${userRank}.svg`} alt={`${userRank} rank`} fill />
     </div>
   );

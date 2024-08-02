@@ -1,6 +1,7 @@
 'use client';
 
 import ProfileTopic from '@/app/(protected)/(user)/profile/_components/profile-topic';
+import ProfileRank from '@/app/(public)/introduction/[introductionId]/_components/profile-rank';
 import { User } from '@/type';
 
 interface UserData {
@@ -16,7 +17,7 @@ interface Props {
 }
 
 export default function ProfileItem({ userData }: Props) {
-  const { user, activityCount, questionCount } = userData;
+  const { user, activityCount, averageReviewScore, questionCount } = userData;
   const { nickname, tags } = user;
 
   return (
@@ -28,6 +29,7 @@ export default function ProfileItem({ userData }: Props) {
       <ProfileTopic tags={tags} />
       <div className="w-full pb-4 border-b border-gray-200">
         <p className="text-sm">점수</p>
+        <ProfileRank rating={averageReviewScore} />
       </div>
       <div className="flex w-full pb-4 border-b border-gray-200 justify-evenly">
         <div className="text-center">
