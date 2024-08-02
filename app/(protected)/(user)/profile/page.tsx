@@ -1,9 +1,12 @@
 import ProfileItem from '@/app/(protected)/(user)/profile/_components/profile-Item';
-import { getUserProfileWithIntroducedInfos } from '@/app/data/user';
+import { getCurrentUserId, getUserProfileWithIntroducedInfos } from '@/app/data/user';
 import UserImage from '@/app/(protected)/(user)/profile/_components/user-Image';
 
 export default async function Page() {
-  const userData = await getUserProfileWithIntroducedInfos();
+  const userId = await getCurrentUserId();
+  const userData = await getUserProfileWithIntroducedInfos(userId);
+
+  console.log(userData);
 
   return (
     <div className="m-8">
