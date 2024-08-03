@@ -20,7 +20,7 @@ export default function Page() {
   };
 
   const editTag = async () => {
-    const result = await editTags({ tags: tagList });
+    const result = await editTags(tagList);
     toast.message(result.message);
     router.replace('/activity-list');
   };
