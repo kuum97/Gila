@@ -7,7 +7,7 @@ export default async function Page() {
   return (
     <div className="flex flex-col gap-3">
       <h1 className="text-lg font-bold">내가 신청한 활동</h1>
-      <PromiseList promiseList={myPromise.requests} />
+      <PromiseList promiseList={myPromise.requests} cursorId={myPromise.cursorId} />
     </div>
   );
 }
