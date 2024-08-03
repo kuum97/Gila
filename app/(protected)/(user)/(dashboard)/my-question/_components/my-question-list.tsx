@@ -4,14 +4,16 @@ import { getMyQuestions } from '@/app/data/question';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { QuestionWithUserAndAnswers } from '@/type';
 import React, { useCallback, useEffect, useState, useTransition } from 'react';
-import MyQuestionCard from './my-question-card';
+import Spinner from '@/components/ui/spinner';
+import MyQuestionCard from '@/app/(protected)/(user)/(dashboard)/my-question/_components/my-question-card';
 
 interface Props {
   myQuestions: QuestionWithUserAndAnswers[];
   myQuestionCursorId: string | null;
+  userId: string;
 }
 
-export default function MyQuestionList({ myQuestions, myQuestionCursorId }: Props) {
+export default function MyQuestionList({ myQuestions, myQuestionCursorId, userId }: Props) {
   const [myQuestionList, setMyQuestionList] = useState<QuestionWithUserAndAnswers[]>(myQuestions);
   const [cursorId, setCursorId] = useState(myQuestionCursorId);
   const [isPending, startTransition] = useTransition();
@@ -41,15 +43,16 @@ export default function MyQuestionList({ myQuestions, myQuestionCursorId }: Prop
   });
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center pb-5">
       <ul className="flex flex-col gap-3 w-full">
         {myQuestionList.map((myQuestion) => (
           <li key={myQuestion.id}>
-            <MyQuestionCard myQuestionItem={myQuestion} />
+            <MyQuestionCard myQuestionItem={myQuestion} userId={userId} />
           </li>
         ))}
         <div ref={observer} />
       </ul>
+      {isPending && <Spinner />}
     </div>
   );
 }
