@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import TagFooter from '@/app/(protected)/topic/_components/tag-footer';
 import TagCarousel from '@/app/(protected)/topic/_components/tag-carousel';
-import { editTags } from '@/app/action/user';
+import { editTags, setFirstLoginToFalse } from '@/app/action/user';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 
@@ -20,8 +20,14 @@ export default function Page() {
   };
 
   const editTag = async () => {
-    const result = await editTags({ tags: tagList });
+    await setFirstLoginToFalse();
+    const result = await editTags(tagList);
     toast.message(result.message);
+    router.replace('/activity-list');
+  };
+
+  const passTag = async () => {
+    await setFirstLoginToFalse();
     router.replace('/activity-list');
   };
 
@@ -35,7 +41,7 @@ export default function Page() {
         </p>
       </div>
       <TagCarousel addTag={addTag} changeTag={changeTag} tagList={tagList} />
-      <TagFooter page={tagList.length} tagList={tagList} editTag={editTag} />
+      <TagFooter page={tagList.length} editTag={editTag} passTag={passTag} />
     </div>
   );
 }

@@ -6,6 +6,7 @@ import AnswerButtonContainer from '@/app/(protected)/(main)/question-list/_compo
 import AnswerEditForm from '@/app/(protected)/(main)/question-list/_components/answer-edit-form';
 import { AnswerWithUser } from '@/type';
 import calculateDate from '@/utils/calculateData';
+import Image from 'next/image';
 
 interface Props {
   answer: AnswerWithUser;
@@ -37,11 +38,16 @@ export default function AnswerItem({ answer, userId }: Props) {
         )}
       </div>
       <div className="flex flex-col gap-2">
-        <div className="w-full">
-          {/* {answer.images[0] && (
-            <Image src={answer.images[0]} alt="답변 이미지" height={200} width={200} />
-          )} */}
-        </div>
+        {answer.images[0] && (
+          <div className="w-full h-72 relative">
+            <Image
+              src={answer.images[0]}
+              alt="답변 이미지"
+              fill
+              className="rounded-md object-cover"
+            />
+          </div>
+        )}
         {isEdit ? (
           <AnswerEditForm
             answerId={answer.id}

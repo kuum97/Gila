@@ -1,4 +1,5 @@
 'use client';
+
 import { UploadButton as UploadtingButton } from '@/lib/uploadthing';
 
 type UploadButtonProps = {
