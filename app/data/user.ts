@@ -61,9 +61,9 @@ export const getCurrentUserId = async (): Promise<string> => {
   }
 };
 
-export const getCurrentUserProfile = async (): Promise<User | null> => {
+export const getCurrentUserProfile = async (userId: string): Promise<User | null> => {
   try {
-    const userId = await getCurrentUserId();
+    // const userId = await getCurrentUserId();
 
     const userProfile = await db.user.findUnique({
       where: { id: userId },
