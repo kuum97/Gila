@@ -4,8 +4,8 @@ import { RequestWithActivity } from '@/type';
 import { useCallback, useEffect, useState, useTransition } from 'react';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { getMySentRequests } from '@/app/data/activity-request';
-import PromiseListCard from './promise-list-card';
 import Spinner from '@/components/ui/spinner';
+import PromiseListCard from './promise-list-card';
 
 interface Props {
   promiseList: RequestWithActivity[];
