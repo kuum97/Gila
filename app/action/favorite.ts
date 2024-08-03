@@ -6,8 +6,7 @@ import { ActionType } from '@/type';
 import { Favorite } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
 
-// eslint-disable-next-line import/prefer-default-export
-export const toggleFavorite = async (activityId: string): Promise<ActionType<Favorite>> => {
+const toggleFavorite = async (activityId: string): Promise<ActionType<Favorite>> => {
   try {
     const userId = await getCurrentUserId();
 
@@ -37,8 +36,7 @@ export const toggleFavorite = async (activityId: string): Promise<ActionType<Fav
     });
 
     if (!newFavorite) return { success: false, message: '즐겨찾기 추가에 실패하였습니다.' };
-
-    revalidatePath(`/${activityId}`);
+    revalidatePath('/my-activity', 'page');
 
     return {
       success: true,
@@ -52,3 +50,5 @@ export const toggleFavorite = async (activityId: string): Promise<ActionType<Fav
     };
   }
 };
+
+export default toggleFavorite;

@@ -1,6 +1,6 @@
 import { MessageCircle } from 'lucide-react';
 import React from 'react';
-import DropdownKebab from '@/components/dropdown-kebab';
+import MyQuestionKebab from './my-question-kebab';
 
 export default function MyQuestionCard() {
   return (
@@ -12,7 +12,7 @@ export default function MyQuestionCard() {
           <p>24</p>
         </div>
         <div className="top-2 right-2 z-50">
-          <DropdownKebab />
+          <MyQuestionKebab />
         </div>
       </div>
     </div>

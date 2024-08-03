@@ -11,26 +11,20 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { EllipsisVertical } from 'lucide-react';
 
-export default function DropdownKebab() {
-  const handleEdit = () => {
-    console.log('수정');
-  };
+interface Props {
+  handleDelete: () => void;
+}
 
-  const handleDelete = () => {
-    console.log('삭제');
-  };
-
+export default function MyQuestionKebab({ handleDelete }: Props) {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
-        <EllipsisVertical size={15} />
+      <DropdownMenuTrigger className="p-2 hover:bg-slate-200 rounded-full transition outline-none">
+        <EllipsisVertical className="h-5 w-5" />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="relative mr-9 bg-white">
-        <DropdownMenuItem onClick={handleEdit} className="flex justify-center">
-          수정하기
-        </DropdownMenuItem>
+        <DropdownMenuItem className="flex justify-center cursor-pointer">수정하기</DropdownMenuItem>
         <div className="w-full border-[0.5px]" />
-        <DropdownMenuItem onClick={handleDelete} className="flex justify-center">
+        <DropdownMenuItem onClick={handleDelete} className="flex justify-center cursor-pointer">
           삭제하기
         </DropdownMenuItem>
       </DropdownMenuContent>

@@ -10,7 +10,6 @@ export default function PromiseListCard() {
     <ImageCard
       title="함께 배우는 즐거운 스트릿 댄스"
       date="2024-07-19 ~ 2024-07-19"
-      time="16 : 00 ~ 18 : 00"
       participants={10}
       extraContent={<UserIcon name="Sjae" />}
       bottomContent={
