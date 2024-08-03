@@ -1,16 +1,17 @@
-import MyQuestionCard from '@/app/(protected)/(user)/(dashboard)/my-question/_components/my-question-card';
 import PlusButton from '@/app/(protected)/(user)/(dashboard)/_components/plus-button';
+import { getMyQuestions } from '@/app/data/question';
+import MyQuestionList from './_components/my-question-list';
 
-export default function Page() {
+export default async function Page() {
+  const myQuestions = await getMyQuestions({ take: 7, answerTake: 5 });
   return (
     <>
-      <div className="flex flex-col gap-3">
+      <div>
         <h1 className="text-lg font-bold">내 질문</h1>
-        <MyQuestionCard />
-        <MyQuestionCard />
-        <MyQuestionCard />
-        <MyQuestionCard />
-        <MyQuestionCard />
+        <MyQuestionList
+          myQuestions={myQuestions.questions}
+          myQuestionCursorId={myQuestions.cursorId}
+        />
       </div>
       <PlusButton />
     </>
