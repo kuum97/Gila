@@ -53,7 +53,7 @@ export default function EditImageForm({ userImg }: Props) {
 
   const customButton = () => {
     return (
-      <div className="z-50 p-2 border border-black rounded-full bg-primary">
+      <div className="z-50 p-3 rounded-full bg-primary">
         <Edit2 className="w-4 h-4" />
       </div>
     );
@@ -64,27 +64,29 @@ export default function EditImageForm({ userImg }: Props) {
   return (
     <div className="relative">
       <RenderAvatar loading={loading} imageUrl={imageUrl} />
-      <div className="absolute top-0 flex space-x-2 right-36">
+      <div className="absolute top-0 flex space-x-2 right-0 w-10 h-10">
         <UploadButton
           onChange={onChange}
           onUploadBegin={onUploadBegin}
           CustomButton={customButton}
         />
       </div>
-      {showButtons && (
-        <div className="flex mt-4 gap-x-2">
-          <Button
-            disabled={isPending}
-            className="font-bold bg-slate-50 hover:bg-slate-300"
-            onClick={onCancel}
-          >
-            취소하기
-          </Button>
-          <Button disabled={isPending} onClick={onEdit} className="font-bold">
-            바꾸기
-          </Button>
-        </div>
-      )}
+      <div className="flex items-center h-12">
+        {showButtons && (
+          <div className="flex mt-4 gap-x-2">
+            <Button
+              disabled={isPending}
+              className="font-bold bg-slate-50 hover:bg-slate-300"
+              onClick={onCancel}
+            >
+              취소하기
+            </Button>
+            <Button disabled={isPending} onClick={onEdit} className="font-bold">
+              바꾸기
+            </Button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

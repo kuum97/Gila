@@ -18,7 +18,7 @@ export default function RenderAvatar({ loading, imageUrl }: Props) {
       <div className="relative w-40 h-40 mx-auto my-0 rounded-full bg-slate-500">
         <Image
           src={imageUrl}
-          alt={'img'}
+          alt="img"
           fill
           sizes="(max-width: 768px) 100vw"
           className="object-cover rounded-full"
