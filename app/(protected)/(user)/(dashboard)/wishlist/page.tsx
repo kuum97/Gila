@@ -1,6 +1,5 @@
-import WishListCard from '@/app/(protected)/(user)/dashboard/wishlist/_components/wishlist-card';
 import { getMyFavorites } from '@/app/data/favorite';
-import { getCurrentUser, getCurrentUserProfile } from '@/app/data/user';
+import WishListContainer from '@/app/(protected)/(user)/(dashboard)/wishlist/_components/wishlist-container';
 
 export default async function Page() {
   const { favorites, cursorId } = await getMyFavorites({ take: 10 });
@@ -8,7 +7,7 @@ export default async function Page() {
   return (
     <div className="flex flex-col gap-3">
       <h1 className="text-lg font-bold">찜 목록</h1>
-      <WishListCard testList={favorites} cursorId={cursorId} user={user} />
+      <WishListContainer initialFavorites={favorites} initialCursorId={cursorId} />
     </div>
   );
 }
