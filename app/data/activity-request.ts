@@ -3,7 +3,7 @@
 import { getCurrentUserId } from '@/app/data/user';
 import { db } from '@/lib/db';
 import { RequestWithActivity, RequestWithReqUser } from '@/type';
-import { RequestStatus } from '@prisma/client';
+import { revalidatePath } from 'next/cache';
 
 export const getMySentRequests = async ({
   cursor,
@@ -79,6 +79,8 @@ export const getMyReceivedRequests = async ({
     const requests = userRequests.activityRequests;
     const lastRequest = requests[requests.length - 1];
     const cursorId = lastRequest ? lastRequest.id : null;
+
+    revalidatePath('/promised-list');
 
     return { requests, cursorId };
   } catch (error) {
