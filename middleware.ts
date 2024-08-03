@@ -8,7 +8,7 @@ import {
 import { auth } from './auth';
 import { NextResponse } from 'next/server';
 
-export default auth((req) => {
+export default auth(async (req) => {
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
 
@@ -17,6 +17,13 @@ export default auth((req) => {
   const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
   const isMainPage = nextUrl.pathname === '/';
+
+  const isFirst = req.cookies.has('isFirstLogin');
+  if (nextUrl.pathname !== '/topic') {
+    if (isLoggedIn && isFirst) {
+      return NextResponse.redirect(new URL('/topic', nextUrl));
+    }
+  }
 
   if (isApiAuthRoute) {
     return;
