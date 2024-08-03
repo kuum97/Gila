@@ -284,6 +284,11 @@ export const getAvailableReviewActivities = async ({
             status: RequestStatus.APPROVE,
           },
         },
+        reviews: {
+          none: {
+            userId: userId,
+          },
+        },
       },
       include: {
         user: {

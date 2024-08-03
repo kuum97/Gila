@@ -4,6 +4,7 @@ import { db } from '@/lib/db';
 import { ActionType } from '@/type';
 import { Review } from '@prisma/client';
 import { getCurrentUserId } from '@/app/data/user';
+import { revalidatePath } from 'next/cache';
 
 export const createReview = async ({
   activityId,
@@ -42,6 +43,7 @@ export const createReview = async ({
 
     if (!newReview) return { success: false, message: '리뷰 생성에 실패하였습니다.' };
 
+    revalidatePath('/reviews', 'page');
     return {
       success: true,
       message: '리뷰 생성에 성공하였습니다.',
