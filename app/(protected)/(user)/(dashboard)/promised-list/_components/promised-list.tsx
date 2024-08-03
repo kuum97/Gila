@@ -11,7 +11,7 @@ export default function PromisedList({ promisedActivities }: Props) {
       {promisedActivities.length > 0 ? (
         promisedActivities.map((activity) => (
           <li key={activity.id}>
-            <PromisedListCard requestId={activity.requestUserId} />
+            <PromisedListCard activity={activity} />
           </li>
         ))
       ) : (
