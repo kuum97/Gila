@@ -95,11 +95,16 @@ export const getActivities = async ({
           take: size,
           cursor: cursor ? { id: cursor } : undefined,
           skip: cursor ? 1 : 0,
-          orderBy: {
-            favorites: {
-              _count: 'desc',
+          orderBy: [
+            {
+              favorites: {
+                _count: 'desc',
+              },
             },
-          },
+            {
+              createdAt: 'desc',
+            },
+          ],
           include: {
             user: {
               select: {
@@ -165,9 +170,14 @@ export const getActivities = async ({
           take: size,
           cursor: cursor ? { id: cursor } : undefined,
           skip: cursor ? 1 : 0,
-          orderBy: {
-            views: 'desc',
-          },
+          orderBy: [
+            {
+              views: 'desc',
+            },
+            {
+              createdAt: 'desc',
+            },
+          ],
           include: {
             user: {
               select: {
@@ -222,7 +232,7 @@ export const getActivityById = async (id: string): Promise<ActivityWithUserAndFa
         },
         favorites: {
           where: {
-            userId: userId,
+            userId,
           },
           select: {
             id: true,
