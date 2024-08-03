@@ -28,7 +28,7 @@ export default function ProfileDropdown() {
         <DropdownMenuSeparator className="bg-gray-300" />
         <DropdownMenuItem asChild>
           <Link
-            href="/dashboard"
+            href="/my-activity"
             className="flex items-center justify-center text-black hover:bg-gray-100 active:bg-gray-100"
           >
             대시보드
