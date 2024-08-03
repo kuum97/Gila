@@ -4,19 +4,19 @@ import QuestionListCard from '@/app/(protected)/(main)/question-list/_components
 import { getQuestions } from '@/app/data/question';
 import Spinner from '@/components/ui/spinner';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
-import { QuestionWithUserAndAnswerAndCount } from '@/type';
+import { QuestionWithUserAndAnswers } from '@/type';
 import { useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useState, useTransition } from 'react';
 
 interface Props {
   userId: string;
-  questions: (QuestionWithUserAndAnswerAndCount & { answerCursorId: string | null })[];
+  questions: (QuestionWithUserAndAnswers & { answerCursorId: string | null })[];
   questionCursorId: string | null;
 }
 
 export default function QuestionList({ questions, userId, questionCursorId }: Props) {
   const [questionList, setQuestionList] = useState<
-    (QuestionWithUserAndAnswerAndCount & { answerCursorId: string | null })[]
+    (QuestionWithUserAndAnswers & { answerCursorId: string | null })[]
   >([]);
   const [cursorId, setCursorId] = useState(questionCursorId);
   const [isPending, startTransition] = useTransition();

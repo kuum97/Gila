@@ -3,8 +3,8 @@
 import { db } from '@/lib/db';
 import { ActionType } from '@/type';
 import { Activity } from '@prisma/client';
-import { getCurrentUserId } from '../data/user';
 import { cookies } from 'next/headers';
+import { getCurrentUserId } from '../data/user';
 
 export const createActivity = async ({
   title,

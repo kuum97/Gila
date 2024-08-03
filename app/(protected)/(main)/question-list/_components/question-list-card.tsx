@@ -2,11 +2,11 @@
 import React from 'react';
 import { MessageCircle } from 'lucide-react';
 import QuestionDetailModal from '@/app/(protected)/(main)/question-list/_components/question-detail-modal';
-import { QuestionWithUserAndAnswerAndCount } from '@/type';
+import { QuestionWithUserAndAnswers } from '@/type';
 import calculateDate from '@/utils/calculateData';
 
 interface Props {
-  questionItem: QuestionWithUserAndAnswerAndCount & { answerCursorId: string | null };
+  questionItem: QuestionWithUserAndAnswers & { answerCursorId: string | null };
   userId: string;
 }
 
