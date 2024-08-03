@@ -32,6 +32,11 @@ export type ActivityWithUser = Activity & { user: User };
 export type ActivityWithUserAndFavorite = ActivityWithFavoCount & {
   isFavorite: boolean;
 };
+export type ActivityWithFavoriteAndCount = Activity & {
+  isFavorite: boolean;
+} & {
+  _count: { favorites: number };
+};
 
 // Answer
 export type AnswerWithUser = Answer & { user: User };

@@ -3,10 +3,10 @@
 import { getCurrentUser, getCurrentUserId } from '@/app/data/user';
 import { db } from '@/lib/db';
 import {
-  ActivityWithFavoCount,
   ActivityWithUser,
   ActivityWithUserAndFavoCount,
   ActivityWithUserAndFavorite,
+  ActivityWithFavoriteAndCount,
 } from '@/type';
 import { RequestStatus } from '@prisma/client';
 
@@ -16,7 +16,7 @@ export const getMyActivities = async ({
 }: {
   cursor?: string;
   take?: number;
-}): Promise<{ activities: ActivityWithFavoCount[]; cursorId: string | null }> => {
+}): Promise<{ activities: ActivityWithFavoriteAndCount[]; cursorId: string | null }> => {
   try {
     const userId = await getCurrentUserId();
 
@@ -25,6 +25,14 @@ export const getMyActivities = async ({
       include: {
         _count: {
           select: { favorites: true },
+        },
+        favorites: {
+          where: {
+            userId,
+          },
+          select: {
+            id: true,
+          },
         },
       },
       take,
@@ -38,7 +46,13 @@ export const getMyActivities = async ({
     const lastActivity = myActivities[myActivities.length - 1];
     const cursorId = lastActivity ? lastActivity.id : null;
 
-    return { activities: myActivities, cursorId };
+    // Map over activities and add `isFavo` property
+    const activitiesWithFavo = myActivities.map((activity) => {
+      const isFavorite = activity.favorites.length > 0;
+      return { ...activity, isFavorite };
+    });
+
+    return { activities: activitiesWithFavo, cursorId };
   } catch (error) {
     throw new Error('활동을 가져오는 중에 에러가 발생하였습니다.');
   }
@@ -222,7 +236,7 @@ export const getActivityById = async (id: string): Promise<ActivityWithUserAndFa
         },
         favorites: {
           where: {
-            userId: userId,
+            userId,
           },
           select: {
             id: true,

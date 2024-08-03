@@ -1,19 +1,20 @@
 'use client';
 
-import { Activity } from '@prisma/client';
-import React, { useCallback, useEffect, useState, useTransition } from 'react';
+/* eslint-disable no-underscore-dangle */
+
+import React, { useCallback, useState, useEffect, useTransition } from 'react';
 import MyActivityCard from '@/app/(protected)/(user)/(dashboard)/my-activity/_components/my-activity-card';
 import { getMyActivities } from '@/app/data/activity';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
-import Spinner from '@/components/ui/spinner';
+import { ActivityWithFavoriteAndCount } from '@/type';
 
 interface Props {
-  myActivities: Activity[];
+  myActivities: ActivityWithFavoriteAndCount[];
   activityCursorId: string | null;
 }
 
 export default function MyActivityList({ myActivities, activityCursorId }: Props) {
-  const [activityList, setActivityList] = useState<Activity[]>([]);
+  const [activityList, setActivityList] = useState<ActivityWithFavoriteAndCount[]>(myActivities);
   const [cursorId, setCursorId] = useState(activityCursorId);
   const [isPending, startTransition] = useTransition();
 
@@ -27,7 +28,7 @@ export default function MyActivityList({ myActivities, activityCursorId }: Props
   }, [cursorId]);
 
   useEffect(() => {
-    setActivityList([...myActivities]);
+    setActivityList(myActivities);
     setCursorId(activityCursorId);
   }, [myActivities, activityCursorId]);
 
@@ -48,12 +49,14 @@ export default function MyActivityList({ myActivities, activityCursorId }: Props
               maximumCount={myActivity.maximumCount}
               startDate={myActivity.startDate}
               endDate={myActivity.endDate}
+              activityId={myActivity.id}
+              favoriteCount={myActivity._count.favorites}
+              isFavorite={myActivity.isFavorite}
             />
           </li>
         ))}
         <div ref={observer} />
       </ul>
-      {isPending && <Spinner />}
     </div>
   );
 }

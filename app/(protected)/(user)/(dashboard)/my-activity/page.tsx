@@ -13,9 +13,7 @@ export default async function Page() {
           activityCursorId={myActivities.cursorId}
         />
       </div>
-      <div className="z-100">
-        <ActivityCreateModal />
-      </div>
+      <ActivityCreateModal />
     </>
   );
 }
