@@ -25,6 +25,7 @@ export default function QuestionList({ questions, userId, questionCursorId }: Pr
   const loadMoreQuestion = useCallback(async () => {
     const listOrder = query.get('sort') ? 'answerLen' : 'recent';
     startTransition(async () => {
+      if (!cursorId) return;
       const result = await getQuestions({
         take: 3,
         answerTake: 7,

@@ -7,11 +7,15 @@ interface Props {
 
 export default function CarouselText({ title, likes }: Props) {
   return (
-    <div className="absolute w-full left-4 bottom-4">
-      <p className="font-bold">인기 약속 BEST 5</p>
-      <p>{title}</p>
-      <div className="flex gap-2">
-        <Heart />
+    <div className="absolute bottom-0 flex justify-between w-full p-3 pt-10 text-white shadow-inner bg-gradient-to-t from-black to-transparent">
+      <div>
+        <p className="text-xl font-bold">
+          <span className="text-3xl">길라</span> TOP5
+        </p>
+        <p>{title}</p>
+      </div>
+      <div className="flex items-end gap-2">
+        <Heart className="text-red" />
         <p>{likes}</p>
       </div>
     </div>
