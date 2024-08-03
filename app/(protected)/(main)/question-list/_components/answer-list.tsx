@@ -23,7 +23,7 @@ export default function AnswerList({
   questionId,
 }: Props) {
   const [answerList, setAnswerList] = useState(answers);
-  const [cursorId, setCursorId] = useState(answerCursorId);
+  const [cursorId, setCursorId] = useState<string | null>(answerCursorId);
   const [isPending, startTransition] = useTransition();
 
   const loadMoreAnswer = useCallback(async () => {

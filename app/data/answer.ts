@@ -10,7 +10,7 @@ export const getAnswers = async ({
   take = 10,
 }: {
   questionId: string;
-  cursor?: string;
+  cursor: string | null;
   take?: number;
 }): Promise<{ answers: AnswerWithUser[]; cursorId: string | null }> => {
   try {
@@ -32,7 +32,7 @@ export const getAnswers = async ({
       skip: cursor ? 1 : 0,
       take,
       orderBy: {
-        createdAt: 'asc',
+        createdAt: 'desc',
       },
     });
 

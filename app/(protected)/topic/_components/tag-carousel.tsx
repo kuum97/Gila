@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Logo from '@/public/logo.png';
-import TAGS from '@/constants/tag';
+import { TAGS } from '@/constants/tag';
 import {
   Carousel,
   CarouselContent,
@@ -20,7 +20,7 @@ interface Props {
 
 export default function TagCarousel({ addTag, changeTag, tagList }: Props) {
   return (
-    <Carousel className="w-full relative">
+    <Carousel className="relative w-full">
       <CarouselContent>
         {TAGS.map((item) => (
           <CarouselItem key={item.id}>
@@ -28,7 +28,7 @@ export default function TagCarousel({ addTag, changeTag, tagList }: Props) {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <div className="flex flex-col items-center justify-center absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+      <div className="absolute flex flex-col items-center justify-center -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
         <Image src={Logo} alt="로고 이미지" width={80} />
       </div>
       <CarouselPrevious className="left-5" />
