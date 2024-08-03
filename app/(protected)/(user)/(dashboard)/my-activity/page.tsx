@@ -1,5 +1,5 @@
-import MyActivityCard from '@/app/(protected)/(user)/dashboard/my-activity/_components/my-activity-card';
-import PlusButton from '@/app/(protected)/(user)/dashboard/_components/plus-button';
+import MyActivityCard from '@/app/(protected)/(user)/(dashboard)/my-activity/_components/my-activity-card';
+import PlusButton from '@/app/(protected)/(user)/(dashboard)/_components/plus-button';
 
 export default function Page() {
   return (
