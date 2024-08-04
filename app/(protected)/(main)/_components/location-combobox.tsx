@@ -22,7 +22,7 @@ export default function LocationCombobox() {
           {searchParams.get('location') || '어디로 떠나실래요?'}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-full p-0 bg-white" asChild>
+      <PopoverContent className="w-full p-0 bg-white">
         <LocationCommand />
       </PopoverContent>
     </Popover>
