@@ -14,11 +14,7 @@ import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import { editPassword } from '@/app/action/user';
 
-interface Props {
-  setValue: (value: string) => void;
-}
-
-export default function EditPasswordForm({ setValue }: Props) {
+export default function EditPasswordForm() {
   const passwordSchema = z.object({
     password: z.string().min(1, { message: '비밀번호를 입력해 주세요.' }),
   });
@@ -33,7 +29,6 @@ export default function EditPasswordForm({ setValue }: Props) {
       }
 
       toast.success(result.message);
-      setValue(values.password);
     } catch (error) {
       toast.error('비밀번호 수정 중에 문제가 발생하였습니다.');
     }

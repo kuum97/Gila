@@ -10,17 +10,17 @@ interface Props {
 }
 
 export default function EditProfileItem({ userData }: Props) {
-  const { email, nickname, password, tags } = userData;
+  const { email, nickname, tags } = userData;
 
   return (
     <div className="flex flex-col gap-8 mt-12">
-      <div className="flex w-full gap-4 pb-4 mx-1 border-b border-gray-200">
-        <p className="text-sm">이메일</p>
+      <div className="flex w-full gap-4 pb-4 border-b border-gray-200">
+        <p className="text-sm w-[51.5px] text-center">이메일</p>
         <p className="text-sm font-bold">{email}</p>
       </div>
       <div className="flex flex-col gap-8">
         <EditItemNickname value={nickname} triggerText="닉네임" />
-        <EditItemPassword value={password} triggerText="비밀번호" />
+        <EditItemPassword triggerText="비밀번호" />
       </div>
       <EditProfileTopic tags={tags} />
     </div>

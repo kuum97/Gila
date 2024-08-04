@@ -12,7 +12,7 @@ export default async function Page() {
   const userData = await getUserProfileWithIntroducedInfos(userId);
 
   return (
-    <div className="m-8">
+    <div className="m-8 flex flex-col items-center">
       <EditImageForm userImg={user.image ?? undefined} />
       <EditProfileItem userData={userData.user} />
     </div>

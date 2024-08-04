@@ -12,25 +12,28 @@ export default function EditProfileTopic({ tags = [] }: Props) {
   };
 
   return (
-    <div className="flex justify-between w-full pb-4 mx-1 border-b border-gray-200">
-      <div className="flex flex-wrap gap-1 w-80">
-        {tags.length === 0 ? (
-          <p className="text-sm text-gray-400">토픽이 없습니다.</p>
-        ) : (
-          tags.map((item: string) => (
-            <span
-              key={item}
-              className="flex items-center justify-center px-2 py-1 text-xs font-bold text-black rounded-3xl"
-              style={{ backgroundColor: getTagColor(item) }}
-            >
-              {item}
-            </span>
-          ))
-        )}
+    <div className="flex w-full pb-4 border-b border-gray-200 items-center">
+      <p className="text-sm text-center w-[51.5px]">내 토픽</p>
+      <div className="flex mx-3 items-center">
+        <div className="flex flex-wrap w-[172px] gap-1">
+          {tags.length === 0 ? (
+            <p className="text-sm text-gray-400">토픽이 없습니다.</p>
+          ) : (
+            tags.map((item: string) => (
+              <span
+                key={item}
+                className="flex items-center justify-center px-2 py-1 text-xs font-bold text-black rounded-3xl"
+                style={{ backgroundColor: getTagColor(item) }}
+              >
+                {item}
+              </span>
+            ))
+          )}
+        </div>
+        <Link href="/topic" className="text-xs text-gray-400 text-nowrap">
+          수정하기
+        </Link>
       </div>
-      <Link href="/topic" className="w-16 mr-6 text-xs text-gray-400">
-        수정하기
-      </Link>
     </div>
   );
 }
