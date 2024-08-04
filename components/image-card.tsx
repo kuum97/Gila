@@ -14,7 +14,7 @@ interface Props {
   extraContent?: ReactNode;
   bottomContent?: ReactNode;
   topContent?: ReactNode;
-  imageSrc?: string;
+  imageSrc: string;
   isPending?: boolean;
 }
 
@@ -31,26 +31,26 @@ export default function ImageCard({
 }: Props) {
   return (
     <Link href={`/${activityId}`} className="relative">
-      <div className="w-full border p-3 rounded-lg flex gap-6 relative shadow-md">
+      <div className="relative flex w-full gap-6 p-3 border rounded-lg shadow-md">
         {isPending && (
           <div
-            className="absolute inset-0 bg-black/50 rounded-md z-10 cursor-not-allowed flex justify-center items-center"
+            className="absolute inset-0 z-10 flex items-center justify-center rounded-md cursor-not-allowed bg-black/50"
             onClick={(e: React.MouseEvent<HTMLDivElement>) => {
               e.preventDefault();
             }}
           >
-            <Loader2 className="animate-spin h-8 w-8" />
+            <Loader2 className="w-8 h-8 animate-spin" />
           </div>
         )}
         {topContent}
         <div className="w-[110px] h-[110px] relative rounded-lg overflow-hidden flex-shrink-0">
           <Image src={imageSrc} alt="썸네일" fill style={{ objectFit: 'cover' }} />
         </div>
-        <div className="flex flex-col justify-center gap-2 w-full overflow-hidden">
-          <h1 className="text-sm font-bold truncate w-full">{title}</h1>
+        <div className="flex flex-col justify-center w-full gap-2 overflow-hidden">
+          <h1 className="w-full text-sm font-bold truncate">{title}</h1>
           <div className="text-xs flex flex-col gap-[3px]">
             <p>{date}</p>
-            <div className="flex gap-3 items-center">
+            <div className="flex items-center gap-3">
               {extraContent}
               {extraContent && <span>•</span>}
               {participants && <p className="text-sm font-bold">{participants} 명</p>}

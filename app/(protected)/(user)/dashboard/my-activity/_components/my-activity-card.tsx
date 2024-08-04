@@ -19,10 +19,12 @@ interface Props {
   endDate: Date;
   favoriteCount: number;
   isFavorite: boolean;
+  imageSrc: string;
 }
 
 export default function MyActivityCard({
   activityId,
+  imageSrc,
   title,
   views,
   maximumCount,
@@ -64,6 +66,7 @@ export default function MyActivityCard({
   return (
     <div className="relative">
       <ImageCard
+        imageSrc={imageSrc}
         isPending={isPending}
         activityId={activityId}
         title={title}
