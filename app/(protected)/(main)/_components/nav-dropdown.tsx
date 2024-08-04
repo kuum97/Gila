@@ -6,6 +6,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function NavDropdown() {
   return (
@@ -17,11 +18,11 @@ export default function NavDropdown() {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="bg-[#ffffff]">
         <DropdownMenuItem className="flex items-center justify-center text-black hover:bg-gray-200 active:bg-gray-200">
-          내 정보
+          <Link href="/profile">내 정보</Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator className="bg-gray-300" />
         <DropdownMenuItem className="flex items-center justify-center text-black hover:bg-gray-200 active:bg-gray-200">
-          대시보드
+          <Link href="/dashboard/my-activity">대시보드</Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -20,11 +20,11 @@ export default function LocationCommand() {
   return (
     <Command>
       <CommandInput placeholder="목적지를 찾아보세요!" />
-      <CommandList className="flex justify-center w-[350x] p-1 relative">
+      <CommandList className="relative flex justify-center p-1">
         <CommandEmpty>디폴트 이미지</CommandEmpty>
         {!province ? (
           <CommandGroup heading="도・광역시・특별시">
-            <ul className="flex flex-col flex-wrap gap-3">
+            <ul className="flex flex-col flex-wrap w-full gap-3">
               {Object.keys(LOCATIONS).map((_province) => (
                 <CommandItem
                   key={_province}
@@ -39,7 +39,7 @@ export default function LocationCommand() {
           </CommandGroup>
         ) : (
           <CommandGroup heading="시・군・구">
-            <ul className="flex flex-col flex-wrap gap-3">
+            <ul className="flex flex-col flex-wrap w-full gap-3">
               {cities.map((_city) => (
                 <CommandItem
                   key={_city}

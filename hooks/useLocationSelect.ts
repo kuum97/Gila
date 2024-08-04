@@ -45,7 +45,7 @@ const useLocationSelect = () => {
   useEffect(() => {
     if (province) {
       router.push(
-        `${pathname}?${createQueryString('location', city ? province + city : province)}`,
+        `${pathname}?${createQueryString('location', city ? `${province} ${city}` : province)}`,
       );
     }
   }, [createQueryString, province, city, pathname, router]);
