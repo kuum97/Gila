@@ -48,7 +48,7 @@ export default function AnswerForm({ questionId }: { questionId: string }) {
 
   const uploadImage = (url?: string) => {
     if (!url) return;
-    setImageUrl((prev) => [...prev, url]);
+    setImageUrl([url]);
     setLoading(false);
   };
 
