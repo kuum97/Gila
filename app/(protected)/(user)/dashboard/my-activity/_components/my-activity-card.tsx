@@ -31,7 +31,7 @@ export default function MyActivityCard({
   favoriteCount,
   isFavorite,
 }: Props) {
-  const dateRange = formatDateRange(startDate, endDate);
+  const dateRange = formatDateRange({ startDateString: startDate, endDateString: endDate });
   const [favorite, setFavorite] = useState(isFavorite);
   const [favoCount, setFavoCount] = useState(favoriteCount);
   const [isPending, startTransition] = useTransition();

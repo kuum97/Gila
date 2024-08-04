@@ -10,6 +10,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
+import Spinner from '@/components/ui/spinner';
 import { Textarea } from '@/components/ui/textarea';
 import { UploadButton } from '@/components/upload-button';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -47,7 +48,7 @@ export default function AnswerForm({ questionId }: { questionId: string }) {
 
   const uploadImage = (url?: string) => {
     if (!url) return;
-    setImageUrl((prev) => [...prev, url]);
+    setImageUrl([url]);
     setLoading(false);
   };
 
@@ -88,6 +89,11 @@ export default function AnswerForm({ questionId }: { questionId: string }) {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-sm">{FormFields.label}</FormLabel>
+                {loading && (
+                  <div className="flex justify-center items-center">
+                    <Spinner />
+                  </div>
+                )}
                 {imageUrl[0] && (
                   <div className="w-52 h-60 relative">
                     <Image
@@ -110,7 +116,6 @@ export default function AnswerForm({ questionId }: { questionId: string }) {
           />
         </div>
         <div className="flex flex-col items-center">
-          {loading && <p className="text-xs">업로드중...</p>}
           <UploadButton
             onChange={uploadImage}
             onUploadBegin={() => setLoading(true)}

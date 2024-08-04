@@ -8,12 +8,13 @@ import RatingSelector from '@/app/(protected)/(user)/dashboard/reviews/_componen
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { createReview } from '@/app/action/review';
+import { formatDateRange } from '@/utils/formatDateRange';
 
 type Props = {
   activityId: string;
   title: string;
-  startDate: string;
-  endDate: string;
+  startDate: Date;
+  endDate: Date;
   userImg: string;
   nickname: string;
   removeActivity: (activityId: string) => void;
@@ -30,6 +31,7 @@ export default function ReviewsCard({
 }: Props) {
   const [selectedRating, setSelectedRating] = useState<number>(-1);
   const [isPending, startTransition] = useTransition();
+  const formatDate = formatDateRange({ startDateString: startDate, endDateString: endDate });
 
   const handleRatingClick = (rating: number) => {
     if (selectedRating === rating) {
@@ -61,9 +63,7 @@ export default function ReviewsCard({
         <h1 className="text-sm font-bold truncate w-full">{title}</h1>
         <div className="text-xs flex flex-col gap-2">
           <div className="flex gap-3">
-            <p>
-              {startDate} ~ {endDate}
-            </p>
+            <p>{formatDate}</p>
           </div>
           <UserIcon imageSrc={userImg} name={nickname} />
         </div>

@@ -5,6 +5,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/componen
 import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ActivityWithUserAndFavoCount } from '@/type';
+import { formatDateRange } from '@/utils/formatDateRange';
 
 interface Props {
   activity: ActivityWithUserAndFavoCount;
@@ -12,6 +13,7 @@ interface Props {
 
 export default function ActivityListCard({ activity }: Props) {
   const { title, startDate, endDate, location, views, user, _count } = activity;
+  const formatDate = formatDateRange({ startDateString: startDate, endDateString: endDate });
 
   return (
     <Card>
@@ -34,9 +36,7 @@ export default function ActivityListCard({ activity }: Props) {
               </Avatar>
               <span className="font-medium text-black">{user.nickname}</span>
             </div>
-            <span className="text-xs text-gray-500">
-              {startDate.getDate().toString()} ~ {endDate.getDate().toString()}
-            </span>
+            <span className="text-xs text-gray-500">{formatDate}</span>
             <span className="text-xs text-gray-500">{location}</span>
           </CardContent>
           <CardFooter className="flex justify-end gap-2 p-0 pr-2 text-xs">

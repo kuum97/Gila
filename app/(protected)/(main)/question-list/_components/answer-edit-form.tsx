@@ -10,15 +10,20 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
+import Spinner from '@/components/ui/spinner';
 import { Textarea } from '@/components/ui/textarea';
+import { UploadButton } from '@/components/upload-button';
+import { AnswerWithUser } from '@/type';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useTransition } from 'react';
+import { FileImage, X } from 'lucide-react';
+import Image from 'next/image';
+import { useState, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
 
 interface Props {
-  defaultValue: string;
+  defaultValue: AnswerWithUser;
   answerId: string;
   handleEditAnswer: () => void;
 }
@@ -38,17 +43,29 @@ const FormSchema = z.object({
 });
 
 export default function AnswerEditForm({ answerId, defaultValue, handleEditAnswer }: Props) {
+  const [defaultImage, setDefaultImage] = useState<string[]>([defaultValue.images[0]]);
+  const [loading, setLoading] = useState(false);
   const [isPending, startTransition] = useTransition();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      content: defaultValue,
+      content: defaultValue.content,
     },
   });
 
+  const uploadImage = (url?: string) => {
+    if (!url) return;
+    setDefaultImage([url]);
+    setLoading(false);
+  };
+
+  const cancelImage = () => {
+    setDefaultImage([]);
+  };
+
   const onSubmit = (values: z.infer<typeof FormSchema>) => {
     startTransition(async () => {
-      const result = await editAnswer({ answerId, content: values.content });
+      const result = await editAnswer({ answerId, content: values.content, images: defaultImage });
       if (!result.success) {
         toast.error(result.message);
         return;
@@ -57,6 +74,16 @@ export default function AnswerEditForm({ answerId, defaultValue, handleEditAnswe
       form.setValue('content', '');
       handleEditAnswer();
     });
+  };
+
+  const customButton = () => {
+    return (
+      <div className="z-10 relative">
+        <div className="w-[80px] border-2 border-primary rounded-md flex justify-center items-center py-2">
+          <FileImage className="h-4 w-4" color="#000" />
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -69,6 +96,22 @@ export default function AnswerEditForm({ answerId, defaultValue, handleEditAnswe
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-sm">{FormFields.label}</FormLabel>
+                {loading && (
+                  <div className="flex justify-center items-center">
+                    <Spinner />
+                  </div>
+                )}
+                {defaultImage[0] && (
+                  <div className="w-full h-72 relative">
+                    <Image
+                      src={defaultImage[0]}
+                      alt="답변 이미지"
+                      fill
+                      className="rounded-md object-cover"
+                    />
+                    <X className="absolute right-1 top-1" onClick={cancelImage} />
+                  </div>
+                )}
                 <FormControl>
                   <Textarea placeholder={FormFields.placeholder} {...field} className="text-xs" />
                 </FormControl>
@@ -87,6 +130,11 @@ export default function AnswerEditForm({ answerId, defaultValue, handleEditAnswe
           >
             취소
           </Button>
+          <UploadButton
+            onChange={uploadImage}
+            onUploadBegin={() => setLoading(true)}
+            CustomButton={customButton}
+          />
           <Button disabled={isPending} type="submit" className="px-4 py-1 text-sm rounded-md mb-6">
             수정하기
           </Button>

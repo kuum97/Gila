@@ -30,6 +30,8 @@ export default function MyQuestionCard({ myQuestionItem, userId }: Props) {
     });
   };
 
+  const isDisabled = myQuestionItem._count.answers > 0;
+
   return (
     <div className="w-full border rounded-md flex justify-between items-center p-3 text-xs overflow-hidden relative">
       {isPending && (
@@ -51,7 +53,11 @@ export default function MyQuestionCard({ myQuestionItem, userId }: Props) {
         </div>
         <QuestionDetailModal question={myQuestionItem} userId={userId} createaAt={createdAt} />
         <div className="z-50">
-          <MyQuestionKebab myQuestion={myQuestionItem} handleDelete={onDelete} />
+          <MyQuestionKebab
+            myQuestion={myQuestionItem}
+            handleDelete={onDelete}
+            disabled={isDisabled}
+          />
         </div>
       </div>
     </div>
