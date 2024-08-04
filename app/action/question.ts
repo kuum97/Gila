@@ -47,10 +47,12 @@ export const createQuestion = async ({
 export const editQuestion = async ({
   requestId,
   title,
+  content,
   location,
 }: {
   requestId: string;
   title: string;
+  content: string;
   location: string;
 }): Promise<ActionType<Question>> => {
   try {
@@ -58,11 +60,14 @@ export const editQuestion = async ({
       where: { id: requestId },
       data: {
         title,
+        content,
         location,
       },
     });
 
     if (!question) return { success: false, message: '질문 수정에 실패하였습니다.' };
+
+    revalidatePath('/question-list');
 
     return {
       success: true,
@@ -85,6 +90,7 @@ export const deleteQuestion = async (requestId: string): Promise<ActionType<Ques
 
     if (!question) return { success: false, message: '질문 삭제에 실패하였습니다.' };
 
+    revalidatePath('/my-qustion');
     return { success: true, message: '질문 삭제에 성공하였습니다.' };
   } catch (error) {
     return {
