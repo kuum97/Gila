@@ -53,3 +53,6 @@ export type QuestionWithUserAndAnswers = Question & {
   };
   answerCursorId: string | null;
 };
+
+// Sort
+export type Sort = 'recent' | 'mostFavorite' | 'mostViewed' | 'tag';

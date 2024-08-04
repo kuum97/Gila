@@ -38,7 +38,7 @@ export default function AnswerItem({ answer, userId }: Props) {
         )}
       </div>
       <div className="flex flex-col gap-2">
-        {answer.images[0] && (
+        {answer.images[0] && !isEdit && (
           <div className="w-full h-72 relative">
             <Image
               src={answer.images[0]}
@@ -51,7 +51,7 @@ export default function AnswerItem({ answer, userId }: Props) {
         {isEdit ? (
           <AnswerEditForm
             answerId={answer.id}
-            defaultValue={answer.content}
+            defaultValue={answer}
             handleEditAnswer={handleEditAnswer}
           />
         ) : (
