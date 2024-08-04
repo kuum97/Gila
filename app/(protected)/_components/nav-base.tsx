@@ -1,8 +1,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import NavDropdown from '@/app/(protected)/(main)/_components/nav-dropdown';
+import NavDropdown from '@/app/(protected)/_components/nav-dropdown';
+import { getCurrentUser } from '@/app/data/user';
 
-export default function NavigationBase() {
+export default async function NavigationBase() {
+  const { image } = await getCurrentUser();
+
   return (
     <nav className="flex items-center justify-between px-2 py-4 bg-white border-b border-gray-300">
       <div className="flex items-center justify-start">
@@ -11,7 +14,7 @@ export default function NavigationBase() {
         </Link>
       </div>
       <div className="flex items-center justify-end">
-        <NavDropdown />
+        <NavDropdown userAvatar={image} />
       </div>
     </nav>
   );

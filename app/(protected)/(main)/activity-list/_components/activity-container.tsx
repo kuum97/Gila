@@ -1,7 +1,6 @@
-import { ActivityWithUserAndFavoCount } from '@/type';
+import { ActivityWithUserAndFavoCount, Sort } from '@/type';
 import ActivityList from '@/app/(protected)/(main)/activity-list/_components/activity-list';
 import SortingDropdown from '@/app/(protected)/(main)/activity-list/_components/sorting-dropdown';
-import { Sort } from '../page';
 
 interface Props {
   activities: ActivityWithUserAndFavoCount[];
