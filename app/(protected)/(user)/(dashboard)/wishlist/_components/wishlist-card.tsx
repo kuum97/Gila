@@ -1,10 +1,8 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
-import ImageCard from '@/components/image-card';
-import UserIcon from '@/components/user-icon';
-import WishlistHeartIcon from './wishlist-heart-icon';
+import WishlistHeartIcon from '@/app/(protected)/(user)/(dashboard)/wishlist/_components/wishlist-heart-icon';
+import WishlistImageCard from '@/app/(protected)/(user)/(dashboard)/wishlist/_components/wishlist-image-card';
 import { FavoriteWithActivity } from '@/type';
 
 interface Props {
@@ -14,17 +12,16 @@ interface Props {
 
 export default function WishListCard({ favorites, onRemoveFavorite }: Props) {
   return (
-    <div>
+    <div className="flex flex-col gap-2">
       {favorites.map(({ activity }) => (
         <div key={activity.id} className="relative">
           <Link href={`/${activity.id}`} passHref>
-            <ImageCard
+            <WishlistImageCard
               title={activity.title}
               startDate={activity.startDate}
               endDate={activity.endDate}
               participants={activity.maximumCount}
-              extraContent={<UserIcon imageSrc="/test.png" name="성재" />}
-              // extraContent={<UserIcon cardUserId={activity.userId} />}
+              cardUserId={activity.userId}
               imageSrc={activity.thumbnails}
             />
           </Link>
