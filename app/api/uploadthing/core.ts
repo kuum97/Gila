@@ -4,12 +4,12 @@ import { getCurrentUserId } from '@/app/data/user';
 
 const f = createUploadthing();
 export const ourFileRouter = {
-  imageUploader: f({ image: { maxFileSize: '4MB' } })
-    .middleware(async ({ req }) => {
+  imageUploader: f({ image: { maxFileSize: '4MB', maxFileCount: 5 } })
+    .middleware(async () => {
       const userId = await getCurrentUserId();
       return { userId };
     })
-    .onUploadComplete(async ({ metadata, file }) => {
+    .onUploadComplete(async ({ metadata }) => {
       return { uploadedBy: metadata.userId };
     }),
 } satisfies FileRouter;

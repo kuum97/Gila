@@ -1,5 +1,7 @@
 'use client';
 
+/* eslint-disable no-console */
+
 import { Edit2, Loader2 } from 'lucide-react';
 import Image from 'next/image';
 import { UploadDropzone } from '@/lib/uploadthing';
@@ -14,7 +16,7 @@ interface FileUploadProps {
   changeEvent?: () => void;
 }
 
-export const FileUpload = ({ onChange, value, className, changeEvent }: FileUploadProps) => {
+export default function FileUpload({ onChange, value, className, changeEvent }: FileUploadProps) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -36,8 +38,8 @@ export const FileUpload = ({ onChange, value, className, changeEvent }: FileUplo
       {value ? (
         <>
           {isLoading && (
-            <div className="flex items-center justify-center h-full w-full dark:bg-slate-900 bg-slate-300 rounded-md animate-pulse">
-              <Loader2 className="h-1/2 w-1/2 animate-spin" />
+            <div className="flex items-center justify-center w-full h-full rounded-md dark:bg-slate-900 bg-slate-300 animate-pulse">
+              <Loader2 className="w-1/2 h-1/2 animate-spin" />
             </div>
           )}
           <Image
@@ -49,10 +51,11 @@ export const FileUpload = ({ onChange, value, className, changeEvent }: FileUplo
           />
           <button
             onClick={handleReset}
-            className="bg-black text-white p-2 rounded-full absolute top-2 right-2 shadow-sm group"
+            className="absolute p-2 text-white bg-black rounded-full shadow-sm top-2 right-2 group"
             type="button"
+            aria-label="reset"
           >
-            <Edit2 className="h-6 w-6 group-hover:text-rose-500 transition-all" />
+            <Edit2 className="w-6 h-6 transition-all group-hover:text-rose-500" />
           </button>
         </>
       ) : (
@@ -61,7 +64,7 @@ export const FileUpload = ({ onChange, value, className, changeEvent }: FileUplo
             'aspect-[4/5] rounded-md border-black dark:border-white bg-slate-200 dark:bg-slate-800',
             className,
           )}
-          endpoint={'imageUploader'}
+          endpoint="imageUploader"
           onClientUploadComplete={(res) => {
             onChange(res?.[0].url);
             setIsLoading(false);
@@ -70,10 +73,10 @@ export const FileUpload = ({ onChange, value, className, changeEvent }: FileUplo
             }
           }}
           onUploadError={(error: Error) => {
-            console.log(error);
+            console.error(error);
           }}
         />
       )}
     </div>
   );
-};
+}

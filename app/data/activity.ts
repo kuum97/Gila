@@ -300,7 +300,7 @@ export const getAvailableReviewActivities = async ({
         },
         reviews: {
           none: {
-            userId: userId,
+            userId,
           },
         },
       },

@@ -1,5 +1,7 @@
 'use client';
 
+/* eslint-disable react/no-unstable-nested-components */
+
 import { UploadButton as UploadtingButton } from '@/lib/uploadthing';
 
 type UploadButtonProps = {
@@ -8,7 +10,7 @@ type UploadButtonProps = {
   CustomButton: React.ComponentType<{ ready: boolean }>;
 };
 
-export function UploadButton({ onChange, onUploadBegin, CustomButton }: UploadButtonProps) {
+export default function UploadButton({ onChange, onUploadBegin, CustomButton }: UploadButtonProps) {
   return (
     <UploadtingButton
       endpoint="imageUploader"
