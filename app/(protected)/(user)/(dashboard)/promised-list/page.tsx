@@ -1,14 +1,13 @@
-import PromisedListCard from '@/app/(protected)/(user)/(dashboard)/promised-list/_components/promised-list-card';
+import { getMyReceivedRequests } from '@/app/data/activity-request';
+import PromisedList from '@/app/(protected)/(user)/(dashboard)/promised-list/_components/promised-list';
 
-export default function Page() {
+export default async function Page() {
+  const { requests, cursorId } = await getMyReceivedRequests({});
+
   return (
-    <div className="flex flex-col gap-3">
+    <main className="flex flex-col min-h-screen gap-3">
       <h1 className="text-lg font-bold">내 활동 신청 현황</h1>
-      <PromisedListCard />
-      <PromisedListCard />
-      <PromisedListCard />
-      <PromisedListCard />
-      <PromisedListCard />
-    </div>
+      <PromisedList promisedActivities={requests} cursorId={cursorId} />
+    </main>
   );
 }
