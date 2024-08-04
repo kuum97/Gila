@@ -7,9 +7,9 @@ import { useForm, UseFormReturn } from 'react-hook-form';
 import { z } from 'zod';
 import { Accordion } from '@/components/ui/accordion';
 import { Undo2 } from 'lucide-react';
-import LocationSelectSection from '@/app/(protected)/(user)/dashboard/my-activity/_components/location-select-section';
-import ScheduleSection from '@/app/(protected)/(user)/dashboard/my-activity/_components/schedule-section';
-import DetailInfoSection from '@/app/(protected)/(user)/dashboard/my-activity/_components/detail-info-section';
+import LocationSelectSection from '@/app/(protected)/(user)/(dashboard)/my-activity/_components/location-select-section';
+import ScheduleSection from '@/app/(protected)/(user)/(dashboard)/my-activity/_components/schedule-section';
+import DetailInfoSection from '@/app/(protected)/(user)/(dashboard)/my-activity/_components/detail-info-section';
 import { useTransition } from 'react';
 import { createActivity } from '@/app/action/activity';
 import { toast } from 'sonner';
@@ -84,7 +84,7 @@ export default function ActivityCreateForm() {
   return (
     <Form {...form}>
       <main className="min-h-screen bg-white">
-        <div className="px-5 pt-5">
+        <div className="mb-5">
           <button
             type="button"
             aria-label="back-btn"
@@ -93,7 +93,7 @@ export default function ActivityCreateForm() {
             <Undo2 />
           </button>
         </div>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 p-5">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5">
           <Accordion
             type="single"
             className="flex flex-col gap-5"

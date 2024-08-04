@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+
 import DashboardNav from '@/app/(protected)/(user)/(dashboard)/_components/dashboard-nav';
 
 export default function Layout({ children }: { children: ReactNode }) {
