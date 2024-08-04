@@ -2,7 +2,7 @@
 
 import { createActivityRequest } from '@/app/action/activity-request';
 import { Button } from '@/components/ui/button';
-import { format } from 'date-fns';
+import { formatDateRange } from '@/utils/formatDateRange';
 import { useTransition } from 'react';
 import { toast } from 'sonner';
 
@@ -15,8 +15,7 @@ interface Props {
 
 export default function PromiseRequestForm({ startDate, endDate, maxCount, activityId }: Props) {
   const [isPending, startTransition] = useTransition();
-  const start = format(startDate, 'yyyy.MM.dd');
-  const end = format(endDate, 'yyyy.MM.dd');
+  const formatDate = formatDateRange({ startDateString: startDate, endDateString: endDate });
 
   const applyActivity = () => {
     startTransition(async () => {
@@ -28,9 +27,7 @@ export default function PromiseRequestForm({ startDate, endDate, maxCount, activ
   return (
     <div className="fixed bottom-0 w-full h-20 bg-[#1B1B1B] z-50 flex justify-between gap-8 items-center px-8 py-0">
       <div className="flex items-center justify-between w-full flex-col gap-2">
-        <p className="text-xs text-white">
-          {start} ~ {end}
-        </p>
+        <p className="text-xs text-white">{formatDate}</p>
         <p className="text-sm text-white">최대 인원 {maxCount}명</p>
       </div>
       <Button

@@ -32,9 +32,7 @@ export default function WishlistImageCard({
       <div className="flex flex-col justify-center w-full gap-2 overflow-hidden">
         <h1 className="w-full text-xl font-bold truncate">{title}</h1>
         <div className="flex flex-col gap-2 text-xs">
-          <p>
-            {startDate.getDate().toString()} ~ {endDate.getDate().toString()}
-          </p>
+          <p>{formatDate}</p>
           <div className="flex items-center gap-3">
             {participants && <p className="text-sm font-bold">{participants} 명</p>}
           </div>
