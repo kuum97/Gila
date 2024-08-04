@@ -2,7 +2,7 @@
 
 import { Heart } from 'lucide-react';
 import { toast } from 'sonner';
-import { toggleFavorite } from '@/app/action/favorite';
+import toggleFavorite from '@/app/action/favorite';
 
 interface Props {
   activityId: string;
