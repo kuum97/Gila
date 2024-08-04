@@ -60,7 +60,7 @@ export default function WishlistImageCard({
           <div className="flex items-center gap-3">
             <div className="flex items-center">
               <Avatar className="mr-2 size-6">
-                <AvatarImage src={userImage ?? '/test.png'} />
+                <AvatarImage src={userImage || '/test.png'} />
                 <AvatarFallback>U</AvatarFallback>
               </Avatar>
               <span className="font-medium text-black">{userName}</span>
