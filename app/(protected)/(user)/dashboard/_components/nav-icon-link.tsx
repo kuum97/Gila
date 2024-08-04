@@ -21,7 +21,7 @@ export default function NavIconLink({ navLabel, navHref, NavIcon }: Props) {
       href={navHref}
       className={cn(
         'flex flex-col items-center gap-2 text-xs p-3 w-20',
-        isActive && 'border-t border-primary text-primary',
+        isActive && 'border-b border-primary text-primary',
       )}
     >
       <NavIcon size={20} />

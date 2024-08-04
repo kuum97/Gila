@@ -23,8 +23,8 @@ const routes: Route[] = [
 
 export default function DashboardNav() {
   return (
-    <div className="fixed bottom-0 overflow-x-scroll bg-white border-t border-gray-300">
-      <div className="flex min-w-full">
+    <div className="flex overflow-x-auto bg-white border-b border-gray-300 whitespace-nowrap">
+      <div className="flex">
         {routes.map((route) => (
           <NavIconLink
             key={route.label}
