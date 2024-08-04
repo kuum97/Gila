@@ -1,5 +1,5 @@
 'use client';
-import { format } from 'date-fns';
+
 import { useState, useTransition } from 'react';
 
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
@@ -43,8 +43,8 @@ export default function ReviewList({ activities, cursorId }: Props) {
           key={activity.id}
           activityId={activity.id}
           title={activity.title}
-          startDate={format(activity.startDate, 'yyyy-MM-dd')}
-          endDate={format(activity.endDate, 'yyyy-MM-dd')}
+          startDate={activity.startDate}
+          endDate={activity.endDate}
           userImg={activity.user.image!}
           nickname={activity.user.nickname}
           removeActivity={removeActivity}

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import React, { ReactNode, useEffect, useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { getUserProfileWithIntroducedInfos } from '@/app/data/user';
+import { formatDateRange } from '@/utils/formatDateRange';
 
 interface Props {
   title: string;
@@ -28,6 +29,7 @@ export default function WishlistImageCard({
 }: Props) {
   const [userImage, setUserImage] = useState<string | null>(null);
   const [userName, setUserName] = useState('');
+  const formatDate = formatDateRange({ startDateString: startDate, endDateString: endDate });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,9 +56,7 @@ export default function WishlistImageCard({
       <div className="flex flex-col justify-center w-full gap-2 overflow-hidden">
         <h1 className="w-full text-xl font-bold truncate">{title}</h1>
         <div className="flex flex-col gap-2 text-xs">
-          <p>
-            {startDate.getDate().toString()} ~ {endDate.getDate().toString()}
-          </p>
+          <p>{formatDate}</p>
           <div className="flex items-center gap-3">
             <div className="flex items-center">
               <Avatar className="mr-2 size-6">
