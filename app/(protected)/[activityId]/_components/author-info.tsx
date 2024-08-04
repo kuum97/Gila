@@ -1,4 +1,4 @@
-import ProfileRank from '@/app/(public)/introduction/_components/profile-rank';
+import ProfileRank from '@/app/(public)/introduction/[introductionId]/_components/profile-rank';
 import { getUserProfileWithIntroducedInfos } from '@/app/data/user';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import Link from 'next/link';

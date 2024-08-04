@@ -13,6 +13,7 @@ interface Props {
   participants?: number;
   extraContent?: ReactNode;
   bottomContent?: ReactNode;
+  topContent?: ReactNode;
   imageSrc?: string;
   isPending?: boolean;
 }
@@ -26,6 +27,7 @@ export default function ImageCard({
   bottomContent,
   imageSrc = '/test.png',
   isPending,
+  topContent,
 }: Props) {
   return (
     <Link href={`/${activityId}`} className="relative">
@@ -40,7 +42,7 @@ export default function ImageCard({
             <Loader2 className="animate-spin h-8 w-8" />
           </div>
         )}
-
+        {topContent}
         <div className="w-[110px] h-[110px] relative rounded-lg overflow-hidden flex-shrink-0">
           <Image src={imageSrc} alt="썸네일" fill style={{ objectFit: 'cover' }} />
         </div>
@@ -54,7 +56,7 @@ export default function ImageCard({
               {participants && <p className="text-sm font-bold">{participants} 명</p>}
             </div>
           </div>
-          {bottomContent && <div>{bottomContent}</div>}
+          {bottomContent}
         </div>
       </div>
     </Link>

@@ -1,7 +1,7 @@
 'use server';
 
 import { db } from '@/lib/db';
-import { ActionType, RequestWithActivity } from '@/type';
+import { ActionType } from '@/type';
 import { ActivityRequest } from '@prisma/client';
 import { getCurrentUserId } from '../data/user';
 
@@ -15,7 +15,7 @@ export const createActivityRequest = async (
       where: {
         requestUserId_activityId: {
           requestUserId: userId,
-          activityId: activityId,
+          activityId,
         },
       },
     });
