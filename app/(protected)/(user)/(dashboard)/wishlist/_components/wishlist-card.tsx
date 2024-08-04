@@ -1,19 +1,36 @@
-import { Heart } from 'lucide-react';
-import ImageCard from '@/components/image-card';
-import UserIcon from '@/components/user-icon';
+'use client';
 
-export default function WishListCard() {
+import Link from 'next/link';
+import WishlistHeartIcon from '@/app/(protected)/(user)/(dashboard)/wishlist/_components/wishlist-heart-icon';
+import WishlistImageCard from '@/app/(protected)/(user)/(dashboard)/wishlist/_components/wishlist-image-card';
+import { FavoriteWithActivity } from '@/type';
+
+interface Props {
+  favorites: FavoriteWithActivity[];
+  onRemoveFavorite: (activityId: string) => void;
+}
+
+export default function WishListCard({ favorites, onRemoveFavorite }: Props) {
   return (
-    <ImageCard
-      title="함께 배우는 즐거운 스트릿 댄스"
-      date="2024-07-19 ~ 2024-07-19"
-      participants={10}
-      extraContent={<UserIcon imageSrc="/test.png" name="성재" />}
-      bottomContent={
-        <button className="absolute bottom-3 right-3" type="button" aria-label="찜하기">
-          <Heart size={20} />
-        </button>
-      }
-    />
+    <div className="flex flex-col gap-2">
+      {favorites.map(({ activity }) => (
+        <div key={activity.id} className="relative">
+          <Link href={`/${activity.id}`} passHref>
+            <WishlistImageCard
+              title={activity.title}
+              startDate={activity.startDate}
+              endDate={activity.endDate}
+              participants={activity.maximumCount}
+              cardUserId={activity.userId}
+              imageSrc={activity.thumbnails}
+            />
+          </Link>
+          <WishlistHeartIcon
+            activityId={activity.id}
+            onRemove={() => onRemoveFavorite(activity.id)}
+          />
+        </div>
+      ))}
+    </div>
   );
 }

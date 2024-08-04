@@ -1,6 +1,6 @@
 'use client';
 
-import { toggleFavorite } from '@/app/action/favorite';
+import toggleFavorite from '@/app/action/favorite';
 import { TAGS } from '@/constants/tag';
 import { Heart, Eye } from 'lucide-react';
 import { toast } from 'sonner';
@@ -76,11 +76,11 @@ export default function DetailTitle({
       <h1 className="mt-1 text-2xl font-bold leading-normal">{title}</h1>
       <div className="flex items-center gap-3 my-2">
         <div className="flex gap-4">
-          <div className="flex gap-1 items-center">
+          <div className="flex items-center gap-1">
             <Heart size={20} />
             <p className="ml-1 text-xs font-normal leading-relaxed">{likes}</p>
           </div>
-          <div className="flex gap-1 items-center">
+          <div className="flex items-center gap-1">
             <Eye width={20} />
             <p className="text-xs">{views + 1}</p>
           </div>
