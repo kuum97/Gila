@@ -33,7 +33,9 @@ export default function QuestionDetailModal({ question, userId, createaAt }: Pro
       <DialogContent className="bg-white h-screen flex flex-col justify-start pt-14">
         <DialogHeader className="h-fit gap-2">
           <DialogTitle>
-            <p className="text-left text-4xl font-semibold leading-tight">{question.title}</p>
+            <p className="text-left text-4xl font-semibold leading-tight break-word">
+              {question.title}
+            </p>
           </DialogTitle>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -51,7 +53,9 @@ export default function QuestionDetailModal({ question, userId, createaAt }: Pro
               <p className="text-sm">{question.user.nickname}</p>
             </div>
           </div>
-          <DialogDescription className="text-left">{question.content}</DialogDescription>
+          <DialogDescription className="text-left break-words w-64">
+            {question.content}
+          </DialogDescription>
         </DialogHeader>
         <div className="flex flex-col">
           <AnswerForm questionId={question.id} />

@@ -55,7 +55,7 @@ export default function AnswerItem({ answer, userId }: Props) {
             handleEditAnswer={handleEditAnswer}
           />
         ) : (
-          <p className="text-sm">{answer.content}</p>
+          <p className="text-sm w-full break-words">{answer.content}</p>
         )}
       </div>
     </div>
