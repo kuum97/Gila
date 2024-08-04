@@ -6,7 +6,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, UseFormReturn } from 'react-hook-form';
 import { z } from 'zod';
 import { Accordion } from '@/components/ui/accordion';
-import { Undo2 } from 'lucide-react';
 import LocationSelectSection from '@/app/(protected)/(user)/dashboard/my-activity/_components/location-select-section';
 import ScheduleSection from '@/app/(protected)/(user)/dashboard/my-activity/_components/schedule-section';
 import DetailInfoSection from '@/app/(protected)/(user)/dashboard/my-activity/_components/detail-info-section';
@@ -21,8 +20,8 @@ const ActivityCreateFormSchema = z.object({
   description: z.string(),
   schedule: z.object({ from: z.date(), to: z.date() }),
   location: z.string(),
-  images: z.string().array(),
-  maximumCount: z.number().min(1),
+  images: z.any(),
+  maximumCount: z.string(),
 });
 
 export type ActivityCreateFormData = z.infer<typeof ActivityCreateFormSchema>;
@@ -42,7 +41,7 @@ export default function ActivityCreateForm() {
       location: '',
       tags: [],
       images: [],
-      maximumCount: 1,
+      maximumCount: '1',
     },
   });
 
@@ -58,19 +57,21 @@ export default function ActivityCreateForm() {
     tags,
     location,
     maximumCount,
+    images,
   }: ActivityCreateFormData) => {
     startTransition(async () => {
       const { from, to } = schedule;
+      const formattedCount = parseInt(maximumCount, 10);
 
       const action = await createActivity({
         title,
         description,
         tags,
-        thumbnails: [],
+        thumbnails: images,
         location,
         startDate: from,
         endDate: to,
-        maximumCount,
+        maximumCount: formattedCount,
       });
       if (!action.success) {
         toast.error(action.message);
@@ -84,15 +85,6 @@ export default function ActivityCreateForm() {
   return (
     <Form {...form}>
       <main className="min-h-screen bg-white">
-        <div className="mb-5">
-          <button
-            type="button"
-            aria-label="back-btn"
-            className="bg-[#ffffff] p-1 rounded-full shadow-md border hover:bg-slate-200"
-          >
-            <Undo2 />
-          </button>
-        </div>
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5">
           <Accordion
             type="single"
@@ -111,7 +103,7 @@ export default function ActivityCreateForm() {
           <Button
             disabled={isPending}
             type="submit"
-            className="w-full text-xl font-semibold text-black shadow-md py-7"
+            className="w-full text-xl font-semibold text-black shadow-md py-7 disabled:bg-primary_dark"
           >
             제출
           </Button>
