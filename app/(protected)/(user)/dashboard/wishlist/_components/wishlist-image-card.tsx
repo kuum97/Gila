@@ -1,5 +1,6 @@
 'use client';
 
+import { formatDateRange } from '@/utils/formatDateRange';
 import Image from 'next/image';
 import React, { ReactNode } from 'react';
 
@@ -23,6 +24,7 @@ export default function WishlistImageCard({
   imageSrc,
 }: Props) {
   const imgSrc = imageSrc && imageSrc.length > 0 ? imageSrc[0] : '/test.png';
+  const formatDate = formatDateRange({ startDateString: startDate, endDateString: endDate });
 
   return (
     <div className="relative flex w-full gap-6 p-3 border rounded-lg">
