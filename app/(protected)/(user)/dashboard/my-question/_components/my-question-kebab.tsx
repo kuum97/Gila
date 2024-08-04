@@ -12,7 +12,7 @@ import {
 import { EllipsisVertical } from 'lucide-react';
 import { QuestionWithUserAndAnswers } from '@/type';
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import MyQuestionEditForm from '@/app/(protected)/(user)/(dashboard)/my-question/_components/my-question-edit-form';
+import MyQuestionEditForm from '@/app/(protected)/(user)/dashboard/my-question/_components/my-question-edit-form';
 import { cn } from '@/lib/utils';
 
 interface Props {

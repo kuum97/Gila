@@ -7,8 +7,8 @@ import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import Spinner from '@/components/ui/spinner';
 import { FavoriteWithActivity } from '@/type';
 import Link from 'next/link';
-import WishlistImageCard from '@/app/(protected)/(user)/(dashboard)/wishlist/_components/wishlist-image-card';
-import WishlistHeartIcon from '@/app/(protected)/(user)/(dashboard)/wishlist/_components/wishlist-heart-icon';
+import WishlistImageCard from '@/app/(protected)/(user)/dashboard/wishlist/_components/wishlist-image-card';
+import WishlistHeartIcon from '@/app/(protected)/(user)/dashboard/wishlist/_components/wishlist-heart-icon';
 
 interface Props {
   initialFavorites: FavoriteWithActivity[];

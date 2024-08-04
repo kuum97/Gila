@@ -4,7 +4,7 @@ import { Heart } from 'lucide-react';
 import { useTransition } from 'react';
 import { toast } from 'sonner';
 import toggleFavorite from '@/app/action/favorite';
-import WishlistHeartLoading from '@/app/(protected)/(user)/(dashboard)/wishlist/_components/wishlist-heart-loading';
+import WishlistHeartLoading from '@/app/(protected)/(user)/dashboard/wishlist/_components/wishlist-heart-loading';
 
 interface Props {
   activityId: string;
