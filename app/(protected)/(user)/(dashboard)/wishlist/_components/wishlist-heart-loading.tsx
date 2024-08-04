@@ -8,7 +8,7 @@ interface Props {
 
 export default function WishlistHeartLoading({ isPending }: Props) {
   return (
-    <div className="absolute inset-0 flex items-center justify-center">
+    <div className="absolute inset-0 flex items-center justify-center bottom-16">
       {isPending ? <Spinner /> : null}
     </div>
   );
