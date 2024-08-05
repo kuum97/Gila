@@ -20,6 +20,8 @@ import { toast } from 'sonner';
 import { login } from '@/app/action/user';
 import { useRouter } from 'next/navigation';
 import PasswordInput from '@/components/ui/password-input';
+import { cn } from '@/lib/utils';
+import Spinner from '@/components/ui/spinner';
 
 const loginFields = [
   { name: 'email', label: '이메일', placeholder: '이메일을 입력해 주세요', type: 'text' },
@@ -57,7 +59,6 @@ export default function LoginForm() {
         toast.error(action.message);
         return;
       }
-      toast.success(action.message);
       router.replace('/activity-list');
     });
   }
@@ -65,6 +66,7 @@ export default function LoginForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
+        <h1 className="mb-2 text-xl font-semibold">로그인</h1>
         {loginFields.map((field) => (
           <FormField
             key={field.name}
@@ -72,36 +74,44 @@ export default function LoginForm() {
             name={field.name as keyof LoginSchemaType}
             render={({ field: controllerField }) => (
               <FormItem className="relative">
-                <FormLabel>{field.label}</FormLabel>
+                <FormLabel className="text-base">{field.label}</FormLabel>
                 <FormControl>
                   {field.type === 'password' ? (
                     <PasswordInput
                       type={isVisible ? 'text' : 'password'}
                       handleToggle={handleVisibility}
                       placeholder={field.placeholder}
-                      className="border-none shadow-md"
+                      className={cn(
+                        form.getFieldState(field.name as keyof LoginSchemaType).error &&
+                          'bg-red bg-opacity-10 border-red',
+                        'border border-gray-300',
+                      )}
                       {...controllerField}
                     />
                   ) : (
                     <Input
                       type={field.type}
                       placeholder={field.placeholder}
-                      className="border-none shadow-md"
+                      className={cn(
+                        form.getFieldState(field.name as keyof LoginSchemaType).error &&
+                          'bg-red bg-opacity-10 border-red',
+                        'border border-gray-300',
+                      )}
                       {...controllerField}
                     />
                   )}
                 </FormControl>
                 <div className="h-5">
-                  <FormMessage className="text-xs text-red" />
+                  <FormMessage className="text-xs" />
                 </div>
               </FormItem>
             )}
           />
         ))}
         <Button
-          disabled={isPending}
+          disabled={isPending || !form.formState.isValid}
           type="submit"
-          className="w-full py-3 text-base font-semibold shadow-lg hover:bg-primary_dark active:bg-primary_dark"
+          className="w-full py-3 text-lg font-semibold text-white disabled:bg-primary_dark"
         >
           로그인
         </Button>
