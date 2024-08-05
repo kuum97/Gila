@@ -50,6 +50,9 @@ export const getMyReceivedRequests = async ({
       where: { id: currentUserId },
       select: {
         activityRequests: {
+          where: {
+            status: 'PENDING',
+          },
           include: {
             requestUser: {
               select: {
