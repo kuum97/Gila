@@ -1,7 +1,13 @@
+import Image from 'next/image';
+import Link from 'next/link';
+
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <main className='min-h-screen bg-stone-200 flex items-center justify-center'>
-      <div className='w-[450px]'>{children}</div>
-    </main>
-  )
+    <div className="flex flex-col items-center justify-center min-h-screen px-8 overflow-hidden bg-white">
+      <Link href="/" className="mb-2">
+        <Image width={180} height={180} src="/GilaLogo.png" alt="logo-to-home" />
+      </Link>
+      <main className="w-[450px] px-10">{children}</main>
+    </div>
+  );
 }

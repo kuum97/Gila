@@ -1,19 +1,28 @@
-import { Favorite } from "@prisma/client";
-import { getCurrentUserId } from "@/app/data/user";
-import { db } from "@/lib/db";
+'use server';
 
-export const getMyFavorites = async (): Promise<{ favorites: Favorite[], cursorId: string | null }> => {
+import { getCurrentUserId } from '@/app/data/user';
+import db from '@/lib/db';
+import { FavoriteWithActivity } from '@/type';
+
+const getMyFavorites = async ({
+  cursor,
+  take = 10,
+}: {
+  cursor?: string;
+  take?: number;
+}): Promise<{ favorites: FavoriteWithActivity[]; cursorId: string | null }> => {
+  const userId = await getCurrentUserId();
   try {
-    const userId = await getCurrentUserId();
-
     const favorites = await db.favorite.findMany({
       where: { userId },
       include: {
-        activity: true,  
+        activity: true,
       },
-      take: 10,
+      cursor: cursor ? { id: cursor } : undefined,
+      skip: cursor ? 1 : 0,
+      take,
       orderBy: {
-        createdAt: 'asc',  
+        createdAt: 'asc',
       },
     });
 
@@ -25,3 +34,5 @@ export const getMyFavorites = async (): Promise<{ favorites: Favorite[], cursorI
     throw new Error('좋아요 목록을 가져오는 중에 에러가 발생하였습니다.');
   }
 };
+
+export default getMyFavorites;

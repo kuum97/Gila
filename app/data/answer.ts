@@ -1,16 +1,37 @@
-import { db } from "@/lib/db";
-import { Answer } from "@prisma/client";
+'use server';
 
-export const getAnswers = async (questionId: string): Promise<{ answers: Answer[], cursorId: string | null }> => {
+import db from '@/lib/db';
+import { AnswerWithUser } from '@/type';
+
+const getAnswers = async ({
+  questionId,
+  cursor,
+  take = 10,
+}: {
+  questionId: string;
+  cursor: string | null;
+  take?: number;
+}): Promise<{ answers: AnswerWithUser[]; cursorId: string | null }> => {
   try {
     const answers = await db.answer.findMany({
       where: { questionId },
       include: {
-        user: true,  
+        user: {
+          select: {
+            id: true,
+            nickname: true,
+            email: true,
+            image: true,
+            tags: true,
+            createdAt: true,
+          },
+        },
       },
-      take: 10,
+      cursor: cursor ? { id: cursor } : undefined,
+      skip: cursor ? 1 : 0,
+      take,
       orderBy: {
-        createdAt: 'asc', 
+        createdAt: 'desc',
       },
     });
 
@@ -22,3 +43,5 @@ export const getAnswers = async (questionId: string): Promise<{ answers: Answer[
     throw new Error('답변을 가져오는 중에 에러가 발생하였습니다.');
   }
 };
+
+export default getAnswers;

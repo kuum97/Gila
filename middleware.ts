@@ -1,43 +1,56 @@
-import { auth } from './auth'
-
+/* eslint-disable consistent-return */
 import {
   DEFAULT_LOGIN_REDIRECT,
   apiAuthPrefix,
+  apiUploadThingPrefix,
   authRoutes,
   publicRoutes,
-} from '@/routes'
+} from '@/routes';
+import { NextResponse } from 'next/server';
+import { auth } from './auth';
 
-export default auth((req) => {
-  const { nextUrl } = req
-  const isLoggedIn = !!req.auth
+export default auth(async (req) => {
+  const { nextUrl } = req;
+  const isLoggedIn = !!req.auth;
 
-  const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix)
-  const isPublicRoute = publicRoutes.includes(nextUrl.pathname)
-  const isAuthRoute = authRoutes.includes(nextUrl.pathname)
-  const isMainPage = nextUrl.pathname === '/'
+  const isApiAuthRoute = nextUrl.pathname.startsWith(`/${apiAuthPrefix}`);
+  const isApiUploadthingRoute = nextUrl.pathname.startsWith(`/${apiUploadThingPrefix}`);
+  const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
+  const isAuthRoute = authRoutes.includes(nextUrl.pathname);
+  const isMainPage = nextUrl.pathname === '/';
+
+  const isFirst = req.cookies.has('isFirstLogin');
+  if (nextUrl.pathname !== '/topic') {
+    if (isLoggedIn && isFirst) {
+      return NextResponse.redirect(new URL('/topic', nextUrl));
+    }
+  }
 
   if (isApiAuthRoute) {
-    return
+    return;
+  }
+  if (isApiUploadthingRoute) {
+    return;
   }
 
   if (isAuthRoute) {
     if (isLoggedIn) {
-      return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl))
+      return NextResponse.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
     }
-    return
+    return;
   }
 
   if (!isLoggedIn && !isPublicRoute) {
-    return Response.redirect(new URL('/sign-in', nextUrl))
+    return NextResponse.redirect(new URL('/sign-in', nextUrl));
   }
 
   if (isLoggedIn && isMainPage) {
-    return Response.redirect(new URL('/activity', nextUrl))
+    return NextResponse.redirect(new URL('/activity-list', nextUrl));
   }
 
-  return
-})
+  return NextResponse.next();
+});
 
 export const config = {
   matcher: ['/((?!.*\\..*|_next).*)', '/', '/(api|trpc)(.*)'],
-}
+};

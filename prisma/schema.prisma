@@ -48,21 +48,21 @@ model VerificationToken {
 
 model User {
   id               String            @id @default(cuid())
-  nickname         String            @default("user")
+  nickname         String
   email            String            @unique
   password         String
   emailVerified    DateTime?         @map("email_verified")
   image            String?
+  isFirstLogin     Boolean           @default(true)
   tags             String[]
   accounts         Account[]
   sessions         Session[]
   activities       Activity[]
   reviews          Review[]
   favorites        Favorite[]
-  questionRequests Question[]
+  questions        Question[]
   answers          Answer[]
   activityRequests ActivityRequest[]
-  likes            Like[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -118,6 +118,8 @@ model Review {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@unique([userId, activityId])
 }
 
 model Activity {
@@ -129,12 +131,11 @@ model Activity {
   maximumCount Int
   thumbnails   String[]
   tags         String[]
-  locations    String[]
+  location     String
 
   userId String
   user   User   @relation(fields: [userId], references: [id])
 
-  likes            Like[]
   reviews          Review[]
   activityRequests ActivityRequest[]
 
@@ -161,15 +162,6 @@ model ActivityRequest {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-}
 
-model Like {
-  id         String   @id @default(cuid())
-  userId     String
-  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  activityId String
-  activity   Activity @relation(fields: [activityId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  @@unique([requestUserId, activityId])
 }
