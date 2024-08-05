@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { editImage } from '@/app/action/user';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
-import { UploadButton } from '@/components/upload-button';
+import UploadButton from '@/components/upload-button';
 
 type Props = {
   userImg?: string;

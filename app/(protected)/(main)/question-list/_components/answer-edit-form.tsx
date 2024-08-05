@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/form';
 import Spinner from '@/components/ui/spinner';
 import { Textarea } from '@/components/ui/textarea';
-import { UploadButton } from '@/components/upload-button';
+import UploadButton from '@/components/upload-button';
 import { AnswerWithUser } from '@/type';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FileImage, X } from 'lucide-react';
