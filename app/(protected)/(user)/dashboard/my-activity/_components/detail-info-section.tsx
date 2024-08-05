@@ -6,16 +6,13 @@ import { Textarea } from '@/components/ui/textarea';
 import { SELECT_TAGS, SelectTag } from '@/constants/tag';
 import { ActivityCreateFormProps } from '@/app/(protected)/(user)/dashboard/my-activity/_components/activity-create-form';
 import Select, { MultiValue } from 'react-select';
+import MultiUploader from '@/components/multi-file-upload';
 
 interface Props extends ActivityCreateFormProps {
   className?: string;
 }
 
 export default function DetailInfoSection({ form, className }: Props) {
-  // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   form.setValue('images', e.target.files);
-  // };
-
   return (
     <AccordionItem className={className} value="item-3" asChild>
       <Card className="shadow-md">
@@ -32,9 +29,11 @@ export default function DetailInfoSection({ form, className }: Props) {
                 name="title"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-lg">제목</FormLabel>
+                    <FormLabel className="text-lg" htmlFor="title">
+                      제목
+                    </FormLabel>
                     <FormControl>
-                      <Input type="text" placeholder="제목을 입력해 주세요" {...field} />
+                      <Input id="title" type="text" placeholder="제목을 입력해 주세요" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -45,9 +44,11 @@ export default function DetailInfoSection({ form, className }: Props) {
                 name="description"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-lg">설명</FormLabel>
+                    <FormLabel className="text-lg" htmlFor="description">
+                      설명
+                    </FormLabel>
                     <FormControl>
-                      <Textarea placeholder="설명을 입력해 주세요" {...field} />
+                      <Textarea id="description" placeholder="설명을 입력해 주세요" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -58,11 +59,14 @@ export default function DetailInfoSection({ form, className }: Props) {
                 name="tags"
                 render={({ field: { onChange, value } }) => (
                   <FormItem>
-                    <FormLabel className="text-lg">태그</FormLabel>
+                    <FormLabel className="text-lg" htmlFor="tags">
+                      태그
+                    </FormLabel>
                     <FormControl>
                       <Select
                         isMulti
                         name="tags"
+                        id="tags"
                         closeMenuOnSelect={false}
                         options={SELECT_TAGS}
                         value={SELECT_TAGS.filter((tag) => value?.includes(tag.value))}
@@ -84,28 +88,37 @@ export default function DetailInfoSection({ form, className }: Props) {
                 name="maximumCount"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-lg">최대 인원</FormLabel>
+                    <FormLabel className="text-lg" htmlFor="maximumCount">
+                      최대 인원
+                    </FormLabel>
                     <FormControl>
-                      <Input type="number" placeholder="최대 인원을 설정해 주세요" {...field} />
+                      <Input
+                        id="maximumCount"
+                        type="number"
+                        placeholder="최대 인원을 설정해 주세요"
+                        value={field.value}
+                        onChange={field.onChange}
+                      />
                     </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="images"
+                render={({ field: { value, onChange } }) => (
+                  <FormItem>
+                    <FormLabel>이미지</FormLabel>
+                    <FormControl>
+                      <MultiUploader onChange={onChange} value={value} />
+                    </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
             </Card>
           </CardContent>
-          {/* <CardContent>
-            <FormField
-              control={form.control}
-              name="description"
-              render={() => (
-                <Input
-                  type="file"
-                  placeholder="이미지를 추가해 주세요"
-                  onChange={handleFileChange}
-                />
-              )}
-            />
-          </CardContent> */}
         </AccordionContent>
       </Card>
     </AccordionItem>
