@@ -4,6 +4,7 @@ import db from '@/lib/db';
 import { ActionType } from '@/type';
 import { ActivityRequest } from '@prisma/client';
 import { getCurrentUserId } from '../data/user';
+import { revalidatePath } from 'next/cache';
 
 export const createActivityRequest = async (
   activityId: string,
@@ -59,6 +60,8 @@ export const approveActivityRequest = async (
 
     if (!activityRequest) return { success: false, message: '요청 승인에 실패하였습니다.' };
 
+    revalidatePath('/dashboard/promised-list', 'page');
+
     return { success: true, message: '요청 승인에 성공하였습니다.' };
   } catch (error) {
     return { success: false, message: '요청 승인 중에 에러가 발생하였습니다.' };
@@ -75,6 +78,8 @@ export const rejectActivityRequest = async (
     });
 
     if (!activityRequest) return { success: false, message: '요청 거절에 실패하였습니다.' };
+
+    revalidatePath('/dashboard/promised-list', 'page');
 
     return { success: true, message: '요청 거절에 성공하였습니다.' };
   } catch (error) {
