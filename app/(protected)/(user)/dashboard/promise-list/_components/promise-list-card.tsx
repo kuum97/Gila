@@ -12,9 +12,10 @@ import DeleteAlertModal from '@/components/delete-alert-modal';
 export default function PromiseListCard({ promise }: { promise: RequestWithActivity }) {
   const router = useRouter();
   const { activity } = promise;
+  const { id, title, startDate, endDate, maximumCount, thumbnails } = activity;
   const formatDate = formatDateRange({
-    startDateString: activity.startDate,
-    endDateString: activity.endDate,
+    startDateString: startDate,
+    endDateString: endDate,
   });
 
   const cancelPromise = async () => {
@@ -25,10 +26,11 @@ export default function PromiseListCard({ promise }: { promise: RequestWithActiv
 
   return (
     <ImageCard
-      activityId={activity.id}
-      title={activity.title}
+      activityId={id}
+      title={title}
       date={formatDate}
-      participants={activity.maximumCount}
+      participants={maximumCount}
+      imageSrc={thumbnails[0]}
       bottomContent={
         <div className="absolute z-10 right-3 bottom-3">
           {promise.status === 'PENDING' && (
@@ -43,7 +45,6 @@ export default function PromiseListCard({ promise }: { promise: RequestWithActiv
           <PromiseStatus status={promise.status} />
         </div>
       }
-      imageSrc=""
     />
   );
 }

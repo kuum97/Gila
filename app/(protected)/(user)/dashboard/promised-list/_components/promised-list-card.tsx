@@ -18,7 +18,7 @@ export default function PromisedListCard({ promisedActivity }: Props) {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const { id, activity, activityId, requestUser } = promisedActivity;
-  const { title, startDate, endDate } = activity;
+  const { title, startDate, endDate, thumbnails } = activity;
 
   const approve = () => {
     startTransition(async () => {
@@ -49,6 +49,7 @@ export default function PromisedListCard({ promisedActivity }: Props) {
       title={title}
       date={formatDateRange({ startDateString: startDate, endDateString: endDate })}
       activityId={activityId}
+      imageSrc={thumbnails[0]}
       bottomContent={
         <div className="flex items-center text-xs">
           <UserIcon imageSrc={requestUser.image || '/test.png'} name="sjae" />
@@ -58,7 +59,6 @@ export default function PromisedListCard({ promisedActivity }: Props) {
           </div>
         </div>
       }
-      imageSrc=""
     />
   );
 }
