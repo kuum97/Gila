@@ -95,7 +95,7 @@ export default function KakaoMap({ address }: Props) {
     } else {
       const mapScript = document.createElement('script');
       mapScript.async = true;
-      mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=e415c78ee2db9fc2249f1227e3fb0c2f&autoload=false&libraries=services,clusterer,drawing`;
+      mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_API_KEY}&autoload=false&libraries=services,clusterer,drawing`;
       document.head.appendChild(mapScript);
       mapScript.addEventListener('load', onLoadKakaoMap);
 
