@@ -5,7 +5,7 @@ import { TAGS } from '@/constants/tag';
 import { Heart, Eye } from 'lucide-react';
 import { toast } from 'sonner';
 import { format } from 'date-fns';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { increaseActivityCount } from '@/app/action/activity';
 import SharePopover from './share-popover';
 
@@ -30,12 +30,21 @@ export default function DetailTitle({
   activityId,
   isFavorite,
 }: Props) {
+  const [favorite, setFavorite] = useState(isFavorite);
+  const [viewCount, setViewCount] = useState(views);
+  const [likeCount, setLikeCount] = useState(likes);
   const getTagColor = (item: string) => {
     const tagInfo = TAGS.find((tagItem) => tagItem.tag.includes(item));
     return tagInfo ? tagInfo.color : '#FFB800';
   };
 
-  const isActivityLike = async () => {
+  const toggleActivityLike = async () => {
+    setFavorite(!favorite);
+    if (favorite) {
+      setLikeCount(likeCount - 1);
+    } else {
+      setLikeCount(likeCount + 1);
+    }
     const result = await toggleFavorite(activityId);
     toast.message(result.message);
   };
@@ -45,10 +54,13 @@ export default function DetailTitle({
 
   useEffect(() => {
     const action = async () => {
-      await increaseActivityCount(activityId);
+      const result = await increaseActivityCount(activityId);
+      if (result.success) {
+        setViewCount(viewCount + 1);
+      }
     };
     action();
-  }, [activityId]);
+  }, [activityId, viewCount]);
 
   return (
     <div>
@@ -65,11 +77,9 @@ export default function DetailTitle({
           ))}
         </div>
         <div className="flex items-center gap-4">
-          {isFavorite ? (
-            <Heart size={20} onClick={isActivityLike} color="#FF4242" fill="#FF4242" />
-          ) : (
-            <Heart size={20} onClick={isActivityLike} />
-          )}
+          <div onClick={toggleActivityLike}>
+            {favorite ? <Heart size={20} color="#FF4242" fill="#FF4242" /> : <Heart size={20} />}
+          </div>
           <SharePopover activityId={activityId} />
         </div>
       </div>
@@ -78,11 +88,11 @@ export default function DetailTitle({
         <div className="flex gap-4">
           <div className="flex items-center gap-1">
             <Heart size={20} />
-            <p className="ml-1 text-xs font-normal leading-relaxed">{likes}</p>
+            <p className="ml-1 text-xs font-normal leading-relaxed">{likeCount}</p>
           </div>
           <div className="flex items-center gap-1">
             <Eye width={20} />
-            <p className="text-xs">{views + 1}</p>
+            <p className="text-xs">{viewCount}</p>
           </div>
         </div>
       </div>
