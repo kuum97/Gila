@@ -1,6 +1,7 @@
 import ProfileImage from '@/app/(protected)/(user)/profile/_components/profile-image';
-import { getCurrentUser, getUserProfileWithIntroducedInfos } from '@/app/data/user';
+import { getUserProfileWithIntroducedInfos } from '@/app/data/user';
 import ProfileItem from '@/components/profile-item';
+import BackButton from './_components/back-button';
 
 interface Params {
   introductionId: string;
@@ -8,12 +9,12 @@ interface Params {
 
 export default async function Page({ params }: { params: Params }) {
   const id = params.introductionId;
-  const { image } = await getCurrentUser();
   const userData = await getUserProfileWithIntroducedInfos(id);
 
   return (
     <div className="m-8">
-      <ProfileImage image={image} />
+      <BackButton />
+      <ProfileImage image={userData.user.image} />
       <ProfileItem userData={userData} />
     </div>
   );
