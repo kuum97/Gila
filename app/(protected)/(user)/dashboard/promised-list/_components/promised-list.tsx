@@ -1,6 +1,6 @@
 'use client';
 
-import { RequestWithReqUser } from '@/type';
+import { RequestWithReqUserAndActivity } from '@/type';
 import PromisedListCard from '@/app/(protected)/(user)/dashboard/promised-list/_components/promised-list-card';
 import { useCallback, useState, useTransition } from 'react';
 import { getMyReceivedRequests } from '@/app/data/activity-request';
@@ -8,13 +8,13 @@ import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import Spinner from '@/components/ui/spinner';
 
 interface Props {
-  promisedActivities: RequestWithReqUser[];
+  promisedActivities: RequestWithReqUserAndActivity[];
   cursorId: string | null;
 }
 
 export default function PromisedList({ promisedActivities, cursorId }: Props) {
   const [infinityPromisedActivities, setInfinityPromisedActivities] = useState<
-    RequestWithReqUser[]
+    RequestWithReqUserAndActivity[]
   >([]);
   const [infinityCursorId, setInfinityCursorId] = useState(cursorId);
   const [isPending, startTransition] = useTransition();
