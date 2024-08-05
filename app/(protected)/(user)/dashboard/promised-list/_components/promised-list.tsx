@@ -33,8 +33,7 @@ export default function PromisedList({ promisedActivities, cursorId }: Props) {
 
   useEffect(() => {
     setInfinityPromisedActivities([...promisedActivities]);
-    setInfinityCursorId(cursorId);
-  }, [cursorId, promisedActivities]);
+  }, [promisedActivities]);
 
   const observer = useInfiniteScroll({
     callback: loadMorePromisedActivities,
