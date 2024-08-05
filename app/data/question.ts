@@ -1,10 +1,9 @@
 'use server';
 
-import { db } from '@/lib/db';
+import db from '@/lib/db';
 import { QuestionWithUserAndAnswers } from '@/type';
 import { getCurrentUserId } from './user';
 
-// eslint-disable-next-line import/prefer-default-export
 export const getQuestions = async ({
   order = 'recent',
   location,

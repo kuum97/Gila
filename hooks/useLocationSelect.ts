@@ -1,4 +1,4 @@
-import { LOCATIONS } from '@/constants/locations';
+import LOCATIONS from '@/constants/locations';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 

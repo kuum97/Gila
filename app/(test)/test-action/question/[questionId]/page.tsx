@@ -1,14 +1,14 @@
 import { getAnswers } from '@/app/data/answer';
-import CreateSampleAnswerButton from './_components/create-sample-answer-button';
 import { getQuestionById } from '@/app/data/question';
+import CreateSampleAnswerButton from './_components/create-sample-answer-button';
 
 export default async function Page({ params }: { params: { questionId: string } }) {
-  const questionId = params.questionId;
+  const { questionId } = params;
 
   const question = await getQuestionById(questionId);
 
   const answersRes = await getAnswers({ questionId });
-  const answers = answersRes.answers;
+  const { answers } = answersRes;
 
   return (
     <div className="space-y-4">

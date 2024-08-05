@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import { auth } from '@/auth';
-import { db } from '@/lib/db';
+import db from '@/lib/db';
 import { User } from '@/type';
 
 export const getCurrentUserEmail = async (): Promise<string> => {

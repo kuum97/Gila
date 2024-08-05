@@ -1,7 +1,7 @@
 'use server';
 
 import { getCurrentUserId } from '@/app/data/user';
-import { db } from '@/lib/db';
+import db from '@/lib/db';
 import { ActionType } from '@/type';
 import { Favorite } from '@prisma/client';
 import { revalidatePath } from 'next/cache';

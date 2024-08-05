@@ -3,7 +3,7 @@ import Credentials from 'next-auth/providers/credentials';
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import { verifyPassword } from './lib/utils';
 import { LoginSchema } from './schema';
-import { db } from './lib/db';
+import db from './lib/db';
 
 export const authConfig = {
   providers: [

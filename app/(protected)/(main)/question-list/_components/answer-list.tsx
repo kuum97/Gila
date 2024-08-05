@@ -1,7 +1,7 @@
 'use client';
 
 import AnswerItem from '@/app/(protected)/(main)/question-list/_components/answer-item';
-import { getAnswers } from '@/app/data/answer';
+import getAnswers from '@/app/data/answer';
 import Spinner from '@/components/ui/spinner';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { AnswerWithUser } from '@/type';

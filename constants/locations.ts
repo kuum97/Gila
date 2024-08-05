@@ -3,8 +3,7 @@ interface Locations {
   [key: string]: Cities;
 }
 
-// eslint-disable-next-line import/prefer-default-export
-export const LOCATIONS: Locations = {
+const LOCATIONS: Locations = {
   서울특별시: [
     '종로구',
     '중구',
@@ -236,3 +235,5 @@ export const LOCATIONS: Locations = {
   ],
   제주특별자치도: ['제주시', '서귀포시'],
 };
+
+export default LOCATIONS;

@@ -5,7 +5,7 @@ import ImageCard from '@/components/image-card';
 import SmallButton from '@/components/small-button';
 import UserIcon from '@/components/user-icon';
 import { RequestWithReqUserAndActivity } from '@/type';
-import { formatDateRange } from '@/utils/formatDateRange';
+import formatDateRange from '@/utils/formatDateRange';
 import { useRouter } from 'next/navigation';
 import { useTransition } from 'react';
 import { toast } from 'sonner';
@@ -58,6 +58,7 @@ export default function PromisedListCard({ promisedActivity }: Props) {
           </div>
         </div>
       }
+      imageSrc=""
     />
   );
 }

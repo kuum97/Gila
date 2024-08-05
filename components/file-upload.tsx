@@ -1,7 +1,5 @@
 'use client';
 
-/* eslint-disable no-console */
-
 import { Edit2, Loader2 } from 'lucide-react';
 import Image from 'next/image';
 import { UploadDropzone } from '@/lib/uploadthing';
@@ -73,6 +71,7 @@ export default function FileUpload({ onChange, value, className, changeEvent }: 
             }
           }}
           onUploadError={(error: Error) => {
+            // eslint-disable-next-line no-console
             console.error(error);
           }}
         />

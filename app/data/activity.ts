@@ -1,7 +1,7 @@
 'use server';
 
 import { getCurrentUser, getCurrentUserId } from '@/app/data/user';
-import { db } from '@/lib/db';
+import db from '@/lib/db';
 import {
   ActivityWithUser,
   ActivityWithUserAndFavoCount,

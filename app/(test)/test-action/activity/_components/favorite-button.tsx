@@ -31,7 +31,7 @@ export default function FavoriteButton({ activityId, isFavorited }: Props) {
   };
 
   return (
-    <Button disabled={isPending} onClick={onClick} size={'icon'} variant={'ghost'}>
+    <Button disabled={isPending} onClick={onClick} size="icon" variant="ghost">
       <Heart className={cn('h-6 w-6', favorite && 'text-rose-500')} />
     </Button>
   );

@@ -1,8 +1,7 @@
 'use client';
 
 import { useState, useCallback, useEffect, useTransition } from 'react';
-import WishListCard from '@/app/(protected)/(user)/dashboard/wishlist/_components/wishlist-card';
-import { getMyFavorites } from '@/app/data/favorite';
+import getMyFavorites from '@/app/data/favorite';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import Spinner from '@/components/ui/spinner';
 import { FavoriteWithActivity } from '@/type';

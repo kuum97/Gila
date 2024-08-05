@@ -1,7 +1,7 @@
 'use server';
 
 import { getCurrentUserId } from '@/app/data/user';
-import { db } from '@/lib/db';
+import db from '@/lib/db';
 import { RequestWithActivity, RequestWithReqUserAndActivity } from '@/type';
 import { revalidatePath } from 'next/cache';
 

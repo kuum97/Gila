@@ -1,4 +1,4 @@
-import { getMyFavorites } from '@/app/data/favorite';
+import getMyFavorites from '@/app/data/favorite';
 import WishListContainer from '@/app/(protected)/(user)/dashboard/wishlist/_components/wishlist-container';
 
 export default async function Page() {

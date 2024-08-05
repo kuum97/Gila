@@ -1,5 +1,5 @@
 import { getMySentRequests } from '@/app/data/activity-request';
-import PromiseList from './_components/promise-list';
+import PromiseList from '@/app/(protected)/(user)/dashboard/promise-list/_components/promise-list';
 
 export default async function Page() {
   const myPromise = await getMySentRequests({ take: 6 });

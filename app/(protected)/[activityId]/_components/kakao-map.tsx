@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import MapImg from '@/public/map.png';
 import KakaoMapImg from '@/public/kakaomap.png';
 
 declare global {
   interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     kakao: any;
   }
 }
@@ -23,8 +24,7 @@ interface AddressSearchResult {
 type AddressSearchStatus = 'OK' | 'ZERO_RESULT' | 'ERROR';
 
 export default function KakaoMap({ address }: Props) {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const onLoadKakaoMap = () => {
+  const onLoadKakaoMap = useCallback(() => {
     window.kakao.maps.load(() => {
       const mapContainer = document.getElementById('map');
       if (!mapContainer) return;
@@ -86,7 +86,7 @@ export default function KakaoMap({ address }: Props) {
         },
       );
     });
-  };
+  }, [address]);
 
   // eslint-disable-next-line consistent-return
   useEffect(() => {

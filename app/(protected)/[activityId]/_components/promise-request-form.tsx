@@ -2,7 +2,7 @@
 
 import { createActivityRequest } from '@/app/action/activity-request';
 import { Button } from '@/components/ui/button';
-import { formatDateRange } from '@/utils/formatDateRange';
+import formatDateRange from '@/utils/formatDateRange';
 import { useTransition } from 'react';
 import { toast } from 'sonner';
 

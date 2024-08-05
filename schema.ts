@@ -1,5 +1,5 @@
 import z from 'zod';
-import { PASSWORD_REGEX } from '@/constants/regex';
+import PASSWORD_REGEX from '@/constants/regex';
 
 export const LoginSchema = z.object({
   email: z.string().email({ message: '올바른 이메일 형식을 입력해 주세요.' }),

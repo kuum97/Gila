@@ -4,7 +4,7 @@ import { useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 import { logout } from '@/app/action/user';
 import { toast } from 'sonner';
-import { Button } from './ui/button';
+import { Button } from '@/components/ui/button';
 
 export default function LogoutButton() {
   const [isPending, startTransition] = useTransition();
