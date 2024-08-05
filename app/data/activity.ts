@@ -73,42 +73,59 @@ export const getActivities = async ({
     const currentUser = await getCurrentUser();
     let activities;
 
+    const baseQuery = {
+      take: size,
+      cursor: cursor ? { id: cursor } : undefined,
+      skip: cursor ? 1 : 0,
+      include: {
+        user: {
+          select: {
+            id: true,
+            nickname: true,
+            email: true,
+            image: true,
+            tags: true,
+            createdAt: true,
+          },
+        },
+        _count: {
+          select: {
+            favorites: true,
+          },
+        },
+      },
+    };
+
     switch (type) {
       case 'recent':
         activities = await db.activity.findMany({
-          where: { location },
-          take: size,
-          cursor: cursor ? { id: cursor } : undefined,
-          skip: cursor ? 1 : 0,
+          ...baseQuery,
+          where: location ? { location } : {},
           orderBy: {
             createdAt: 'desc',
           },
-          include: {
-            user: {
-              select: {
-                id: true,
-                nickname: true,
-                email: true,
-                image: true,
-                tags: true,
-                createdAt: true,
-              },
-            },
-            _count: {
-              select: {
-                favorites: true,
-              },
-            },
-          },
         });
+
+        if (location && activities.length < size) {
+          const remainingSize = size - activities.length;
+          const additionalActivities = await db.activity.findMany({
+            ...baseQuery,
+            where: {
+              location: { not: location },
+            },
+            take: remainingSize,
+            orderBy: {
+              createdAt: 'desc',
+            },
+          });
+          activities = [...activities, ...additionalActivities];
+        }
         break;
 
       case 'mostFavorite':
         activities = await db.activity.findMany({
-          where: { location },
-          take: size,
-          cursor: cursor ? { id: cursor } : undefined,
-          skip: cursor ? 1 : 0,
+          ...baseQuery,
+          where: location ? { location } : {},
           orderBy: [
             {
               favorites: {
@@ -119,24 +136,29 @@ export const getActivities = async ({
               createdAt: 'desc',
             },
           ],
-          include: {
-            user: {
-              select: {
-                id: true,
-                nickname: true,
-                email: true,
-                image: true,
-                tags: true,
-                createdAt: true,
-              },
-            },
-            _count: {
-              select: {
-                favorites: true,
-              },
-            },
-          },
         });
+
+        if (location && activities.length < size) {
+          const remainingSize = size - activities.length;
+          const additionalActivities = await db.activity.findMany({
+            ...baseQuery,
+            where: {
+              location: { not: location },
+            },
+            take: remainingSize,
+            orderBy: [
+              {
+                favorites: {
+                  _count: 'desc',
+                },
+              },
+              {
+                createdAt: 'desc',
+              },
+            ],
+          });
+          activities = [...activities, ...additionalActivities];
+        }
         break;
 
       case 'tag':
@@ -145,45 +167,41 @@ export const getActivities = async ({
         }
 
         activities = await db.activity.findMany({
+          ...baseQuery,
           where: {
             location,
             tags: {
               hasSome: currentUser.tags,
             },
           },
-          take: size,
-          cursor: cursor ? { id: cursor } : undefined,
-          skip: cursor ? 1 : 0,
           orderBy: {
             createdAt: 'desc',
           },
-          include: {
-            user: {
-              select: {
-                id: true,
-                nickname: true,
-                email: true,
-                image: true,
-                tags: true,
-                createdAt: true,
-              },
-            },
-            _count: {
-              select: {
-                favorites: true,
-              },
-            },
-          },
         });
 
+        if (location && activities.length < size) {
+          const remainingSize = size - activities.length;
+          const additionalActivities = await db.activity.findMany({
+            ...baseQuery,
+            where: {
+              location: { not: location },
+              tags: {
+                hasSome: currentUser.tags,
+              },
+            },
+            take: remainingSize,
+            orderBy: {
+              createdAt: 'desc',
+            },
+          });
+          activities = [...activities, ...additionalActivities];
+        }
         break;
 
       case 'mostViewed':
         activities = await db.activity.findMany({
-          where: { location },
-          take: size,
-          cursor: cursor ? { id: cursor } : undefined,
-          skip: cursor ? 1 : 0,
+          ...baseQuery,
+          where: location ? { location } : {},
           orderBy: [
             {
               views: 'desc',
@@ -192,24 +210,27 @@ export const getActivities = async ({
               createdAt: 'desc',
             },
           ],
-          include: {
-            user: {
-              select: {
-                id: true,
-                nickname: true,
-                email: true,
-                image: true,
-                tags: true,
-                createdAt: true,
-              },
-            },
-            _count: {
-              select: {
-                favorites: true,
-              },
-            },
-          },
         });
+
+        if (location && activities.length < size) {
+          const remainingSize = size - activities.length;
+          const additionalActivities = await db.activity.findMany({
+            ...baseQuery,
+            where: {
+              location: { not: location },
+            },
+            take: remainingSize,
+            orderBy: [
+              {
+                views: 'desc',
+              },
+              {
+                createdAt: 'desc',
+              },
+            ],
+          });
+          activities = [...activities, ...additionalActivities];
+        }
         break;
 
       default:

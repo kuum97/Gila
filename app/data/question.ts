@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 'use server';
 
 import db from '@/lib/db';
@@ -19,103 +21,84 @@ export const getQuestions = async ({
 }): Promise<{ questions: QuestionWithUserAndAnswers[]; cursorId: string | null }> => {
   try {
     let questions;
-    switch (order) {
-      case 'recent':
-        questions = await db.question.findMany({
-          where: { location },
-          include: {
-            answers: {
-              include: {
-                user: {
-                  select: {
-                    id: true,
-                    nickname: true,
-                    email: true,
-                    image: true,
-                    tags: true,
-                    createdAt: true,
-                  },
-                },
-              },
-              take: answerTake,
-              orderBy: {
-                createdAt: 'desc',
-              },
-            },
-            user: {
-              select: {
-                id: true,
-                nickname: true,
-                email: true,
-                image: true,
-                tags: true,
-                createdAt: true,
-              },
-            },
-            _count: {
-              select: {
-                answers: true,
-              },
+    let locationQuestions: string | any[] = [];
+    let otherQuestions: {
+      id: string;
+      title: string;
+      content: string;
+      location: string;
+      userId: string;
+      createdAt: Date;
+      updatedAt: Date;
+    }[] = [];
+    const baseInclude = {
+      answers: {
+        include: {
+          user: {
+            select: {
+              id: true,
+              nickname: true,
+              email: true,
+              image: true,
+              tags: true,
+              createdAt: true,
             },
           },
-          take,
-          cursor: cursor ? { id: cursor } : undefined,
-          skip: cursor ? 1 : 0,
-          orderBy: { createdAt: 'desc' },
-        });
-        break;
-      case 'answerLen':
-        questions = await db.question.findMany({
-          where: { location },
-          include: {
-            answers: {
-              include: {
-                user: {
-                  select: {
-                    id: true,
-                    nickname: true,
-                    email: true,
-                    image: true,
-                    tags: true,
-                    createdAt: true,
-                  },
-                },
-              },
-              take: answerTake,
-              orderBy: {
-                createdAt: 'desc',
-              },
-            },
-            user: {
-              select: {
-                id: true,
-                nickname: true,
-                email: true,
-                image: true,
-                tags: true,
-                createdAt: true,
-              },
-            },
-            _count: {
-              select: {
-                answers: true,
-              },
-            },
-          },
-          take,
-          cursor: cursor ? { id: cursor } : undefined,
-          skip: cursor ? 1 : 0,
-          orderBy: [
-            { answers: { _count: 'desc' } },
-            {
-              createdAt: 'desc',
-            },
-          ],
-        });
-        break;
-      default:
-        throw new Error('order값이 잘못 되었습니다');
+        },
+        take: answerTake,
+        orderBy: {
+          createdAt: 'desc' as const,
+        },
+      },
+      user: {
+        select: {
+          id: true,
+          nickname: true,
+          email: true,
+          image: true,
+          tags: true,
+          createdAt: true,
+        },
+      },
+      _count: {
+        select: {
+          answers: true,
+        },
+      },
+    };
+
+    if (location) {
+      locationQuestions = await db.question.findMany({
+        where: { location },
+        include: baseInclude,
+        take,
+        cursor: cursor ? { id: cursor } : undefined,
+        skip: cursor ? 1 : 0,
+        orderBy:
+          order === 'recent'
+            ? { createdAt: 'desc' as const }
+            : [{ answers: { _count: 'desc' as const } }, { createdAt: 'desc' as const }],
+      });
     }
+
+    const remainingTake = take - locationQuestions.length;
+
+    if (remainingTake > 0) {
+      otherQuestions = await db.question.findMany({
+        where: location ? { location: { not: location } } : {},
+        include: baseInclude,
+        take: remainingTake,
+        cursor: cursor ? { id: cursor } : undefined,
+        skip: cursor ? 1 : 0,
+        orderBy:
+          order === 'recent'
+            ? { createdAt: 'desc' as const }
+            : [{ answers: { _count: 'desc' as const } }, { createdAt: 'desc' as const }],
+      });
+    }
+
+    // eslint-disable-next-line prefer-const
+    questions = [...locationQuestions, ...otherQuestions];
 
     const lastQuestion = questions[questions.length - 1];
     const newCursorId = lastQuestion ? lastQuestion.id : null;
@@ -133,7 +116,6 @@ export const getQuestions = async ({
     throw new Error('질문 요청을 가져오는 중에 에러가 발생하였습니다.');
   }
 };
-
 export const getMyQuestions = async ({
   take = 10,
   answerTake = 10,
