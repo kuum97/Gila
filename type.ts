@@ -23,7 +23,10 @@ export type User = Pick<DbUser, 'id' | 'nickname' | 'email' | 'image' | 'created
 
 // ActivityRequest
 export type RequestWithActivity = ActivityRequest & { activity: Activity };
-export type RequestWithReqUser = ActivityRequest & { requestUser: User };
+export type RequestWithReqUserAndActivity = ActivityRequest & {
+  requestUser: User;
+  activity: Activity;
+};
 
 // Activity
 export type ActivityWithFavoCount = Activity & { _count: { favorites: number } };

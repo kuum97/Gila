@@ -2,7 +2,7 @@
 
 import { getCurrentUserId } from '@/app/data/user';
 import { db } from '@/lib/db';
-import { RequestWithActivity, RequestWithReqUser } from '@/type';
+import { RequestWithActivity, RequestWithReqUserAndActivity } from '@/type';
 import { revalidatePath } from 'next/cache';
 
 export const getMySentRequests = async ({
@@ -43,13 +43,16 @@ export const getMyReceivedRequests = async ({
 }: {
   cursor?: string;
   take?: number;
-}): Promise<{ requests: RequestWithReqUser[]; cursorId: string | null }> => {
+}): Promise<{ requests: RequestWithReqUserAndActivity[]; cursorId: string | null }> => {
   try {
     const currentUserId = await getCurrentUserId();
     const userRequests = await db.user.findUnique({
       where: { id: currentUserId },
       select: {
         activityRequests: {
+          where: {
+            status: 'PENDING',
+          },
           include: {
             requestUser: {
               select: {
@@ -61,6 +64,7 @@ export const getMyReceivedRequests = async ({
                 createdAt: true,
               },
             },
+            activity: true,
           },
           orderBy: {
             id: 'asc',
