@@ -4,10 +4,10 @@ import toggleFavorite from '@/app/action/favorite';
 import { TAGS } from '@/constants/tag';
 import { Heart, Eye } from 'lucide-react';
 import { toast } from 'sonner';
-import { format } from 'date-fns';
 import { useEffect, useState } from 'react';
 import { increaseActivityCount } from '@/app/action/activity';
 import SharePopover from '@/app/(protected)/[activityId]/_components/share-popover';
+import formatDateRange from '@/utils/formatDateRange';
 
 interface Props {
   title: string;
@@ -37,6 +37,7 @@ export default function DetailTitle({
     const tagInfo = TAGS.find((tagItem) => tagItem.tag.includes(item));
     return tagInfo ? tagInfo.color : '#FFB800';
   };
+  const formatDate = formatDateRange({ startDateString: startDate, endDateString: endDate });
 
   const toggleActivityLike = async () => {
     setFavorite(!favorite);
@@ -48,9 +49,6 @@ export default function DetailTitle({
     const result = await toggleFavorite(activityId);
     toast.message(result.message);
   };
-
-  const start = format(startDate, 'yyyy.MM.dd');
-  const end = format(endDate, 'yyyy.MM.dd');
 
   useEffect(() => {
     const action = async () => {
@@ -98,7 +96,7 @@ export default function DetailTitle({
       </div>
       <div className="flex items-center mx-0">
         <p className="text-xs">
-          <span className="text-[#949694] mr-1">기간</span> {start} ~ {end}
+          <span className="text-[#949694] mr-1">기간</span> {formatDate}
         </p>
       </div>
     </div>
