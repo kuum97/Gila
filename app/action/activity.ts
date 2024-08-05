@@ -129,10 +129,10 @@ export const increaseActivityCount = async (activityId: string): Promise<ActionT
       return { success: false, message: '이미 조회수를 올린 유저입니다.' };
     }
 
-    // const activity = await db.activity.update({
-    //   where: { id: activityId },
-    //   data: { views: { increment: 1 } },
-    // });
+    await db.activity.update({
+      where: { id: activityId },
+      data: { views: { increment: 1 } },
+    });
 
     cookies().set(`viewed_${activityId}`, 'true', { maxAge: 30 * 60 });
 
