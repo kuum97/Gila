@@ -12,9 +12,8 @@ export const getMySentRequests = async ({
   cursor?: string;
   take?: number;
 }): Promise<{ requests: RequestWithActivity[]; cursorId: string | null }> => {
+  const userId = await getCurrentUserId();
   try {
-    const userId = await getCurrentUserId();
-
     const requests = await db.activityRequest.findMany({
       where: { requestUserId: userId },
       include: {
@@ -44,8 +43,9 @@ export const getMyReceivedRequests = async ({
   cursor?: string;
   take?: number;
 }): Promise<{ requests: RequestWithReqUserAndActivity[]; cursorId: string | null }> => {
+  const currentUserId = await getCurrentUserId();
+
   try {
-    const currentUserId = await getCurrentUserId();
     const userRequests = await db.user.findUnique({
       where: { id: currentUserId },
       select: {

@@ -99,8 +99,8 @@ export const logout = async (): Promise<ActionType<null>> => {
 };
 
 export const editNickname = async (newNickname: string): Promise<ActionType<User>> => {
+  const userId = await getCurrentUserId();
   try {
-    const userId = await getCurrentUserId();
     const updatedUser = await db.user.update({
       where: { id: userId },
       data: { nickname: newNickname },
@@ -122,8 +122,8 @@ export const editNickname = async (newNickname: string): Promise<ActionType<User
 };
 
 export const editPassword = async (newPassword: string): Promise<ActionType<User>> => {
+  const userId = await getCurrentUserId();
   try {
-    const userId = await getCurrentUserId();
     const updatedUser = await db.user.update({
       where: { id: userId },
       data: { password: newPassword },
@@ -145,8 +145,9 @@ export const editPassword = async (newPassword: string): Promise<ActionType<User
 };
 
 export const editTags = async (tags: string[]): Promise<ActionType<User>> => {
+  const userId = await getCurrentUserId();
+
   try {
-    const userId = await getCurrentUserId();
     const updatedUser = await db.user.update({
       where: { id: userId },
       data: { tags },
@@ -165,8 +166,9 @@ export const editTags = async (tags: string[]): Promise<ActionType<User>> => {
 };
 
 export const editImage = async (url: string): Promise<ActionType<User>> => {
+  const userId = await getCurrentUserId();
+
   try {
-    const userId = await getCurrentUserId();
     const updatedUser = await db.user.update({
       where: { id: userId },
       data: { image: url },
@@ -188,9 +190,9 @@ export const editImage = async (url: string): Promise<ActionType<User>> => {
 };
 
 export const setFirstLoginToFalse = async (): Promise<ActionType<null>> => {
-  try {
-    const userId = await getCurrentUserId();
+  const userId = await getCurrentUserId();
 
+  try {
     const user = await db.user.update({
       where: { id: userId },
       data: {

@@ -15,9 +15,8 @@ export const createAnswer = async ({
   content: string;
   images?: string[];
 }): Promise<ActionType<Answer>> => {
+  const userId = await getCurrentUserId();
   try {
-    const userId = await getCurrentUserId();
-
     const newAnswer = await db.answer.create({
       data: {
         userId,
