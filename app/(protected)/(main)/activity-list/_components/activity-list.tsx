@@ -3,10 +3,9 @@
 import ActivityListCard from '@/app/(protected)/(main)/activity-list/_components/activity-list-card';
 import { getActivities } from '@/app/data/activity';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
-import { ActivityWithUserAndFavoCount } from '@/type';
+import { ActivityWithUserAndFavoCount, Sort } from '@/type';
 import { useCallback, useEffect, useState, useTransition } from 'react';
 import Spinner from '@/components/ui/spinner';
-import { Sort } from '../page';
 
 interface Props {
   activities: ActivityWithUserAndFavoCount[];

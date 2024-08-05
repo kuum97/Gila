@@ -4,10 +4,19 @@ import QuestionList from '@/app/(protected)/(main)/question-list/_components/que
 import { getCurrentUserId } from '@/app/data/user';
 import QuestionSortDropdown from '@/app/(protected)/(main)/question-list/_components/question-sort-dropdown';
 
-export default async function Page({ searchParams }: { searchParams: { sort: string } }) {
-  const { sort } = searchParams;
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: { sort: string; location: string };
+}) {
+  const { sort, location } = searchParams;
   const listOrder = sort ? 'answerLen' : 'recent';
-  const qusetions = await getQuestions({ take: 7, order: listOrder, answerTake: 5 });
+  const qusetions = await getQuestions({
+    take: 7,
+    order: listOrder,
+    answerTake: 5,
+    location,
+  });
   const userId = await getCurrentUserId();
 
   return (
