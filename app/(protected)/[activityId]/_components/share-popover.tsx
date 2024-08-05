@@ -3,7 +3,12 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { ExternalLink, Link, MessageCircle } from 'lucide-react';
 import { toast } from 'sonner';
 
-export default function SharePopover({ activityId }: { activityId: string }) {
+interface Props {
+  shareImage: string;
+  activityId: string;
+}
+
+export default function SharePopover({ activityId, shareImage }: Props) {
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}/${activityId}`;
 
   const copyLink = async () => {
@@ -17,15 +22,15 @@ export default function SharePopover({ activityId }: { activityId: string }) {
       objectType: 'feed',
       content: {
         title: 'Gila',
-        description: '길라와 같이 떠나자',
-        imageUrl: '',
+        description: '길라와 같이 떠나자!',
+        imageUrl: shareImage,
         link: {
           mobileWebUrl: url,
         },
       },
       buttons: [
         {
-          title: '새로운 경험하러 가기',
+          title: '친구와 같이 매듭 묶기',
           link: {
             mobileWebUrl: url,
           },
