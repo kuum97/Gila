@@ -7,7 +7,7 @@ import { toast } from 'sonner';
 import { format } from 'date-fns';
 import { useEffect, useState } from 'react';
 import { increaseActivityCount } from '@/app/action/activity';
-import SharePopover from './share-popover';
+import SharePopover from '@/app/(protected)/[activityId]/_components/share-popover';
 
 interface Props {
   title: string;

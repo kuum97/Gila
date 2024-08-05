@@ -6,7 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import EditPasswordForm from './edit-password-form';
+import EditPasswordForm from '@/app/(protected)/(user)/profile/edit/_components/edit-password-form';
 
 interface Props {
   triggerText: string;

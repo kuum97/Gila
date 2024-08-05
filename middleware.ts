@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import {
   DEFAULT_LOGIN_REDIRECT,
   apiAuthPrefix,
@@ -5,8 +6,8 @@ import {
   authRoutes,
   publicRoutes,
 } from '@/routes';
-import { auth } from './auth';
 import { NextResponse } from 'next/server';
+import { auth } from './auth';
 
 export default auth(async (req) => {
   const { nextUrl } = req;

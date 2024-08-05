@@ -1,10 +1,9 @@
 'use server';
 
-import { db } from '@/lib/db';
+import db from '@/lib/db';
 import { AnswerWithUser } from '@/type';
 
-// eslint-disable-next-line import/prefer-default-export
-export const getAnswers = async ({
+const getAnswers = async ({
   questionId,
   cursor,
   take = 10,
@@ -44,3 +43,5 @@ export const getAnswers = async ({
     throw new Error('답변을 가져오는 중에 에러가 발생하였습니다.');
   }
 };
+
+export default getAnswers;

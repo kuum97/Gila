@@ -1,12 +1,12 @@
 'use server';
 
-import { db } from '@/lib/db';
+import db from '@/lib/db';
 import { ActionType } from '@/type';
 import { Review } from '@prisma/client';
 import { getCurrentUserId } from '@/app/data/user';
 import { revalidatePath } from 'next/cache';
 
-export const createReview = async ({
+const createReview = async ({
   activityId,
   rating,
 }: {
@@ -53,3 +53,5 @@ export const createReview = async ({
     return { success: false, message: '리뷰 생성 중에 에러가 발생하였습니다.' };
   }
 };
+
+export default createReview;

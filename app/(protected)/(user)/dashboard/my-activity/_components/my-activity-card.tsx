@@ -6,7 +6,7 @@ import ImageCard from '@/components/image-card';
 import toggleFavorite from '@/app/action/favorite';
 
 import { cn } from '@/lib/utils';
-import { formatDateRange } from '@/utils/formatDateRange';
+import formatDateRange from '@/utils/formatDateRange';
 import { deleteActivity } from '@/app/action/activity';
 import MyActivityKebab from '@/app/(protected)/(user)/dashboard/my-activity/_components/my-activity-kebab';
 

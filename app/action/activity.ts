@@ -1,6 +1,6 @@
 'use server';
 
-import { db } from '@/lib/db';
+import db from '@/lib/db';
 import { ActionType } from '@/type';
 import { Activity } from '@prisma/client';
 import { cookies } from 'next/headers';

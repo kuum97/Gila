@@ -1,11 +1,10 @@
 'use server';
 
 import { getCurrentUserId } from '@/app/data/user';
-import { db } from '@/lib/db';
+import db from '@/lib/db';
 import { FavoriteWithActivity } from '@/type';
 
-// eslint-disable-next-line import/prefer-default-export
-export const getMyFavorites = async ({
+const getMyFavorites = async ({
   cursor,
   take = 10,
 }: {
@@ -36,3 +35,5 @@ export const getMyFavorites = async ({
     throw new Error('좋아요 목록을 가져오는 중에 에러가 발생하였습니다.');
   }
 };
+
+export default getMyFavorites;

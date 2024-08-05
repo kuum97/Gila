@@ -1,13 +1,12 @@
 'use client';
 
 import ImageCard from '@/components/image-card';
-import SmallButton from '@/components/small-button';
 import PromiseStatus from '@/app/(protected)/(user)/dashboard/promise-list/_components/promise-status';
 import { RequestWithActivity } from '@/type';
 import { deleteActivityRequest } from '@/app/action/activity-request';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
-import { formatDateRange } from '@/utils/formatDateRange';
+import formatDateRange from '@/utils/formatDateRange';
 import DeleteAlertModal from '@/components/delete-alert-modal';
 
 export default function PromiseListCard({ promise }: { promise: RequestWithActivity }) {
@@ -44,6 +43,7 @@ export default function PromiseListCard({ promise }: { promise: RequestWithActiv
           <PromiseStatus status={promise.status} />
         </div>
       }
+      imageSrc=""
     />
   );
 }

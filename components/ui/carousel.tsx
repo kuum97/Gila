@@ -1,7 +1,8 @@
+/* eslint-disable consistent-return */
+
 'use client';
 
 import * as React from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import useEmblaCarousel, { type UseEmblaCarouselType } from 'embla-carousel-react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 
@@ -102,7 +103,6 @@ const Carousel = React.forwardRef<
     api.on('reInit', onSelect);
     api.on('select', onSelect);
 
-    // eslint-disable-next-line consistent-return
     return () => {
       api?.off('select', onSelect);
     };

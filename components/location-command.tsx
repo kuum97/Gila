@@ -1,6 +1,6 @@
 'use client';
 
-import { LOCATIONS } from '@/constants/locations';
+import LOCATIONS from '@/constants/locations';
 import {
   Command,
   CommandEmpty,

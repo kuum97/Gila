@@ -1,6 +1,6 @@
 'use server';
 
-import { db } from '@/lib/db';
+import db from '@/lib/db';
 import { ActionType } from '@/type';
 import { ActivityRequest } from '@prisma/client';
 import { getCurrentUserId } from '../data/user';

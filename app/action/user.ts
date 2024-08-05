@@ -1,14 +1,14 @@
 'use server';
 
 import { signIn, signOut } from '@/auth';
-import { db } from '@/lib/db';
+import db from '@/lib/db';
 import { hashPassword } from '@/lib/utils';
 import { LoginSchema, RegisterSchema } from '@/schema';
 import { ActionType, LoginSchemaType, RegisterSchemaType } from '@/type';
 import { User } from '@prisma/client';
 import { AuthError } from 'next-auth';
-import { getCurrentUserId } from '../data/user';
 import { cookies } from 'next/headers';
+import { getCurrentUserId } from '../data/user';
 
 export const register = async (form: RegisterSchemaType): Promise<ActionType<User>> => {
   try {

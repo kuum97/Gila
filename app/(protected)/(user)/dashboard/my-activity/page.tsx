@@ -1,6 +1,6 @@
 import { getMyActivities } from '@/app/data/activity';
 import MyActivityList from '@/app/(protected)/(user)/dashboard/my-activity/_components/my-activity-list';
-import ActivityCreateModal from './_components/activity-create-modal';
+import ActivityCreateModal from '@/app/(protected)/(user)/dashboard/my-activity/_components/activity-create-modal';
 
 export default async function Page() {
   const myActivities = await getMyActivities({ take: 7 });

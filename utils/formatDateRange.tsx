@@ -1,7 +1,6 @@
-/* eslint-disable import/prefer-default-export */
 import { format } from 'date-fns';
 
-export const formatDateRange = ({
+const formatDateRange = ({
   startDateString,
   endDateString,
 }: {
@@ -13,3 +12,5 @@ export const formatDateRange = ({
 
   return `${formattedStartDate} ~ ${formattedEndDate}`;
 };
+
+export default formatDateRange;

@@ -15,7 +15,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { RefreshCcw } from 'lucide-react';
 import { useCallback, useMemo, useState } from 'react';
-import { LOCATIONS } from '@/constants/locations';
+import LOCATIONS from '@/constants/locations';
 
 interface Props extends ActivityCreateFormProps {
   selectLocation: (location: string) => void;

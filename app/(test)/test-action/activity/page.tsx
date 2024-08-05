@@ -1,6 +1,6 @@
 import { getActivities, getMyActivities } from '@/app/data/activity';
-import CreateSampleActivityButton from './_components/create-sample-activity-button';
 import Link from 'next/link';
+import CreateSampleActivityButton from './_components/create-sample-activity-button';
 
 const getSingle = async () => {
   const res = await getActivities({ type: 'recent' });
@@ -9,7 +9,7 @@ const getSingle = async () => {
 
 export default async function Page() {
   const activitiesRes = await getActivities({ type: 'mostFavorite', size: 5, location: '은평구' });
-  const activities = activitiesRes.activities;
+  const { activities } = activitiesRes;
 
   const myActivitiesRes = await getMyActivities({ take: 3 });
   const myActivities = myActivitiesRes.activities;
@@ -22,25 +22,25 @@ export default async function Page() {
       <div className="space-y-4">
         <CreateSampleActivityButton />
         <div className="flex flex-col gap-y-2">
-          {activities.map((activity) => (
-            <div key={activity.id} className="grid grid-cols-2">
+          {activities.map((item) => (
+            <div key={item.id} className="grid grid-cols-2">
               <Link
-                href={`/test-action/activity/${activity.id}`}
+                href={`/test-action/activity/${item.id}`}
                 className="bg-slate-300 p-2 rounded-md"
               >
-                {activity.title}
+                {item.title}
               </Link>
             </div>
           ))}
         </div>
         <div className="flex flex-col gap-y-2">
-          {myActivities.map((activity) => (
-            <div key={activity.id} className="grid grid-cols-2">
+          {myActivities.map((item) => (
+            <div key={item.id} className="grid grid-cols-2">
               <Link
-                href={`/test-action/activity/${activity.id}`}
+                href={`/test-action/activity/${item.id}`}
                 className="bg-slate-300 p-2 rounded-md"
               >
-                {activity.title}
+                {item.title}
               </Link>
             </div>
           ))}
