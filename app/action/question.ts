@@ -15,9 +15,8 @@ export const createQuestion = async ({
   content: string;
   location: string;
 }): Promise<ActionType<Question>> => {
+  const userId = await getCurrentUserId();
   try {
-    const userId = await getCurrentUserId();
-
     const question = await db.question.create({
       data: {
         userId,

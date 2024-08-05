@@ -76,9 +76,8 @@ export const editActivity = async ({
   location: string;
   maximumCount: number;
 }): Promise<ActionType<Activity>> => {
+  const userId = await getCurrentUserId();
   try {
-    const userId = await getCurrentUserId();
-
     const updatedActivity = await db.activity.update({
       where: { id: activityId },
       data: {

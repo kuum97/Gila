@@ -8,9 +8,8 @@ import { getCurrentUserId } from '../data/user';
 export const createActivityRequest = async (
   activityId: string,
 ): Promise<ActionType<ActivityRequest>> => {
+  const userId = await getCurrentUserId();
   try {
-    const userId = await getCurrentUserId();
-
     const existingRequest = await db.activityRequest.findUnique({
       where: {
         requestUserId_activityId: {

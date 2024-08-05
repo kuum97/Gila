@@ -17,9 +17,8 @@ export const getMyActivities = async ({
   cursor?: string;
   take?: number;
 }): Promise<{ activities: ActivityWithFavoriteAndCount[]; cursorId: string | null }> => {
+  const userId = await getCurrentUserId();
   try {
-    const userId = await getCurrentUserId();
-
     const myActivities = await db.activity.findMany({
       where: { userId },
       include: {
@@ -249,9 +248,8 @@ export const getActivities = async ({
 };
 
 export const getActivityById = async (id: string): Promise<ActivityWithUserAndFavorite> => {
+  const userId = await getCurrentUserId();
   try {
-    const userId = await getCurrentUserId();
-
     const activity = await db.activity.findUnique({
       where: { id },
       include: {
@@ -304,8 +302,8 @@ export const getAvailableReviewActivities = async ({
   activities: ActivityWithUser[];
   cursorId: string | null;
 }> => {
+  const userId = await getCurrentUserId();
   try {
-    const userId = await getCurrentUserId();
     const currentDate = new Date();
 
     const activities = await db.activity.findMany({

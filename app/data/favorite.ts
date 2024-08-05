@@ -11,9 +11,8 @@ const getMyFavorites = async ({
   cursor?: string;
   take?: number;
 }): Promise<{ favorites: FavoriteWithActivity[]; cursorId: string | null }> => {
+  const userId = await getCurrentUserId();
   try {
-    const userId = await getCurrentUserId();
-
     const favorites = await db.favorite.findMany({
       where: { userId },
       include: {

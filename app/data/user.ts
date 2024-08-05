@@ -4,8 +4,8 @@ import db from '@/lib/db';
 import { User } from '@/type';
 
 export const getCurrentUserEmail = async (): Promise<string> => {
+  const session = await auth();
   try {
-    const session = await auth();
     if (!session) throw new Error('현재 로그인되어있지 않습니다.');
     const email = session.user?.email;
     if (!email) throw new Error('존재하지 않는 이메일 입니다.');
@@ -17,9 +17,8 @@ export const getCurrentUserEmail = async (): Promise<string> => {
 };
 
 export const getCurrentUser = async (): Promise<User> => {
+  const email = await getCurrentUserEmail();
   try {
-    const email = await getCurrentUserEmail();
-
     const user = await db.user.findUnique({
       where: {
         email,
@@ -43,9 +42,8 @@ export const getCurrentUser = async (): Promise<User> => {
 };
 
 export const getCurrentUserId = async (): Promise<string> => {
+  const email = await getCurrentUserEmail();
   try {
-    const email = await getCurrentUserEmail();
-
     const user = await db.user.findUnique({
       where: { email },
       select: {
@@ -133,9 +131,8 @@ export const getUserProfileWithIntroducedInfos = async (
 };
 
 export const getIsFirstLogin = async (): Promise<boolean> => {
+  const userId = await getCurrentUserId();
   try {
-    const userId = await getCurrentUserId();
-
     const user = await db.user.findUnique({
       where: { id: userId },
     });
