@@ -2,7 +2,7 @@
 
 import { RequestWithReqUserAndActivity } from '@/type';
 import PromisedListCard from '@/app/(protected)/(user)/dashboard/promised-list/_components/promised-list-card';
-import { useCallback, useState, useTransition } from 'react';
+import { useCallback, useEffect, useState, useTransition } from 'react';
 import { getMyReceivedRequests } from '@/app/data/activity-request';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import Spinner from '@/components/ui/spinner';
@@ -31,6 +31,11 @@ export default function PromisedList({ promisedActivities, cursorId }: Props) {
     });
   }, [infinityCursorId]);
 
+  useEffect(() => {
+    setInfinityPromisedActivities([...promisedActivities]);
+    setInfinityCursorId(cursorId);
+  }, [cursorId, promisedActivities]);
+
   const observer = useInfiniteScroll({
     callback: loadMorePromisedActivities,
     cursorId: infinityCursorId,
@@ -44,7 +49,7 @@ export default function PromisedList({ promisedActivities, cursorId }: Props) {
           <>
             {infinityPromisedActivities.map((activity) => (
               <li key={activity.id}>
-                <PromisedListCard activity={activity} />
+                <PromisedListCard promisedActivity={activity} />
               </li>
             ))}
             <div ref={observer} />
