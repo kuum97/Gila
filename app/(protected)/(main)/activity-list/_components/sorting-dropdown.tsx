@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import {
@@ -10,13 +10,13 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import SORTS from '@/constants/sort';
+import { cn } from '@/lib/utils';
 
 export default function SortingDropdown() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [currentSort, setCurrentSort] = useState(searchParams.get('sort'));
-  const currentSortLabel = SORTS.find((sort) => sort.en === currentSort)?.ko;
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -28,14 +28,6 @@ export default function SortingDropdown() {
     [searchParams],
   );
 
-  useEffect(() => {
-    if (!searchParams.get('sort')) {
-      const defaultSort = SORTS[0].en;
-      router.push(`${pathname}?${createQueryString('sort', defaultSort)}`);
-      setCurrentSort(defaultSort);
-    }
-  }, [createQueryString, pathname, router, searchParams]);
-
   const handleClickSort = ({ name, value }: { name: string; value: string }) => {
     router.push(`${pathname}?${createQueryString(name, value)}`);
     setCurrentSort(value);
@@ -45,7 +37,7 @@ export default function SortingDropdown() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button type="button" className="bg-[#ffffff] border shadow-md">
-          {currentSortLabel}
+          정렬
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="bg-[#ffffff]">
@@ -53,7 +45,10 @@ export default function SortingDropdown() {
           <DropdownMenuItem asChild key={sort.en}>
             <button
               type="button"
-              className="flex w-full items-center justify-center text-black hover:bg-gray-100 active:bg-gray-100"
+              className={cn(
+                currentSort === sort.en && `bg-primary_dark bg-opacity-50`,
+                `flex w-full items-center justify-center text-black hover:bg-gray-100 active:bg-gray-100`,
+              )}
               onClick={() => handleClickSort({ name: 'sort', value: sort.en })}
             >
               {sort.ko}
