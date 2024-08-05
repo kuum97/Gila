@@ -7,6 +7,7 @@ import AnswerEditForm from '@/app/(protected)/(main)/question-list/_components/a
 import { AnswerWithUser } from '@/type';
 import calculateDate from '@/utils/calculateData';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface Props {
   answer: AnswerWithUser;
@@ -22,16 +23,18 @@ export default function AnswerItem({ answer, userId }: Props) {
   };
 
   return (
-    <div className="flex flex-col border rounded-md p-3 gap-2">
+    <div className="flex flex-col gap-2 p-3 border rounded-md">
       <div className="flex items-center gap-2">
-        <Avatar className="w-7 h-7">
-          <AvatarImage
-            src={answer.user.image ? answer.user.image : '/test.png'}
-            className="object-cover w-7 h-7 rounded-full"
-          />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
-        <p className="text-sm">{answer.user.nickname}</p>
+        <Link href={`/introduction/${answer.userId}`} className="flex items-center gap-2 h-fit">
+          <Avatar className="w-7 h-7">
+            <AvatarImage
+              src={answer.user.image ? answer.user.image : '/test.png'}
+              className="object-cover rounded-full w-7 h-7"
+            />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+          <p className="text-sm">{answer.user.nickname}</p>
+        </Link>
         <p className="text-[10px] text-nowrap w-10 text-center text-gray_500">{`${createaAt.time}${createaAt.result}전`}</p>
         {userId === answer.userId && !isEdit && (
           <AnswerButtonContainer answerId={answer.id} handleEditAnswer={handleEditAnswer} />
@@ -39,12 +42,12 @@ export default function AnswerItem({ answer, userId }: Props) {
       </div>
       <div className="flex flex-col gap-2">
         {answer.images[0] && !isEdit && (
-          <div className="w-full h-72 relative">
+          <div className="relative w-full h-72">
             <Image
               src={answer.images[0]}
               alt="답변 이미지"
               fill
-              className="rounded-md object-cover"
+              className="object-cover rounded-md"
             />
           </div>
         )}
@@ -55,7 +58,7 @@ export default function AnswerItem({ answer, userId }: Props) {
             handleEditAnswer={handleEditAnswer}
           />
         ) : (
-          <p className="text-sm w-full break-words">{answer.content}</p>
+          <p className="w-full text-sm break-words">{answer.content}</p>
         )}
       </div>
     </div>

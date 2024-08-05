@@ -12,6 +12,7 @@ import AnswerList from '@/app/(protected)/(main)/question-list/_components/answe
 import AnswerForm from '@/app/(protected)/(main)/question-list/_components/answer-form';
 import { QuestionWithUserAndAnswers } from '@/type';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import Link from 'next/link';
 
 interface Props {
   userId: string;
@@ -30,10 +31,10 @@ export default function QuestionDetailModal({ question, userId, createaAt }: Pro
           보기
         </Button>
       </DialogTrigger>
-      <DialogContent className="bg-white h-screen flex flex-col justify-start pt-14">
-        <DialogHeader className="h-fit gap-2">
+      <DialogContent className="flex flex-col justify-start h-screen bg-white pt-14">
+        <DialogHeader className="gap-2 h-fit">
           <DialogTitle>
-            <p className="text-left text-4xl font-semibold leading-tight break-word">
+            <p className="text-4xl font-semibold leading-tight text-left break-word">
               {question.title}
             </p>
           </DialogTitle>
@@ -42,18 +43,20 @@ export default function QuestionDetailModal({ question, userId, createaAt }: Pro
               <p className="text-sm font-semibold">{question.location}</p>
               <p className="text-[10px] text-nowrap w-10 text-center text-gray_500">{`${createaAt.time}${createaAt.result}전`}</p>
             </div>
-            <div className="flex justify-center items-center gap-2">
-              <Avatar className="w-7 h-7">
-                <AvatarImage
-                  src={question.user.image ? question.user.image : '/test.png'}
-                  className="object-cover w-7 h-7 rounded-full"
-                />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
-              <p className="text-sm">{question.user.nickname}</p>
-            </div>
+            <Link href={`/introduction/${question.userId}`} className="h-fit">
+              <div className="flex items-center justify-center gap-2">
+                <Avatar className="w-7 h-7">
+                  <AvatarImage
+                    src={question.user.image ? question.user.image : '/test.png'}
+                    className="object-cover rounded-full w-7 h-7"
+                  />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+                <p className="text-sm">{question.user.nickname}</p>
+              </div>
+            </Link>
           </div>
-          <DialogDescription className="text-left break-words w-64">
+          <DialogDescription className="w-64 text-left break-words">
             {question.content}
           </DialogDescription>
         </DialogHeader>
