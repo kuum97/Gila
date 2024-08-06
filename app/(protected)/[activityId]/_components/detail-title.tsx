@@ -1,5 +1,3 @@
-/* eslint-disable no-underscore-dangle */
-
 'use client';
 
 import toggleFavorite from '@/app/action/favorite';
@@ -10,24 +8,36 @@ import { useEffect, useState } from 'react';
 import { increaseActivityCount } from '@/app/action/activity';
 import SharePopover from '@/app/(protected)/[activityId]/_components/share-popover';
 import formatDateRange from '@/utils/formatDateRange';
-import { ActivityWithUserAndFavorite } from '@/type';
+
+interface Props {
+  title: string;
+  tags: string[];
+  likes: number;
+  views: number;
+  startDate: Date;
+  endDate: Date;
+  activityId: string;
+  isFavorite: boolean;
+}
 
 export default function DetailTitle({
-  activityDetail,
-}: {
-  activityDetail: ActivityWithUserAndFavorite;
-}) {
-  const [favorite, setFavorite] = useState(activityDetail.isFavorite);
-  const [viewCount, setViewCount] = useState(activityDetail.views);
-  const [likeCount, setLikeCount] = useState(activityDetail._count.favorites);
+  title,
+  tags,
+  likes,
+  views,
+  startDate,
+  endDate,
+  activityId,
+  isFavorite,
+}: Props) {
+  const [favorite, setFavorite] = useState(isFavorite);
+  const [viewCount, setViewCount] = useState(views);
+  const [likeCount, setLikeCount] = useState(likes);
   const getTagColor = (item: string) => {
     const tagInfo = TAGS.find((tagItem) => tagItem.tag.includes(item));
     return tagInfo ? tagInfo.color : '#FFB800';
   };
-  const formatDate = formatDateRange({
-    startDateString: activityDetail.startDate,
-    endDateString: activityDetail.endDate,
-  });
+  const formatDate = formatDateRange({ startDateString: startDate, endDateString: endDate });
 
   const toggleActivityLike = async () => {
     setFavorite(!favorite);
@@ -36,25 +46,25 @@ export default function DetailTitle({
     } else {
       setLikeCount(likeCount + 1);
     }
-    const result = await toggleFavorite(activityDetail.id);
+    const result = await toggleFavorite(activityId);
     toast.message(result.message);
   };
 
   useEffect(() => {
     const action = async () => {
-      const result = await increaseActivityCount(activityDetail.id);
+      const result = await increaseActivityCount(activityId);
       if (result.success) {
         setViewCount(viewCount + 1);
       }
     };
     action();
-  }, [activityDetail.id, viewCount]);
+  }, [activityId, viewCount]);
 
   return (
     <div>
       <div className="flex justify-between">
         <div className="flex gap-1">
-          {activityDetail.tags.map((item: string) => (
+          {tags.map((item: string) => (
             <span
               key={item}
               className="py-1 px-2 text-[9px] font-bold text-black rounded-3xl"
@@ -68,10 +78,10 @@ export default function DetailTitle({
           <div onClick={toggleActivityLike}>
             {favorite ? <Heart size={20} color="#FF4242" fill="#FF4242" /> : <Heart size={20} />}
           </div>
-          <SharePopover activityId={activityDetail.id} shareImage={activityDetail.thumbnails[0]} />
+          <SharePopover activityId={activityId} />
         </div>
       </div>
-      <h1 className="mt-1 text-2xl font-bold leading-normal">{activityDetail.title}</h1>
+      <h1 className="mt-1 text-2xl font-bold leading-normal">{title}</h1>
       <div className="flex items-center gap-3 my-2">
         <div className="flex gap-4">
           <div className="flex items-center gap-1">
