@@ -121,7 +121,11 @@ export default function AnswerForm({ questionId }: { questionId: string }) {
             onUploadBegin={() => setLoading(true)}
             CustomButton={customButton}
           />
-          <Button disabled={isPending} type="submit" className="px-4 py-1 text-sm rounded-md mb-6">
+          <Button
+            disabled={isPending || loading}
+            type="submit"
+            className="px-4 py-1 text-sm rounded-md mb-6"
+          >
             제출하기
           </Button>
         </div>
