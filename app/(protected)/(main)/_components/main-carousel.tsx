@@ -1,4 +1,3 @@
-import React from 'react';
 import CarouselCard from '@/app/(protected)/(main)/_components/carousel-card';
 import { getActivities } from '@/app/data/activity';
 

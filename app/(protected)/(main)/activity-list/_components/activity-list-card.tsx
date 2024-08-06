@@ -1,9 +1,8 @@
-import Image from 'next/image';
 import React from 'react';
-import { Heart } from 'lucide-react';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import Link from 'next/link';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import Image from 'next/image';
+import { Eye, Heart } from 'lucide-react';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { ActivityWithUserAndFavoCount } from '@/type';
 import formatDateRange from '@/utils/formatDateRange';
 
@@ -12,42 +11,50 @@ interface Props {
 }
 
 export default function ActivityListCard({ activity }: Props) {
-  const { title, startDate, endDate, location, views, user, _count } = activity;
+  const { title, startDate, endDate, location, views, _count, user, thumbnails } = activity;
   const formatDate = formatDateRange({ startDateString: startDate, endDateString: endDate });
 
   return (
-    <Card>
-      <Link
-        href={`/activity/${activity.id}`}
-        className="flex w-full justify-center gap-3 p-1 border rounded-lg shadow-md bg-[#ffffff]"
-      >
-        <div className="w-[130px] h-[130px] relative rounded-lg overflow-hidden">
-          <Image src="/test.png" alt="thumbnail" fill style={{ objectFit: 'cover' }} />
+    <Link href={`/activity/${activity.id}`}>
+      <Card className="h-[400px] flex flex-col items-start border-none shadow-md hover:shadow-xl">
+        <div className="flex justify-center w-full h-full row-span-2 px-2 pt-2 rounded-md">
+          <div className="relative w-full h-full rounded-md">
+            <Image
+              src={thumbnails[0] || '/test.png'}
+              alt="thumbnail"
+              fill
+              sizes="(max-width: 768px) 100vw"
+              style={{ objectFit: 'cover', borderRadius: '8px' }}
+            />
+          </div>
         </div>
-        <div className="flex flex-col justify-between w-full pt-1 overflow-hidden">
+        <div className="flex flex-col w-full row-span-1 gap-1 p-2">
           <CardHeader className="p-0">
-            <CardTitle className="w-full text-xl font-bold truncate">{title}</CardTitle>
+            <CardTitle className="text-xl font-bold text-black truncate">{title}</CardTitle>
           </CardHeader>
-          <CardContent className="flex flex-col gap-1 p-0 text-sm">
+          <CardContent className="p-0">
             <div className="flex items-center">
-              <Avatar className="mr-2 size-6">
-                <AvatarImage src={user.image || '/test.png'} />
-                <AvatarFallback>G</AvatarFallback>
-              </Avatar>
-              <span className="font-medium text-black">{user.nickname}</span>
+              <span className="text-sm font-normal text-gray-500">길라: {user.nickname}</span>
             </div>
-            <span className="text-xs text-gray-500">{formatDate}</span>
-            <span className="text-xs text-gray-500">{location}</span>
+            <div className="flex flex-col">
+              <span className="text-xs font-semibold text-gray-900">{formatDate}</span>
+              <span className="text-xs font-semibold text-gray-900">{location}</span>
+            </div>
           </CardContent>
-          <CardFooter className="flex justify-end gap-2 p-0 pr-2 text-xs">
-            <span className="text-xs text-gray-500">조회수 {views}</span>
-            <button className="flex items-center gap-1 text-xs text-gray-500" type="button">
-              <Heart className="text-red" size={15} />
-              {_count.favorites}
-            </button>
+          <CardFooter className="p-0">
+            <div className="flex items-center justify-end w-full gap-2 text-xs text-gray-500">
+              <div className="flex items-center gap-1">
+                <Heart className="text-red" size={16} />
+                <span>{_count.favorites}</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <Eye size={16} />
+                <span>{views}</span>
+              </div>
+            </div>
           </CardFooter>
         </div>
-      </Link>
-    </Card>
+      </Card>
+    </Link>
   );
 }
