@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import LoginForm from '@/app/(auth)/sign-in/_components/login-form';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
 export default function Page() {
   return (

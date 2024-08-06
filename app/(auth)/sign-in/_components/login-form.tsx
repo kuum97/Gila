@@ -21,7 +21,6 @@ import { login } from '@/app/action/user';
 import { useRouter } from 'next/navigation';
 import PasswordInput from '@/components/ui/password-input';
 import { cn } from '@/lib/utils';
-import Spinner from '@/components/ui/spinner';
 
 const loginFields = [
   { name: 'email', label: '이메일', placeholder: '이메일을 입력해 주세요', type: 'text' },
