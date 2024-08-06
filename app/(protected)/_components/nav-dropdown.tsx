@@ -29,7 +29,8 @@ export default function NavDropdown({ userAvatar }: Props) {
         toast.error(action.message);
         return;
       }
-      router.replace('/');
+      toast.success(action.message);
+      router.refresh();
     });
   };
 

@@ -20,7 +20,6 @@ import { register } from '@/app/action/user';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import PasswordInput from '@/components/ui/password-input';
-import { cn } from '@/lib/utils';
 
 const registerFields = [
   { name: 'nickname', label: '닉네임', placeholder: '닉네임을 입력해 주세요', type: 'text' },
@@ -64,6 +63,7 @@ export default function RegisterForm() {
         toast.error(action.message);
         return;
       }
+      toast.success(action.message);
       router.replace('/sign-in');
     });
   }
@@ -84,52 +84,43 @@ export default function RegisterForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
-        <h1 className="mb-2 text-xl font-semibold">회원가입</h1>
         {registerFields.map((field) => (
           <FormField
             key={field.name}
             control={form.control}
             name={field.name as keyof RegisterSchemaType}
             render={({ field: controllerField }) => (
-              <FormItem className="relative">
+              <FormItem>
                 <FormLabel>{field.label}</FormLabel>
-                <FormControl className="text-base">
+                <FormControl>
                   {field.type === 'password' ? (
                     <PasswordInput
                       type={settingPasswordInputType(field.name) ? 'text' : 'password'}
                       handleToggle={() => handleVisibility(field.name)}
                       placeholder={field.placeholder}
-                      className={cn(
-                        form.getFieldState(field.name as keyof RegisterSchemaType).error &&
-                          'bg-red bg-opacity-10 border-red',
-                        'border border-gray-300',
-                      )}
+                      className="border-none shadow-md"
                       {...controllerField}
                     />
                   ) : (
                     <Input
                       type={field.type}
                       placeholder={field.placeholder}
-                      className={cn(
-                        form.getFieldState(field.name as keyof RegisterSchemaType).error &&
-                          'bg-red bg-opacity-10 border-red',
-                        'border border-gray-300',
-                      )}
+                      className="border-none shadow-md"
                       {...controllerField}
                     />
                   )}
                 </FormControl>
                 <div className="h-5">
-                  <FormMessage className="text-xs" />
+                  <FormMessage className="text-xs text-red" />
                 </div>
               </FormItem>
             )}
           />
         ))}
         <Button
-          disabled={isPending || !form.formState.isValid}
+          disabled={isPending}
           type="submit"
-          className="w-full py-3 text-lg font-semibold text-white disabled:bg-primary_dark"
+          className="w-full py-3 text-base font-semibold shadow-lg hover:bg-primary_dark active:bg-primary_dark"
         >
           회원가입
         </Button>

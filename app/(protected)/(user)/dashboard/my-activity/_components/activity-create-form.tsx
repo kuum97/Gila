@@ -5,6 +5,7 @@ import { Form } from '@/components/ui/form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, UseFormReturn } from 'react-hook-form';
 import { z } from 'zod';
+import { Accordion } from '@/components/ui/accordion';
 import LocationSelectSection from '@/app/(protected)/(user)/dashboard/my-activity/_components/location-select-section';
 import ScheduleSection from '@/app/(protected)/(user)/dashboard/my-activity/_components/schedule-section';
 import DetailInfoSection from '@/app/(protected)/(user)/dashboard/my-activity/_components/detail-info-section';
@@ -14,12 +15,12 @@ import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 
 const ActivityCreateFormSchema = z.object({
-  title: z.string().min(1, { message: '제목은 필수 요소입니다.' }),
+  title: z.string(),
   tags: z.string().array(),
   description: z.string(),
-  schedule: z.object({ from: z.date(), to: z.date() }, { message: '일정은 필수 요소입니다.' }),
-  location: z.string({ message: '지역은 필수 요소입니다.' }),
-  images: z.any().optional(),
+  schedule: z.object({ from: z.date(), to: z.date() }),
+  location: z.string(),
+  images: z.any(),
   maximumCount: z.string(),
 });
 
@@ -43,6 +44,11 @@ export default function ActivityCreateForm() {
       maximumCount: '1',
     },
   });
+
+  const selectLocation = (location: string) => {
+    form.setValue('location', location);
+    form.clearErrors('location');
+  };
 
   const onSubmit = ({
     title,
@@ -80,9 +86,20 @@ export default function ActivityCreateForm() {
     <Form {...form}>
       <main className="min-h-screen bg-white">
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5">
-          <LocationSelectSection className="border-none shadow-md bg-white_light" form={form} />
-          <ScheduleSection className="border-none shadow-md bg-white_light" form={form} />
-          <DetailInfoSection className="border-none shadow-md bg-white_light" form={form} />
+          <Accordion
+            type="single"
+            className="flex flex-col gap-5"
+            collapsible
+            defaultValue="item-1"
+          >
+            <LocationSelectSection
+              className="bg-[#ffffff]"
+              form={form}
+              selectLocation={selectLocation}
+            />
+            <ScheduleSection className="bg-[#ffffff]" form={form} />
+            <DetailInfoSection className="bg-[#ffffff]" form={form} />
+          </Accordion>
           <Button
             disabled={isPending}
             type="submit"
