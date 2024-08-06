@@ -57,7 +57,7 @@ export default function CarouselCard({ activities }: Props) {
             <CarouselItem key={id}>
               <Card>
                 <CardContent className="relative p-0 border-0 rounded-lg">
-                  <Link href={`/${id}`} passHref>
+                  <Link href={`/activity/${id}`} passHref>
                     <div className="w-16 h-60">
                       <Image
                         src={thumbnails[0] || `/test.png`}
