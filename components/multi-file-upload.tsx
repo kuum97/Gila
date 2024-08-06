@@ -80,16 +80,18 @@ export default function MultiUploader({ onChange, value = [] }: Props) {
                 </li>
               ))}
             </ul>
-            <Button type="button" className="w-full my-1 text-white">
-              another files upload
-            </Button>
+            <div className="flex gap-2 mt-2">
+              <Button type="button" className="w-full text-white hover:bg-primary_dark">
+                다른 사진 올리기
+              </Button>
+            </div>
           </>
         ) : (
-          <div className="flex flex-col items-center justify-center h-48 border-2 border-gray-300 border-dashed rounded-md">
-            <Button type="button" className="text-black bg-transparent">
+          <div className="flex flex-col items-center justify-center h-48 border-2 border-gray-200 rounded-md">
+            <Button type="button" className="text-black bg-transparent hover:bg-gray-200">
               <FileImage />
             </Button>
-            Drop files here! (최대 5장)
+            드래그로 사진을 올려보세요! (최대 5장)
           </div>
         )}
       </div>

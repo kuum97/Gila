@@ -20,10 +20,10 @@ export default function LocationSelectSection({ form, className, defaultLocation
         <FormField
           control={form.control}
           name="location"
-          render={({ field }) => (
+          render={({ field: { onChange } }) => (
             <FormItem>
               <FormControl>
-                <LocationSelectDrawer {...field} defaultLocation={defaultLocation} />
+                <LocationSelectDrawer onChange={onChange} defaultLocation={defaultLocation} />
               </FormControl>
               <FormMessage />
             </FormItem>

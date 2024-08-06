@@ -22,14 +22,14 @@ import {
 import { Input } from '@/components/ui/input';
 import LOCATIONS from '@/constants/locations';
 import { Map } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface Props {
   defaultLocation?: string;
   onChange: (value: string) => void;
-  value: string;
 }
 
-export default function LocationSelectDrawer({ defaultLocation, ...field }: Props) {
+export default function LocationSelectDrawer({ defaultLocation, onChange }: Props) {
   const [province, setProvince] = useState<string | null>(null);
   const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
 
@@ -51,8 +51,10 @@ export default function LocationSelectDrawer({ defaultLocation, ...field }: Prop
           placeholder={
             selectedLocation ? `${selectedLocation}` : '지도를 눌러 지역을 선택해 보세요!'
           }
-          className="h-10 text-sm text-black bg-gray-100 rounded-r-none"
-          disabled
+          className={cn(
+            selectedLocation && 'bg-white text-black',
+            'h-10 text-sm text-black bg-gray-100 rounded-r-none',
+          )}
         />
         <Map className="w-10 h-10 p-1 text-white rounded-r size-5 bg-primary" />
       </DrawerTrigger>
@@ -76,7 +78,7 @@ export default function LocationSelectDrawer({ defaultLocation, ...field }: Prop
                         key={_province}
                         value={_province}
                         onSelect={(value) => {
-                          field.onChange(value);
+                          onChange(value);
                           setSelectedLocation(value);
                           setProvince(value);
                         }}
@@ -97,7 +99,7 @@ export default function LocationSelectDrawer({ defaultLocation, ...field }: Prop
                         value={city}
                         onSelect={(value) => {
                           const fullLocation = `${province} ${value}`;
-                          field.onChange(fullLocation);
+                          onChange(fullLocation);
                           setSelectedLocation(fullLocation);
                         }}
                         className="flex items-center justify-center p-2 font-medium rounded-lg shadow-md hover:bg-gray-100"
