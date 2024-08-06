@@ -5,8 +5,8 @@ export default function PlusButton() {
   return (
     <button
       type="button"
-      className="flex justify-center w-full p-2 rounded-full bottom-2 bg-primary"
-      aria-label="추가하기"
+      className="flex justify-center w-full p-1 rounded-full shadow-md bg-primary hover:bg-primary_dark"
+      aria-label="plus-button"
     >
       <Plus className="text-white" />
     </button>

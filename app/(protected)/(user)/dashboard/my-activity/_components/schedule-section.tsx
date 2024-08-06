@@ -32,32 +32,30 @@ export default function ScheduleSection({ form, className, defaultSchedule }: Pr
       <CardHeader>
         <CardTitle>2. 일정</CardTitle>
       </CardHeader>
-      <CardContent>
-        <Card className="shadow-[inset_0_0_5px_rgb(0,0,0,0.08)]">
-          <FormField
-            control={form.control}
-            name="schedule"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Calendar
-                    mode="range"
-                    defaultMonth={field.value?.from}
-                    selected={selectedSchedule}
-                    onSelect={(e: DateRange | undefined) => {
-                      setSelectedSchedule(e);
-                      field.onChange(e);
-                    }}
-                    numberOfMonths={2}
-                    disabled={isDisabled}
-                    initialFocus
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </Card>
+      <CardContent className="flex justify-center">
+        <FormField
+          control={form.control}
+          name="schedule"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Calendar
+                  mode="range"
+                  defaultMonth={field.value?.from}
+                  selected={selectedSchedule}
+                  onSelect={(e: DateRange | undefined) => {
+                    setSelectedSchedule(e);
+                    field.onChange(e);
+                  }}
+                  numberOfMonths={2}
+                  disabled={isDisabled}
+                  initialFocus
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
       </CardContent>
     </Card>
   );

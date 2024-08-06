@@ -10,7 +10,7 @@ interface Props {
 
 export default function FooterNavigation({ routes }: Props) {
   return (
-    <nav className="sticky bottom-0 z-50 flex items-center justify-around overflow-x-auto bg-white border-t bg-opacity-95">
+    <nav className="fixed bottom-0 z-50 flex items-center justify-around w-full overflow-x-auto bg-white border-t bg-opacity-95">
       <div className="flex">
         {routes.map((route) => (
           <NavIconLink

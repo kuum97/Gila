@@ -81,7 +81,7 @@ export default function ActivityEditForm({ activity }: Props) {
   return (
     <Form {...form}>
       <main className="min-h-screen bg-white">
-        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 pb-5">
           <LocationSelectSection
             className="border-none shadow-md bg-white_light"
             form={form}
@@ -94,11 +94,11 @@ export default function ActivityEditForm({ activity }: Props) {
           />
           <DetailInfoSection className="border-none shadow-md bg-white_light" form={form} />
           <Button
-            disabled={isPending}
+            disabled={isPending || !form.formState.isValid}
             type="submit"
-            className="w-full text-xl font-semibold text-black shadow-md py-7 disabled:bg-primary_dark"
+            className="w-full text-xl font-semibold text-white shadow-md py-7 disabled:bg-primary_dark"
           >
-            제출
+            수정
           </Button>
         </form>
       </main>
