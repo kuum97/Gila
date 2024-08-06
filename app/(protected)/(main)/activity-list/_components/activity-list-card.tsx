@@ -18,7 +18,7 @@ export default function ActivityListCard({ activity }: Props) {
   return (
     <Card>
       <Link
-        href={`/${activity.id}`}
+        href={`/activity/${activity.id}`}
         className="flex w-full justify-center gap-3 p-1 border rounded-lg shadow-md bg-[#ffffff]"
       >
         <div className="w-[130px] h-[130px] relative rounded-lg overflow-hidden">
