@@ -1,6 +1,6 @@
-import PromiseRequestForm from '@/app/(protected)/[activityId]/_components/promise-request-form';
+import PromiseRequestForm from '@/app/(protected)/(detail)/activity/[activityId]/_components/promise-request-form';
 import { getActivityById } from '@/app/data/activity';
-import DetailContent from '@/app/(protected)/[activityId]/_components/detail-content';
+import DetailContent from '@/app/(protected)/(detail)/activity/[activityId]/_components/detail-content';
 
 interface Params {
   activityId: string;
