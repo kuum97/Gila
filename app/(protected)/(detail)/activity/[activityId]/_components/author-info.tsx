@@ -18,15 +18,15 @@ export default async function AuthorInfo({ ownerId }: Props) {
           <div className="flex items-center gap-1 text-xs">
             <Avatar>
               <AvatarImage
-                src={owner.user.image ? owner.user.image : '/test.png'}
+                src={owner.user.image || '/default-profile-image.png'}
                 className="object-cover w-10 h-10 rounded-full"
               />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
           </div>
-          <div className="flex items-center justify-center gap-2">
+          <div className="flex items-center justify-between gap-2 w-full">
             <p className="text-sm">{owner.user.nickname}</p>
-            <ProfileRank rating={owner.averageReviewScore} />
+            <ProfileRank rating={owner.averageReviewScore} score="style1" />
           </div>
         </div>
       </Link>

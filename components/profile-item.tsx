@@ -29,7 +29,9 @@ export default function ProfileItem({ userData }: Props) {
       <ProfileTopic tags={tags} />
       <div className="w-full pb-4 border-b border-gray-200">
         <p className="text-sm">점수</p>
-        <ProfileRank rating={averageReviewScore} />
+        <div className="w-full flex justify-center">
+          <ProfileRank rating={averageReviewScore} score="style2" />
+        </div>
       </div>
       <div className="flex w-full pb-4 border-b border-gray-200 justify-evenly">
         <div className="text-center">
