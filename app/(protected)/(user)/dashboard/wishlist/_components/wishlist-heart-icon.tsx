@@ -1,10 +1,9 @@
 'use client';
 
 import { Heart } from 'lucide-react';
-import { useTransition } from 'react';
+import { MouseEventHandler, useTransition } from 'react';
 import { toast } from 'sonner';
 import toggleFavorite from '@/app/action/favorite';
-import WishlistHeartLoading from '@/app/(protected)/(user)/dashboard/wishlist/_components/wishlist-heart-loading';
 
 interface Props {
   activityId: string;
@@ -14,7 +13,8 @@ interface Props {
 export default function WishlistHeartIcon({ activityId, onRemove }: Props) {
   const [isPending, startTransition] = useTransition();
 
-  const isActivityLike = async () => {
+  const isActivityLike: MouseEventHandler = async (e) => {
+    e.preventDefault();
     startTransition(async () => {
       try {
         const result = await toggleFavorite(activityId);
@@ -27,15 +27,14 @@ export default function WishlistHeartIcon({ activityId, onRemove }: Props) {
   };
 
   return (
-    <div className="relative">
-      <Heart
-        size={20}
-        onClick={isActivityLike}
-        color="#FF4242"
-        fill="#FF4242"
-        className="absolute right-4 bottom-4 cursor-pointer"
-      />
-      <WishlistHeartLoading isPending={isPending} />
-    </div>
+    <button
+      disabled={isPending}
+      onClick={isActivityLike}
+      aria-label="favorite-button"
+      type="button"
+      className="absolute right-4 bottom-4"
+    >
+      <Heart size={20} color="#FF4242" fill="#FF4242" />
+    </button>
   );
 }

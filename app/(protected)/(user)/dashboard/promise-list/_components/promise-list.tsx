@@ -4,8 +4,9 @@ import { RequestWithActivity } from '@/type';
 import { useCallback, useEffect, useState, useTransition } from 'react';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { getMySentRequests } from '@/app/data/activity-request';
-import Spinner from '@/components/ui/spinner';
 import PromiseListCard from '@/app/(protected)/(user)/dashboard/promise-list/_components/promise-list-card';
+import Spinner from '@/components/ui/spinner';
+import Link from 'next/link';
 
 interface Props {
   promiseList: RequestWithActivity[];
@@ -40,9 +41,23 @@ export default function PromiseList({ promiseList, cursorId }: Props) {
     setInfinityCursorId(cursorId);
   }, [cursorId, promiseList]);
 
+  if (promiseList.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center gap-4">
+        <p>아직 아무 길라와도 약속을 잡지 않으셨습니다.</p>
+        <Link
+          href="/activity-list"
+          className="flex items-center justify-center px-4 py-3 font-semibold rounded-lg bg-primary text-white_light hover:bg-primary_dark"
+        >
+          약속 잡으러 가기
+        </Link>
+      </div>
+    );
+  }
+
   return (
-    <div className="flex flex-col items-center w-full">
-      <ul className="flex flex-col gap-2 overflow-y-scroll h-[690px] w-full">
+    <>
+      <ul className="flex flex-col w-full gap-6">
         {infinityPromise.map((item) => (
           <li key={item.id}>
             <PromiseListCard promise={item} />
@@ -50,7 +65,11 @@ export default function PromiseList({ promiseList, cursorId }: Props) {
         ))}
         <div ref={observer} />
       </ul>
-      {isPending && <Spinner />}
-    </div>
+      {isPending && (
+        <div className="flex justify-center w-full">
+          <Spinner />
+        </div>
+      )}
+    </>
   );
 }
