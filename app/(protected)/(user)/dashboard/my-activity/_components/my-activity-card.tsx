@@ -28,6 +28,7 @@ export default function MyActivityCard({ activity }: Props) {
   const handleDelete: MouseEventHandler = (e) => {
     e.preventDefault();
 
+    // eslint-disable-next-line no-restricted-globals, no-alert
     const isConfirmed = confirm('정말로 삭제하시겠습니까?');
     if (!isConfirmed) {
       return;

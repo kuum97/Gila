@@ -7,7 +7,6 @@ import MyActivityCard from '@/app/(protected)/(user)/dashboard/my-activity/_comp
 import { getMyActivities } from '@/app/data/activity';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { ActivityWithFavoriteAndCount } from '@/type';
-import Spinner from '@/components/ui/spinner';
 import MyActivityCardSkeleton from '@/components/skeletons/my-activity-card-skeleton';
 
 interface Props {
