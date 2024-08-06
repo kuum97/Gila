@@ -47,7 +47,7 @@ export default function LocationSelectDrawerForNav() {
           type="button"
           className="flex items-center justify-between w-full gap-1 text-base font-semibold border shadow-md bg-white_light rounded-3xl hover:bg-gray-200"
         >
-          어디로 떠나실래요?
+          {selectedLocation || '어디로 떠나실래요?'}
           <Compass className="size-5" />
         </Button>
       </DrawerTrigger>

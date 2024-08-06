@@ -62,6 +62,7 @@ export default function NavDropdown({ userAvatar }: Props) {
           <button
             type="button"
             className="absolute right-0 top-0 flex items-center justify-center w-[35px] h-[35px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"
+            aria-label="profile"
           >
             <CircleUserRound className="size-5" />
           </button>
