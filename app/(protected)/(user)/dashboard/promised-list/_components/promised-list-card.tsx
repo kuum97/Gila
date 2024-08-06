@@ -6,8 +6,7 @@ import SmallButton from '@/components/small-button';
 import UserIcon from '@/components/user-icon';
 import { RequestWithReqUserAndActivity } from '@/type';
 import formatDateRange from '@/utils/formatDateRange';
-import { useRouter } from 'next/navigation';
-import { useTransition } from 'react';
+import { MouseEventHandler, useTransition } from 'react';
 import { toast } from 'sonner';
 
 interface Props {
@@ -16,11 +15,11 @@ interface Props {
 
 export default function PromisedListCard({ promisedActivity }: Props) {
   const [isPending, startTransition] = useTransition();
-  const router = useRouter();
   const { id, activity, activityId, requestUser } = promisedActivity;
   const { title, startDate, endDate, thumbnails } = activity;
 
-  const approve = () => {
+  const approve: MouseEventHandler = (e) => {
+    e.preventDefault();
     startTransition(async () => {
       const action = await approveActivityRequest(id);
       if (!action.success) {
@@ -28,11 +27,11 @@ export default function PromisedListCard({ promisedActivity }: Props) {
         return;
       }
       toast.success(action.message);
-      router.refresh();
     });
   };
 
-  const reject = () => {
+  const reject: MouseEventHandler = (e) => {
+    e.preventDefault();
     startTransition(async () => {
       const action = await rejectActivityRequest(id);
       if (!action.success) {
@@ -40,7 +39,6 @@ export default function PromisedListCard({ promisedActivity }: Props) {
         return;
       }
       toast.success(action.message);
-      router.refresh();
     });
   };
 
