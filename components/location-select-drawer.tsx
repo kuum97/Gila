@@ -39,20 +39,20 @@ export default function LocationSelectDrawer({ ...field }) {
           placeholder={
             selectedLocation ? `${selectedLocation}` : '지도를 눌러 지역을 선택해 보세요!'
           }
-          className="text-sm text-black bg-gray-100 rounded-r-none"
+          className="h-10 text-sm text-black bg-gray-100 rounded-r-none"
           disabled
         />
-        <Button className="text-white rounded-l-none">
-          <Map className="size-5" />
-        </Button>
+        <Map className="w-10 h-10 p-1 text-white rounded-r size-5 bg-primary" />
       </DrawerTrigger>
       <DrawerContent className="bg-white_light">
         <DrawerHeader>
-          <DrawerTitle className="mb-1 text-2xl">지역을 선택하세요</DrawerTitle>
-          <DrawerDescription className="mb-4">
+          <DrawerTitle className="text-2xl">지역을 선택하세요</DrawerTitle>
+          <DrawerDescription className="">
             도・광역시・특별시를 먼저 선택하시고 시・군・구를 선택해 주세요.
             <span className="text-xs text-gray-800">(세종특별자치시 제외)</span>
           </DrawerDescription>
+        </DrawerHeader>
+        <div className="px-4">
           <Command>
             <CommandList className="flex p-2 relative justify-center shadow-[inset_0_0_5px_rgb(0,0,0,0.1)]">
               <CommandEmpty>디폴트 이미지 넣을 예정</CommandEmpty>
@@ -98,7 +98,7 @@ export default function LocationSelectDrawer({ ...field }) {
               )}
             </CommandList>
           </Command>
-        </DrawerHeader>
+        </div>
         <DrawerFooter>
           <Button
             type="button"
