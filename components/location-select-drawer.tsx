@@ -119,6 +119,7 @@ export default function LocationSelectDrawer({ defaultLocation, onChange }: Prop
             onClick={() => {
               setProvince(null);
               setSelectedLocation(null);
+              onChange('');
             }}
             className="text-base text-white shadow-md bg-slate-800"
           >
