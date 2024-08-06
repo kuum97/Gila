@@ -49,9 +49,9 @@ export default function QuestionList({ questions, questionCursorId }: Props) {
 
   return (
     <div className="h-[450px] w-full overflow-y-scroll overflow-x-hidden flex flex-col items-center">
-      <ul className="flex flex-col items-center gap-2">
+      <ul className="flex flex-col items-center gap-2 w-full">
         {questionList.map((question) => (
-          <li key={question.id}>
+          <li key={question.id} className="w-full">
             <QuestionListCard questionItem={question} />
           </li>
         ))}

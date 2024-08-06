@@ -13,8 +13,9 @@ export default function QuestionListCard({ questionItem }: Props) {
   const createaAt = calculateDate(questionItem.createdAt);
   return (
     <Link href={`/question/${questionItem.id}`}>
-      <div className="flex items-center justify-between gap-2 p-3 overflow-hidden text-xs border border-none rounded-md shadow-md w-80">
-        <h1 className="w-32 font-semibold truncate">{questionItem.title}</h1>
+      <div className="flex items-center justify-between gap-2 p-3 overflow-hidden text-xs border border-none rounded-md shadow-md w-full h-14">
+        <h1 className="w-24 font-semibold truncate text-sm">{questionItem.title}</h1>
+        <p className="w-24 text-nowrap text-center text-[10px]">{questionItem.location}</p>
         <p className="text-[10px] text-nowrap w-10 text-center text-gray_500">{`${createaAt.time}${createaAt.result}전`}</p>
         <div className="flex items-center gap-[2px]">
           <MessageCircle size={13} />
