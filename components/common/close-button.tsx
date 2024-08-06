@@ -1,14 +1,14 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { Undo2 } from 'lucide-react';
+import { X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface Props {
   className?: string;
 }
 
-export default function BackButton({ className }: Props) {
+export default function CloseButton({ className }: Props) {
   const router = useRouter();
 
   const handleBack = () => {
@@ -20,12 +20,9 @@ export default function BackButton({ className }: Props) {
       type="button"
       aria-label="back-btn"
       onClick={handleBack}
-      className={cn(
-        'bg-white_light p-1 rounded-full shadow-md border hover:bg-slate-200',
-        className,
-      )}
+      className={cn('bg-[#ffffff] p-1 rounded-full shadow-md border hover:bg-slate-200', className)}
     >
-      <Undo2 />
+      <X />
     </button>
   );
 }

@@ -3,7 +3,7 @@ import NavigationBase from '@/components/common/nav-base';
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <div>
+    <div className="relative">
       <NavigationBase />
       {children}
     </div>

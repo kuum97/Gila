@@ -16,9 +16,9 @@ import { useRouter } from 'next/navigation';
 const ActivityCreateFormSchema = z.object({
   title: z.string().min(1, { message: '제목은 필수 요소입니다.' }),
   tags: z.string().array(),
-  description: z.string(),
+  description: z.string().min(1, { message: '설명은 필수 요소입니다.' }),
   schedule: z.object({ from: z.date(), to: z.date() }, { message: '일정은 필수 요소입니다.' }),
-  location: z.string({ message: '지역은 필수 요소입니다.' }),
+  location: z.string().min(1, { message: '지역은 필수 요소입니다.' }),
   images: z.any().optional(),
   maximumCount: z.string(),
 });
@@ -78,17 +78,17 @@ export default function ActivityCreateForm() {
 
   return (
     <Form {...form}>
-      <main className="min-h-screen bg-white">
+      <main className="min-h-screen bg-white_light">
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5">
           <LocationSelectSection className="border-none shadow-md bg-white_light" form={form} />
           <ScheduleSection className="border-none shadow-md bg-white_light" form={form} />
           <DetailInfoSection className="border-none shadow-md bg-white_light" form={form} />
           <Button
-            disabled={isPending}
+            disabled={isPending || !form.formState.isValid}
             type="submit"
-            className="w-full text-xl font-semibold text-black shadow-md py-7 disabled:bg-primary_dark"
+            className="w-full text-xl font-semibold text-white shadow-md py-7 disabled:bg-primary_dark"
           >
-            제출
+            확정
           </Button>
         </form>
       </main>

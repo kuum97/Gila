@@ -60,7 +60,7 @@ export const getMyActivities = async ({
 export const getActivities = async ({
   type = 'recent',
   location,
-  size = 10,
+  size = 5,
   cursor,
 }: {
   type: 'recent' | 'mostFavorite' | 'tag' | 'mostViewed';

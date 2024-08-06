@@ -1,3 +1,5 @@
+'use client';
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
@@ -18,12 +20,12 @@ export default function DetailInfoSection({ form, className }: Props) {
         <CardTitle>3. 세부사항</CardTitle>
       </CardHeader>
       <CardContent>
-        <Card className="shadow-[inset_0_0_5px_rgb(0,0,0,0.08)] p-2 flex flex-col gap-3">
+        <div className="flex flex-col items-start justify-center w-full gap-3 p-2">
           <FormField
             control={form.control}
             name="title"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="w-full">
                 <FormLabel className="text-lg" htmlFor="title">
                   제목
                 </FormLabel>
@@ -38,7 +40,7 @@ export default function DetailInfoSection({ form, className }: Props) {
             control={form.control}
             name="description"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="w-full">
                 <FormLabel className="text-lg" htmlFor="description">
                   설명
                 </FormLabel>
@@ -53,15 +55,13 @@ export default function DetailInfoSection({ form, className }: Props) {
             control={form.control}
             name="tags"
             render={({ field: { onChange, value } }) => (
-              <FormItem>
-                <FormLabel className="text-lg" htmlFor="tags">
-                  태그
-                </FormLabel>
+              <FormItem className="w-full">
+                <FormLabel className="text-lg">태그</FormLabel>
                 <FormControl>
                   <Select
                     isMulti
                     name="tags"
-                    id="tags"
+                    instanceId="tag"
                     closeMenuOnSelect={false}
                     options={SELECT_TAGS}
                     value={SELECT_TAGS.filter((tag) => value?.includes(tag.value))}
@@ -82,7 +82,7 @@ export default function DetailInfoSection({ form, className }: Props) {
             control={form.control}
             name="maximumCount"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="w-full">
                 <FormLabel className="text-lg" htmlFor="maximumCount">
                   최대 인원
                 </FormLabel>
@@ -104,7 +104,7 @@ export default function DetailInfoSection({ form, className }: Props) {
             control={form.control}
             name="images"
             render={({ field: { value, onChange } }) => (
-              <FormItem>
+              <FormItem className="w-full">
                 <FormLabel className="text-lg">이미지</FormLabel>
                 <FormControl>
                   <MultiUploader onChange={onChange} value={value} />
@@ -113,7 +113,7 @@ export default function DetailInfoSection({ form, className }: Props) {
               </FormItem>
             )}
           />
-        </Card>
+        </div>
       </CardContent>
     </Card>
   );

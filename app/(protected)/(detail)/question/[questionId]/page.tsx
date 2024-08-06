@@ -1,8 +1,10 @@
 /* eslint-disable no-underscore-dangle */
 import { getQuestionById } from '@/app/data/question';
 import { getCurrentUser } from '@/app/data/user';
+import { Separator } from '@/components/ui/separator';
 import QuestionDetail from './_components/question-detail';
 import AnswerList from './_components/answer-list';
+import AnswerForm from './_components/answer-form';
 
 interface Params {
   questionId: string;
@@ -22,6 +24,8 @@ export default async function Page({ params }: { params: Params }) {
         answerCursorId={questionDetail.answerCursorId}
         questionId={questionDetail.id}
       />
+      <Separator className="bg-gray_300" />
+      <AnswerForm questionId={questionDetail.id} />
     </div>
   );
 }

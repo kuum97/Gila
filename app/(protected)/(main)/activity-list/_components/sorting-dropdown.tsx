@@ -39,20 +39,20 @@ export default function SortingDropdown() {
   return (
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
-        <Button type="button" className="bg-[#ffffff] border flex gap-1 justify-between w-[128px]">
-          <div className="w-[100px] text-base">{currentSortKorean}</div>
-          <div className="w-[28px]">
+        <Button type="button" className="flex justify-between gap-1 bg-white_light">
+          <div className="text-sm">{currentSortKorean}</div>
+          <div>
             {isOpen ? <ChevronUp className="size-4" /> : <ChevronDown className="size-4" />}
           </div>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="bg-[#ffffff]">
+      <DropdownMenuContent className="border-none bg-opacity-90 bg-white_light" align="end">
         {ACTIVITYSORTS.map((sort) => (
           <DropdownMenuItem asChild key={sort.en}>
             <button
               type="button"
               className={cn(
-                currentSort === sort.en && `bg-gray-200`,
+                currentSort === sort.en && `bg-gray-200 bg-opacity-90`,
                 `flex w-full items-center justify-center text-black hover:bg-gray-100`,
               )}
               onClick={() => handleClickSort({ name: 'sort', value: sort.en })}
