@@ -32,7 +32,7 @@ export default function QuestionDetail({
           <p className="text-sm">{questionInfo.user.nickname}</p>
         </div>
       </div>
-      <div className="text-left break-words w-64">{questionInfo.content}</div>
+      <div className="text-left break-words w-64 min-h-10">{questionInfo.content}</div>
     </div>
   );
 }
