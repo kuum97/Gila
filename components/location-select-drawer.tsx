@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   Command,
   CommandEmpty,
@@ -23,13 +23,25 @@ import { Input } from '@/components/ui/input';
 import LOCATIONS from '@/constants/locations';
 import { Map } from 'lucide-react';
 
-export default function LocationSelectDrawer({ ...field }) {
+interface Props {
+  defaultLocation?: string;
+  onChange: (value: string) => void;
+  value: string;
+}
+
+export default function LocationSelectDrawer({ defaultLocation, ...field }: Props) {
   const [province, setProvince] = useState<string | null>(null);
   const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
 
   const cities = useMemo(() => {
     return province ? LOCATIONS[province] : [];
   }, [province]);
+
+  useEffect(() => {
+    if (defaultLocation) {
+      setSelectedLocation(defaultLocation);
+    }
+  }, [defaultLocation]);
 
   return (
     <Drawer>

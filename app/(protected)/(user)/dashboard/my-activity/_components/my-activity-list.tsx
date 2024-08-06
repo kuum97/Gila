@@ -7,6 +7,7 @@ import MyActivityCard from '@/app/(protected)/(user)/dashboard/my-activity/_comp
 import { getMyActivities } from '@/app/data/activity';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { ActivityWithFavoriteAndCount } from '@/type';
+import Spinner from '@/components/ui/spinner';
 
 interface Props {
   myActivities: ActivityWithFavoriteAndCount[];
@@ -41,35 +42,14 @@ export default function MyActivityList({ myActivities, activityCursorId }: Props
   return (
     <div className="flex flex-col items-center">
       <ul className="flex flex-col w-full gap-3">
-        {activityList.map(
-          ({
-            id,
-            title,
-            views,
-            maximumCount,
-            startDate,
-            endDate,
-            _count,
-            isFavorite,
-            thumbnails,
-          }) => (
-            <li key={id}>
-              <MyActivityCard
-                imageSrc={thumbnails[0]}
-                title={title}
-                views={views}
-                maximumCount={maximumCount}
-                startDate={startDate}
-                endDate={endDate}
-                activityId={id}
-                favoriteCount={_count.favorites}
-                isFavorite={isFavorite}
-              />
-            </li>
-          ),
-        )}
+        {activityList.map((myActivity) => (
+          <li key={myActivity.id}>
+            <MyActivityCard activity={myActivity} />
+          </li>
+        ))}
         <div ref={observer} />
       </ul>
+      {isPending && <Spinner />}
     </div>
   );
 }
