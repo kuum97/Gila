@@ -2,8 +2,8 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useState } from 'react';
-import AnswerButtonContainer from '@/app/(protected)/(main)/question-list/_components/answer-button-container';
-import AnswerEditForm from '@/app/(protected)/(main)/question-list/_components/answer-edit-form';
+import AnswerButtonContainer from '@/app/(protected)/(detail)/question/[questionId]/_components/answer-button-container';
+import AnswerEditForm from '@/app/(protected)/(detail)/question/[questionId]/_components/answer-edit-form';
 import { AnswerWithUser } from '@/type';
 import calculateDate from '@/utils/calculateData';
 import Image from 'next/image';

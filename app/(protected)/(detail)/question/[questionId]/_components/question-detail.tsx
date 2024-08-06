@@ -1,4 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Separator } from '@/components/ui/separator';
 import { QuestionWithUserAndAnswers } from '@/type';
 import calculateDate from '@/utils/calculateData';
 
@@ -32,6 +33,7 @@ export default function QuestionDetail({
           <p className="text-sm">{questionInfo.user.nickname}</p>
         </div>
       </div>
+      <Separator className="bg-gray_300" />
       <div className="text-left break-words w-64 min-h-10">{questionInfo.content}</div>
     </div>
   );
