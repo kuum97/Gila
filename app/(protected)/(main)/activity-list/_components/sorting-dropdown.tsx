@@ -9,14 +9,17 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import SORTS from '@/constants/sort';
+import { ACTIVITYSORTS } from '@/constants/sort';
 import { cn } from '@/lib/utils';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 
 export default function SortingDropdown() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const [currentSort, setCurrentSort] = useState(searchParams.get('sort'));
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [currentSort, setCurrentSort] = useState('recent');
+  const currentSortKorean = ACTIVITYSORTS.find((sort) => sort.en === currentSort)?.ko || '최신순';
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -34,20 +37,23 @@ export default function SortingDropdown() {
   };
 
   return (
-    <DropdownMenu>
+    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
-        <Button type="button" className="bg-[#ffffff] border shadow-md">
-          정렬
+        <Button type="button" className="bg-[#ffffff] border flex gap-1 justify-between w-[128px]">
+          <div className="w-[100px] text-base">{currentSortKorean}</div>
+          <div className="w-[28px]">
+            {isOpen ? <ChevronUp className="size-4" /> : <ChevronDown className="size-4" />}
+          </div>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="bg-[#ffffff]">
-        {SORTS.map((sort) => (
+        {ACTIVITYSORTS.map((sort) => (
           <DropdownMenuItem asChild key={sort.en}>
             <button
               type="button"
               className={cn(
-                currentSort === sort.en && `bg-primary_dark bg-opacity-50`,
-                `flex w-full items-center justify-center text-black hover:bg-gray-100 active:bg-gray-100`,
+                currentSort === sort.en && `bg-gray-200`,
+                `flex w-full items-center justify-center text-black hover:bg-gray-100`,
               )}
               onClick={() => handleClickSort({ name: 'sort', value: sort.en })}
             >

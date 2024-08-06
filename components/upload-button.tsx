@@ -1,7 +1,5 @@
 'use client';
 
-/* eslint-disable react/no-unstable-nested-components */
-
 import { UploadButton as UploadtingButton } from '@/lib/uploadthing';
 
 type UploadButtonProps = {
@@ -18,6 +16,7 @@ export default function UploadButton({ onChange, onUploadBegin, CustomButton }: 
         allowedContent: 'hidden',
       }}
       content={{
+        // eslint-disable-next-line react/no-unstable-nested-components
         button: ({ ready }) => <CustomButton ready={ready} />,
       }}
       onClientUploadComplete={(res) => {

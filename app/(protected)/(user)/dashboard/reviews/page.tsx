@@ -1,5 +1,5 @@
 import { getAvailableReviewActivities } from '@/app/data/activity';
-import ReviewList from './_components/review-list';
+import ReviewList from '@/app/(protected)/(user)/dashboard/reviews/_components/review-list';
 
 export default async function Page() {
   const activitiesRes = await getAvailableReviewActivities({ take: 5 });

@@ -7,8 +7,8 @@ import UserIcon from '@/components/user-icon';
 import RatingSelector from '@/app/(protected)/(user)/dashboard/reviews/_components/rating-selector';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
-import { createReview } from '@/app/action/review';
-import { formatDateRange } from '@/utils/formatDateRange';
+import createReview from '@/app/action/review';
+import formatDateRange from '@/utils/formatDateRange';
 
 type Props = {
   activityId: string;

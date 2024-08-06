@@ -10,7 +10,7 @@ import {
   CommandList,
 } from '@/components/ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { LOCATIONS } from '@/constants/locations';
+import LOCATIONS from '@/constants/locations';
 import { Map, RefreshCcw } from 'lucide-react';
 import { useCallback, useMemo, useState } from 'react';
 

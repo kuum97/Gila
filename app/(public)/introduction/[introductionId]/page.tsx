@@ -1,7 +1,7 @@
 import ProfileImage from '@/app/(protected)/(user)/profile/_components/profile-image';
 import { getUserProfileWithIntroducedInfos } from '@/app/data/user';
+import BackButton from '@/components/common/back-button';
 import ProfileItem from '@/components/profile-item';
-import BackButton from './_components/back-button';
 
 interface Params {
   introductionId: string;

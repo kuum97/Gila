@@ -1,14 +1,14 @@
 'use server';
 
 import { signIn, signOut } from '@/auth';
-import { db } from '@/lib/db';
+import db from '@/lib/db';
 import { hashPassword } from '@/lib/utils';
 import { LoginSchema, RegisterSchema } from '@/schema';
 import { ActionType, LoginSchemaType, RegisterSchemaType } from '@/type';
 import { User } from '@prisma/client';
 import { AuthError } from 'next-auth';
-import { getCurrentUserId } from '../data/user';
 import { cookies } from 'next/headers';
+import { getCurrentUserId } from '../data/user';
 
 export const register = async (form: RegisterSchemaType): Promise<ActionType<User>> => {
   try {
@@ -76,11 +76,11 @@ export const login = async (form: LoginSchemaType): Promise<ActionType<null>> =>
     if (error instanceof AuthError) {
       switch (error.type) {
         case 'CredentialsSignin':
-          return { success: false, message: '잘못된 인증입니다.' };
+          return { success: false, message: '이메일이나 비밀번호가 일치하지 않습니다.' };
         default:
           return {
             success: false,
-            message: '이메일이나 패스워드가 잘못되었습니다.',
+            message: '이메일이나 비밀번호가 일치하지 않습니다.',
           };
       }
     }
@@ -99,8 +99,8 @@ export const logout = async (): Promise<ActionType<null>> => {
 };
 
 export const editNickname = async (newNickname: string): Promise<ActionType<User>> => {
+  const userId = await getCurrentUserId();
   try {
-    const userId = await getCurrentUserId();
     const updatedUser = await db.user.update({
       where: { id: userId },
       data: { nickname: newNickname },
@@ -122,8 +122,8 @@ export const editNickname = async (newNickname: string): Promise<ActionType<User
 };
 
 export const editPassword = async (newPassword: string): Promise<ActionType<User>> => {
+  const userId = await getCurrentUserId();
   try {
-    const userId = await getCurrentUserId();
     const updatedUser = await db.user.update({
       where: { id: userId },
       data: { password: newPassword },
@@ -145,8 +145,9 @@ export const editPassword = async (newPassword: string): Promise<ActionType<User
 };
 
 export const editTags = async (tags: string[]): Promise<ActionType<User>> => {
+  const userId = await getCurrentUserId();
+
   try {
-    const userId = await getCurrentUserId();
     const updatedUser = await db.user.update({
       where: { id: userId },
       data: { tags },
@@ -165,8 +166,9 @@ export const editTags = async (tags: string[]): Promise<ActionType<User>> => {
 };
 
 export const editImage = async (url: string): Promise<ActionType<User>> => {
+  const userId = await getCurrentUserId();
+
   try {
-    const userId = await getCurrentUserId();
     const updatedUser = await db.user.update({
       where: { id: userId },
       data: { image: url },
@@ -188,9 +190,9 @@ export const editImage = async (url: string): Promise<ActionType<User>> => {
 };
 
 export const setFirstLoginToFalse = async (): Promise<ActionType<null>> => {
-  try {
-    const userId = await getCurrentUserId();
+  const userId = await getCurrentUserId();
 
+  try {
     const user = await db.user.update({
       where: { id: userId },
       data: {

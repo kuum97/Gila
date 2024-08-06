@@ -1,6 +1,6 @@
 'use client';
 
-import { formatDateRange } from '@/utils/formatDateRange';
+import formatDateRange from '@/utils/formatDateRange';
 import Image from 'next/image';
 import React, { ReactNode } from 'react';
 

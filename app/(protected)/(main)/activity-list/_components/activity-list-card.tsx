@@ -5,7 +5,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/componen
 import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ActivityWithUserAndFavoCount } from '@/type';
-import { formatDateRange } from '@/utils/formatDateRange';
+import formatDateRange from '@/utils/formatDateRange';
 
 interface Props {
   activity: ActivityWithUserAndFavoCount;
@@ -18,7 +18,7 @@ export default function ActivityListCard({ activity }: Props) {
   return (
     <Card>
       <Link
-        href={`/${activity.id}`}
+        href={`/activity/${activity.id}`}
         className="flex w-full justify-center gap-3 p-1 border rounded-lg shadow-md bg-[#ffffff]"
       >
         <div className="w-[130px] h-[130px] relative rounded-lg overflow-hidden">

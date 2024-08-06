@@ -1,9 +1,9 @@
 'use server';
 
-import { getCurrentUserId } from '@/app/data/user';
-import { db } from '@/lib/db';
-import { RequestWithActivity, RequestWithReqUserAndActivity } from '@/type';
 import { revalidatePath } from 'next/cache';
+import { getCurrentUserId } from '@/app/data/user';
+import db from '@/lib/db';
+import { RequestWithActivity, RequestWithReqUserAndActivity } from '@/type';
 
 export const getMySentRequests = async ({
   cursor,
@@ -12,9 +12,8 @@ export const getMySentRequests = async ({
   cursor?: string;
   take?: number;
 }): Promise<{ requests: RequestWithActivity[]; cursorId: string | null }> => {
+  const userId = await getCurrentUserId();
   try {
-    const userId = await getCurrentUserId();
-
     const requests = await db.activityRequest.findMany({
       where: { requestUserId: userId },
       include: {
@@ -46,8 +45,9 @@ export const getMyReceivedRequests = async ({
 }): Promise<{ requests: RequestWithReqUserAndActivity[]; cursorId: string | null }> => {
   try {
     const currentUserId = await getCurrentUserId();
-    const userRequests = await db.user.findUnique({
-      where: { id: currentUserId },
+
+    const userActivities = await db.activity.findMany({
+      where: { userId: currentUserId },
       select: {
         activityRequests: {
           where: {
@@ -76,11 +76,8 @@ export const getMyReceivedRequests = async ({
       },
     });
 
-    if (!userRequests) {
-      throw new Error('사용자를 찾을 수 없습니다.');
-    }
+    const requests = userActivities.flatMap((activity) => activity.activityRequests);
 
-    const requests = userRequests.activityRequests;
     const lastRequest = requests[requests.length - 1];
     const cursorId = lastRequest ? lastRequest.id : null;
 

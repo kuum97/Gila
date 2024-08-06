@@ -1,21 +1,21 @@
 'use client';
 
 import ImageCard from '@/components/image-card';
-import SmallButton from '@/components/small-button';
 import PromiseStatus from '@/app/(protected)/(user)/dashboard/promise-list/_components/promise-status';
 import { RequestWithActivity } from '@/type';
 import { deleteActivityRequest } from '@/app/action/activity-request';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
-import { formatDateRange } from '@/utils/formatDateRange';
+import formatDateRange from '@/utils/formatDateRange';
 import DeleteAlertModal from '@/components/delete-alert-modal';
 
 export default function PromiseListCard({ promise }: { promise: RequestWithActivity }) {
   const router = useRouter();
   const { activity } = promise;
+  const { id, title, startDate, endDate, maximumCount, thumbnails } = activity;
   const formatDate = formatDateRange({
-    startDateString: activity.startDate,
-    endDateString: activity.endDate,
+    startDateString: startDate,
+    endDateString: endDate,
   });
 
   const cancelPromise = async () => {
@@ -26,10 +26,11 @@ export default function PromiseListCard({ promise }: { promise: RequestWithActiv
 
   return (
     <ImageCard
-      activityId={activity.id}
-      title={activity.title}
+      activityId={id}
+      title={title}
       date={formatDate}
-      participants={activity.maximumCount}
+      participants={maximumCount}
+      imageSrc={thumbnails[0]}
       bottomContent={
         <div className="absolute z-10 right-3 bottom-3">
           {promise.status === 'PENDING' && (

@@ -16,16 +16,26 @@ interface Props {
   deleteAction: () => void;
   isButton: boolean;
   content: string;
+  open?: boolean;
+  setModalOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function DeleteAlertModal({ deleteAction, isButton, content }: Props) {
+export default function DeleteAlertModal({
+  deleteAction,
+  isButton,
+  content,
+  open,
+  setModalOpen,
+}: Props) {
   return (
-    <AlertDialog>
-      <AlertDialogTrigger
-        className={`${isButton ? 'bg-primary text-xs' : 'text-sm w-full'} py-1 px-2 h-fit rounded-md`}
-      >
-        {content}
-      </AlertDialogTrigger>
+    <AlertDialog open={open} onOpenChange={setModalOpen}>
+      {isButton && (
+        <AlertDialogTrigger
+          className={`${isButton ? 'bg-primary text-xs' : 'text-sm w-full'} py-1 px-2 h-fit rounded-md`}
+        >
+          {content}
+        </AlertDialogTrigger>
+      )}
       <AlertDialogContent className="bg-white w-80 rounded-lg">
         <AlertDialogHeader>
           <AlertDialogTitle>정말 {content}하시나요?</AlertDialogTitle>

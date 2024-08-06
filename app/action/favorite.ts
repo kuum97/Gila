@@ -1,15 +1,14 @@
 'use server';
 
 import { getCurrentUserId } from '@/app/data/user';
-import { db } from '@/lib/db';
+import db from '@/lib/db';
 import { ActionType } from '@/type';
 import { Favorite } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
 
 const toggleFavorite = async (activityId: string): Promise<ActionType<Favorite>> => {
+  const userId = await getCurrentUserId();
   try {
-    const userId = await getCurrentUserId();
-
     const existingFavorite = await db.favorite.findFirst({
       where: {
         activityId,

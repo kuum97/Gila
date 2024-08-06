@@ -1,11 +1,11 @@
 'use server';
 
-import { db } from '@/lib/db';
+import { revalidatePath } from 'next/cache';
+import { cookies } from 'next/headers';
+import db from '@/lib/db';
 import { ActionType } from '@/type';
 import { Activity } from '@prisma/client';
-import { cookies } from 'next/headers';
-import { revalidatePath } from 'next/cache';
-import { getCurrentUserId } from '../data/user';
+import { getCurrentUserId } from '@/app/data/user';
 
 export const createActivity = async ({
   title,
@@ -76,9 +76,8 @@ export const editActivity = async ({
   location: string;
   maximumCount: number;
 }): Promise<ActionType<Activity>> => {
+  const userId = await getCurrentUserId();
   try {
-    const userId = await getCurrentUserId();
-
     const updatedActivity = await db.activity.update({
       where: { id: activityId },
       data: {
@@ -129,10 +128,10 @@ export const increaseActivityCount = async (activityId: string): Promise<ActionT
       return { success: false, message: '이미 조회수를 올린 유저입니다.' };
     }
 
-    // const activity = await db.activity.update({
-    //   where: { id: activityId },
-    //   data: { views: { increment: 1 } },
-    // });
+    await db.activity.update({
+      where: { id: activityId },
+      data: { views: { increment: 1 } },
+    });
 
     cookies().set(`viewed_${activityId}`, 'true', { maxAge: 30 * 60 });
 
