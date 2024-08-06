@@ -1,10 +1,10 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
 import db from '@/lib/db';
 import { ActionType } from '@/type';
 import { ActivityRequest } from '@prisma/client';
-import { getCurrentUserId } from '../data/user';
-import { revalidatePath } from 'next/cache';
+import { getCurrentUserId } from '@/app/data/user';
 
 export const createActivityRequest = async (
   activityId: string,
