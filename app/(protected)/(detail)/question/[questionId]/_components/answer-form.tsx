@@ -129,7 +129,7 @@ export default function AnswerForm({ questionId }: { questionId: string }) {
           <Button
             disabled={isPending || loading || !form.formState.isValid}
             type="submit"
-            className="px-4 py-1 text-sm rounded-md h-10"
+            className="px-4 py-1 text-sm rounded-md h-8"
           >
             제출하기
           </Button>

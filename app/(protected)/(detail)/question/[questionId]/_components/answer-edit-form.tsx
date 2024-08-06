@@ -79,8 +79,8 @@ export default function AnswerEditForm({ answerId, defaultValue, handleEditAnswe
   const customButton = () => {
     return (
       <div className="z-10 relative">
-        <div className="w-[80px] border-2 border-primary rounded-md flex justify-center items-center py-2">
-          <FileImage className="h-4 w-4" color="#000" />
+        <div className="rounded-md flex justify-center items-center p-1 gap-1">
+          <FileImage className="h-5 w-5" color="#000" />
         </div>
       </div>
     );
@@ -88,13 +88,21 @@ export default function AnswerEditForm({ answerId, defaultValue, handleEditAnswe
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex items-end gap-6 w-full">
-        <div className="flex flex-col gap-4 w-full">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col items-end w-full gap-2">
+        <div className="flex flex-col w-full">
           <FormField
             control={form.control}
             name="content"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="relative">
+                <div className="absolute right-0 -top-1 ">
+                  <UploadButton
+                    onChange={uploadImage}
+                    onUploadBegin={() => setLoading(true)}
+                    CustomButton={customButton}
+                  />
+                </div>
+
                 <FormLabel className="text-sm">{FormFields.label}</FormLabel>
                 {loading && (
                   <div className="flex justify-center items-center">
@@ -115,30 +123,25 @@ export default function AnswerEditForm({ answerId, defaultValue, handleEditAnswe
                 <FormControl>
                   <Textarea placeholder={FormFields.placeholder} {...field} className="text-xs" />
                 </FormControl>
-                <div className="h-4">
+                <div className="absolute -bottom-6">
                   <FormMessage className="text-xs text-red" />
                 </div>
               </FormItem>
             )}
           />
         </div>
-        <div className="flex flex-col gap-3">
+        <div className="flex gap-3">
           <Button
             type="button"
-            className="px-4 py-1 text-sm rounded-md h-fit"
+            className="px-4 py-1 text-sm rounded-md h-8"
             onClick={handleEditAnswer}
           >
             취소
           </Button>
-          <UploadButton
-            onChange={uploadImage}
-            onUploadBegin={() => setLoading(true)}
-            CustomButton={customButton}
-          />
           <Button
-            disabled={isPending || loading}
+            disabled={isPending || loading || !form.formState.isValid}
             type="submit"
-            className="px-4 py-1 text-sm rounded-md mb-6"
+            className="px-4 py-1 text-sm rounded-md h-8"
           >
             수정하기
           </Button>

@@ -51,6 +51,11 @@ export default function AnswerList({
       </div>
       <div className="w-full">
         <ul className="flex flex-col overflow-y-scroll max-h-[500px] gap-2">
+          {totalCount === 0 && (
+            <div className="bg-gray-100 h-20 rounded-lg flex flex-col items-center justify-center font-semibold">
+              아직 답변이 없습니다!
+            </div>
+          )}
           {answerList.map((answer) => (
             <li key={answer.id}>
               <AnswerItem answer={answer} userId={userId} />
