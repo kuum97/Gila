@@ -4,8 +4,9 @@ import ActivityCreateModal from '@/app/(protected)/(user)/dashboard/my-activity/
 
 export default async function Page() {
   const myActivities = await getMyActivities({ take: 7 });
+
   return (
-    <main className="min-h-screen">
+    <main>
       <h1 className="mb-3 text-lg font-bold">내가 등록한 활동</h1>
       <MyActivityList
         myActivities={myActivities.activities}

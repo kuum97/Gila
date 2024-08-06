@@ -39,19 +39,21 @@ export default function SortingDropdown() {
   return (
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
-        <Button type="button" className="bg-[#ffffff] border flex gap-1 justify-between w-28">
-          {currentSortKorean}{' '}
-          {isOpen ? <ChevronUp className="size-4" /> : <ChevronDown className="size-4" />}
+        <Button type="button" className="bg-[#ffffff] border flex gap-1 justify-between w-[128px]">
+          <div className="w-[100px] text-base">{currentSortKorean}</div>
+          <div className="w-[28px]">
+            {isOpen ? <ChevronUp className="size-4" /> : <ChevronDown className="size-4" />}
+          </div>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="bg-[#ffffff]">
+      <DropdownMenuContent className="bg-[#ffffff]" align="end">
         {SORTS.map((sort) => (
           <DropdownMenuItem asChild key={sort.en}>
             <button
               type="button"
               className={cn(
-                currentSort === sort.en && `bg-primary_dark bg-opacity-30`,
-                `flex w-full items-center justify-center text-black hover:bg-gray-100 active:bg-gray-100`,
+                currentSort === sort.en && `bg-gray-200`,
+                `flex w-full items-center justify-center text-black hover:bg-gray-100`,
               )}
               onClick={() => handleClickSort({ name: 'sort', value: sort.en })}
             >
