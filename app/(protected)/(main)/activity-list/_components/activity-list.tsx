@@ -1,11 +1,13 @@
 'use client';
 
+import { useCallback, useEffect, useState, useTransition } from 'react';
+import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 import ActivityListCard from '@/app/(protected)/(main)/activity-list/_components/activity-list-card';
 import { getActivities } from '@/app/data/activity';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { ActivityWithUserAndFavoCount, Sort } from '@/type';
-import { useCallback, useEffect, useState, useTransition } from 'react';
-import Spinner from '@/components/ui/spinner';
+import ActivityCardSkeleton from '@/components/skeletons/activity-card-skeleton';
 
 interface Props {
   activities: ActivityWithUserAndFavoCount[];
@@ -16,6 +18,7 @@ interface Props {
 export default function ActivityList({ activities, cursorId, sort }: Props) {
   const [infinityActivities, setInfinityActivities] = useState<ActivityWithUserAndFavoCount[]>([]);
   const [infinityCursorId, setInfinityCursorId] = useState<string | null>(cursorId);
+  const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
 
   const loadMoreActivities = useCallback(async () => {
@@ -24,6 +27,7 @@ export default function ActivityList({ activities, cursorId, sort }: Props) {
       const result = await getActivities({
         type: sort,
         cursor: infinityCursorId,
+        size: 5,
       });
       setInfinityCursorId(result.cursorId);
       setInfinityActivities((prev) => [...prev, ...result.activities]);
@@ -41,9 +45,29 @@ export default function ActivityList({ activities, cursorId, sort }: Props) {
     setInfinityCursorId(cursorId);
   }, [activities, cursorId, sort]);
 
+  if (activities.length === 0 && searchParams.get('sort') === 'tag') {
+    return (
+      <div className="flex flex-col items-center justify-center gap-4">
+        <span>관심사를 먼저 설정해 주세요!</span>
+        <Link
+          href="/topic"
+          className="flex items-center justify-center px-4 py-3 font-semibold rounded-lg bg-primary text-white_light hover:bg-primary_dark"
+        >
+          관심사 정하기
+        </Link>
+      </div>
+    );
+  }
+
+  if (activities.length === 0 || !infinityActivities) {
+    return (
+      <div className="flex items-center justify-center">현재 활동중인 길라가 아무도 없습니다.</div>
+    );
+  }
+
   return (
-    <div className="flex flex-col ">
-      <ul className="flex flex-col gap-2">
+    <>
+      <ul className="flex flex-col w-full gap-6">
         {infinityActivities.map((activity) => (
           <li key={activity.id}>
             <ActivityListCard activity={activity} />
@@ -51,7 +75,7 @@ export default function ActivityList({ activities, cursorId, sort }: Props) {
         ))}
         <div ref={observer} />
       </ul>
-      {isPending && <Spinner />}
-    </div>
+      {isPending && <ActivityCardSkeleton />}
+    </>
   );
 }
