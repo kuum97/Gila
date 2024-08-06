@@ -7,9 +7,10 @@ import LocationSelectDrawer from '@/components/location-select-drawer';
 
 interface Props extends ActivityCreateFormProps {
   className?: string;
+  defaultLocation?: string;
 }
 
-export default function LocationSelectSection({ form, className }: Props) {
+export default function LocationSelectSection({ form, className, defaultLocation }: Props) {
   return (
     <Card className={className}>
       <CardHeader>
@@ -22,7 +23,7 @@ export default function LocationSelectSection({ form, className }: Props) {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <LocationSelectDrawer {...field} />
+                <LocationSelectDrawer {...field} defaultLocation={defaultLocation} />
               </FormControl>
               <FormMessage />
             </FormItem>

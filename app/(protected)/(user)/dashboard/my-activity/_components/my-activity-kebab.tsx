@@ -9,19 +9,16 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { EllipsisVertical } from 'lucide-react';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { ActivityWithFavoriteAndCount } from '@/type';
+import ActivityEditForm from '@/app/(protected)/(user)/dashboard/my-activity/_components/activity-edit-form';
 
 interface Props {
   handleDelete: () => void;
+  activity: ActivityWithFavoriteAndCount;
 }
 
-export default function MyActivityKebab({ handleDelete }: Props) {
+export default function MyActivityKebab({ handleDelete, activity }: Props) {
   return (
     <Dialog>
       <DropdownMenu>
@@ -38,10 +35,9 @@ export default function MyActivityKebab({ handleDelete }: Props) {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>????</DialogTitle>
-        </DialogHeader>
+      <DialogContent className="h-screen overflow-y-auto bg-white">
+        <DialogTitle>활동 수정</DialogTitle>
+        <ActivityEditForm activity={activity} />
       </DialogContent>
     </Dialog>
   );
