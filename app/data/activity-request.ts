@@ -1,9 +1,9 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
 import { getCurrentUserId } from '@/app/data/user';
 import db from '@/lib/db';
 import { RequestWithActivity, RequestWithReqUserAndActivity } from '@/type';
-import { revalidatePath } from 'next/cache';
 
 export const getMySentRequests = async ({
   cursor,
