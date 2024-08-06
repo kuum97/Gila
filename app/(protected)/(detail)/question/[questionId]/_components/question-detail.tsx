@@ -20,7 +20,7 @@ export default function QuestionDetail({
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <p className="text-sm font-semibold">{questionInfo.location}</p>
-          <p className="text-[10px] text-nowrap w-10 text-center text-gray_500">{`${createaAt.time}${createaAt.result}전`}</p>
+          <p className="text-[12px] text-nowrap w-10 text-center text-gray_500">{`${createaAt.time}${createaAt.result}전`}</p>
         </div>
         <div className="flex justify-center items-center gap-2">
           <Avatar className="w-7 h-7">
@@ -34,7 +34,7 @@ export default function QuestionDetail({
         </div>
       </div>
       <Separator className="bg-gray_300" />
-      <div className="text-left break-words w-64 min-h-10">{questionInfo.content}</div>
+      <div className="text-left break-words min-h-10">{questionInfo.content}</div>
     </div>
   );
 }

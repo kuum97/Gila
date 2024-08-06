@@ -15,10 +15,8 @@ export default async function Page({ params }: { params: Params }) {
   const currentUser = await getCurrentUser();
   if (!questionDetail) return <div>없음</div>;
   return (
-    <div className="p-4 flex flex-col">
+    <div className="p-4 flex flex-col gap-4">
       <QuestionDetail questionInfo={questionDetail} />
-      <AnswerForm questionId={questionDetail.id} />
-      <Separator className="bg-gray_300 mb-4" />
       <AnswerList
         answers={questionDetail.answers}
         totalCount={questionDetail._count.answers}
@@ -26,6 +24,8 @@ export default async function Page({ params }: { params: Params }) {
         answerCursorId={questionDetail.answerCursorId}
         questionId={questionDetail.id}
       />
+      <Separator className="bg-gray_300" />
+      <AnswerForm questionId={questionDetail.id} />
     </div>
   );
 }
