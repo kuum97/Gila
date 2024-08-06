@@ -9,7 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import SORTS from '@/constants/sort';
+import { ACTIVITYSORTS } from '@/constants/sort';
 import { cn } from '@/lib/utils';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
@@ -19,7 +19,7 @@ export default function SortingDropdown() {
   const searchParams = useSearchParams();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [currentSort, setCurrentSort] = useState('recent');
-  const currentSortKorean = SORTS.find((sort) => sort.en === currentSort)?.ko || '최신순';
+  const currentSortKorean = ACTIVITYSORTS.find((sort) => sort.en === currentSort)?.ko || '최신순';
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -45,7 +45,7 @@ export default function SortingDropdown() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="bg-[#ffffff]">
-        {SORTS.map((sort) => (
+        {ACTIVITYSORTS.map((sort) => (
           <DropdownMenuItem asChild key={sort.en}>
             <button
               type="button"
