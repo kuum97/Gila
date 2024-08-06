@@ -9,7 +9,7 @@ interface Params {
 }
 
 export default async function Page({ params }: { params: Params }) {
-  const questionDetail = await getQuestionById({ questionId: params.questionId, answerTake: 5 });
+  const questionDetail = await getQuestionById({ questionId: params.questionId, answerTake: 10 });
   const currentUser = await getCurrentUser();
   if (!questionDetail) return <div>없음</div>;
   return (
