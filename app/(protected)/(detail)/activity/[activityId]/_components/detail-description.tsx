@@ -1,4 +1,4 @@
-import KakaoMap from '@/app/(protected)/[activityId]/_components/kakao-map';
+import KakaoMap from '@/app/(protected)/(detail)/activity/[activityId]/_components/kakao-map';
 import { MapPin } from 'lucide-react';
 
 interface Props {
