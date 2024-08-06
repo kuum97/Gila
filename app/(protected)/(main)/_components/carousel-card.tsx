@@ -39,6 +39,8 @@ export default function CarouselCard({ activities }: Props) {
     });
   }, [api]);
 
+  const imageSrc = (imageUrl: string | null): string => imageUrl || '/default-carousel-image.png';
+
   return (
     <div className="relative">
       <Carousel
@@ -60,7 +62,7 @@ export default function CarouselCard({ activities }: Props) {
                   <Link href={`/activity/${id}`} passHref>
                     <div className="w-16 h-60">
                       <Image
-                        src={thumbnails[0] || `/test.png`}
+                        src={imageSrc(thumbnails[0])}
                         alt={title}
                         fill
                         className="object-cover border-0 rounded-lg"
