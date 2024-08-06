@@ -52,8 +52,14 @@ export default function MyActivityCard({ activity }: Props) {
           isPending={isPending}
           activityId={id}
           title={title}
-          date={dateRange}
-          participants={maximumCount}
+          middleContent={
+            <>
+              <p className="text-sm font-semibold text-gray-900">{dateRange}</p>
+              <div className="text-sm font-semibold text-gray-900">
+                <p>최대 인원: {maximumCount} 명</p>
+              </div>
+            </>
+          }
           bottomContent={
             <div className="flex flex-col w-full gap-1">
               <div className="flex items-center justify-end w-full gap-2 text-xs text-gray-500">

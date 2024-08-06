@@ -7,7 +7,7 @@ import MyActivityCard from '@/app/(protected)/(user)/dashboard/my-activity/_comp
 import { getMyActivities } from '@/app/data/activity';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { ActivityWithFavoriteAndCount } from '@/type';
-import MyActivityCardSkeleton from '@/components/skeletons/my-activity-card-skeleton';
+import Spinner from '@/components/ui/spinner';
 
 interface Props {
   myActivities: ActivityWithFavoriteAndCount[];
@@ -39,9 +39,17 @@ export default function MyActivityList({ myActivities, activityCursorId }: Props
     isLoading: isPending,
   });
 
+  if (myActivities.length === 0) {
+    return (
+      <div className="flex items-center justify-center">
+        오른쪽 위에 플러스 버튼을 눌러 길라가 되어보세요!
+      </div>
+    );
+  }
+
   return (
-    <div className="flex flex-col items-center">
-      <ul className="flex flex-col w-full gap-3">
+    <>
+      <ul className="flex flex-col w-full gap-6">
         {activityList.map((myActivity) => (
           <li key={myActivity.id}>
             <MyActivityCard activity={myActivity} />
@@ -49,7 +57,11 @@ export default function MyActivityList({ myActivities, activityCursorId }: Props
         ))}
         <div ref={observer} />
       </ul>
-      {isPending && <MyActivityCardSkeleton />}
-    </div>
+      {isPending && (
+        <div className="flex justify-center w-full">
+          <Spinner />
+        </div>
+      )}
+    </>
   );
 }

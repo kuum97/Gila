@@ -59,7 +59,7 @@ export default function ActivityList({ activities, cursorId, sort }: Props) {
     );
   }
 
-  if (activities.length === 0 || !infinityActivities) {
+  if (activities.length === 0) {
     return (
       <div className="flex items-center justify-center">현재 활동중인 길라가 아무도 없습니다.</div>
     );

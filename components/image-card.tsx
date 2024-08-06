@@ -3,18 +3,15 @@
 import Image from 'next/image';
 
 import React, { ReactNode } from 'react';
-import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import Spinner from '@/components/ui/spinner';
 
 interface Props {
   activityId: string;
   title: string;
-  date: string;
-  participants?: number;
-  extraContent?: ReactNode;
   bottomContent?: ReactNode;
-  topContent?: ReactNode;
+  middleContent?: ReactNode;
   imageSrc?: string;
   isPending?: boolean;
 }
@@ -22,18 +19,14 @@ interface Props {
 export default function ImageCard({
   activityId,
   title,
-  date,
-  participants,
-  extraContent,
   bottomContent,
   imageSrc,
   isPending,
-  topContent,
+  middleContent,
 }: Props) {
   return (
     <Link href={`/${activityId}`}>
       <Card className="h-[400px] flex flex-col items-start border-none shadow-md hover:shadow-xl">
-        {topContent}
         <div className="flex justify-center w-full h-full px-2 pt-2 rounded-md">
           <div className="relative w-full h-full rounded-md">
             <Image
@@ -45,18 +38,11 @@ export default function ImageCard({
             />
           </div>
         </div>
-        <div className="flex flex-col w-full gap-1 p-2">
+        <div className="flex flex-col w-full gap-1 p-2 relative">
           <CardHeader className="p-0">
             <CardTitle className="text-2xl font-bold text-black truncate">{title}</CardTitle>
           </CardHeader>
-          <CardContent className="p-0">
-            <p className="text-sm font-semibold text-gray-900">{date}</p>
-            <div className="text-sm font-semibold text-gray-900">
-              {extraContent}
-              {extraContent && <span>•</span>}
-              {participants && <p>약속잡은 사람들: {participants} 명</p>}
-            </div>
-          </CardContent>
+          <CardContent className="p-0">{middleContent}</CardContent>
           <CardFooter className="p-0">{bottomContent}</CardFooter>
         </div>
         {isPending && (
@@ -64,8 +50,9 @@ export default function ImageCard({
             onClick={(e: React.MouseEvent<HTMLDivElement>) => {
               e.preventDefault();
             }}
+            className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-50"
           >
-            <Loader2 className="w-8 h-8 animate-spin" />
+            <Spinner />
           </div>
         )}
       </Card>

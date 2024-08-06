@@ -9,7 +9,7 @@ export default function PromiseStatus({ status }: Props) {
 
   switch (status) {
     case 'PENDING':
-      statusColor = 'bg-black';
+      statusColor = 'bg-blue-600';
       break;
     case 'APPROVE':
       statusColor = 'bg-green';
@@ -18,7 +18,7 @@ export default function PromiseStatus({ status }: Props) {
       statusColor = 'bg-red';
       break;
     default:
-      statusColor = 'bg-gray-500';
+      statusColor = 'bg-blue-600';
   }
-  return <div className={`absolute top-2 right-2 w-2 h-2 rounded-full ${statusColor}`} />;
+  return <div className={`rounded-full size-2 ${statusColor}`} />;
 }
