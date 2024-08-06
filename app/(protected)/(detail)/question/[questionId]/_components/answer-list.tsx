@@ -1,6 +1,6 @@
 'use client';
 
-import AnswerItem from '@/app/(protected)/(main)/question-list/_components/answer-item';
+import AnswerItem from '@/app/(protected)/(detail)/question/[questionId]/_components/answer-item';
 import getAnswers from '@/app/data/answer';
 import Spinner from '@/components/ui/spinner';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
@@ -50,7 +50,12 @@ export default function AnswerList({
         <p className="text-lg font-semibold text-left">받은 답변 {totalCount}</p>
       </div>
       <div className="w-full">
-        <ul className="flex flex-col overflow-y-scroll h-[600px] gap-2">
+        <ul className="flex flex-col overflow-y-scroll max-h-[500px] gap-2">
+          {totalCount === 0 && (
+            <div className="bg-gray-100 h-20 rounded-lg flex flex-col items-center justify-center font-semibold">
+              아직 답변이 없습니다!
+            </div>
+          )}
           {answerList.map((answer) => (
             <li key={answer.id}>
               <AnswerItem answer={answer} userId={userId} />

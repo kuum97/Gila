@@ -1,6 +1,6 @@
 'use client';
 
-import { createAnswer } from '@/app/action/answer';
+import { editAnswer } from '@/app/action/answer';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -13,6 +13,7 @@ import {
 import Spinner from '@/components/ui/spinner';
 import { Textarea } from '@/components/ui/textarea';
 import UploadButton from '@/components/upload-button';
+import { AnswerWithUser } from '@/type';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FileImage, X } from 'lucide-react';
 import Image from 'next/image';
@@ -21,9 +22,15 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
 
+interface Props {
+  defaultValue: AnswerWithUser;
+  answerId: string;
+  handleEditAnswer: () => void;
+}
+
 const FormFields = {
   name: 'content',
-  label: '답변하기',
+  label: '수정하기',
   placeholder: '답변을 입력해 주세요',
   type: 'textarea',
 };
@@ -35,45 +42,45 @@ const FormSchema = z.object({
     .max(200, { message: '답변은 200자 이내로 입력해 주세요.' }),
 });
 
-export default function AnswerForm({ questionId }: { questionId: string }) {
-  const [imageUrl, setImageUrl] = useState<string[]>([]);
+export default function AnswerEditForm({ answerId, defaultValue, handleEditAnswer }: Props) {
+  const [defaultImage, setDefaultImage] = useState<string[]>([defaultValue.images[0]]);
   const [loading, setLoading] = useState(false);
   const [isPending, startTransition] = useTransition();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      content: '',
+      content: defaultValue.content,
     },
   });
 
   const uploadImage = (url?: string) => {
     if (!url) return;
-    setImageUrl([url]);
+    setDefaultImage([url]);
     setLoading(false);
   };
 
   const cancelImage = () => {
-    setImageUrl([]);
+    setDefaultImage([]);
   };
 
   const onSubmit = (values: z.infer<typeof FormSchema>) => {
     startTransition(async () => {
-      const result = await createAnswer({ questionId, content: values.content, images: imageUrl });
+      const result = await editAnswer({ answerId, content: values.content, images: defaultImage });
       if (!result.success) {
         toast.error(result.message);
         return;
       }
       toast.success(result.message);
       form.setValue('content', '');
-      setImageUrl([]);
+      handleEditAnswer();
     });
   };
 
   const customButton = () => {
     return (
       <div className="z-10 relative">
-        <div className="w-[80px] border-2 border-primary rounded-md flex justify-center items-center py-2">
-          <FileImage className="h-4 w-4" color="#000" />
+        <div className="rounded-md flex justify-center items-center p-1 gap-1">
+          <FileImage className="h-5 w-5" color="#000" />
         </div>
       </div>
     );
@@ -81,26 +88,34 @@ export default function AnswerForm({ questionId }: { questionId: string }) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex items-end gap-6 w-full">
-        <div className="flex flex-col gap-4 w-full">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col items-end w-full gap-2">
+        <div className="flex flex-col w-full">
           <FormField
             control={form.control}
             name="content"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="relative">
+                <div className="absolute right-0 -top-1 ">
+                  <UploadButton
+                    onChange={uploadImage}
+                    onUploadBegin={() => setLoading(true)}
+                    CustomButton={customButton}
+                  />
+                </div>
+
                 <FormLabel className="text-sm">{FormFields.label}</FormLabel>
                 {loading && (
                   <div className="flex justify-center items-center">
                     <Spinner />
                   </div>
                 )}
-                {imageUrl[0] && (
-                  <div className="w-52 h-60 relative">
+                {defaultImage[0] && (
+                  <div className="w-full h-72 relative">
                     <Image
-                      src={imageUrl[0]}
-                      fill
+                      src={defaultImage[0]}
                       alt="답변 이미지"
-                      className="rounded-lg object-cover"
+                      fill
+                      className="rounded-md object-cover"
                     />
                     <X className="absolute right-1 top-1" onClick={cancelImage} />
                   </div>
@@ -108,25 +123,27 @@ export default function AnswerForm({ questionId }: { questionId: string }) {
                 <FormControl>
                   <Textarea placeholder={FormFields.placeholder} {...field} className="text-xs" />
                 </FormControl>
-                <div className="h-4">
+                <div className="absolute -bottom-6">
                   <FormMessage className="text-xs text-red" />
                 </div>
               </FormItem>
             )}
           />
         </div>
-        <div className="flex flex-col items-center">
-          <UploadButton
-            onChange={uploadImage}
-            onUploadBegin={() => setLoading(true)}
-            CustomButton={customButton}
-          />
+        <div className="flex gap-3">
           <Button
-            disabled={isPending || loading}
-            type="submit"
-            className="px-4 py-1 text-sm rounded-md mb-6"
+            type="button"
+            className="px-4 py-1 text-sm rounded-md h-8"
+            onClick={handleEditAnswer}
           >
-            제출하기
+            취소
+          </Button>
+          <Button
+            disabled={isPending || loading || !form.formState.isValid}
+            type="submit"
+            className="px-4 py-1 text-sm rounded-md h-8"
+          >
+            수정하기
           </Button>
         </div>
       </form>

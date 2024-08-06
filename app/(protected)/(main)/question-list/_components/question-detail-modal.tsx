@@ -9,7 +9,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import AnswerList from '@/app/(protected)/(detail)/question/[questionId]/_components/answer-list';
-import AnswerForm from '@/app/(protected)/(main)/question-list/_components/answer-form';
+import AnswerForm from '@/app/(protected)/(detail)/question/[questionId]/_components/answer-form';
 import { QuestionWithUserAndAnswers } from '@/type';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
