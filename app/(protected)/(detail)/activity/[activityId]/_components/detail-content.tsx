@@ -1,9 +1,9 @@
 /* eslint-disable no-underscore-dangle */
-import DetailTitle from '@/app/(protected)/[activityId]/_components/detail-title';
-import DetailDescription from '@/app/(protected)/[activityId]/_components/detail-description';
+import DetailTitle from '@/app/(protected)/(detail)/activity/[activityId]/_components/detail-title';
+import DetailDescription from '@/app/(protected)/(detail)/activity/[activityId]/_components/detail-description';
 import { ActivityWithUserAndFavorite } from '@/type';
-import DetailCarousel from '@/app/(protected)/[activityId]/_components/detail-carousel';
-import AuthorInfo from '@/app/(protected)/[activityId]/_components/author-info';
+import DetailCarousel from '@/app/(protected)/(detail)/activity/[activityId]/_components/detail-carousel';
+import AuthorInfo from '@/app/(protected)/(detail)/activity/[activityId]/_components/author-info';
 
 export default function DetailContent({ detail }: { detail: ActivityWithUserAndFavorite }) {
   return (

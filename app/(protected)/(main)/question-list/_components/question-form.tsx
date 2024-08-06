@@ -158,11 +158,15 @@ export default function QuestionForm() {
               </FormItem>
             )}
           />
-        </div>
-        <div>
-          <Button disabled={isPending} type="submit" className="px-4 py-1 mb-6 text-sm rounded-md">
-            물어보기
-          </Button>
+          <div>
+            <Button
+              disabled={isPending}
+              type="submit"
+              className="px-4 py-1 mb-6 text-sm rounded-md w-full"
+            >
+              물어보기
+            </Button>
+          </div>
         </div>
         <QuestionTipPopOver />
       </form>

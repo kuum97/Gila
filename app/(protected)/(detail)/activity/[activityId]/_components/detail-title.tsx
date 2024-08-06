@@ -8,7 +8,7 @@ import { Heart, Eye } from 'lucide-react';
 import { toast } from 'sonner';
 import { useEffect, useState } from 'react';
 import { increaseActivityCount } from '@/app/action/activity';
-import SharePopover from '@/app/(protected)/[activityId]/_components/share-popover';
+import SharePopover from '@/app/(protected)/(detail)/activity/[activityId]/_components/share-popover';
 import formatDateRange from '@/utils/formatDateRange';
 import { ActivityWithUserAndFavorite } from '@/type';
 

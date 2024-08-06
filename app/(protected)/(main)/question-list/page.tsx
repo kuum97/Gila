@@ -1,7 +1,6 @@
 import QuestionForm from '@/app/(protected)/(main)/question-list/_components/question-form';
 import { getQuestions } from '@/app/data/question';
 import QuestionList from '@/app/(protected)/(main)/question-list/_components/question-list';
-import { getCurrentUserId } from '@/app/data/user';
 import QuestionSortDropdown from '@/app/(protected)/(main)/question-list/_components/question-sort-dropdown';
 
 export default async function Page({
@@ -17,7 +16,6 @@ export default async function Page({
     answerTake: 5,
     location,
   });
-  const userId = await getCurrentUserId();
 
   return (
     <div className="flex flex-col items-center gap-3 p-6">
@@ -32,11 +30,7 @@ export default async function Page({
           <h2 className="font-semibold">질문 목록</h2>
           <QuestionSortDropdown sortValue={sort} />
         </div>
-        <QuestionList
-          questions={qusetions.questions}
-          userId={userId}
-          questionCursorId={qusetions.cursorId}
-        />
+        <QuestionList questions={qusetions.questions} questionCursorId={qusetions.cursorId} />
       </div>
     </div>
   );
