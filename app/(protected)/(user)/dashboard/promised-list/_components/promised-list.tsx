@@ -43,7 +43,9 @@ export default function PromisedList({ promisedActivities, cursorId }: Props) {
 
   if (promisedActivities.length === 0) {
     return (
-      <div className="flex items-center justify-center">아직 약속을 신청한 분이 없습니다.</div>
+      <div className="flex items-center justify-center font-semibold -translate-y-16 h-screen-minus-134">
+        아직 약속을 신청한 분이 없습니다.
+      </div>
     );
   }
 

@@ -9,7 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { ACTIVITYSORTS, SortOption } from '@/constants/sort';
+import { SortOption } from '@/constants/sort';
 import { cn } from '@/lib/utils';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
@@ -23,7 +23,7 @@ export default function SortingDropdown({ sorts }: Props) {
   const searchParams = useSearchParams();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [currentSort, setCurrentSort] = useState('recent');
-  const currentSortKorean = ACTIVITYSORTS.find((sort) => sort.en === currentSort)?.ko || '최신순';
+  const currentSortKorean = sorts.find((sort) => sort.en === currentSort)?.ko || '최신순';
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -43,9 +43,12 @@ export default function SortingDropdown({ sorts }: Props) {
   return (
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
-        <Button type="button" className="flex justify-between gap-1 bg-white_light">
+        <Button
+          type="button"
+          className="flex justify-between gap-1 p-0 px-1 bg-white_light hover:bg-gray-200"
+        >
           <div className="text-sm">{currentSortKorean}</div>
-          <div>
+          <div className="flex justify-end w-full">
             {isOpen ? <ChevronUp className="size-4" /> : <ChevronDown className="size-4" />}
           </div>
         </Button>

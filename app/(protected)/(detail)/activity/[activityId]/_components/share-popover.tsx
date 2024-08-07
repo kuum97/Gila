@@ -42,7 +42,7 @@ export default function SharePopover({ activityId, shareImage }: Props) {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <ExternalLink width={20} />
+        <ExternalLink width={20} className="cursor-pointer" />
       </PopoverTrigger>
       <PopoverContent className="bg-white w-full flex gap-4">
         <div

@@ -39,9 +39,9 @@ export default function ReviewList({ activities, cursorId }: Props) {
 
   if (activities.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center gap-4">
+      <div className="flex flex-col items-center justify-center gap-4 font-semibold -translate-y-16 h-screen-minus-134">
         <p>아직 리뷰가능한 활동이 없습니다.</p>
-        <p className="text-sm">아직 길라를 한 번도 경험해 본 적이 없으시다면?</p>
+        <p className="text-sm font-normal">아직 길라를 한 번도 경험해 본 적이 없으시다면?</p>
         <Link
           href="/activity-list"
           className="flex items-center justify-center px-4 py-3 font-semibold rounded-lg bg-primary text-white_light hover:bg-primary_dark"

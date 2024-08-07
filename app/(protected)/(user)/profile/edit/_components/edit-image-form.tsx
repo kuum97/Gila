@@ -76,12 +76,12 @@ export default function EditImageForm({ userImg }: Props) {
           <div className="flex mt-4 gap-x-2">
             <Button
               disabled={isPending}
-              className="font-bold bg-slate-50 hover:bg-slate-300"
+              className="font-bold text-white bg-slate-50 hover:bg-slate-300"
               onClick={onCancel}
             >
               취소하기
             </Button>
-            <Button disabled={isPending} onClick={onEdit} className="font-bold">
+            <Button disabled={isPending} onClick={onEdit} className="font-bold text-white">
               바꾸기
             </Button>
           </div>

@@ -15,7 +15,7 @@ interface Props {
 }
 
 export default function MyActivityList({ myActivities, activityCursorId }: Props) {
-  const [activityList, setActivityList] = useState<ActivityWithFavoriteAndCount[]>(myActivities);
+  const [activityList, setActivityList] = useState<ActivityWithFavoriteAndCount[]>([]);
   const [cursorId, setCursorId] = useState(activityCursorId);
   const [isPending, startTransition] = useTransition();
 
@@ -29,7 +29,7 @@ export default function MyActivityList({ myActivities, activityCursorId }: Props
   }, [cursorId]);
 
   useEffect(() => {
-    setActivityList(myActivities);
+    setActivityList([...myActivities]);
     setCursorId(activityCursorId);
   }, [myActivities, activityCursorId]);
 
@@ -41,7 +41,7 @@ export default function MyActivityList({ myActivities, activityCursorId }: Props
 
   if (myActivities.length === 0) {
     return (
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center font-semibold -translate-y-16 h-screen-minus-134">
         오른쪽 위에 플러스 버튼을 눌러 길라가 되어보세요!
       </div>
     );

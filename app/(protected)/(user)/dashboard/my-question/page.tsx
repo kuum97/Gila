@@ -5,15 +5,15 @@ import MyQuestionCreateModal from '@/app/(protected)/(user)/dashboard/my-questio
 export default async function Page() {
   const myQuestions = await getMyQuestions({ take: 10, answerTake: 5 });
   return (
-    <>
-      <div className="flex flex-col gap-3">
+    <div className="p-5">
+      <div className="flex justify-between w-full mb-5">
         <h1 className="text-2xl font-bold">내 질문</h1>
-        <MyQuestionList
-          myQuestions={myQuestions.questions}
-          myQuestionCursorId={myQuestions.cursorId}
-        />
+        <MyQuestionCreateModal />
       </div>
-      <MyQuestionCreateModal />
-    </>
+      <MyQuestionList
+        myQuestions={myQuestions.questions}
+        myQuestionCursorId={myQuestions.cursorId}
+      />
+    </div>
   );
 }

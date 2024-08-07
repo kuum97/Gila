@@ -3,15 +3,15 @@ import Link from 'next/link';
 import { getMyActivities } from '@/app/data/activity';
 import { getCurrentUser } from '@/app/data/user';
 import MyActivityList from '@/app/(protected)/(user)/dashboard/my-activity/_components/my-activity-list';
-import PlusButton from '@/components/common/plus-button';
 import Loading from '@/app/(protected)/(user)/dashboard/loading';
+import PlusDiv from '@/components/common/plus-div';
 
 export default async function Page() {
   const { activities, cursorId } = await getMyActivities({ take: 7 });
   const user = await getCurrentUser();
 
   return (
-    <main>
+    <main className="p-5 pb-20">
       <div className="flex items-center justify-between w-full pb-5">
         <div>
           <h1 className="text-2xl font-bold">
@@ -22,8 +22,8 @@ export default async function Page() {
           </p>
         </div>
         <div>
-          <Link href="/dashboard/my-activity/create">
-            <PlusButton />
+          <Link href="/dashboard/my-activity/create" className="relative z-50">
+            <PlusDiv />
           </Link>
         </div>
       </div>

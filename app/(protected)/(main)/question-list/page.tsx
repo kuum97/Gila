@@ -3,36 +3,36 @@ import { getQuestions } from '@/app/data/question';
 import QuestionList from '@/app/(protected)/(main)/question-list/_components/question-list';
 import SortingDropdown from '@/components/sorting-dropdown';
 import { QUESTIONSORTS } from '@/constants/sort';
+import { QuestionSort } from '@/type';
 
 export default async function Page({
   searchParams,
 }: {
-  searchParams: { sort: string; location: string };
+  searchParams: { sort: QuestionSort; location: string };
 }) {
   const { sort, location } = searchParams;
-  const listOrder = sort ? 'answerLen' : 'recent';
   const qusetions = await getQuestions({
     take: 7,
-    order: listOrder,
+    order: sort,
     answerTake: 5,
     location,
   });
 
   return (
-    <div className="flex flex-col items-center gap-3 p-5 pb-20">
-      <div className="relative flex flex-col items-center w-full gap-4">
+    <main className="w-full pb-20">
+      <div className="relative flex flex-col items-center w-full gap-4 p-5">
         <h1 className="text-2xl font-semibold">
           <span className="text-3xl font-bold text-primary">길라</span>에게 바로 물어보세요!
         </h1>
         <QuestionForm />
       </div>
-      <div className="flex flex-col items-start w-full gap-2">
+      <div className="flex flex-col items-start w-full gap-2 p-5">
         <div className="flex items-center justify-between w-full">
           <h2 className="text-xl font-semibold">질문 목록</h2>
           <SortingDropdown sorts={QUESTIONSORTS} />
         </div>
         <QuestionList questions={qusetions.questions} questionCursorId={qusetions.cursorId} />
       </div>
-    </div>
+    </main>
   );
 }

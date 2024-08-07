@@ -31,7 +31,7 @@ export default function DeleteAlertModal({
     <AlertDialog open={open} onOpenChange={setModalOpen}>
       {isButton && (
         <AlertDialogTrigger
-          className={`${isButton ? 'bg-red text-white text-base' : 'text-sm w-full'} px-4 py-2 rounded-md`}
+          className={`${isButton ? 'bg-red text-white text-base' : 'text-sm'} px-4 py-2 rounded-md w-full`}
         >
           {content}
         </AlertDialogTrigger>

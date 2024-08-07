@@ -9,13 +9,13 @@ export default async function Page() {
   const user = await getCurrentUser();
 
   return (
-    <div className="flex flex-col gap-3">
-      <h1 className="text-2xl font-bold">
+    <main className="p-5">
+      <h1 className="w-full text-2xl font-bold">
         <span className="text-3xl text-primary">{user.nickname}</span>님이 신청한 활동
       </h1>
       <Suspense fallback={<Loading />}>
         <PromiseList promiseList={myPromise.requests} cursorId={myPromise.cursorId} />
       </Suspense>
-    </div>
+    </main>
   );
 }
