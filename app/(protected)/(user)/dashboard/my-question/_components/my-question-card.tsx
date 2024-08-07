@@ -44,14 +44,14 @@ export default function MyQuestionCard({ myQuestionItem }: Props) {
             <Loader2 className="animate-spin h-8 w-8" />
           </div>
         )}
-        <h1 className="w-24 font-semibold truncate text-sm">{myQuestionItem.title}</h1>
+        <h1 className="w-40 font-semibold truncate text-sm">{myQuestionItem.title}</h1>
         <div className="flex gap-4 items-center">
           <p className="text-[10px] text-nowrap w-10 text-center text-gray_500">{`${createdAt.time}${createdAt.result}전`}</p>
           <div className="flex items-center gap-[2px]">
             <MessageCircle size={13} />
             <p>{myQuestionItem._count.answers}</p>
           </div>
-          <div className="z-50 flex items-center" onClick={(e) => e.preventDefault()}>
+          <div className="z-50 flex items-center" onClick={(e) => e.stopPropagation()}>
             <MyQuestionKebab
               myQuestion={myQuestionItem}
               handleDelete={onDelete}

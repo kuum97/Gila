@@ -10,7 +10,13 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { EllipsisVertical } from 'lucide-react';
 import { QuestionWithUserAndAnswers } from '@/type';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import MyQuestionEditForm from '@/app/(protected)/(user)/dashboard/my-question/_components/my-question-edit-form';
 import { cn } from '@/lib/utils';
 import DeleteAlertModal from '@/components/delete-alert-modal';
@@ -24,6 +30,10 @@ interface Props {
 export default function MyQuestionKebab({ handleDelete, myQuestion, disabled }: Props) {
   const [isEditModalOpen, setEditModalOpen] = useState<boolean>(false);
   const [isDeleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
+
+  const toggleEditModal = () => {
+    setEditModalOpen(!isEditModalOpen);
+  };
 
   return (
     <>
@@ -40,7 +50,7 @@ export default function MyQuestionKebab({ handleDelete, myQuestion, disabled }: 
         <DropdownMenuContent className="relative bg-white mr-9">
           <DropdownMenuItem
             className="flex justify-center cursor-pointer"
-            onSelect={() => setEditModalOpen(true)}
+            onSelect={toggleEditModal}
           >
             수정하기
           </DropdownMenuItem>
@@ -59,11 +69,13 @@ export default function MyQuestionKebab({ handleDelete, myQuestion, disabled }: 
           <DialogHeader>
             <DialogTitle>수정하기</DialogTitle>
           </DialogHeader>
+          <DialogDescription aria-describedby={undefined} />
           <MyQuestionEditForm
             questionId={myQuestion.id}
             questionTitle={myQuestion.title}
             questionContent={myQuestion.content}
             questionLocation={myQuestion.location}
+            setEditModalOpen={toggleEditModal}
           />
         </DialogContent>
       </Dialog>
