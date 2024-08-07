@@ -46,14 +46,15 @@ export default function AnswerItem({ answer, userId }: Props) {
           <AnswerKebab handleDelete={isDeleteAnswer} handleEdit={handleEditAnswer} />
         )}
       </div>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-3">
         {answer.images[0] && !isEdit && (
           <div className="w-full h-72 relative">
             <Image
               src={answer.images[0]}
               alt="답변 이미지"
               fill
-              className="rounded-md object-cover"
+              className="rounded-md"
+              objectFit="contain"
             />
           </div>
         )}
@@ -64,7 +65,7 @@ export default function AnswerItem({ answer, userId }: Props) {
             handleEditAnswer={handleEditAnswer}
           />
         ) : (
-          <p className="text-sm w-full break-words">{answer.content}</p>
+          <p className="text-sm w-full break-words min-h-10">{answer.content}</p>
         )}
       </div>
     </div>
