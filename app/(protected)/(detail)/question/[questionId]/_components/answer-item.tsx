@@ -34,7 +34,7 @@ export default function AnswerItem({ answer, userId }: Props) {
         <div className="flex items-center gap-2">
           <Avatar className="w-7 h-7">
             <AvatarImage
-              src={answer.user.image ? answer.user.image : '/test.png'}
+              src={answer.user.image || '/default-profile-image.png'}
               className="object-cover w-7 h-7 rounded-full"
             />
             <AvatarFallback>CN</AvatarFallback>

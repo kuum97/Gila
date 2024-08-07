@@ -23,7 +23,7 @@ export default function QuestionDetail({
         <div className="flex justify-center items-center gap-2">
           <Avatar className="w-7 h-7">
             <AvatarImage
-              src={questionInfo.user.image ? questionInfo.user.image : '/test.png'}
+              src={questionInfo.user.image || '/default-profile-image.png'}
               className="object-cover w-7 h-7 rounded-full"
             />
             <AvatarFallback>CN</AvatarFallback>
