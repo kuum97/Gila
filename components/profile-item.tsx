@@ -2,6 +2,7 @@ import { User } from '@/type';
 import ProfileTopic from '@/app/(protected)/(user)/profile/_components/profile-topic';
 import ProfileRank from '@/app/(public)/introduction/[introductionId]/_components/profile-rank';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+import ProfileScoreTip from './profile-score-tip';
 import { Separator } from './ui/separator';
 
 interface UserData {
@@ -35,7 +36,10 @@ export default function ProfileItem({ userData }: Props) {
           <ProfileTopic tags={tags} />
         </div>
         <div>
-          <h2 className="text-lg font-semibold">점수</h2>
+          <div className="flex gap-2">
+            <h2 className="text-lg font-semibold">점수</h2>
+            <ProfileScoreTip />
+          </div>
           <div className="flex justify-center w-full">
             <ProfileRank rating={averageReviewScore} score="style2" />
           </div>
