@@ -103,7 +103,7 @@ export default function ActivityEditForm({ activity }: Props) {
             form={form}
           />
           <Button
-            disabled={isPending || !form.formState.isValid}
+            disabled={isPending || !form.formState.isValid || isUploading}
             type="submit"
             className="w-full text-xl font-semibold text-white shadow-md py-7 disabled:bg-primary_dark"
           >
