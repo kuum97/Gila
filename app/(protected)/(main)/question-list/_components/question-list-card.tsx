@@ -18,12 +18,12 @@ export default function QuestionListCard({ questionItem }: Props) {
         <CardHeader className="px-2 py-4">
           <CardTitle className="w-full text-xl font-bold truncate">{questionItem.title}</CardTitle>
         </CardHeader>
-        <CardContent className="flex items-center justify-between w-full p-2 text-sm border-t">
-          <div className="flex items-center gap-3">
-            <p className="w-24 font-medium text-nowrap">{questionItem.location}</p>
-            <p className="w-10 text-xs text-center text-nowrap text-gray_500">{`${createaAt.time}${createaAt.result}전`}</p>
+        <CardContent className="flex items-center justify-between w-full p-2 pr-3 text-sm border-t">
+          <div className="flex items-center w-full gap-3">
+            <p className="font-medium text-nowrap">{questionItem.location}</p>
+            <p className="text-xs text-center text-nowrap text-gray_500">{`${createaAt.time}${createaAt.result}전`}</p>
           </div>
-          <div className="flex items-center gap-[2px]">
+          <div className="flex items-center font-medium gap-[2px]">
             <MessageCircle size={13} />
             <p className="w-2 text-center">{questionItem._count.answers}</p>
           </div>

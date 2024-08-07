@@ -6,7 +6,7 @@ export default async function Page() {
   const myQuestions = await getMyQuestions({ take: 10, answerTake: 5 });
   return (
     <>
-      <div className="flex flex-col gap-3">
+      <div className="p-5">
         <h1 className="text-2xl font-bold">내 질문</h1>
         <MyQuestionList
           myQuestions={myQuestions.questions}

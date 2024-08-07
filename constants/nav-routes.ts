@@ -32,7 +32,7 @@ export const DASHBOARD_ROUTES: Route[] = [
 ];
 
 export const MAIN_ROUTES: Route[] = [
-  { icon: HeartHandshake, label: '길리 찾기', href: '/activity-list' },
+  { icon: HeartHandshake, label: '길라 찾기', href: '/activity-list' },
   { icon: MessageCircleQuestion, label: '질문 하기', href: '/question-list' },
   { icon: LayoutDashboard, label: '대시보드', href: `${dashboardPrefix}/my-activity` },
 ];

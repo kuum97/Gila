@@ -43,9 +43,12 @@ export default function SortingDropdown({ sorts }: Props) {
   return (
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
-        <Button type="button" className="flex justify-between gap-1 bg-white_light">
+        <Button
+          type="button"
+          className="flex justify-between gap-1 p-0 px-1 bg-white_light hover:bg-gray-200"
+        >
           <div className="text-sm">{currentSortKorean}</div>
-          <div>
+          <div className="flex justify-end w-full">
             {isOpen ? <ChevronUp className="size-4" /> : <ChevronDown className="size-4" />}
           </div>
         </Button>
