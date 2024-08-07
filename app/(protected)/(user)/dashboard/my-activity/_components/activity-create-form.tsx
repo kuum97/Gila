@@ -14,7 +14,7 @@ import DetailInfoSection from '@/app/(protected)/(user)/dashboard/my-activity/_c
 import { createActivity } from '@/app/action/activity';
 
 const ActivityCreateFormSchema = z.object({
-  title: z.string().min(1, { message: '제목은 필수 요소입니다.' }),
+  title: z.string(),
   tags: z.string().array(),
   description: z.string().min(1, { message: '설명은 필수 요소입니다.' }),
   schedule: z.object({ from: z.date(), to: z.date() }, { message: '일정은 필수 요소입니다.' }),
@@ -44,6 +44,11 @@ export default function ActivityCreateForm() {
       maximumCount: '1',
     },
   });
+
+  const selectLocation = (location: string) => {
+    form.setValue('location', location);
+    form.clearErrors('location');
+  };
 
   const onSubmit = ({
     title,

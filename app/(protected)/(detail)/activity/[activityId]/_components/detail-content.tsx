@@ -10,7 +10,16 @@ export default function DetailContent({ detail }: { detail: ActivityWithUserAndF
     <div>
       <DetailCarousel thumbnails={detail.thumbnails} />
       <div className="flex flex-col gap-6 m-4">
-        <DetailTitle activityDetail={detail} />
+        <DetailTitle
+          title={detail.title}
+          tags={detail.tags}
+          likes={detail._count.favorites}
+          views={detail.views}
+          startDate={detail.startDate}
+          endDate={detail.endDate}
+          activityId={detail.id}
+          isFavorite={detail.isFavorite}
+        />
         <DetailDescription description={detail.description} locations={detail.location} />
         <AuthorInfo ownerId={detail.userId} />
       </div>

@@ -22,15 +22,15 @@ export default function SharePopover({ activityId, shareImage }: Props) {
       objectType: 'feed',
       content: {
         title: 'Gila',
-        description: '길라와 같이 떠나자!',
-        imageUrl: shareImage,
+        description: '길라와 같이 떠나자',
+        imageUrl: '',
         link: {
           mobileWebUrl: url,
         },
       },
       buttons: [
         {
-          title: '친구와 같이 매듭 묶기',
+          title: '새로운 경험하러 가기',
           link: {
             mobileWebUrl: url,
           },

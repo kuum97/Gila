@@ -76,11 +76,11 @@ export const login = async (form: LoginSchemaType): Promise<ActionType<null>> =>
     if (error instanceof AuthError) {
       switch (error.type) {
         case 'CredentialsSignin':
-          return { success: false, message: '이메일이나 비밀번호가 일치하지 않습니다.' };
+          return { success: false, message: '잘못된 인증입니다.' };
         default:
           return {
             success: false,
-            message: '이메일이나 비밀번호가 일치하지 않습니다.',
+            message: '이메일이나 패스워드가 잘못되었습니다.',
           };
       }
     }
