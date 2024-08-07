@@ -9,13 +9,13 @@ type Props = {
 export default function RenderAvatar({ loading, imageUrl }: Props) {
   if (loading)
     return (
-      <div className="flex items-center justify-center w-40 h-40 mx-auto my-0 rounded-full bg-slate-500">
+      <div className="flex items-center justify-center w-40 h-40 mx-auto my-0 rounded-full bg-white bg-opacity-50">
         <Loader2 className="w-12 h-12 animate-spin" />
       </div>
     );
   if (imageUrl)
     return (
-      <div className="relative w-40 h-40 mx-auto my-0 rounded-full bg-slate-500">
+      <div className="relative w-40 h-40 mx-auto my-0 rounded-full bg-white bg-opacity-50">
         <Image
           src={imageUrl}
           alt="img"
@@ -26,7 +26,7 @@ export default function RenderAvatar({ loading, imageUrl }: Props) {
       </div>
     );
   return (
-    <div className="flex items-center justify-center w-40 h-40 rounded-full cursor-pointer bg-slate-500">
+    <div className="flex items-center justify-center w-40 h-40 rounded-full cursor-pointer bg-white bg-opacity-50">
       <User className="w-12 h-12" />
     </div>
   );

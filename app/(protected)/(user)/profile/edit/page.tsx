@@ -19,7 +19,7 @@ export default async function Page() {
           <CardTitle className="font-bold">
             <span className="text-3xl text-primary">{userData.user.nickname}</span>님의 개인정보
           </CardTitle>
-          <EditImageForm userImg={user.image ?? undefined} />
+          <EditImageForm userImg={user.image ?? '/default-profile-image.png'} />
         </CardHeader>
         <CardContent>
           <EditProfileItem userData={userData.user} />

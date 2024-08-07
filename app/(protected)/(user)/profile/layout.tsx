@@ -5,7 +5,7 @@ import NavigationBase from '@/components/common/nav-base';
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <div className="relative w-full h-screen">
+    <div className="relative w-full">
       <NavigationBase />
       {children}
       <FooterNavigation routes={PROFILE_ROUTES} />

@@ -10,7 +10,7 @@ export default function ProfileImage({ image }: Props) {
   return (
     <div>
       <div className="flex flex-col items-center">
-        <div className="relative w-32 h-32">
+        <div className="relative w-40 h-40">
           <Avatar className="w-full h-full">
             <AvatarImage
               src={image || '/default-profile-image.png'}
