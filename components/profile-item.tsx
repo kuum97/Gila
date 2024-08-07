@@ -3,6 +3,7 @@
 import ProfileTopic from '@/app/(protected)/(user)/profile/_components/profile-topic';
 import ProfileRank from '@/app/(public)/introduction/[introductionId]/_components/profile-rank';
 import { User } from '@/type';
+import ProfileScoreTip from './profile-score-tip';
 
 interface UserData {
   user: User;
@@ -28,7 +29,11 @@ export default function ProfileItem({ userData }: Props) {
       </div>
       <ProfileTopic tags={tags} />
       <div className="w-full pb-4 border-b border-gray-200">
-        <p className="text-sm">점수</p>
+        <div className="flex gap-2 relative">
+          <p className="text-sm">점수</p>
+          <ProfileScoreTip />
+        </div>
+
         <div className="w-full flex justify-center">
           <ProfileRank rating={averageReviewScore} score="style2" />
         </div>
