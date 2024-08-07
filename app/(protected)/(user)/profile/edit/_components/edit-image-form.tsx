@@ -64,7 +64,7 @@ export default function EditImageForm({ userImg }: Props) {
   return (
     <div className="relative">
       <RenderAvatar loading={loading} imageUrl={imageUrl} />
-      <div className="absolute top-0 flex space-x-2 right-0 w-10 h-10">
+      <div className="absolute top-0 flex w-10 h-10 space-x-2 right-16">
         <UploadButton
           onChange={onChange}
           onUploadBegin={onUploadBegin}

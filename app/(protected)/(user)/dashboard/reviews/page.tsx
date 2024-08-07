@@ -7,7 +7,7 @@ export default async function Page() {
 
   return (
     <div className="flex flex-col gap-3">
-      <h1 className="text-lg font-bold">이전 활동은 어땠나요?</h1>
+      <h1 className="text-2xl font-bold">이전 활동은 어땠나요?</h1>
       <ReviewList activities={activities} cursorId={cursorId} />
     </div>
   );

@@ -1,7 +1,8 @@
 import QuestionForm from '@/app/(protected)/(main)/question-list/_components/question-form';
 import { getQuestions } from '@/app/data/question';
 import QuestionList from '@/app/(protected)/(main)/question-list/_components/question-list';
-import QuestionSortDropdown from '@/app/(protected)/(main)/question-list/_components/question-sort-dropdown';
+import SortingDropdown from '@/components/sorting-dropdown';
+import { QUESTIONSORTS } from '@/constants/sort';
 
 export default async function Page({
   searchParams,
@@ -18,17 +19,17 @@ export default async function Page({
   });
 
   return (
-    <div className="flex flex-col items-center gap-3 p-6">
+    <div className="flex flex-col items-center gap-3 p-5 pb-20">
       <div className="relative flex flex-col items-center w-full gap-4">
-        <h1 className="text-xl font-semibold">
-          <span className="text-2xl font-bold text-primary">길라</span>에게 바로 물어보세요!
+        <h1 className="text-2xl font-semibold">
+          <span className="text-3xl font-bold text-primary">길라</span>에게 바로 물어보세요!
         </h1>
         <QuestionForm />
       </div>
       <div className="flex flex-col items-start w-full gap-2">
         <div className="flex items-center justify-between w-full">
-          <h2 className="font-semibold">질문 목록</h2>
-          <QuestionSortDropdown sortValue={sort} />
+          <h2 className="text-xl font-semibold">질문 목록</h2>
+          <SortingDropdown sorts={QUESTIONSORTS} />
         </div>
         <QuestionList questions={qusetions.questions} questionCursorId={qusetions.cursorId} />
       </div>

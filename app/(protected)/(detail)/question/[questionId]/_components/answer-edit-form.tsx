@@ -78,9 +78,9 @@ export default function AnswerEditForm({ answerId, defaultValue, handleEditAnswe
 
   const customButton = () => {
     return (
-      <div className="z-10 relative">
-        <div className="rounded-md flex justify-center items-center p-1 gap-1">
-          <FileImage className="h-5 w-5" color="#000" />
+      <div className="relative z-10">
+        <div className="flex items-center justify-center gap-1 p-1 rounded-md">
+          <FileImage className="w-5 h-5" color="#000" />
         </div>
       </div>
     );
@@ -105,17 +105,17 @@ export default function AnswerEditForm({ answerId, defaultValue, handleEditAnswe
 
                 <FormLabel className="text-sm">{FormFields.label}</FormLabel>
                 {loading && (
-                  <div className="flex justify-center items-center">
+                  <div className="flex items-center justify-center">
                     <Spinner />
                   </div>
                 )}
                 {defaultImage[0] && (
-                  <div className="w-full h-72 relative">
+                  <div className="relative w-full h-72">
                     <Image
                       src={defaultImage[0]}
                       alt="답변 이미지"
                       fill
-                      className="rounded-md object-cover"
+                      className="object-cover rounded-md"
                     />
                     <X className="absolute right-1 top-1" onClick={cancelImage} />
                   </div>
@@ -133,7 +133,7 @@ export default function AnswerEditForm({ answerId, defaultValue, handleEditAnswe
         <div className="flex gap-3">
           <Button
             type="button"
-            className="px-4 py-1 text-sm rounded-md h-8"
+            className="h-8 px-4 py-1 text-sm rounded-md"
             onClick={handleEditAnswer}
           >
             취소
@@ -141,7 +141,7 @@ export default function AnswerEditForm({ answerId, defaultValue, handleEditAnswe
           <Button
             disabled={isPending || loading || !form.formState.isValid}
             type="submit"
-            className="px-4 py-1 text-sm rounded-md h-8"
+            className="h-8 px-4 py-1 text-sm rounded-md"
           >
             수정하기
           </Button>

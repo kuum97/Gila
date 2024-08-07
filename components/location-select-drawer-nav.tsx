@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import {
   Command,
   CommandEmpty,
@@ -27,6 +27,7 @@ export default function LocationSelectDrawerForNav() {
   const [province, setProvince] = useState<string | null>(null);
   const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const cities = useMemo(() => {
     return province ? LOCATIONS[province] : [];
@@ -36,8 +37,26 @@ export default function LocationSelectDrawerForNav() {
     if (province) {
       const fullLocation = `${province} ${location}`;
       setSelectedLocation(fullLocation);
-      router.push(`?location=${encodeURIComponent(fullLocation)}`);
+
+      const params = new URLSearchParams(searchParams.toString());
+
+      params.set('location', fullLocation);
+
+      router.push(`?${params.toString()}`);
     }
+  };
+
+  const handleResetLocation = () => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    // 'location' 파라미터만 제거합니다.
+    params.delete('location');
+
+    setProvince(null);
+    setSelectedLocation(null);
+
+    // 변경된 검색 파라미터로 URL을 업데이트합니다.
+    router.push(`?${params.toString()}`);
   };
 
   return (
@@ -104,11 +123,7 @@ export default function LocationSelectDrawerForNav() {
         <DrawerFooter>
           <Button
             type="button"
-            onClick={() => {
-              setProvince(null);
-              setSelectedLocation(null);
-              router.push('?'); // Reset the URL when clearing selections
-            }}
+            onClick={handleResetLocation}
             className="text-base text-white shadow-md bg-slate-800"
           >
             초기화

@@ -87,12 +87,10 @@ export default function QuestionForm() {
             control={form.control}
             name="location"
             render={({ field: { onChange } }) => (
-              <FormItem className="relative">
-                <FormLabel className="text-sm">{FormFields[0].label}</FormLabel>
+              <FormItem>
+                <FormLabel className="text-base">{FormFields[0].label}</FormLabel>
                 <FormControl>
-                  <div className="relative">
-                    <LocationSelectDrawer onChange={onChange} />
-                  </div>
+                  <LocationSelectDrawer onChange={onChange} />
                 </FormControl>
               </FormItem>
             )}
@@ -101,14 +99,14 @@ export default function QuestionForm() {
             control={form.control}
             name="title"
             render={({ field }) => (
-              <FormItem className="relative">
-                <FormLabel className="text-sm">{FormFields[1].label}</FormLabel>
+              <FormItem>
+                <FormLabel className="text-base">{FormFields[1].label}</FormLabel>
                 <FormControl>
                   <Input
                     type={FormFields[1].type}
                     placeholder={FormFields[1].placeholder}
                     {...field}
-                    className="text-xs"
+                    className="text-sm"
                   />
                 </FormControl>
               </FormItem>
@@ -118,25 +116,27 @@ export default function QuestionForm() {
             control={form.control}
             name="content"
             render={({ field }) => (
-              <FormItem className="relative">
-                <FormLabel className="text-sm">{FormFields[2].label}</FormLabel>
+              <FormItem>
+                <FormLabel className="text-base">{FormFields[2].label}</FormLabel>
                 <FormControl>
                   <Textarea
                     placeholder={FormFields[2].placeholder}
                     {...field}
-                    className="text-xs"
+                    className="text-sm"
                   />
                 </FormControl>
               </FormItem>
             )}
           />
-          <Button
-            disabled={isPending || !form.formState.isValid}
-            type="submit"
-            className="px-4 py-1 text-sm rounded-md w-full"
-          >
-            물어보기
-          </Button>
+          <div>
+            <Button
+              disabled={isPending || !form.formState.isValid}
+              type="submit"
+              className="w-full px-4 py-1 mb-6 text-base font-medium text-white rounded-md"
+            >
+              물어보기
+            </Button>
+          </div>
         </div>
         <QuestionTipPopOver />
       </form>
