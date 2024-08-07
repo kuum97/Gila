@@ -46,7 +46,7 @@ export default function ProfileItem({ userData }: Props) {
         </div>
       </CardContent>
       <Separator className="w-full bg-gray-200" />
-      <CardFooter className="flex justify-center w-full gap-6">
+      <CardFooter className="flex justify-center w-full gap-6 p-0 pb-3">
         <div className="flex flex-col items-center">
           <h2 className="text-base font-medium">가이드 횟수</h2>
           <p className="text-sm font-normal">{activityCount}</p>

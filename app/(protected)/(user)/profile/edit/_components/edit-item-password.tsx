@@ -14,12 +14,14 @@ interface Props {
 
 export default function EditItemPassword({ triggerText }: Props) {
   return (
-    <Accordion type="single" collapsible className="flex flex-col gap-8">
-      <AccordionItem value="password">
+    <Accordion type="single" collapsible>
+      <AccordionItem value="password" className="border-none">
         <AccordionTrigger>
-          <div className="flex justify-between w-full px-3">
-            <p className="w-20 text-lg font-semibold text-black cursor-pointer">{triggerText}</p>
-            <span className="mr-2 text-xs text-gray-400 cursor-pointer">수정하기</span>
+          <div className="flex relative w-full">
+            <p className="text-lg font-semibold text-black">{triggerText}</p>
+            <span className="absolute text-xs text-gray-400 cursor-pointer right-1 top-[7px]">
+              수정하기
+            </span>
           </div>
         </AccordionTrigger>
         <AccordionContent>
