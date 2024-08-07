@@ -43,7 +43,7 @@ export default function EditPasswordForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex items-center justify-center gap-6 mx-2"
+        className="flex items-end justify-center gap-6 mx-2"
       >
         <div className="flex flex-col w-full">
           <FormField
@@ -57,7 +57,7 @@ export default function EditPasswordForm() {
                     type="password"
                     placeholder="비밀번호를 입력해 주세요"
                     {...field}
-                    className="text-xs"
+                    className="m-0 text-xs"
                   />
                 </FormControl>
                 <FormMessage className="text-xs text-red" />

@@ -17,10 +17,9 @@ export default function EditItemPassword({ triggerText }: Props) {
     <Accordion type="single" collapsible className="flex flex-col gap-8">
       <AccordionItem value="password">
         <AccordionTrigger>
-          <p className="w-20 text-sm text-black cursor-pointer">{triggerText}</p>
-          <div className="flex items-center justify-between w-full mx-3">
-            <p className="text-sm font-bold">********</p>
-            <span className="text-xs text-gray-400 cursor-pointer">수정하기</span>
+          <div className="flex justify-between w-full px-3">
+            <p className="w-20 text-lg font-semibold text-black cursor-pointer">{triggerText}</p>
+            <span className="mr-2 text-xs text-gray-400 cursor-pointer">수정하기</span>
           </div>
         </AccordionTrigger>
         <AccordionContent>

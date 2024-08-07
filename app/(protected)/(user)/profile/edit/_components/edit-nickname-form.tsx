@@ -48,7 +48,7 @@ export default function EditNicknameForm({ setValue }: Props) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex items-center justify-center gap-6 mx-2"
+        className="flex items-end justify-center gap-6 mx-2"
       >
         <div className="flex flex-col w-full">
           <FormField
@@ -56,13 +56,13 @@ export default function EditNicknameForm({ setValue }: Props) {
             name="nickname"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="hidden text-sm">닉네임</FormLabel>
+                <FormLabel className="hidden text-lg font-semibold">닉네임</FormLabel>
                 <FormControl>
                   <Input
                     type="text"
                     placeholder="닉네임을 입력해 주세요"
                     {...field}
-                    className="text-xs"
+                    className="m-0 text-xs"
                   />
                 </FormControl>
                 <FormMessage className="text-xs text-red" />

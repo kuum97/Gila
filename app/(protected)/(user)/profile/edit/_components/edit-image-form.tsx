@@ -53,7 +53,7 @@ export default function EditImageForm({ userImg }: Props) {
 
   const customButton = () => {
     return (
-      <div className="z-50 p-3 rounded-full bg-primary">
+      <div className="z-10 p-3 rounded-full bg-primary">
         <Edit2 className="w-4 h-4" />
       </div>
     );
@@ -64,7 +64,7 @@ export default function EditImageForm({ userImg }: Props) {
   return (
     <div className="relative">
       <RenderAvatar loading={loading} imageUrl={imageUrl} />
-      <div className="absolute top-0 flex w-10 h-10 space-x-2 right-16">
+      <div className="absolute flex w-10 h-10 space-x-2 top-4 right-28">
         <UploadButton
           onChange={onChange}
           onUploadBegin={onUploadBegin}
