@@ -65,7 +65,7 @@ export default function DetailTitle({
           ))}
         </div>
         <div className="flex items-center gap-4">
-          <div onClick={toggleActivityLike}>
+          <div onClick={toggleActivityLike} className="cursor-pointer">
             {favorite ? <Heart size={20} color="#FF4242" fill="#FF4242" /> : <Heart size={20} />}
           </div>
           <SharePopover activityId={activityDetail.id} shareImage={activityDetail.thumbnails[0]} />

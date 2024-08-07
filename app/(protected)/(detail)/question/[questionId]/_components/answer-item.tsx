@@ -34,7 +34,7 @@ export default function AnswerItem({ answer, userId }: Props) {
         <div className="flex items-center gap-2">
           <Avatar className="w-7 h-7">
             <AvatarImage
-              src={answer.user.image ? answer.user.image : '/test.png'}
+              src={answer.user.image || '/default-profile-image.png'}
               className="object-cover w-7 h-7 rounded-full"
             />
             <AvatarFallback>CN</AvatarFallback>
@@ -46,14 +46,15 @@ export default function AnswerItem({ answer, userId }: Props) {
           <AnswerKebab handleDelete={isDeleteAnswer} handleEdit={handleEditAnswer} />
         )}
       </div>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-3">
         {answer.images[0] && !isEdit && (
           <div className="w-full h-72 relative">
             <Image
               src={answer.images[0]}
               alt="답변 이미지"
               fill
-              className="rounded-md object-cover"
+              className="rounded-md"
+              objectFit="contain"
             />
           </div>
         )}
@@ -64,7 +65,7 @@ export default function AnswerItem({ answer, userId }: Props) {
             handleEditAnswer={handleEditAnswer}
           />
         ) : (
-          <p className="text-sm w-full break-words">{answer.content}</p>
+          <p className="text-sm w-full break-words min-h-10">{answer.content}</p>
         )}
       </div>
     </div>

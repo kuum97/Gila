@@ -119,7 +119,8 @@ export default function AnswerEditForm({ answerId, defaultValue, handleEditAnswe
                       src={defaultImage[0]}
                       alt="답변 이미지"
                       fill
-                      className="object-cover rounded-md"
+                      className="rounded-md"
+                      objectFit="contain"
                     />
                     <X className="absolute right-1 top-1" onClick={cancelImage} />
                   </div>
