@@ -38,8 +38,7 @@ export default function LandingMainSection() {
               src="/ActivityPage.png"
               fill
               alt="활동 페이지"
-              objectFit="cover"
-              className="rounded"
+              style={{ objectFit: 'cover', borderRadius: '8px' }}
             />
           </div>
         </div>
@@ -59,8 +58,7 @@ export default function LandingMainSection() {
               src="/QuestionPage.png"
               fill
               alt="질문 페이지"
-              objectFit="cover"
-              className="rounded"
+              style={{ objectFit: 'cover', borderRadius: '8px' }}
             />
           </div>
         </div>

@@ -11,7 +11,12 @@ export default function LandingHeroSection() {
         <Image fill src="/GilaName.png" alt="text-main-logo" style={{ objectFit: 'cover' }} />
       </div>
       <div className="w-full h-40 relative">
-        <Image src="/LandingBackground.jpg" alt="렌딩 배경이미지" fill objectFit="cover" />
+        <Image
+          src="/LandingBackground.jpg"
+          alt="렌딩 배경이미지"
+          fill
+          style={{ objectFit: 'cover' }}
+        />
       </div>
     </section>
   );
