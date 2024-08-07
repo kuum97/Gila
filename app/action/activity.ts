@@ -45,6 +45,8 @@ export const createActivity = async ({
 
     if (!newActivity) return { success: false, message: '활동 생성에 실패하였습니다.' };
 
+    revalidatePath('/dashboard/my-activity');
+
     return {
       success: true,
       message: '활동 생성에 성공하였습니다.',

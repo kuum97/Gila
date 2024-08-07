@@ -28,21 +28,23 @@ export default function PromiseListCard({ promise }: { promise: RequestWithActiv
     <ImageCard
       activityId={id}
       title={title}
-      date={formatDate}
-      participants={maximumCount}
       imageSrc={thumbnails[0]}
-      bottomContent={
-        <div className="absolute z-10 right-3 bottom-3">
-          {promise.status === 'PENDING' && (
-            <div onClick={(e) => e.preventDefault()}>
-              <DeleteAlertModal deleteAction={cancelPromise} isButton content="취소" />
-            </div>
-          )}
-        </div>
+      middleContent={
+        <>
+          <p className="text-sm font-semibold text-gray-900">{formatDate}</p>
+          <div className="text-sm font-semibold text-gray-900">
+            <p>최대 인원: {maximumCount} 명</p>
+          </div>
+        </>
       }
-      topContent={
-        <div className="absolute top-1 right-1">
-          <PromiseStatus status={promise.status} />
+      bottomContent={
+        <div className="absolute top-3 right-3 flex flex-col gap-7">
+          <div className="w-full flex justify-end">
+            <PromiseStatus status={promise.status} />
+          </div>
+          <div className="w-full" onClick={(e) => e.preventDefault()}>
+            <DeleteAlertModal deleteAction={cancelPromise} isButton content="취소" />
+          </div>
         </div>
       }
     />

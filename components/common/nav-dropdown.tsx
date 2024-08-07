@@ -46,7 +46,7 @@ export default function NavDropdown({ userAvatar }: Props) {
                 src={userAvatar || '/default-profile-image.png'}
                 alt="user-avatar"
                 sizes="(max-width: 768px) 100vw"
-                style={{ objectFit: 'contain' }}
+                style={{ objectFit: 'cover' }}
               />
               <AvatarFallback className="flex items-center justify-center">
                 <Image
@@ -68,7 +68,7 @@ export default function NavDropdown({ userAvatar }: Props) {
           </button>
         </div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="bg-white_light" align="end">
+      <DropdownMenuContent className="border-none bg-opacity-90 bg-white_light" align="end">
         <DropdownMenuItem asChild>
           <Link
             href="/profile"
