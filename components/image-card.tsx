@@ -38,7 +38,7 @@ export default function ImageCard({
             />
           </div>
         </div>
-        <div className="flex flex-col w-full gap-1 p-2 relative">
+        <div className="flex flex-col w-full gap-1 p-2">
           <CardHeader className="p-0">
             <CardTitle className="text-2xl font-bold text-black truncate">{title}</CardTitle>
           </CardHeader>
