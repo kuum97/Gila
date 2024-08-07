@@ -24,6 +24,16 @@ export const createActivityRequest = async (
       return { success: false, message: '이미 생성된 요청이 있습니다.' };
     }
 
+    const myActivity = await db.activity.findUnique({
+      where: {
+        id: activityId,
+      },
+    });
+
+    if (myActivity?.userId === userId) {
+      return { success: false, message: '본인의 활동은 신청할 수 없습니다.' };
+    }
+
     const activityRequest = await db.activityRequest.create({
       data: {
         requestUserId: userId,

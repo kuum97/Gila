@@ -1,8 +1,6 @@
-import Image from 'next/image';
-import GilaName from '@/public/GilaName.png';
-import Background from '@/public/LandingBackground.jpg';
-import GilaLogo from '@/public/GilaLogo.png';
-import Link from 'next/link';
+import LandingHeroSection from '@/app/(public)/_components/landing-hero-section';
+import LandingMainSection from '@/app/(public)/_components/landing-main-section';
+import LandingNavigation from '@/app/(public)/_components/landing-nav';
 
 export default function Page() {
   return (

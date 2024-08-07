@@ -22,12 +22,13 @@ const PasswordInput = forwardRef<HTMLInputElement, Props>(
           size="sm"
           onClick={handleToggle}
           disabled={disabled}
+          tabIndex={-1}
           className="absolute top-0.5 right-0"
         >
           {props.type === 'password' && !disabled ? (
-            <EyeIcon aria-hidden="true" color="#A4A1AA" size={20} />
+            <EyeIcon aria-hidden="true" tabIndex={-1} color="#A4A1AA" size={20} />
           ) : (
-            <EyeOffIcon aria-hidden="true" color="#A4A1AA" size={20} />
+            <EyeOffIcon aria-hidden="true" tabIndex={-1} color="#A4A1AA" size={20} />
           )}
         </Button>
       </div>

@@ -1,5 +1,6 @@
 import BackButton from '@/components/common/back-button';
 import Image from 'next/image';
+import BackButton from '@/components/common/back-button';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
