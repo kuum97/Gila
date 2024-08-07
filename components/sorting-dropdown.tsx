@@ -9,7 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { ACTIVITYSORTS, SortOption } from '@/constants/sort';
+import { SortOption } from '@/constants/sort';
 import { cn } from '@/lib/utils';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
@@ -23,7 +23,7 @@ export default function SortingDropdown({ sorts }: Props) {
   const searchParams = useSearchParams();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [currentSort, setCurrentSort] = useState('recent');
-  const currentSortKorean = ACTIVITYSORTS.find((sort) => sort.en === currentSort)?.ko || '최신순';
+  const currentSortKorean = sorts.find((sort) => sort.en === currentSort)?.ko || '최신순';
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
