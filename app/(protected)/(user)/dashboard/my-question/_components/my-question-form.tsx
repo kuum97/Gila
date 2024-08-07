@@ -148,7 +148,7 @@ export default function MyQuestionForm({ toggleModal }: { toggleModal: () => voi
             <Button
               disabled={isPending || !form.formState.isValid}
               type="submit"
-              className="px-4 py-1 text-sm rounded-md"
+              className="px-4 py-1 text-sm rounded-md w-full"
             >
               물어보기
             </Button>
