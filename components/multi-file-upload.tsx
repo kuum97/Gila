@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useDropzone } from '@uploadthing/react';
 import { useUploadThing } from '@/lib/uploadthing';
@@ -13,9 +13,10 @@ import { FileImage } from 'lucide-react';
 interface Props {
   value: string[];
   onChange: (...event: string[][]) => void;
+  onLoadingChange: (loading: boolean) => void;
 }
 
-export default function MultiUploader({ onChange, value = [] }: Props) {
+export default function MultiUploader({ onChange, value = [], onLoadingChange }: Props) {
   const [uploadedFiles, setUploadedFiles] = useState<string[]>(value);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -62,6 +63,15 @@ export default function MultiUploader({ onChange, value = [] }: Props) {
     accept: fileTypes ? generateClientDropzoneAccept(fileTypes) : undefined,
   });
 
+  useEffect(() => {
+    onLoadingChange(isLoading);
+  }, [isLoading, onLoadingChange]);
+
+  const handleCancel = useCallback((event: React.MouseEvent) => {
+    event.stopPropagation();
+    setUploadedFiles([]);
+  }, []);
+
   return (
     <div className="relative">
       <div
@@ -83,6 +93,13 @@ export default function MultiUploader({ onChange, value = [] }: Props) {
             <div className="flex gap-2 mt-2">
               <Button type="button" className="w-full text-white hover:bg-primary_dark">
                 다른 사진 올리기
+              </Button>
+              <Button
+                type="button"
+                className="w-full text-white bg-red hover:bg-rose-800"
+                onClick={handleCancel}
+              >
+                취소
               </Button>
             </div>
           </>

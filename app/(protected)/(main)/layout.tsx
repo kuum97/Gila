@@ -6,7 +6,7 @@ import { MAIN_ROUTES } from '@/constants/nav-routes';
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <div>
+    <div className="relative h-screen max-w-screen">
       <NavigationBase>
         <LocationSelectDrawerForNav />
       </NavigationBase>

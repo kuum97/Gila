@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -8,8 +9,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import MyQuestionForm from '@/app/(protected)/(user)/dashboard/my-question/_components/my-question-form';
-import PlusButton from '@/components/common/plus-button';
-import { useState } from 'react';
+import PlusButton from '@/components/common/plus-div';
 
 export default function MyQuestionCreateModal() {
   const [modalOpen, setModalOpen] = useState(false);

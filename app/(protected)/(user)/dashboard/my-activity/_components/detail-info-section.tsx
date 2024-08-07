@@ -11,9 +11,10 @@ import MultiUploader from '@/components/multi-file-upload';
 
 interface Props extends ActivityCreateFormProps {
   className?: string;
+  onLoadingChange: (loading: boolean) => void;
 }
 
-export default function DetailInfoSection({ form, className }: Props) {
+export default function DetailInfoSection({ form, className, onLoadingChange }: Props) {
   return (
     <Card className={className}>
       <CardHeader>
@@ -107,7 +108,11 @@ export default function DetailInfoSection({ form, className }: Props) {
               <FormItem className="w-full">
                 <FormLabel className="text-lg">이미지</FormLabel>
                 <FormControl>
-                  <MultiUploader onChange={onChange} value={value} />
+                  <MultiUploader
+                    onChange={onChange}
+                    onLoadingChange={onLoadingChange}
+                    value={value}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
