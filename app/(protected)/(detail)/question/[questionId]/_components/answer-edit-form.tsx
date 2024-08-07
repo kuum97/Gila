@@ -138,7 +138,7 @@ export default function AnswerEditForm({ answerId, defaultValue, handleEditAnswe
         <div className="flex gap-3">
           <Button
             type="button"
-            className="h-8 px-4 py-1 text-sm rounded-md"
+            className="h-8 px-4 py-1 text-sm text-white rounded-md"
             onClick={handleEditAnswer}
           >
             취소
@@ -146,7 +146,7 @@ export default function AnswerEditForm({ answerId, defaultValue, handleEditAnswe
           <Button
             disabled={isPending || loading || !form.formState.isValid}
             type="submit"
-            className="h-8 px-4 py-1 text-sm rounded-md"
+            className="h-8 px-4 py-1 text-sm text-white rounded-md"
           >
             수정하기
           </Button>

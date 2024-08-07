@@ -33,19 +33,19 @@ export default function MyQuestionCard({ myQuestionItem }: Props) {
 
   return (
     <Link href={`/question/${myQuestionItem.id}`}>
-      <div className="w-full border rounded-md flex justify-between items-center p-3 text-xs overflow-hidden relative">
+      <div className="relative flex items-center justify-between w-full p-3 overflow-hidden text-xs border rounded-md">
         {isPending && (
           <div
-            className="absolute inset-0 bg-black/50 rounded-md z-10 cursor-not-allowed flex justify-center items-center"
+            className="absolute inset-0 z-10 flex items-center justify-center rounded-md cursor-not-allowed bg-black/50"
             onClick={(e: React.MouseEvent<HTMLDivElement>) => {
               e.preventDefault();
             }}
           >
-            <Loader2 className="animate-spin h-8 w-8" />
+            <Loader2 className="w-8 h-8 animate-spin" />
           </div>
         )}
-        <h1 className="w-40 font-semibold truncate text-sm">{myQuestionItem.title}</h1>
-        <div className="flex gap-4 items-center">
+        <h1 className="w-40 text-sm font-semibold truncate">{myQuestionItem.title}</h1>
+        <div className="flex items-center gap-4">
           <p className="text-[10px] text-nowrap w-10 text-center text-gray_500">{`${createdAt.time}${createdAt.result}전`}</p>
           <div className="flex items-center gap-[2px]">
             <MessageCircle size={13} />

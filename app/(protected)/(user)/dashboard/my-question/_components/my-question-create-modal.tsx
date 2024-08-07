@@ -21,7 +21,7 @@ export default function MyQuestionCreateModal() {
   return (
     <Dialog open={modalOpen} onOpenChange={toggleModal}>
       <DialogTrigger asChild>
-        <div className="w-8 h-8">
+        <div className="relative z-50 w-8 h-8">
           <PlusButton />
         </div>
       </DialogTrigger>
