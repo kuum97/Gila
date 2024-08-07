@@ -4,7 +4,7 @@ import BackButton from '@/components/common/back-button';
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen gap-2 bg-white_light">
-      <div className="fixed flex flex-col items-center w-full gap-5 pb-5 border-b border-gray-300 top-5">
+      <div className="fixed flex flex-col items-center w-full gap-5 pb-5 top-5">
         <div className="relative size-14">
           <Image fill src="/GilaLogo.png" alt="logo-to-home" style={{ objectFit: 'contain' }} />
         </div>
