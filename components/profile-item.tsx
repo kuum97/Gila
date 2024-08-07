@@ -36,7 +36,7 @@ export default function ProfileItem({ userData }: Props) {
           <ProfileTopic tags={tags} />
         </div>
         <div>
-          <div className="flex gap-4">
+          <div className="flex gap-2">
             <h2 className="text-lg font-semibold">점수</h2>
             <ProfileScoreTip />
           </div>
