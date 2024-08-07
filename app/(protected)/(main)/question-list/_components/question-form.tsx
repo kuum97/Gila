@@ -16,9 +16,9 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { createQuestion } from '@/app/action/question';
 import QuestionTipPopOver from '@/app/(protected)/(main)/question-list/_components/qusetion-tip-popover';
-import QuestionLocationPopover from '@/app/(protected)/(main)/question-list/_components/question-location-popover';
 import { toast } from 'sonner';
 import { useTransition } from 'react';
+import LocationSelectDrawer from '@/components/location-select-drawer';
 
 const FormFields = [
   {
@@ -67,11 +67,6 @@ export default function QuestionForm() {
     },
   });
 
-  const selectLocation = (location: string) => {
-    form.setValue('location', location);
-    form.clearErrors('location');
-  };
-
   const onSubmit = (values: z.infer<typeof FormSchema>) => {
     startTransition(async () => {
       const result = await createQuestion({
@@ -98,20 +93,11 @@ export default function QuestionForm() {
           <FormField
             control={form.control}
             name="location"
-            render={({ field }) => (
+            render={({ field: { onChange } }) => (
               <FormItem>
-                <FormLabel className="text-sm">{FormFields[0].label}</FormLabel>
+                <FormLabel className="text-base">{FormFields[0].label}</FormLabel>
                 <FormControl>
-                  <div className="relative">
-                    <Input
-                      type={FormFields[0].type}
-                      placeholder={FormFields[0].placeholder}
-                      {...field}
-                      className="text-xs"
-                      disabled
-                    />
-                    <QuestionLocationPopover selectLocation={selectLocation} />
-                  </div>
+                  <LocationSelectDrawer onChange={onChange} />
                 </FormControl>
                 <div className="h-4">
                   <FormMessage className="text-xs text-red" />
@@ -124,13 +110,13 @@ export default function QuestionForm() {
             name="title"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-sm">{FormFields[1].label}</FormLabel>
+                <FormLabel className="text-base">{FormFields[1].label}</FormLabel>
                 <FormControl>
                   <Input
                     type={FormFields[1].type}
                     placeholder={FormFields[1].placeholder}
                     {...field}
-                    className="text-xs"
+                    className="text-sm"
                   />
                 </FormControl>
                 <div className="h-4">
@@ -144,12 +130,12 @@ export default function QuestionForm() {
             name="content"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-sm">{FormFields[2].label}</FormLabel>
+                <FormLabel className="text-base">{FormFields[2].label}</FormLabel>
                 <FormControl>
                   <Textarea
                     placeholder={FormFields[2].placeholder}
                     {...field}
-                    className="text-xs"
+                    className="text-sm"
                   />
                 </FormControl>
                 <div className="h-4">
@@ -160,9 +146,9 @@ export default function QuestionForm() {
           />
           <div>
             <Button
-              disabled={isPending}
+              disabled={isPending || !form.formState.isValid}
               type="submit"
-              className="px-4 py-1 mb-6 text-sm rounded-md w-full"
+              className="w-full px-4 py-1 mb-6 text-base font-medium text-white rounded-md"
             >
               물어보기
             </Button>

@@ -7,6 +7,7 @@ import ReviewsCard from '@/app/(protected)/(user)/dashboard/reviews/_components/
 
 import { ActivityWithUser } from '@/type';
 import { getAvailableReviewActivities } from '@/app/data/activity';
+import Link from 'next/link';
 
 type Props = {
   activities: ActivityWithUser[];
@@ -35,6 +36,21 @@ export default function ReviewList({ activities, cursorId }: Props) {
   const removeActivity = (activityId: string) => {
     setInitActivities((prev) => prev.filter((activity) => activity.id !== activityId));
   };
+
+  if (activities.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center gap-4">
+        <p>아직 리뷰가능한 활동이 없습니다.</p>
+        <p className="text-sm">아직 길라를 한 번도 경험해 본 적이 없으시다면?</p>
+        <Link
+          href="/activity-list"
+          className="flex items-center justify-center px-4 py-3 font-semibold rounded-lg bg-primary text-white_light hover:bg-primary_dark"
+        >
+          약속 잡으러 가기
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <>

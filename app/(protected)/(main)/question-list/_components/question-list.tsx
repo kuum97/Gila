@@ -48,8 +48,8 @@ export default function QuestionList({ questions, questionCursorId }: Props) {
   });
 
   return (
-    <div className="h-[450px] w-full overflow-y-scroll overflow-x-hidden flex flex-col items-center">
-      <ul className="flex flex-col items-center gap-2 w-full">
+    <>
+      <ul className="flex flex-col items-center w-full gap-5">
         {questionList.map((question) => (
           <li key={question.id} className="w-full">
             <QuestionListCard questionItem={question} />
@@ -57,7 +57,11 @@ export default function QuestionList({ questions, questionCursorId }: Props) {
         ))}
         <div ref={observer} />
       </ul>
-      {isPending && <Spinner />}
-    </div>
+      {isPending && (
+        <div className="flex justify-center w-full">
+          <Spinner />
+        </div>
+      )}
+    </>
   );
 }

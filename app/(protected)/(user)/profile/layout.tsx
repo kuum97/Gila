@@ -1,11 +1,12 @@
 import { ReactNode } from 'react';
-import ProfileNavgationRoute from '@/app/(protected)/(user)/profile/_components/profile-nav-route';
+import FooterNavigation from '@/components/common/nav-footer';
+import { PROFILE_ROUTES } from '@/constants/nav-routes';
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <div>
-      <ProfileNavgationRoute />
       {children}
+      <FooterNavigation routes={PROFILE_ROUTES} />
     </div>
   );
 }

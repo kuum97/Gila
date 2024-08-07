@@ -9,11 +9,15 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { ACTIVITYSORTS } from '@/constants/sort';
+import { ACTIVITYSORTS, SortOption } from '@/constants/sort';
 import { cn } from '@/lib/utils';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
-export default function SortingDropdown() {
+interface Props {
+  sorts: SortOption[];
+}
+
+export default function SortingDropdown({ sorts }: Props) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -47,7 +51,7 @@ export default function SortingDropdown() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="border-none bg-opacity-90 bg-white_light" align="end">
-        {ACTIVITYSORTS.map((sort) => (
+        {sorts.map((sort) => (
           <DropdownMenuItem asChild key={sort.en}>
             <button
               type="button"
