@@ -75,8 +75,8 @@ export default function CarouselCard({ activities }: Props) {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className="absolute border-0 left-3" />
-        <CarouselNext className="absolute border-0 right-3" />
+        <CarouselPrevious className="absolute text-white border-0 left-3" />
+        <CarouselNext className="absolute text-white border-0 right-3" />
       </Carousel>
       <DotIndicator total={count} current={current} />
     </div>
