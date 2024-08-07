@@ -63,7 +63,7 @@ export default function WishListContainer({ initialFavorites, initialCursorId }:
       <ul className="flex flex-col w-full gap-6">
         {favorites.map(({ activity }) => (
           <li key={activity.id} className="relative">
-            <Link href={`/${activity.id}`} passHref>
+            <Link href={`/activity/${activity.id}`} passHref>
               <WishlistImageCard
                 title={activity.title}
                 startDate={activity.startDate}

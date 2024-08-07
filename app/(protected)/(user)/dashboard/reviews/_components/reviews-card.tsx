@@ -58,10 +58,10 @@ export default function ReviewsCard({
   };
 
   return (
-    <div className="w-full border p-3 rounded-lg flex gap-6 relative">
-      <div className="flex flex-col justify-center gap-2 w-full overflow-hidden">
-        <h1 className="text-sm font-bold truncate w-full">{title}</h1>
-        <div className="text-xs flex flex-col gap-2">
+    <div className="relative flex w-full gap-6 p-3 border rounded-lg">
+      <div className="flex flex-col justify-center w-full gap-2 overflow-hidden">
+        <h1 className="w-full text-sm font-bold truncate">{title}</h1>
+        <div className="flex flex-col gap-2 text-xs">
           <div className="flex gap-3">
             <p>{formatDate}</p>
           </div>
@@ -70,7 +70,7 @@ export default function ReviewsCard({
         <RatingSelector selectedRating={selectedRating} onRatingClick={handleRatingClick} />
       </div>
       <div className="absolute top-3 right-3">
-        <Button disabled={isPending} onClick={handleSubmit} className="h-auto px-2 py-1">
+        <Button disabled={isPending} onClick={handleSubmit} className="h-auto px-2 py-1 text-white">
           제출
         </Button>
       </div>

@@ -14,6 +14,7 @@ export default function UploadButton({ onChange, onUploadBegin, CustomButton }: 
       endpoint="imageUploader"
       appearance={{
         allowedContent: 'hidden',
+        button: 'bg-transparent',
       }}
       content={{
         // eslint-disable-next-line react/no-unstable-nested-components

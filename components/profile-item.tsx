@@ -40,7 +40,6 @@ export default function ProfileItem({ userData }: Props) {
             <h2 className="text-lg font-semibold">점수</h2>
             <ProfileScoreTip />
           </div>
-
           <div className="flex justify-center w-full">
             <ProfileRank rating={averageReviewScore} score="style2" />
           </div>
