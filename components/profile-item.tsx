@@ -36,8 +36,11 @@ export default function ProfileItem({ userData }: Props) {
           <ProfileTopic tags={tags} />
         </div>
         <div>
-          <h2 className="text-lg font-semibold">점수</h2>
-          <ProfileScoreTip />
+          <div className="flex gap-4">
+            <h2 className="text-lg font-semibold">점수</h2>
+            <ProfileScoreTip />
+          </div>
+
           <div className="flex justify-center w-full">
             <ProfileRank rating={averageReviewScore} score="style2" />
           </div>
