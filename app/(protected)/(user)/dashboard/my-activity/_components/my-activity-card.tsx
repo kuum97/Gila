@@ -7,6 +7,7 @@ import { deleteActivity } from '@/app/action/activity';
 import { ActivityWithFavoriteAndCount } from '@/type';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
+import DeleteAlertModal from '@/components/delete-alert-modal';
 import ActivityEditForm from './activity-edit-form';
 
 interface Props {
@@ -25,15 +26,7 @@ export default function MyActivityCard({ activity }: Props) {
     setEditModalOpen(true);
   };
 
-  const handleDelete: MouseEventHandler = (e) => {
-    e.preventDefault();
-
-    // eslint-disable-next-line no-restricted-globals, no-alert
-    const isConfirmed = confirm('정말로 삭제하시겠습니까?');
-    if (!isConfirmed) {
-      return;
-    }
-
+  const handleDelete = () => {
     startTransition(async () => {
       const action = await deleteActivity(id);
       if (!action.success) {
@@ -78,14 +71,9 @@ export default function MyActivityCard({ activity }: Props) {
                 >
                   수정
                 </Button>
-                <Button
-                  disabled={isPending}
-                  type="button"
-                  className="w-full text-base font-medium text-white shadow bg-red hover:bg-rose-800"
-                  onClick={handleDelete}
-                >
-                  삭제
-                </Button>
+                <div className="w-full" onClick={(e) => e.preventDefault()}>
+                  <DeleteAlertModal deleteAction={handleDelete} isButton content="삭제" />
+                </div>
               </div>
             </div>
           }
@@ -94,7 +82,7 @@ export default function MyActivityCard({ activity }: Props) {
       <Dialog open={isEditModalOpen} onOpenChange={setEditModalOpen}>
         <DialogContent className="h-screen overflow-y-auto bg-white">
           <DialogTitle className="text-2xl font-semibold">길라 활동 수정</DialogTitle>
-          <ActivityEditForm activity={activity} />
+          <ActivityEditForm activity={activity} onClose={() => setEditModalOpen(false)} />
         </DialogContent>
       </Dialog>
     </>

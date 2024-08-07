@@ -4,21 +4,19 @@ interface Props {
   status: 'PENDING' | 'APPROVE' | 'REJECT';
 }
 
-export default function PromiseStatus({ status }: Props) {
-  let statusColor = '';
+const statusConfig = {
+  PENDING: { color: 'blue-600', text: '대기중' },
+  APPROVE: { color: 'green', text: '수락됨' },
+  REJECT: { color: 'red', text: '거절됨' },
+};
 
-  switch (status) {
-    case 'PENDING':
-      statusColor = 'bg-blue-600';
-      break;
-    case 'APPROVE':
-      statusColor = 'bg-green';
-      break;
-    case 'REJECT':
-      statusColor = 'bg-red';
-      break;
-    default:
-      statusColor = 'bg-blue-600';
-  }
-  return <div className={`rounded-full size-2 ${statusColor}`} />;
+export default function PromiseStatus({ status }: Props) {
+  const { color, text } = statusConfig[status];
+
+  return (
+    <div className={`text-${color} text-sm flex gap-2 items-center`}>
+      <div className={`rounded-full size-2 bg-${color}`} />
+      {text}
+    </div>
+  );
 }
