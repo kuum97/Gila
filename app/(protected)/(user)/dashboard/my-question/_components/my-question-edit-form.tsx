@@ -165,7 +165,7 @@ export default function MyQuestionEditForm({
             <Button
               disabled={isPending || !form.formState.isValid}
               type="submit"
-              className="px-4 py-1 text-sm rounded-md w-full"
+              className="w-full px-4 py-1 text-base text-white rounded-md"
             >
               수정
             </Button>

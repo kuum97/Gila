@@ -71,9 +71,9 @@ export default function AnswerForm({ questionId }: { questionId: string }) {
 
   const customButton = () => {
     return (
-      <div className="z-10 relative">
-        <div className="rounded-md flex justify-center items-center p-1 gap-1">
-          <FileImage className="h-5 w-5" color="#000" />
+      <div className="relative z-10">
+        <div className="flex items-center justify-center gap-1 p-1 rounded-md">
+          <FileImage className="w-5 h-5" color="#000" />
         </div>
       </div>
     );
@@ -83,7 +83,7 @@ export default function AnswerForm({ questionId }: { questionId: string }) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col items-end w-full gap-2 pt-2 border rounded-lg p-2"
+        className="flex flex-col items-end w-full gap-2 p-2 pt-2 border rounded-lg"
       >
         <div className="flex flex-col w-full">
           <FormField
@@ -98,19 +98,19 @@ export default function AnswerForm({ questionId }: { questionId: string }) {
                     CustomButton={customButton}
                   />
                 </div>
-                <FormLabel className="text-sm pl-1">{FormFields.label}</FormLabel>
+                <FormLabel className="pl-1 text-sm">{FormFields.label}</FormLabel>
                 {loading && (
-                  <div className="flex justify-center items-center">
+                  <div className="flex items-center justify-center">
                     <Spinner />
                   </div>
                 )}
                 {imageUrl[0] && (
-                  <div className="w-52 h-60 relative">
+                  <div className="relative w-52 h-60">
                     <Image
                       src={imageUrl[0]}
                       fill
                       alt="답변 이미지"
-                      className="rounded-lg object-cover"
+                      className="object-cover rounded-lg"
                     />
                     <X className="absolute right-1 top-1" onClick={cancelImage} />
                   </div>
@@ -129,7 +129,7 @@ export default function AnswerForm({ questionId }: { questionId: string }) {
           <Button
             disabled={isPending || loading || !form.formState.isValid}
             type="submit"
-            className="px-4 py-1 text-sm rounded-md h-8"
+            className="h-8 px-4 py-1 text-sm text-white rounded-md"
           >
             제출하기
           </Button>

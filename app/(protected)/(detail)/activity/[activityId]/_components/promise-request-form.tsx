@@ -26,13 +26,13 @@ export default function PromiseRequestForm({ startDate, endDate, maxCount, activ
 
   return (
     <div className="fixed bottom-0 w-full h-20 bg-[#1B1B1B] z-50 flex justify-between gap-8 items-center px-8 py-0">
-      <div className="flex items-center justify-between w-full flex-col gap-2">
-        <p className="text-xs text-white">{formatDate}</p>
+      <div className="flex flex-col items-center justify-between w-full gap-2">
         <p className="text-sm text-white">최대 인원 {maxCount}명</p>
+        <p className="text-xs text-white">{formatDate}</p>
       </div>
       <Button
         type="button"
-        className="px-4 py-2 text-xs font-bold border border-none rounded-md bg-primary"
+        className="px-4 py-2 text-sm font-semibold text-white border border-none rounded-md bg-primary hover:bg-primary_dark"
         onClick={applyActivity}
         disabled={isPending}
       >

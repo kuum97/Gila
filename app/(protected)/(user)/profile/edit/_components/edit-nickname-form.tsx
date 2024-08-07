@@ -70,7 +70,7 @@ export default function EditNicknameForm({ setValue }: Props) {
             )}
           />
         </div>
-        <Button type="submit" className="mt-4 text-sm font-bold">
+        <Button type="submit" className="mt-4 text-sm font-bold text-white">
           저장하기
         </Button>
       </form>

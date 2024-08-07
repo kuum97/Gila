@@ -15,7 +15,7 @@ export default function BackButton() {
       type="button"
       aria-label="back-btn"
       onClick={handleBack}
-      className="bg-[#ffffff] p-1 rounded-full shadow-md border hover:bg-slate-200"
+      className="p-1 border rounded-full shadow-md bg-white_light hover:bg-slate-200"
     >
       <Undo2 />
     </button>
