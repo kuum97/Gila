@@ -15,9 +15,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { createQuestion } from '@/app/action/question';
-import QuestionLocationPopover from '@/app/(protected)/(main)/question-list/_components/question-location-popover';
 import { toast } from 'sonner';
 import { useTransition } from 'react';
+import LocationSelectDrawer from '@/components/location-select-drawer';
 
 const FormFields = [
   {
@@ -55,7 +55,7 @@ const FormSchema = z.object({
     .max(20, { message: '내용은 20자 이내로 입력해 주세요.' }),
 });
 
-export default function MyQuestionForm() {
+export default function MyQuestionForm({ toggleModal }: { toggleModal: () => void }) {
   const [isPending, startTransition] = useTransition();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -65,11 +65,6 @@ export default function MyQuestionForm() {
       location: '',
     },
   });
-
-  const selectLocation = (location: string) => {
-    form.setValue('location', location);
-    form.clearErrors('location');
-  };
 
   const onSubmit = (values: z.infer<typeof FormSchema>) => {
     startTransition(async () => {
@@ -82,6 +77,7 @@ export default function MyQuestionForm() {
         toast.error(result.message);
         return;
       }
+      toggleModal();
       toast.success(result.message);
       form.reset();
     });
@@ -97,20 +93,11 @@ export default function MyQuestionForm() {
           <FormField
             control={form.control}
             name="location"
-            render={({ field }) => (
+            render={({ field: { onChange } }) => (
               <FormItem>
                 <FormLabel className="text-sm">{FormFields[0].label}</FormLabel>
                 <FormControl>
-                  <div className="relative">
-                    <Input
-                      type={FormFields[0].type}
-                      placeholder={FormFields[0].placeholder}
-                      {...field}
-                      className="text-xs"
-                      disabled
-                    />
-                    <QuestionLocationPopover selectLocation={selectLocation} />
-                  </div>
+                  <LocationSelectDrawer onChange={onChange} />
                 </FormControl>
                 <div className="h-4">
                   <FormMessage className="text-xs text-red" />
@@ -158,7 +145,11 @@ export default function MyQuestionForm() {
             )}
           />
           <div className="flex justify-center">
-            <Button disabled={isPending} type="submit" className="px-4 py-1 text-sm rounded-md">
+            <Button
+              disabled={isPending || !form.formState.isValid}
+              type="submit"
+              className="px-4 py-1 text-sm rounded-md"
+            >
               물어보기
             </Button>
           </div>
