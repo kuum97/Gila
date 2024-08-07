@@ -30,7 +30,7 @@ export default function ImageCard({
         <div className="flex justify-center w-full h-full px-2 pt-2 rounded-md">
           <div className="relative w-full h-full rounded-md">
             <Image
-              src={imageSrc || '/default-profile-image.png'}
+              src={imageSrc || '/default-carousel-image.png'}
               alt="thumbnail"
               fill
               sizes="(max-width: 768px) 100vw"

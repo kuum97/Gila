@@ -23,7 +23,7 @@ export default function WishlistImageCard({
   bottomContent,
   imageSrc,
 }: Props) {
-  const imgSrc = imageSrc && imageSrc.length > 0 ? imageSrc[0] : '/test.png';
+  const imgSrc = imageSrc && imageSrc.length > 0 ? imageSrc[0] : '/default-carousel-image.png';
   const formatDate = formatDateRange({ startDateString: startDate, endDateString: endDate });
 
   return (
