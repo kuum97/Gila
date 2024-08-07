@@ -17,7 +17,7 @@ import { AnswerWithUser } from '@/type';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FileImage, X } from 'lucide-react';
 import Image from 'next/image';
-import { useState, useTransition } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
@@ -43,7 +43,7 @@ const FormSchema = z.object({
 });
 
 export default function AnswerEditForm({ answerId, defaultValue, handleEditAnswer }: Props) {
-  const [defaultImage, setDefaultImage] = useState<string[]>([defaultValue.images[0]]);
+  const [defaultImage, setDefaultImage] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [isPending, startTransition] = useTransition();
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -86,6 +86,10 @@ export default function AnswerEditForm({ answerId, defaultValue, handleEditAnswe
     );
   };
 
+  useEffect(() => {
+    if (defaultValue.images[0]) setDefaultImage([defaultValue.images[0]]);
+  }, [defaultValue.images]);
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col items-end w-full gap-2">
@@ -115,7 +119,8 @@ export default function AnswerEditForm({ answerId, defaultValue, handleEditAnswe
                       src={defaultImage[0]}
                       alt="답변 이미지"
                       fill
-                      className="object-cover rounded-md"
+                      className="rounded-md"
+                      objectFit="contain"
                     />
                     <X className="absolute right-1 top-1" onClick={cancelImage} />
                   </div>

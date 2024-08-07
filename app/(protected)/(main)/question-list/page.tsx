@@ -3,17 +3,17 @@ import { getQuestions } from '@/app/data/question';
 import QuestionList from '@/app/(protected)/(main)/question-list/_components/question-list';
 import SortingDropdown from '@/components/sorting-dropdown';
 import { QUESTIONSORTS } from '@/constants/sort';
+import { QuestionSort } from '@/type';
 
 export default async function Page({
   searchParams,
 }: {
-  searchParams: { sort: string; location: string };
+  searchParams: { sort: QuestionSort; location: string };
 }) {
   const { sort, location } = searchParams;
-  const listOrder = sort ? 'answerLen' : 'recent';
   const qusetions = await getQuestions({
     take: 7,
-    order: listOrder,
+    order: sort,
     answerTake: 5,
     location,
   });

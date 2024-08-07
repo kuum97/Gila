@@ -25,7 +25,7 @@ export default function QuestionListCard({ questionItem }: Props) {
           </div>
           <div className="flex items-center font-medium gap-[2px]">
             <MessageCircle size={13} />
-            <p className="w-2 text-center">{questionItem._count.answers}</p>
+            <p className="w-4 text-center">{questionItem._count.answers}</p>
           </div>
         </CardContent>
       </Card>

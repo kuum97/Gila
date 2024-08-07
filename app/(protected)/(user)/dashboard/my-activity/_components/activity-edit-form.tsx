@@ -32,9 +32,10 @@ export interface ActivityCreateFormProps {
 
 interface Props {
   activity: ActivityWithFavoriteAndCount;
+  onClose: () => void;
 }
 
-export default function ActivityEditForm({ activity }: Props) {
+export default function ActivityEditForm({ activity, onClose }: Props) {
   const { id, title, description, location, tags, thumbnails, maximumCount, startDate, endDate } =
     activity;
   const [isPending, startTransition] = useTransition();
@@ -75,6 +76,7 @@ export default function ActivityEditForm({ activity }: Props) {
         return;
       }
       toast.success(action.message);
+      onClose();
       router.replace('/dashboard/my-activity');
     });
   };

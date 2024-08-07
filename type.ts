@@ -59,3 +59,5 @@ export type QuestionWithUserAndAnswers = Question & {
 
 // Sort
 export type Sort = 'recent' | 'mostFavorite' | 'mostViewed' | 'tag';
+
+export type QuestionSort = 'recent' | 'answerLen';
