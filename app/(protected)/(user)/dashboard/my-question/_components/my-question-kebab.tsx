@@ -1,17 +1,25 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { EllipsisVertical } from 'lucide-react';
 import { QuestionWithUserAndAnswers } from '@/type';
-import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import MyQuestionEditForm from '@/app/(protected)/(user)/dashboard/my-question/_components/my-question-edit-form';
 import { cn } from '@/lib/utils';
+import DeleteAlertModal from '@/components/delete-alert-modal';
 
 interface Props {
   handleDelete: () => void;
@@ -20,8 +28,15 @@ interface Props {
 }
 
 export default function MyQuestionKebab({ handleDelete, myQuestion, disabled }: Props) {
+  const [isEditModalOpen, setEditModalOpen] = useState<boolean>(false);
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
+
+  const toggleEditModal = () => {
+    setEditModalOpen(!isEditModalOpen);
+  };
+
   return (
-    <Dialog>
+    <>
       <DropdownMenu>
         <DropdownMenuTrigger
           className={cn(
@@ -33,26 +48,45 @@ export default function MyQuestionKebab({ handleDelete, myQuestion, disabled }: 
           <EllipsisVertical className="w-5 h-5" />
         </DropdownMenuTrigger>
         <DropdownMenuContent className="relative bg-white mr-9">
-          <DropdownMenuItem className="flex justify-center cursor-pointer">
-            <DialogTrigger className="w-full">수정하기</DialogTrigger>
+          <DropdownMenuItem
+            className="flex justify-center cursor-pointer"
+            onSelect={toggleEditModal}
+          >
+            수정하기
           </DropdownMenuItem>
-          <div className="w-full border-[0.5px]" />
-          <DropdownMenuItem onClick={handleDelete} className="flex justify-center cursor-pointer">
+          <DropdownMenuSeparator className="w-full border-[0.5px]" />
+          <DropdownMenuItem
+            onSelect={() => setDeleteModalOpen(true)}
+            className="flex justify-center cursor-pointer"
+          >
             삭제하기
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <DialogTitle>
-        <div />
-      </DialogTitle>
-      <DialogContent className="bg-white">
-        <MyQuestionEditForm
-          questionId={myQuestion.id}
-          questionTitle={myQuestion.title}
-          questionContent={myQuestion.content}
-          questionLocation={myQuestion.location}
-        />
-      </DialogContent>
-    </Dialog>
+
+      <Dialog open={isEditModalOpen} onOpenChange={setEditModalOpen}>
+        <DialogContent className="bg-white">
+          <DialogHeader>
+            <DialogTitle>수정하기</DialogTitle>
+          </DialogHeader>
+          <DialogDescription aria-describedby={undefined} />
+          <MyQuestionEditForm
+            questionId={myQuestion.id}
+            questionTitle={myQuestion.title}
+            questionContent={myQuestion.content}
+            questionLocation={myQuestion.location}
+            setEditModalOpen={toggleEditModal}
+          />
+        </DialogContent>
+      </Dialog>
+
+      <DeleteAlertModal
+        deleteAction={handleDelete}
+        isButton={false}
+        content="삭제"
+        open={isDeleteModalOpen}
+        setModalOpen={setDeleteModalOpen}
+      />
+    </>
   );
 }

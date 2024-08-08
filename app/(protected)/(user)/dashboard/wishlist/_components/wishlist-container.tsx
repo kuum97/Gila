@@ -15,7 +15,7 @@ interface Props {
 }
 
 export default function WishListContainer({ initialFavorites, initialCursorId }: Props) {
-  const [favorites, setFavorites] = useState<FavoriteWithActivity[]>(initialFavorites);
+  const [favorites, setFavorites] = useState<FavoriteWithActivity[]>([]);
   const [cursorId, setCursorId] = useState<string | null>(initialCursorId);
   const [isPending, startTransition] = useTransition();
 
@@ -43,12 +43,27 @@ export default function WishListContainer({ initialFavorites, initialCursorId }:
     setFavorites((prev) => prev.filter((fav) => fav.activity.id !== activityId));
   };
 
+  if (initialFavorites.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center gap-4 font-semibold -translate-y-16 h-screen-minus-134">
+        <p>저장하신 활동이 없습니다.</p>
+        <p className="text-sm font-normal">활동을 둘러보고 관심있는 활동을 저장해보세요!</p>
+        <Link
+          href="/activity-list"
+          className="flex items-center justify-center px-4 py-3 font-semibold rounded-lg bg-primary text-white_light hover:bg-primary_dark"
+        >
+          둘러보러 가기
+        </Link>
+      </div>
+    );
+  }
+
   return (
-    <div>
-      <ul className="flex flex-col gap-2">
+    <>
+      <ul className="flex flex-col w-full gap-6">
         {favorites.map(({ activity }) => (
           <li key={activity.id} className="relative">
-            <Link href={`/${activity.id}`} passHref>
+            <Link href={`/activity/${activity.id}`} passHref>
               <WishlistImageCard
                 title={activity.title}
                 startDate={activity.startDate}
@@ -65,7 +80,11 @@ export default function WishListContainer({ initialFavorites, initialCursorId }:
         ))}
         <div ref={observer} />
       </ul>
-      {isPending && <Spinner />}
-    </div>
+      {isPending && (
+        <div className="flex justify-center w-full">
+          <Spinner />
+        </div>
+      )}
+    </>
   );
 }

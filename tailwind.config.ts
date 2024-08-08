@@ -10,11 +10,16 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      height: {
+        'screen-minus-134': 'calc(100vh - 134px)',
+        'screen-minus-63': 'calc(100vh - 63px)',
+      },
       colors: {
         primary: '#FF7A00',
         primary_dark: '#D16400',
         black: '#1B1B1B',
         white: '#FAFAFA',
+        white_light: '#ffffff',
         gray_100: '#EEEEEE',
         gray_200: '#DDDDDD',
         gray_300: '#CBC9CF',

@@ -1,11 +1,11 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
+import { cookies } from 'next/headers';
 import db from '@/lib/db';
 import { ActionType } from '@/type';
 import { Activity } from '@prisma/client';
-import { cookies } from 'next/headers';
-import { revalidatePath } from 'next/cache';
-import { getCurrentUserId } from '../data/user';
+import { getCurrentUserId } from '@/app/data/user';
 
 export const createActivity = async ({
   title,
@@ -44,6 +44,8 @@ export const createActivity = async ({
     });
 
     if (!newActivity) return { success: false, message: '활동 생성에 실패하였습니다.' };
+
+    revalidatePath('/dashboard/my-activity');
 
     return {
       success: true,

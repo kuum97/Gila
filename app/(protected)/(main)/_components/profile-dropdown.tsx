@@ -12,11 +12,11 @@ export default function ProfileDropdown() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <div className="flex items-center bg-[#ffffff] justify-center overflow-hidden border rounded-full shadow-sm w-9 h-9">
+        <div className="flex items-center bg-white_light justify-center overflow-hidden border rounded-full shadow-sm w-9 h-9">
           <Image width={30} height={30} src="/GilaLogo.png" alt="user-profile" />
         </div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="bg-[#ffffff]">
+      <DropdownMenuContent className="bg-white_light">
         <DropdownMenuItem asChild>
           <Link
             href="/profile"

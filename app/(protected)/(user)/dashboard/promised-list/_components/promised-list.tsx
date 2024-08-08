@@ -41,23 +41,29 @@ export default function PromisedList({ promisedActivities, cursorId }: Props) {
     isLoading: isPending,
   });
 
+  if (promisedActivities.length === 0) {
+    return (
+      <div className="flex items-center justify-center font-semibold -translate-y-16 h-screen-minus-134">
+        아직 약속을 신청한 분이 없습니다.
+      </div>
+    );
+  }
+
   return (
     <>
-      <ul>
-        {promisedActivities.length > 0 ? (
-          <>
-            {infinityPromisedActivities.map((activity) => (
-              <li key={activity.id}>
-                <PromisedListCard promisedActivity={activity} />
-              </li>
-            ))}
-            <div ref={observer} />
-          </>
-        ) : (
-          <div>none</div>
-        )}
+      <ul className="flex flex-col w-full gap-6">
+        {infinityPromisedActivities.map((activity) => (
+          <li key={activity.id}>
+            <PromisedListCard promisedActivity={activity} />
+          </li>
+        ))}
+        <div ref={observer} />
       </ul>
-      {isPending && <Spinner />}
+      {isPending && (
+        <div className="flex justify-center w-full">
+          <Spinner />
+        </div>
+      )}
     </>
   );
 }

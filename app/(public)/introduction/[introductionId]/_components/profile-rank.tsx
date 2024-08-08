@@ -3,6 +3,7 @@ import React from 'react';
 
 interface Props {
   rating: number;
+  score?: 'style1' | 'style2';
 }
 
 const ranks = [
@@ -24,10 +25,17 @@ const getRank = (rating: number) => {
   return rank;
 };
 
-export default function ProfileRank({ rating }: Props) {
+const styles = {
+  style1: 'w-10 h-10',
+  style2: 'w-20 h-20',
+};
+
+export default function ProfileRank({ rating, score }: Props) {
   const userRank = getRank(rating);
+  const styleClass = score ? styles[score] : '';
+
   return (
-    <div className="relative w-20 h-20">
+    <div className={`${styleClass} relative`}>
       <Image src={`/rank/${userRank}.svg`} alt={`${userRank} rank`} fill />
     </div>
   );

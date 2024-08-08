@@ -3,62 +3,59 @@
 import Image from 'next/image';
 
 import React, { ReactNode } from 'react';
-import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import Spinner from '@/components/ui/spinner';
 
 interface Props {
   activityId: string;
   title: string;
-  date: string;
-  participants?: number;
-  extraContent?: ReactNode;
   bottomContent?: ReactNode;
-  topContent?: ReactNode;
-  imageSrc: string;
+  middleContent?: ReactNode;
+  imageSrc?: string;
   isPending?: boolean;
 }
 
 export default function ImageCard({
   activityId,
   title,
-  date,
-  participants,
-  extraContent,
   bottomContent,
-  imageSrc = '/test.png',
+  imageSrc,
   isPending,
-  topContent,
+  middleContent,
 }: Props) {
   return (
-    <Link href={`/${activityId}`} className="relative">
-      <div className="relative flex w-full gap-6 p-3 border rounded-lg shadow-md">
+    <Link href={`/activity/${activityId}`}>
+      <Card className="h-[400px] flex flex-col items-start border-none shadow-md hover:shadow-xl">
+        <div className="flex justify-center w-full h-full px-2 pt-2 rounded-md">
+          <div className="relative w-full h-full rounded-md">
+            <Image
+              src={imageSrc || '/default-carousel-image.png'}
+              alt="thumbnail"
+              fill
+              sizes="(max-width: 768px) 100vw"
+              style={{ objectFit: 'cover', borderRadius: '8px' }}
+            />
+          </div>
+        </div>
+        <div className="flex flex-col w-full gap-1 p-2">
+          <CardHeader className="p-0">
+            <CardTitle className="text-2xl font-bold text-black truncate">{title}</CardTitle>
+          </CardHeader>
+          <CardContent className="p-0">{middleContent}</CardContent>
+          <CardFooter className="p-0">{bottomContent}</CardFooter>
+        </div>
         {isPending && (
           <div
-            className="absolute inset-0 z-10 flex items-center justify-center rounded-md cursor-not-allowed bg-black/50"
             onClick={(e: React.MouseEvent<HTMLDivElement>) => {
               e.preventDefault();
             }}
+            className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-50"
           >
-            <Loader2 className="w-8 h-8 animate-spin" />
+            <Spinner />
           </div>
         )}
-        {topContent}
-        <div className="w-[110px] h-[110px] relative rounded-lg overflow-hidden flex-shrink-0">
-          <Image src={imageSrc} alt="썸네일" fill style={{ objectFit: 'cover' }} />
-        </div>
-        <div className="flex flex-col justify-center w-full gap-2 overflow-hidden">
-          <h1 className="w-full text-sm font-bold truncate">{title}</h1>
-          <div className="text-xs flex flex-col gap-[3px]">
-            <p>{date}</p>
-            <div className="flex items-center gap-3">
-              {extraContent}
-              {extraContent && <span>•</span>}
-              {participants && <p className="text-sm font-bold">{participants} 명</p>}
-            </div>
-          </div>
-          {bottomContent}
-        </div>
-      </div>
+      </Card>
     </Link>
   );
 }

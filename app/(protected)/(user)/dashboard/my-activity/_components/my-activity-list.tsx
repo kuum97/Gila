@@ -7,6 +7,7 @@ import MyActivityCard from '@/app/(protected)/(user)/dashboard/my-activity/_comp
 import { getMyActivities } from '@/app/data/activity';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { ActivityWithFavoriteAndCount } from '@/type';
+import Spinner from '@/components/ui/spinner';
 
 interface Props {
   myActivities: ActivityWithFavoriteAndCount[];
@@ -14,7 +15,7 @@ interface Props {
 }
 
 export default function MyActivityList({ myActivities, activityCursorId }: Props) {
-  const [activityList, setActivityList] = useState<ActivityWithFavoriteAndCount[]>(myActivities);
+  const [activityList, setActivityList] = useState<ActivityWithFavoriteAndCount[]>([]);
   const [cursorId, setCursorId] = useState(activityCursorId);
   const [isPending, startTransition] = useTransition();
 
@@ -28,7 +29,7 @@ export default function MyActivityList({ myActivities, activityCursorId }: Props
   }, [cursorId]);
 
   useEffect(() => {
-    setActivityList(myActivities);
+    setActivityList([...myActivities]);
     setCursorId(activityCursorId);
   }, [myActivities, activityCursorId]);
 
@@ -38,38 +39,29 @@ export default function MyActivityList({ myActivities, activityCursorId }: Props
     isLoading: isPending,
   });
 
+  if (myActivities.length === 0) {
+    return (
+      <div className="flex items-center justify-center font-semibold -translate-y-16 h-screen-minus-134">
+        오른쪽 위에 플러스 버튼을 눌러 길라가 되어보세요!
+      </div>
+    );
+  }
+
   return (
-    <div className="flex flex-col items-center">
-      <ul className="flex flex-col w-full gap-3">
-        {activityList.map(
-          ({
-            id,
-            title,
-            views,
-            maximumCount,
-            startDate,
-            endDate,
-            _count,
-            isFavorite,
-            thumbnails,
-          }) => (
-            <li key={id}>
-              <MyActivityCard
-                imageSrc={thumbnails[0]}
-                title={title}
-                views={views}
-                maximumCount={maximumCount}
-                startDate={startDate}
-                endDate={endDate}
-                activityId={id}
-                favoriteCount={_count.favorites}
-                isFavorite={isFavorite}
-              />
-            </li>
-          ),
-        )}
+    <>
+      <ul className="flex flex-col w-full gap-6">
+        {activityList.map((myActivity) => (
+          <li key={myActivity.id}>
+            <MyActivityCard activity={myActivity} />
+          </li>
+        ))}
         <div ref={observer} />
       </ul>
-    </div>
+      {isPending && (
+        <div className="flex justify-center w-full">
+          <Spinner />
+        </div>
+      )}
+    </>
   );
 }

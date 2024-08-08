@@ -10,10 +10,9 @@ import MyQuestionCard from '@/app/(protected)/(user)/dashboard/my-question/_comp
 interface Props {
   myQuestions: QuestionWithUserAndAnswers[];
   myQuestionCursorId: string | null;
-  userId: string;
 }
 
-export default function MyQuestionList({ myQuestions, myQuestionCursorId, userId }: Props) {
+export default function MyQuestionList({ myQuestions, myQuestionCursorId }: Props) {
   const [myQuestionList, setMyQuestionList] = useState<QuestionWithUserAndAnswers[]>(myQuestions);
   const [cursorId, setCursorId] = useState(myQuestionCursorId);
   const [isPending, startTransition] = useTransition();
@@ -42,17 +41,29 @@ export default function MyQuestionList({ myQuestions, myQuestionCursorId, userId
     isLoading: isPending,
   });
 
+  if (myQuestions.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center gap-4 font-semibold -translate-y-16 h-screen-minus-134">
+        <p>아직 아무 질문을 하지 않으셨습니다.</p>
+      </div>
+    );
+  }
+
   return (
-    <div className="flex flex-col items-center pb-5">
-      <ul className="flex flex-col gap-3 w-full">
+    <>
+      <ul className="flex flex-col w-full gap-4">
         {myQuestionList.map((myQuestion) => (
           <li key={myQuestion.id}>
-            <MyQuestionCard myQuestionItem={myQuestion} userId={userId} />
+            <MyQuestionCard myQuestionItem={myQuestion} />
           </li>
         ))}
         <div ref={observer} />
       </ul>
-      {isPending && <Spinner />}
-    </div>
+      {isPending && (
+        <div className="flex justify-center w-full">
+          <Spinner />
+        </div>
+      )}
+    </>
   );
 }

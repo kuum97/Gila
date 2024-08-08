@@ -13,7 +13,7 @@ export const getQuestions = async ({
   answerTake = 10,
   cursor,
 }: {
-  order?: 'answerLen' | 'recent';
+  order: 'answerLen' | 'recent';
   location?: string;
   take?: number;
   answerTake?: number;
@@ -184,4 +184,71 @@ export const getMyQuestions = async ({
   });
 
   return { questions: questionsWithAnswerCursorId, cursorId: newCursorId };
+};
+
+export const getQuestionById = async ({
+  questionId,
+  answerTake = 10,
+}: {
+  questionId: string;
+  answerTake?: number;
+}): Promise<QuestionWithUserAndAnswers | null> => {
+  try {
+    const question = await db.question.findUnique({
+      where: {
+        id: questionId,
+      },
+      include: {
+        answers: {
+          include: {
+            user: {
+              select: {
+                id: true,
+                nickname: true,
+                email: true,
+                image: true,
+                tags: true,
+                createdAt: true,
+              },
+            },
+          },
+          take: answerTake,
+          orderBy: {
+            createdAt: 'desc',
+          },
+        },
+        user: {
+          select: {
+            id: true,
+            nickname: true,
+            email: true,
+            image: true,
+            tags: true,
+            createdAt: true,
+          },
+        },
+        _count: {
+          select: {
+            answers: true,
+          },
+        },
+      },
+    });
+
+    if (!question) {
+      throw new Error('질문을 찾을 수 없습니다.');
+    }
+
+    const lastAnswer = question.answers[question.answers.length - 1];
+    const answerCursorId = lastAnswer ? lastAnswer.id : null;
+
+    const questionWithAnswerCursorId = {
+      ...question,
+      answerCursorId,
+    };
+
+    return questionWithAnswerCursorId;
+  } catch (error) {
+    throw new Error('질문을 가져오는 중에 에러가 발생했습니다.');
+  }
 };

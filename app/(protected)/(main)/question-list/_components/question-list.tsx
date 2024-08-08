@@ -9,12 +9,11 @@ import { useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useState, useTransition } from 'react';
 
 interface Props {
-  userId: string;
   questions: (QuestionWithUserAndAnswers & { answerCursorId: string | null })[];
   questionCursorId: string | null;
 }
 
-export default function QuestionList({ questions, userId, questionCursorId }: Props) {
+export default function QuestionList({ questions, questionCursorId }: Props) {
   const [questionList, setQuestionList] = useState<
     (QuestionWithUserAndAnswers & { answerCursorId: string | null })[]
   >([]);
@@ -49,16 +48,20 @@ export default function QuestionList({ questions, userId, questionCursorId }: Pr
   });
 
   return (
-    <div className="h-[450px] w-full overflow-y-scroll overflow-x-hidden flex flex-col items-center">
-      <ul className="flex flex-col items-center gap-2">
+    <>
+      <ul className="flex flex-col items-center w-full gap-5">
         {questionList.map((question) => (
-          <li key={question.id}>
-            <QuestionListCard questionItem={question} userId={userId} />
+          <li key={question.id} className="w-full">
+            <QuestionListCard questionItem={question} />
           </li>
         ))}
         <div ref={observer} />
       </ul>
-      {isPending && <Spinner />}
-    </div>
+      {isPending && (
+        <div className="flex justify-center w-full">
+          <Spinner />
+        </div>
+      )}
+    </>
   );
 }

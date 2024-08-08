@@ -1,20 +1,25 @@
 import ProfileItem from '@/components/profile-item';
 import ProfileImage from '@/app/(protected)/(user)/profile/_components/profile-image';
-import {
-  getCurrentUser,
-  getCurrentUserId,
-  getUserProfileWithIntroducedInfos,
-} from '@/app/data/user';
+import { getCurrentUserId, getUserProfileWithIntroducedInfos } from '@/app/data/user';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default async function Page() {
   const userId = await getCurrentUserId();
-  const { image } = await getCurrentUser();
   const userData = await getUserProfileWithIntroducedInfos(userId);
 
   return (
-    <div className="m-8">
-      <ProfileImage image={image} />
-      <ProfileItem userData={userData} />
-    </div>
+    <main className="p-5">
+      <Card className="shadow-md">
+        <CardHeader className="flex flex-col gap-5">
+          <CardTitle className="font-bold">
+            <span className="text-3xl text-primary">{userData.user.nickname}</span>님의 프로필
+          </CardTitle>
+          <ProfileImage image={userData.user.image} />
+        </CardHeader>
+        <CardContent>
+          <ProfileItem userData={userData} />
+        </CardContent>
+      </Card>
+    </main>
   );
 }
