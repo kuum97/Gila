@@ -12,10 +12,10 @@ export default function EditProfileTopic({ tags = [] }: Props) {
   };
 
   return (
-    <div className="flex w-full pb-4 border-b border-gray-200 items-center">
-      <p className="text-sm text-center w-[51.5px]">내 토픽</p>
-      <div className="flex mx-3 items-center">
-        <div className="flex flex-wrap w-[172px] gap-1">
+    <div className="pr-11 py-3">
+      <p className="text-lg font-semibold text-black">내 토픽</p>
+      <div className="flex justify-between">
+        <div className="flex flex-wrap gap-1">
           {tags.length === 0 ? (
             <p className="text-sm text-gray-400">토픽이 없습니다.</p>
           ) : (

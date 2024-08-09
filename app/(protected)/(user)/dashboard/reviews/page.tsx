@@ -6,9 +6,9 @@ export default async function Page() {
   const { activities, cursorId } = activitiesRes;
 
   return (
-    <div className="flex flex-col gap-3">
-      <h1 className="text-lg font-bold">이전 활동은 어땠나요?</h1>
+    <main className="p-5">
+      <h1 className="text-2xl font-bold">이전 활동은 어땠나요?</h1>
       <ReviewList activities={activities} cursorId={cursorId} />
-    </div>
+    </main>
   );
 }

@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default function SharePopover({ activityId, shareImage }: Props) {
-  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/${activityId}`;
+  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/activity/${activityId}`;
 
   const copyLink = async () => {
     await navigator.clipboard.writeText(url);
@@ -42,7 +42,7 @@ export default function SharePopover({ activityId, shareImage }: Props) {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <ExternalLink width={20} />
+        <ExternalLink width={20} className="cursor-pointer" />
       </PopoverTrigger>
       <PopoverContent className="bg-white w-full flex gap-4">
         <div

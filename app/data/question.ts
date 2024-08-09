@@ -13,7 +13,7 @@ export const getQuestions = async ({
   answerTake = 10,
   cursor,
 }: {
-  order?: 'answerLen' | 'recent';
+  order: 'answerLen' | 'recent';
   location?: string;
   take?: number;
   answerTake?: number;

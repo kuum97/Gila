@@ -15,15 +15,16 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { editQuestion } from '@/app/action/question';
-import QuestionLocationPopover from '@/app/(protected)/(main)/question-list/_components/question-location-popover';
 import { toast } from 'sonner';
 import { useTransition } from 'react';
+import LocationSelectDrawer from '@/components/location-select-drawer';
 
 interface Props {
   questionId: string;
   questionTitle: string;
   questionContent: string;
   questionLocation: string;
+  setEditModalOpen: () => void;
 }
 
 const FormFields = [
@@ -67,6 +68,7 @@ export default function MyQuestionEditForm({
   questionContent,
   questionLocation,
   questionTitle,
+  setEditModalOpen,
 }: Props) {
   const [isPending, startTransition] = useTransition();
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -77,11 +79,6 @@ export default function MyQuestionEditForm({
       location: questionLocation,
     },
   });
-
-  const selectLocation = (location: string) => {
-    form.setValue('location', location);
-    form.clearErrors('location');
-  };
 
   const onSubmit = (values: z.infer<typeof FormSchema>) => {
     startTransition(async () => {
@@ -95,6 +92,7 @@ export default function MyQuestionEditForm({
         toast.error(result.message);
         return;
       }
+      setEditModalOpen();
       toast.success(result.message);
       form.reset(values);
     });
@@ -110,19 +108,12 @@ export default function MyQuestionEditForm({
           <FormField
             control={form.control}
             name="location"
-            render={({ field }) => (
+            render={({ field: { onChange } }) => (
               <FormItem>
                 <FormLabel className="text-sm">{FormFields[0].label}</FormLabel>
                 <FormControl>
                   <div className="relative">
-                    <Input
-                      type={FormFields[0].type}
-                      placeholder={FormFields[0].placeholder}
-                      {...field}
-                      className="text-xs"
-                      disabled
-                    />
-                    <QuestionLocationPopover selectLocation={selectLocation} />
+                    <LocationSelectDrawer onChange={onChange} defaultLocation={questionLocation} />
                   </div>
                 </FormControl>
                 <div className="h-4">
@@ -171,7 +162,11 @@ export default function MyQuestionEditForm({
             )}
           />
           <div className="flex justify-center">
-            <Button disabled={isPending} type="submit" className="px-4 py-1 text-sm rounded-md">
+            <Button
+              disabled={isPending || !form.formState.isValid}
+              type="submit"
+              className="w-full px-4 py-1 text-base text-white rounded-md"
+            >
               수정
             </Button>
           </div>

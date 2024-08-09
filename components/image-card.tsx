@@ -25,12 +25,12 @@ export default function ImageCard({
   middleContent,
 }: Props) {
   return (
-    <Link href={`/${activityId}`}>
+    <Link href={`/activity/${activityId}`}>
       <Card className="h-[400px] flex flex-col items-start border-none shadow-md hover:shadow-xl">
         <div className="flex justify-center w-full h-full px-2 pt-2 rounded-md">
           <div className="relative w-full h-full rounded-md">
             <Image
-              src={imageSrc || '/default-profile-image.png'}
+              src={imageSrc || '/default-carousel-image.png'}
               alt="thumbnail"
               fill
               sizes="(max-width: 768px) 100vw"
@@ -38,7 +38,7 @@ export default function ImageCard({
             />
           </div>
         </div>
-        <div className="flex flex-col w-full gap-1 p-2 relative">
+        <div className="flex flex-col w-full gap-1 p-2">
           <CardHeader className="p-0">
             <CardTitle className="text-2xl font-bold text-black truncate">{title}</CardTitle>
           </CardHeader>

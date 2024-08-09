@@ -13,10 +13,10 @@ export default async function Page({
   const { activities, cursorId } = await getActivities({ type: sort, location, size: 5 });
 
   return (
-    <main>
+    <main className="pb-20">
       <Suspense fallback={<Loading />}>
         <div className="pb-8 bg-white shadow-inner border-y-2">
-          <h1 className="p-4 text-xl font-semibold">현재 주목받는 길라들</h1>
+          <h1 className="px-4 pt-4 text-xl font-semibold">현재 주목받는 길라들</h1>
           <MainCarousel />
         </div>
         <ActivityContainer activities={activities} cursorId={cursorId} sort={sort} />

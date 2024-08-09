@@ -10,6 +10,8 @@ import {
   HeartHandshake,
   MessageCircleQuestion,
   LayoutDashboard,
+  UserRoundPen,
+  UserRound,
 } from 'lucide-react';
 
 const dashboardPrefix = '/dashboard';
@@ -30,7 +32,12 @@ export const DASHBOARD_ROUTES: Route[] = [
 ];
 
 export const MAIN_ROUTES: Route[] = [
-  { icon: HeartHandshake, label: '길리 찾기', href: '/activity-list' },
+  { icon: HeartHandshake, label: '길라 찾기', href: '/activity-list' },
   { icon: MessageCircleQuestion, label: '질문 하기', href: '/question-list' },
   { icon: LayoutDashboard, label: '대시보드', href: `${dashboardPrefix}/my-activity` },
+];
+
+export const PROFILE_ROUTES: Route[] = [
+  { icon: UserRound, label: '프로필', href: '/profile' },
+  { icon: UserRoundPen, label: '개인정보', href: '/profile/edit' },
 ];

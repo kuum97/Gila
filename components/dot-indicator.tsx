@@ -12,7 +12,7 @@ export default function DotIndicator({ total, current }: Props) {
         <div
           // eslint-disable-next-line react/no-array-index-key
           key={index}
-          className={`w-2 h-2 rounded-full ${index === current ? 'bg-primary' : 'bg-gray-300'}`}
+          className={`w-2 h-2 rounded-full ${index === current ? 'border bg-transparent' : 'bg-white'}`}
         />
       ))}
     </div>

@@ -38,13 +38,15 @@ export default function PromiseListCard({ promise }: { promise: RequestWithActiv
         </>
       }
       bottomContent={
-        <div className="absolute top-3 right-3 flex flex-col gap-7">
-          <div className="w-full flex justify-end">
+        <div className="absolute bottom-2 right-2 flex gap-32">
+          <div className="flex justify-end translate-y-[6px]">
             <PromiseStatus status={promise.status} />
           </div>
-          <div className="w-full" onClick={(e) => e.preventDefault()}>
-            <DeleteAlertModal deleteAction={cancelPromise} isButton content="취소" />
-          </div>
+          {promise.status === 'PENDING' && (
+            <div className="w-[70px]" onClick={(e) => e.preventDefault()}>
+              <DeleteAlertModal deleteAction={cancelPromise} isButton content="취소" />
+            </div>
+          )}
         </div>
       }
     />

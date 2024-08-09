@@ -1,17 +1,17 @@
 'use client';
 
+import { useState, useTransition } from 'react';
+import { useForm, UseFormReturn } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
+import { z } from 'zod';
+import { toast } from 'sonner';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, UseFormReturn } from 'react-hook-form';
-import { z } from 'zod';
 import LocationSelectSection from '@/app/(protected)/(user)/dashboard/my-activity/_components/location-select-section';
 import ScheduleSection from '@/app/(protected)/(user)/dashboard/my-activity/_components/schedule-section';
 import DetailInfoSection from '@/app/(protected)/(user)/dashboard/my-activity/_components/detail-info-section';
-import { useTransition } from 'react';
 import { createActivity } from '@/app/action/activity';
-import { toast } from 'sonner';
-import { useRouter } from 'next/navigation';
 
 const ActivityCreateFormSchema = z.object({
   title: z.string().min(1, { message: '제목은 필수 요소입니다.' }),
@@ -31,6 +31,7 @@ export interface ActivityCreateFormProps {
 
 export default function ActivityCreateForm() {
   const [isPending, startTransition] = useTransition();
+  const [isUploading, setIsUploading] = useState<boolean>(false);
   const router = useRouter();
   const form = useForm<ActivityCreateFormData>({
     resolver: zodResolver(ActivityCreateFormSchema),
@@ -72,19 +73,27 @@ export default function ActivityCreateForm() {
         return;
       }
       toast.success(action.message);
-      router.replace('/activity-list');
+      router.replace('/dashboard/my-activity');
     });
+  };
+
+  const handleLoadingChange = (loading: boolean) => {
+    setIsUploading(loading);
   };
 
   return (
     <Form {...form}>
       <main className="min-h-screen bg-white_light">
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5">
-          <LocationSelectSection className="border-none shadow-md bg-white_light" form={form} />
-          <ScheduleSection className="border-none shadow-md bg-white_light" form={form} />
-          <DetailInfoSection className="border-none shadow-md bg-white_light" form={form} />
+          <LocationSelectSection className="border shadow-md bg-white_light" form={form} />
+          <ScheduleSection className="border shadow-md bg-white_light" form={form} />
+          <DetailInfoSection
+            className="border shadow-md bg-white_light"
+            onLoadingChange={handleLoadingChange}
+            form={form}
+          />
           <Button
-            disabled={isPending || !form.formState.isValid}
+            disabled={isPending || isUploading || !form.formState.isValid}
             type="submit"
             className="w-full text-xl font-semibold text-white shadow-md py-7 disabled:bg-primary_dark"
           >
