@@ -15,8 +15,9 @@ Gila와 함께 새로운 사람들과의 만남을 통해 잊지 못할 추억�
 ## 컨셉 기획
 
 기존의 여행 서비스는 가이드와 여행객을 이어줬다면 저희는 여행이라는 범위에서 확장한 인연에 초점을 뒀습니다. 그래서 본격적인 컨셉과 기획을 하기 전, 구글 폼을 통해 사전 조사를 진행했습니다.
+[구글 폼](https://forms.gle/H7APRaub5dC9u1B3A)
 
-그리고 설문을 진행한 예상 사용자가 저희가 구상하는 서비스를 사용할 가능성에 대한 설문에도 긍정적인 결과를 받았습니다.
+설문을 진행한 결과 예상 사용자가 저희가 구상하는 서비스를 사용할 가능성에 대한 설문에도 긍정적인 결과를 받았습니다.
 설문 조사를 토대로 팀이 설정한 목표는 아래와 같습니다.
 > 1. 20대가 사용할만한 서비스
 > 2. 인연을 맺고 싶은 사용자에게 약속기능 제공
@@ -51,4 +52,8 @@ Gila와 함께 새로운 사람들과의 만남을 통해 잊지 못할 추억�
 
 ### 기술스택
 
-<img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white"><img src="https://img.shields.io/badge/tailwindcss-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white"><img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
+<img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white"><img src="https://img.shields.io/badge/tailwindcss-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white"><img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white"><img src="https://img.shields.io/badge/prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=white"><img src="https://img.shields.io/badge/eslint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white"><img src="https://img.shields.io/badge/shadcnui-000000?style=for-the-badge&logo=shadcnui&logoColor=white"><img src="https://img.shields.io/badge/reacthookform-EC5990?style=for-the-badge&logo=reacthookform&logoColor=white"><img src="https://img.shields.io/badge/zod-3E67B1?style=for-the-badge&logo=zod&logoColor=white"><img src="https://img.shields.io/badge/datefns-770C56?style=for-the-badge&logo=datefns&logoColor=white"><img src="https://img.shields.io/badge/prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white">
+
+![authjs](https://github.com/user-attachments/assets/328da2a3-af68-46f5-810a-527718f9dcb9)
+![upload](https://github.com/user-attachments/assets/b37355f6-b9bf-4e4d-ae31-1a74d740d3d4)
+
