@@ -12,6 +12,12 @@ Gila와 함께 새로운 사람들과의 만남을 통해 잊지 못할 추억�
 |:-:|:-:|:-:|:-:|:-:|
 |팀장: 박상준<br/>[@sj0724](https://github.com/sj0724)|팀원: 권주현<br/>[@kuum97](https://github.com/kuum97)|팀원: 박성재<br/>[@Batrnan](https://github.com/Batrnan)|팀원: 이주안<br/>[@juan0444](https://github.com/juan0444)|팀원: 홍진호<br/>[@jinho0941](https://github.com/jinho0941)|
 
+- 박상준: product managing, 질문 페이지, 대시보드 - 받은 신청, 토픽 페이지
+- 권주현: product managing, 활동 페이지, 대시보드 - 활동/보낸 신청
+- 박성재: design, 대시보드 페이지, 대시보드 - 질문
+- 이주안: design, 프로필 페이지, 대시보드 - 찜
+- 홍진호: back-end, 인증 페이지, 대시보드 - 리뷰
+
 ## 컨셉 기획
 
 기존의 여행 서비스는 가이드와 여행객을 이어줬다면 저희는 여행이라는 범위에서 확장한 인연에 초점을 뒀습니다. 그래서 본격적인 컨셉과 기획을 하기 전, 구글 폼을 통해 사전 조사를 진행했습니다.
@@ -50,10 +56,15 @@ Gila와 함께 새로운 사람들과의 만남을 통해 잊지 못할 추억�
 
 모든 활동을 관리하는 대시보드 페이지입니다.
 
-### 기술스택
+## 기술스택
 
-<img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white"><img src="https://img.shields.io/badge/tailwindcss-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white"><img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white"><img src="https://img.shields.io/badge/prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=white"><img src="https://img.shields.io/badge/eslint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white"><img src="https://img.shields.io/badge/shadcnui-000000?style=for-the-badge&logo=shadcnui&logoColor=white"><img src="https://img.shields.io/badge/reacthookform-EC5990?style=for-the-badge&logo=reacthookform&logoColor=white"><img src="https://img.shields.io/badge/zod-3E67B1?style=for-the-badge&logo=zod&logoColor=white"><img src="https://img.shields.io/badge/datefns-770C56?style=for-the-badge&logo=datefns&logoColor=white"><img src="https://img.shields.io/badge/prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white">
+<img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white"><img src="https://img.shields.io/badge/tailwindcss-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white"><img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white"><img src="https://img.shields.io/badge/prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=white"><img src="https://img.shields.io/badge/eslint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white"><img src="https://img.shields.io/badge/shadcnui-000000?style=for-the-badge&logo=shadcnui&logoColor=white"><img src="https://img.shields.io/badge/reacthookform-EC5990?style=for-the-badge&logo=reacthookform&logoColor=white"><img src="https://img.shields.io/badge/zod-3E67B1?style=for-the-badge&logo=zod&logoColor=white"><img src="https://img.shields.io/badge/datefns-770C56?style=for-the-badge&logo=datefns&logoColor=white"><img src="https://img.shields.io/badge/prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white"><img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white">
 
 ![authjs](https://github.com/user-attachments/assets/328da2a3-af68-46f5-810a-527718f9dcb9)
 ![upload](https://github.com/user-attachments/assets/b37355f6-b9bf-4e4d-ae31-1a74d740d3d4)
 
+## 코드 실행 가이드
+
+node.js v20.0.0을 사용하고 있습니다. `nvm use`를 사용해서 node 버전을 세팅해주세요.<br/>
+`npx prisma generate`를 사용해 prisma schema table을 생성해주세요.<br/>
+`npm run build`를 사용해 코드를 실행해주시면 됩니다.<br/>
