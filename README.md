@@ -50,3 +50,5 @@ Gila와 함께 새로운 사람들과의 만남을 통해 잊지 못할 추억�
 모든 활동을 관리하는 대시보드 페이지입니다.
 
 ### 기술스택
+
+<img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white"><img src="https://img.shields.io/badge/tailwindcss-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white"><img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
