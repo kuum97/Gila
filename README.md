@@ -5,19 +5,16 @@
 
 Gila와 함께 새로운 사람들과의 만남을 통해 잊지 못할 추억을 만들어 보세요.
 
+## 팀원 소개
+
+## Team
+|<img src="https://avatars.githubusercontent.com/u/137033202?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/113277713?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/118117392?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/159929147?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/150333046?v=4" width="150" height="150"/>|
+|:-:|:-:|:-:|:-:|:-:|
+|팀장: 박상준<br/>[@sj0724](https://github.com/sj0724)|팀원: 권주현<br/>[@kuum97](https://github.com/kuum97)|팀원: 박성재<br/>[@Batrnan](https://github.com/Batrnan)|팀원: 이주안<br/>[@juan0444](https://github.com/juan0444)|팀원: 홍진호<br/>[@jinho0941](https://github.com/jinho0941)|
+
 ## 컨셉 기획
 
 기존의 여행 서비스는 가이드와 여행객을 이어줬다면 저희는 여행이라는 범위에서 확장한 인연에 초점을 뒀습니다. 그래서 본격적인 컨셉과 기획을 하기 전, 구글 폼을 통해 사전 조사를 진행했습니다.
-
-> <img width="549" alt="스크린샷 2024-08-09 오전 11 28 41" src="https://github.com/user-attachments/assets/2a9dc12b-d848-485b-9cd1-0241ce37c98f">
-
-설문의 응답은 20대가 100%로 젊은 고객 위주로 설문을 진행했습니다.
-
-> <img width="549" alt="스크린샷 2024-08-09 오전 11 30 01" src="https://github.com/user-attachments/assets/ca1d8aaf-d898-417a-81d3-08fbade68cf9"> <img width="549" alt="스크린샷 2024-08-09 오전 11 30 11" src="https://github.com/user-attachments/assets/a5c2672f-7550-4a74-beec-5c6566d74b18">
-
-팀에서 초점을 뒀던 여행뿐만 아니라 인연을 만들어준다는 목적에 긍정적인 결과를 받았습니다.
-
-> <img width="549" alt="스크린샷 2024-08-09 오전 11 31 27" src="https://github.com/user-attachments/assets/63bba28f-e2bf-4ece-9eff-f992e91db547"> <img width="664" alt="스크린샷 2024-08-09 오전 11 32 07" src="https://github.com/user-attachments/assets/706ea07a-1433-4de5-8be3-de58a70738e9">
 
 그리고 설문을 진행한 예상 사용자가 저희가 구상하는 서비스를 사용할 가능성에 대한 설문에도 긍정적인 결과를 받았습니다.
 설문 조사를 토대로 팀이 설정한 목표는 아래와 같습니다.
