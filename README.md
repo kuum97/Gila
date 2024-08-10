@@ -10,7 +10,7 @@ Gila와 함께 새로운 사람들과의 만남을 통해 잊지 못할 추억�
 ## Team
 |<img src="https://avatars.githubusercontent.com/u/137033202?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/113277713?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/118117392?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/159929147?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/150333046?v=4" width="150" height="150"/>|
 |:-:|:-:|:-:|:-:|:-:|
-|팀장: 박상준<br/>[@sj0724](https://github.com/sj0724)|팀원: 권주현<br/>[@kuum97](https://github.com/kuum97)|팀원: 박성재<br/>[@Batrnan](https://github.com/Batrnan)|팀원: 이주안<br/>[@juan0444](https://github.com/juan0444)|팀원: 홍진호<br/>[@jinho0941](https://github.com/jinho0941)|
+|팀장: 박상준<br/>[@sj0724](https://github.com/sj0724)|팀원: 권주현<br/>[@kuum97](https://github.com/kuum97)|팀원: 박성재<br/>[@Batrnan](https://github.com/Batrnan)|팀원: 이주안<br/>[@juan0444](https://github.com/juan0444)|팀원: 홍진호<br/>[@jinho0941](https://github.com/jinho0941)|
 
 - 박상준: product managing, 질문 페이지, 대시보드 - 받은 신청, 토픽 페이지
 - 권주현: product managing, 활동 페이지, 대시보드 - 활동/보낸 신청
@@ -74,3 +74,6 @@ Gila와 함께 새로운 사람들과의 만남을 통해 잊지 못할 추억�
 node.js v20.0.0을 사용하고 있습니다. `nvm use`를 사용해서 node 버전을 세팅해주세요.<br/>
 `npx prisma generate`를 사용해 prisma schema table을 생성해주세요.<br/>
 `npm run build`를 사용해 코드를 실행해주시면 됩니다.<br/>
+
+>환경변수(.env) 사용 안내<br/>
+>프로젝트에서 kakao, uploadthing, db의 key값과 auth.js secret key를 사용하고 있습니다.
