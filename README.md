@@ -27,7 +27,7 @@ Gila와 함께 새로운 사람들과의 만남을 통해 잊지 못할 추억�
 ## 컨셉 기획
 
 기존의 여행 서비스는 가이드와 여행객을 이어줬다면 저희는 여행이라는 범위에서 확장한 인연에 초점을 뒀습니다. 그래서 본격적인 컨셉과 기획을 하기 전, 구글 폼을 통해 사전 조사를 진행했습니다.
-[구글 폼](https://forms.gle/H7APRaub5dC9u1B3A)
+[사전 설문 조사]([https://forms.gle/H7APRaub5dC9u1B3A](https://docs.google.com/spreadsheets/d/1IXKUo7oUxSdh4QjMnNmHzH8rDEEsa5b2IS2qCQjnpyk/edit?usp=sharing))
 
 설문을 진행한 결과 예상 사용자가 저희가 구상하는 서비스를 사용할 가능성에 대한 설문에도 긍정적인 결과를 받았습니다.
 설문 조사를 토대로 팀이 설정한 목표는 아래와 같습니다.
