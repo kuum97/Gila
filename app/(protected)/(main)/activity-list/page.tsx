@@ -5,7 +5,7 @@ import MainCarousel from '@/app/(protected)/(main)/_components/main-carousel';
 import ActivityContainer from '@/app/(protected)/(main)/activity-list/_components/activity-container';
 import Loading from '@/app/(protected)/(main)/activity-list/loading';
 import Link from 'next/link';
-import PlusButton from '@/components/common/plus-button';
+import PlusDiv from '@/components/common/plus-div';
 
 export default async function Page({
   searchParams: { sort, location },
@@ -23,7 +23,7 @@ export default async function Page({
         </div>
         <div className="w-8 fixed bottom-24 right-8 z-50">
           <Link href="/dashboard/my-activity/create">
-            <PlusButton />
+            <PlusDiv />
           </Link>
         </div>
         <ActivityContainer activities={activities} cursorId={cursorId} sort={sort} />
