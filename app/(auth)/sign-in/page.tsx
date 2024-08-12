@@ -1,5 +1,11 @@
 import Link from 'next/link';
 import LoginForm from '@/app/(auth)/sign-in/_components/login-form';
+import { AccountItem } from './_components/account-item';
+
+export const accounts = [
+  { label: 'email', value: 'test@mail.com' },
+  { label: 'password', value: 'test1234' },
+];
 
 export default function Page() {
   return (
@@ -15,6 +21,12 @@ export default function Page() {
             회원가입하기
           </Link>
         </p>
+      </div>
+      <div className="flex flex-col items-center">
+        <h3 className="text-xl font-bold">테스트 계정</h3>
+        {accounts.map((account, index) => (
+          <AccountItem key={index} label={account.label} value={account.value} />
+        ))}
       </div>
     </div>
   );
