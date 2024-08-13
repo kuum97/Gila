@@ -11,11 +11,12 @@ export default function ProfileScoreTip() {
       <PopoverContent className="p-5 bg-white absolute -left-4 bottom-8 flex flex-col gap-4">
         <p className="text-[10px] font-bold">길라에서는 리뷰에 따라 점수를 올릴 수 있어요.</p>
         <Image
-          src="/score-tip.svg"
+          src="/score-tip.png"
           alt="점수 이미지"
-          width={500}
-          height={500}
-          className="w-[420px] object-contain rounded-3xl"
+          width={250}
+          height={50}
+          className="rounded-3xl"
+          objectFit="cover"
         />
       </PopoverContent>
     </Popover>
