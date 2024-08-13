@@ -30,12 +30,37 @@ interface Props {
 }
 
 export default function LocationSelectDrawer({ defaultLocation, onChange }: Props) {
+  const [isDrawOpen, setIsDrawOpen] = useState(false);
   const [province, setProvince] = useState<string | null>(null);
   const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
 
   const cities = useMemo(() => {
     return province ? LOCATIONS[province] : [];
   }, [province]);
+
+  const handleSelectProvince = (provinceLocation: string) => {
+    if (provinceLocation === '세종특별자치시') {
+      onChange(provinceLocation);
+      setSelectedLocation(provinceLocation);
+      setIsDrawOpen(false);
+    } else {
+      setProvince(provinceLocation);
+    }
+  };
+
+  const handleSelectLocation = (location: string) => {
+    const fullLocation = `${province} ${location}`;
+    onChange(fullLocation);
+    setSelectedLocation(fullLocation);
+    setProvince(null); // 지역선택하면 처음부터 선택하도록 유도하는게 좋을 것 같아서 초기화 시켰습니다.
+    setIsDrawOpen(false);
+  };
+
+  const handleResetLocation = () => {
+    setProvince(null);
+    setSelectedLocation(null);
+    onChange('');
+  };
 
   useEffect(() => {
     if (defaultLocation) {
@@ -44,7 +69,7 @@ export default function LocationSelectDrawer({ defaultLocation, onChange }: Prop
   }, [defaultLocation]);
 
   return (
-    <Drawer>
+    <Drawer open={isDrawOpen} onOpenChange={setIsDrawOpen}>
       <DrawerTrigger className="flex items-center w-full">
         <Input
           type="text"
@@ -69,19 +94,15 @@ export default function LocationSelectDrawer({ defaultLocation, onChange }: Prop
         <div className="px-4">
           <Command>
             <CommandList className="flex p-2 relative justify-center shadow-[inset_0_0_5px_rgb(0,0,0,0.1)]">
-              <CommandEmpty>디폴트 이미지 넣을 예정</CommandEmpty>
-              {province || (
+              <CommandEmpty>지역 초기화를 해주세요!</CommandEmpty>
+              {province === null && (
                 <CommandGroup>
                   <ul className="grid grid-cols-3 gap-3">
                     {Object.keys(LOCATIONS).map((_province) => (
                       <CommandItem
                         key={_province}
                         value={_province}
-                        onSelect={(value) => {
-                          onChange(value);
-                          setSelectedLocation(value);
-                          setProvince(value);
-                        }}
+                        onSelect={handleSelectProvince}
                         className="flex items-center justify-center p-2 font-medium rounded-lg shadow-md hover:bg-gray-100"
                       >
                         {_province}
@@ -97,11 +118,7 @@ export default function LocationSelectDrawer({ defaultLocation, onChange }: Prop
                       <CommandItem
                         key={city}
                         value={city}
-                        onSelect={(value) => {
-                          const fullLocation = `${province} ${value}`;
-                          onChange(fullLocation);
-                          setSelectedLocation(fullLocation);
-                        }}
+                        onSelect={handleSelectLocation}
                         className="flex items-center justify-center p-2 font-medium rounded-lg shadow-md hover:bg-gray-100"
                       >
                         {city}
@@ -116,11 +133,7 @@ export default function LocationSelectDrawer({ defaultLocation, onChange }: Prop
         <DrawerFooter>
           <Button
             type="button"
-            onClick={() => {
-              setProvince(null);
-              setSelectedLocation(null);
-              onChange('');
-            }}
+            onClick={handleResetLocation}
             className="text-base text-white shadow-md bg-slate-800"
           >
             초기화

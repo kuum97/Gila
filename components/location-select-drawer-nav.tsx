@@ -47,16 +47,14 @@ export default function LocationSelectDrawerForNav() {
   };
 
   const handleSelectLocation = (location: string) => {
-    if (province) {
-      const fullLocation = `${province} ${location}`;
-      setSelectedLocation(fullLocation);
+    const fullLocation = `${province} ${location}`;
+    setSelectedLocation(fullLocation);
 
-      const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams(searchParams.toString());
 
-      params.set('location', fullLocation);
+    params.set('location', fullLocation);
 
-      router.push(`?${params.toString()}`);
-    }
+    router.push(`?${params.toString()}`);
   };
 
   const handleResetLocation = () => {
@@ -124,7 +122,7 @@ export default function LocationSelectDrawerForNav() {
                     </ul>
                   </CommandGroup>
                 )}
-                {province && cities.length > 0 && (
+                {province && (
                   <CommandGroup>
                     <ul className="grid grid-cols-3 gap-3">
                       {cities.map((city) => (
