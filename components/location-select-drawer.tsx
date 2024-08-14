@@ -35,7 +35,7 @@ export default function LocationSelectDrawer({ defaultLocation, onChange }: Prop
   const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
 
   const cities = useMemo(() => {
-    return province ? LOCATIONS[province] : [];
+    return province ? LOCATIONS[province].list : [];
   }, [province]);
 
   const handleSelectProvince = (provinceLocation: string) => {
@@ -116,12 +116,12 @@ export default function LocationSelectDrawer({ defaultLocation, onChange }: Prop
                   <ul className="grid grid-cols-3 gap-3">
                     {cities.map((city) => (
                       <CommandItem
-                        key={city}
-                        value={city}
+                        key={city.state}
+                        value={city.state}
                         onSelect={handleSelectLocation}
                         className="flex items-center justify-center p-2 font-medium rounded-lg shadow-md hover:bg-gray-100"
                       >
-                        {city}
+                        {city.state}
                       </CommandItem>
                     ))}
                   </ul>
