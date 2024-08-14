@@ -6,7 +6,7 @@ export default async function Page() {
   const { activities, cursorId } = activitiesRes;
 
   return (
-    <main className="p-5 pb-20">
+    <main className="p-5 min-h-[calc(100vh-64px-86px)]">
       <h1 className="text-2xl font-bold">이전 활동은 어땠나요?</h1>
       <ReviewList activities={activities} cursorId={cursorId} />
     </main>
