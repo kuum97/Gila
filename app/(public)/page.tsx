@@ -4,7 +4,7 @@ import LandingNavigation from '@/app/(public)/_components/landing-nav';
 
 export default function Page() {
   return (
-    <div className="flex flex-col justify-center min-h-screen">
+    <div className="flex flex-col justify-center w-[420px]">
       <LandingNavigation />
       <LandingHeroSection />
       <LandingMainSection />

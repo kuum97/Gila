@@ -5,6 +5,7 @@ import { NextSSRPlugin } from '@uploadthing/react/next-ssr-plugin';
 import { ourFileRouter } from '@/app/api/uploadthing/core';
 import Toaster from '@/components/ui/sonner';
 import './globals.css';
+import GilaLayout from './_components/gila-layout';
 
 declare global {
   interface Window {
@@ -25,10 +26,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body>
+      <body className="relative">
         <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
         <Toaster />
-        {children}
+        <div className="w-full my-0 mx-auto flex justify-center">
+          <GilaLayout />
+          {children}
+        </div>
       </body>
       <KakaoScript />
     </html>
