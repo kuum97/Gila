@@ -35,19 +35,17 @@ export default function PromiseListCard({ promise }: { promise: RequestWithActiv
           <div className="text-sm font-semibold text-gray-900">
             <p>최대 인원: {maximumCount} 명</p>
           </div>
+          <PromiseStatus status={promise.status} />
         </>
       }
       bottomContent={
-        <div className="absolute bottom-2 right-2 flex gap-32">
-          <div className="flex justify-end translate-y-[6px]">
-            <PromiseStatus status={promise.status} />
-          </div>
-          {promise.status === 'PENDING' && (
+        promise.status === 'PENDING' && (
+          <div className="absolute bottom-2 right-2 flex gap-32">
             <div className="w-[70px]" onClick={(e) => e.preventDefault()}>
               <DeleteAlertModal deleteAction={cancelPromise} isButton content="취소" />
             </div>
-          )}
-        </div>
+          </div>
+        )
       }
     />
   );

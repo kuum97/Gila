@@ -43,7 +43,7 @@ export default function ImageCard({
             <CardTitle className="text-2xl font-bold text-black truncate">{title}</CardTitle>
           </CardHeader>
           <CardContent className="p-0">{middleContent}</CardContent>
-          <CardFooter className="p-0">{bottomContent}</CardFooter>
+          {bottomContent && <CardFooter className="p-0">{bottomContent}</CardFooter>}
         </div>
         {isPending && (
           <div

@@ -22,7 +22,7 @@ export default async function Page() {
           </p>
         </div>
         <div>
-          <Link href="/dashboard/my-activity/create" className="relative z-50">
+          <Link href="/dashboard/my-activity/create" className="relative z-10">
             <PlusDiv />
           </Link>
         </div>

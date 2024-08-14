@@ -7,7 +7,7 @@ export default async function Page() {
   const { favorites, cursorId } = await getMyFavorites({ take: 10 });
 
   return (
-    <main className="p-5">
+    <main className="p-5 pb-20">
       <h1 className="text-2xl font-bold">저장한 활동</h1>
       <Suspense fallback={<Loading />}>
         <WishListContainer initialFavorites={favorites} initialCursorId={cursorId} />

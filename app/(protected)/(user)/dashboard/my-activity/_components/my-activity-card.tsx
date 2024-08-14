@@ -6,7 +6,7 @@ import formatDateRange from '@/utils/formatDateRange';
 import { deleteActivity } from '@/app/action/activity';
 import { ActivityWithFavoriteAndCount } from '@/type';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
 import DeleteAlertModal from '@/components/delete-alert-modal';
 import ActivityEditForm from './activity-edit-form';
 
@@ -82,6 +82,7 @@ export default function MyActivityCard({ activity }: Props) {
       <Dialog open={isEditModalOpen} onOpenChange={setEditModalOpen}>
         <DialogContent className="h-screen overflow-y-auto bg-white">
           <DialogTitle className="text-2xl font-semibold">길라 활동 수정</DialogTitle>
+          <DialogDescription aria-describedby={undefined} />
           <ActivityEditForm activity={activity} onClose={() => setEditModalOpen(false)} />
         </DialogContent>
       </Dialog>

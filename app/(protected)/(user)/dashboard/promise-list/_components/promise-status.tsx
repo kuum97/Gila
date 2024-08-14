@@ -16,7 +16,7 @@ export default function PromiseStatus({ status }: Props) {
   return (
     <div className={`${textColor} text-xs flex gap-2 items-center`}>
       <div className={`rounded-full w-2 h-2 ${bgColor}`} />
-      {text}
+      <p>{text}</p>
     </div>
   );
 }
