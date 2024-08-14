@@ -10,7 +10,7 @@ import Link from 'next/link';
 
 export default function ProfileDropdown() {
   return (
-    <DropdownMenu>
+    <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
         <div className="flex items-center bg-white_light justify-center overflow-hidden border rounded-full shadow-sm w-9 h-9">
           <Image width={30} height={30} src="/GilaLogo.png" alt="user-profile" />

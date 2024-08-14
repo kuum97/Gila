@@ -37,7 +37,7 @@ export default function MyQuestionKebab({ handleDelete, myQuestion, disabled }: 
 
   return (
     <>
-      <DropdownMenu>
+      <DropdownMenu modal={false}>
         <DropdownMenuTrigger
           className={cn(
             'rounded-full transition outline-none',

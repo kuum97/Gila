@@ -37,7 +37,7 @@ export default function NavDropdown({ userAvatar }: Props) {
   };
 
   return (
-    <DropdownMenu>
+    <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
         <div className="relative flex items-center w-[35px] h-[35px] overflow-hidden rounded-3xl bg-white_light shadow-md group transition-all hover:w-[70px] duration-300 ease-in-out">
           <div className="flex items-center gap-1 transition-transform duration-300 ease-in-out">
