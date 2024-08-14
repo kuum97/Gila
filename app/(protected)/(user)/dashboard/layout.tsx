@@ -5,7 +5,7 @@ import NavigationBase from '@/components/common/nav-base';
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <div className="relative">
+    <div className="relative w-[400px]">
       <NavigationBase />
       {children}
       <FooterNavigation routes={DASHBOARD_ROUTES} />

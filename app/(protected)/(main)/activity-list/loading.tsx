@@ -4,7 +4,7 @@ import Skeleton from '@/components/ui/skeleton';
 
 export default function Loading() {
   return (
-    <div className="w-screen h-screen">
+    <div className="w-[420px] h-screen">
       <div className="pb-8 bg-white shadow-inner border-y-2">
         <h1 className="px-4 pt-4 text-xl font-semibold">현재 주목받는 길라들</h1>
         <CarouselCardSkeleton />
