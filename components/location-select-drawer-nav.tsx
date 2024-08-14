@@ -91,7 +91,7 @@ export default function LocationSelectDrawerForNav() {
         </Button>
       </DrawerTrigger>
       <DrawerPortal>
-        <DrawerContent className="bg-white_light">
+        <DrawerContent className="bg-white_light left-[calc(50vw-10px)] max-w-[420px]">
           <DrawerHeader>
             <DrawerTitle className="text-2xl">지역을 선택하세요</DrawerTitle>
             <DrawerDescription className="">
