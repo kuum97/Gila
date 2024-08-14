@@ -15,13 +15,13 @@ export default async function Page({
   const { activities, cursorId } = await getActivities({ type: sort, location, size: 5 });
 
   return (
-    <main className="pb-20">
+    <main>
       <Suspense fallback={<Loading />}>
         <div className="pb-8 bg-white shadow-inner border-y-2">
           <h1 className="px-4 pt-4 text-xl font-semibold">현재 주목받는 길라들</h1>
           <MainCarousel />
         </div>
-        <div className="w-8 fixed bottom-24 right-8 z-50">
+        <div className="w-8 fixed bottom-24 right-[calc(50vw-380px)] z-50">
           <Link href="/dashboard/my-activity/create">
             <PlusDiv />
           </Link>
