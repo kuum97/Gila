@@ -8,6 +8,7 @@ import { getActivities } from '@/app/data/activity';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { ActivityWithUserAndFavoCount, Sort } from '@/type';
 import ActivityCardSkeleton from '@/components/skeletons/activity-card-skeleton';
+import ActivityCarousel from './activity-carousel';
 
 interface Props {
   activities: ActivityWithUserAndFavoCount[];
@@ -20,6 +21,7 @@ export default function ActivityList({ activities, cursorId, sort }: Props) {
   const [infinityCursorId, setInfinityCursorId] = useState<string | null>(cursorId);
   const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
+  const [userLocation, setUserLocation] = useState([]);
 
   const loadMoreActivities = useCallback(async () => {
     startTransition(async () => {
@@ -43,6 +45,11 @@ export default function ActivityList({ activities, cursorId, sort }: Props) {
   useEffect(() => {
     setInfinityActivities([...activities]);
     setInfinityCursorId(cursorId);
+    const location = localStorage.getItem('location');
+    if (location) {
+      const stringifyLocation = JSON.parse(location);
+      setUserLocation(stringifyLocation);
+    }
   }, [activities, cursorId, sort]);
 
   if (activities.length === 0 && searchParams.get('sort') === 'tag') {
@@ -68,9 +75,10 @@ export default function ActivityList({ activities, cursorId, sort }: Props) {
   return (
     <>
       <ul className="flex flex-col w-full gap-6">
-        {infinityActivities.map((activity) => (
+        {infinityActivities.map((activity, index) => (
           <li key={activity.id}>
             <ActivityListCard activity={activity} />
+            {index === 4 && <ActivityCarousel userLocation={userLocation} />}
           </li>
         ))}
         <div ref={observer} />
