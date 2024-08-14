@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function LandingMainSection() {
   return (
-    <main className="flex flex-col items-center w-screen gap-10 bg-white pt-3">
+    <main className="flex flex-col items-center w-[420px] gap-10 bg-white pt-3">
       <div className="flex flex-col items-center gap-2">
         <h2 className="mb-1 text-3xl font-bold">&quot; 짧은 경험 &quot;</h2>
         <div className="flex flex-col items-center gap-1 text-lg">
