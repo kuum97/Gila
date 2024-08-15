@@ -44,10 +44,11 @@ export default function MyQuestionKebab({ handleDelete, myQuestion, disabled }: 
             disabled ? 'cursor-not-allowed opacity-20' : 'hover:bg-slate-200',
           )}
           disabled={disabled}
+          onClick={(e) => e.preventDefault()}
         >
           <EllipsisVertical className="w-5 h-5" />
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="relative bg-white mr-9">
+        <DropdownMenuContent className="relative bg-white" align="end">
           <DropdownMenuItem
             className="flex justify-center cursor-pointer"
             onSelect={toggleEditModal}
@@ -65,7 +66,7 @@ export default function MyQuestionKebab({ handleDelete, myQuestion, disabled }: 
       </DropdownMenu>
 
       <Dialog open={isEditModalOpen} onOpenChange={setEditModalOpen}>
-        <DialogContent className="bg-white">
+        <DialogContent className="bg-white left-[calc(50vw-10px)] translate-x-0 max-w-[420px]">
           <DialogHeader>
             <DialogTitle>수정하기</DialogTitle>
           </DialogHeader>
