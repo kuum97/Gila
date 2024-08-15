@@ -29,7 +29,7 @@ export default function RootLayout({
       <body className="relative">
         <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
         <Toaster />
-        <div className="w-full my-0 mx-auto flex justify-center">
+        <div className="w-full md:my-0 md:mx-auto md:flex justify-center">
           <GilaLayout />
           <div className="border">{children}</div>
         </div>
