@@ -31,7 +31,7 @@ export default function RootLayout({
         <Toaster />
         <div className="w-full md:my-0 md:mx-auto md:flex justify-center">
           <GilaLayout />
-          <div className="border max-w-[420px] mx-auto md:mx-0">{children}</div>
+          <div className="max-w-[420px] mx-auto md:mx-0">{children}</div>
         </div>
       </body>
       <KakaoScript />
