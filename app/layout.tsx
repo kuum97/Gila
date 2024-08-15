@@ -29,9 +29,9 @@ export default function RootLayout({
       <body className="relative">
         <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
         <Toaster />
-        <div className="w-full md:my-0 md:mx-auto md:flex justify-center">
+        <div className="w-full tall:my-0 tall:mx-auto tall:flex justify-center">
           <GilaLayout />
-          <div className="max-w-[420px] mx-auto md:mx-0">{children}</div>
+          <div className="max-w-[420px] mx-auto tall:mx-0">{children}</div>
         </div>
       </body>
       <KakaoScript />
