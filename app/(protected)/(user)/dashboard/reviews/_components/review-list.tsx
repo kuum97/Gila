@@ -53,20 +53,21 @@ export default function ReviewList({ activities, cursorId }: Props) {
   }
 
   return (
-    <>
+    <ul className="flex flex-col gap-4">
       {initActivities.map((activity) => (
-        <ReviewsCard
-          key={activity.id}
-          activityId={activity.id}
-          title={activity.title}
-          startDate={activity.startDate}
-          endDate={activity.endDate}
-          userImg={activity.user.image!}
-          nickname={activity.user.nickname}
-          removeActivity={removeActivity}
-        />
+        <li key={activity.id}>
+          <ReviewsCard
+            activityId={activity.id}
+            title={activity.title}
+            startDate={activity.startDate}
+            endDate={activity.endDate}
+            userImg={activity.user.image!}
+            nickname={activity.user.nickname}
+            removeActivity={removeActivity}
+          />
+        </li>
       ))}
       <div ref={observer} />
-    </>
+    </ul>
   );
 }
