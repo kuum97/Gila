@@ -6,7 +6,7 @@ import { MAIN_ROUTES } from '@/constants/nav-routes';
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <div className="max-w-[420px] w-full mx-auto md:mx-0">
+    <div>
       <NavigationBase>
         <LocationSelectDrawerForNav />
       </NavigationBase>
