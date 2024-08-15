@@ -13,7 +13,7 @@ export default async function Page() {
   const userData = await getUserProfileWithIntroducedInfos(userId);
 
   return (
-    <main className="p-5">
+    <main className="p-5 h-[calc(100vh-64px-71px)]">
       <Card className="shadow-md">
         <CardHeader className="flex flex-col gap-5">
           <CardTitle className="font-bold">
