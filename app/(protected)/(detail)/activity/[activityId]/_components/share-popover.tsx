@@ -17,8 +17,8 @@ export default function SharePopover({ activityId, shareImage }: Props) {
   };
 
   const shareKakao = () => {
-    const { Kakao } = window;
-    Kakao.Share.sendDefault({
+    const { kakao } = window;
+    kakao.Share.sendDefault({
       objectType: 'feed',
       content: {
         title: 'Gila',
