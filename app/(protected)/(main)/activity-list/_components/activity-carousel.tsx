@@ -15,7 +15,7 @@ export default function ActivityCarousel({ userLocation }: { userLocation: strin
   const [recommendList, setRecommentList] = useState<ActivityWithUserAndFavoCount[]>([]);
 
   const getAddress = (mapResult: any, mapStatus: any) => {
-    if (mapStatus === window.Kakao.maps.services.Status.OK) {
+    if (mapStatus === window.kakao.maps.services.Status.OK) {
       const currentLocation = `${mapResult[0].region_1depth_name} ${mapResult[0].region_2depth_name}`;
       const { id, list } = LOCATIONS[mapResult[0].region_1depth_name];
       if (id > 10) {
@@ -55,8 +55,8 @@ export default function ActivityCarousel({ userLocation }: { userLocation: strin
   };
 
   const onLoadKakaoMap = useCallback(() => {
-    window.Kakao.maps.load(() => {
-      const geocoder = new window.Kakao.maps.services.Geocoder();
+    window.kakao.maps.load(() => {
+      const geocoder = new window.kakao.maps.services.Geocoder();
       navigator.geolocation.getCurrentPosition((i) => {
         geocoder.coord2RegionCode(i.coords.longitude, i.coords.latitude, getAddress);
       });
@@ -65,12 +65,12 @@ export default function ActivityCarousel({ userLocation }: { userLocation: strin
 
   // eslint-disable-next-line consistent-return
   useEffect(() => {
-    if (window.Kakao && window.Kakao.maps) {
+    if (window.kakao && window.kakao.maps) {
       onLoadKakaoMap();
     } else {
       const mapScript = document.createElement('script');
       mapScript.async = true;
-      mapScript.src = `//dapi.Kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_Kakao_API_KEY}&autoload=false&libraries=services,clusterer,drawing`;
+      mapScript.src = `//dapi.Kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_API_KEY}&autoload=false&libraries=services,clusterer,drawing`;
       document.head.appendChild(mapScript);
       mapScript.addEventListener('load', onLoadKakaoMap);
 
