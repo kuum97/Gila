@@ -4,7 +4,7 @@
 
 import { useCallback, useEffect } from 'react';
 import MapImg from '@/public/map.png';
-import KakaoMapImg from '@/public/Kakaomap.png';
+import KakaoMapImg from '@/public/kakaomap.png';
 
 declare global {
   interface Window {
@@ -58,7 +58,7 @@ export default function KakaoMap({ address }: Props) {
 
             const mapLink = `https://map.kakao.com/?q=${address}`;
 
-            const KakaoMapImgUrl = KakaoMapImg.src;
+            const KakaoMapImgUrl = kakaoMapImg.src;
 
             const customOverlayContent = `
              <div style="padding:6px; font-size:10px; color:#333; background-color:white; border:1px solid #ccc; border-radius:5px; min-width: 100px;">
