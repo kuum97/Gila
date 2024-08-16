@@ -12,8 +12,9 @@ function Toaster({ ...props }: ToasterProps) {
     <Sonner
       theme={theme as ToasterProps['theme']}
       position="bottom-center"
-      className="toaster group transform-none left-[calc(50vw+15px)] bottom-24"
+      className="toaster group tall:transform-none tall:left-[calc(50vw+15px)]"
       richColors
+      style={{ bottom: '96px' }}
       toastOptions={{
         classNames: {
           toast:

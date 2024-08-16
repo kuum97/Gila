@@ -66,7 +66,7 @@ export default function MyQuestionKebab({ handleDelete, myQuestion, disabled }: 
       </DropdownMenu>
 
       <Dialog open={isEditModalOpen} onOpenChange={setEditModalOpen}>
-        <DialogContent className="bg-white left-[calc(50vw-10px)] translate-x-0 max-w-[420px]">
+        <DialogContent className="bg-white tall:left-[calc(50vw-10px)] tall:translate-x-0 tall:max-w-[420px]">
           <DialogHeader>
             <DialogTitle>수정하기</DialogTitle>
           </DialogHeader>

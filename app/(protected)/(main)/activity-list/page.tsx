@@ -15,18 +15,18 @@ export default async function Page({
   const { activities, cursorId } = await getActivities({ type: sort, location, size: 5 });
 
   return (
-    <main>
+    <main className="relative">
       <Suspense fallback={<Loading />}>
-        <div className="pb-8 bg-white shadow-inner border-y-2">
+        <div className="relative pb-8 bg-white shadow-inner border-y-2 z-20">
           <h1 className="px-4 pt-4 text-xl font-semibold">현재 주목받는 길라들</h1>
           <MainCarousel />
         </div>
-        <div className="w-8 fixed bottom-24 right-[calc(50vw-380px)] z-50">
+        <ActivityContainer activities={activities} cursorId={cursorId} sort={sort} />
+        <div className="fixed w-8 bottom-24 right-[20px] z-50 tall:right-[calc(50vw-380px)]">
           <Link href="/dashboard/my-activity/create">
             <PlusDiv />
           </Link>
         </div>
-        <ActivityContainer activities={activities} cursorId={cursorId} sort={sort} />
       </Suspense>
     </main>
   );

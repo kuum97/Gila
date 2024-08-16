@@ -52,7 +52,7 @@ export default function SortingDropdown({ sorts }: Props) {
       <DropdownMenuTrigger asChild>
         <Button
           type="button"
-          className="flex justify-between gap-1 p-0 px-1 bg-white_light hover:bg-gray-200"
+          className="flex justify-between gap-1 py-0 px-3 bg-white_light hover:bg-gray-200"
         >
           <div className="text-sm">{currentSortKorean}</div>
           <div className="flex justify-end w-full">
