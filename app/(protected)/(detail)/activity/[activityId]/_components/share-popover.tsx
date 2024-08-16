@@ -1,7 +1,17 @@
+'use client';
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable jsx-a11y/anchor-is-valid */
+
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { ExternalLink, Link, MessageCircle } from 'lucide-react';
 import { toast } from 'sonner';
+
+declare global {
+  interface Window {
+    Kakao: any;
+  }
+}
 
 interface Props {
   shareImage: string;
@@ -17,8 +27,8 @@ export default function SharePopover({ activityId, shareImage }: Props) {
   };
 
   const shareKakao = () => {
-    const { kakao } = window;
-    kakao.Share.sendDefault({
+    const { Kakao } = window;
+    Kakao.Share.sendDefault({
       objectType: 'feed',
       content: {
         title: 'Gila',

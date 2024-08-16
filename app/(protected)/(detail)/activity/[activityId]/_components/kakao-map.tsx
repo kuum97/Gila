@@ -1,8 +1,16 @@
 'use client';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { useCallback, useEffect } from 'react';
 import MapImg from '@/public/map.png';
-import KakaoMapImg from '@/public/kakaomap.png';
+import KakaoMapImg from '@/public/Kakaomap.png';
+
+declare global {
+  interface Window {
+    kakao: any;
+  }
+}
 
 interface Props {
   address: string;
@@ -50,7 +58,7 @@ export default function KakaoMap({ address }: Props) {
 
             const mapLink = `https://map.kakao.com/?q=${address}`;
 
-            const kakaoMapImgUrl = KakaoMapImg.src;
+            const KakaoMapImgUrl = KakaoMapImg.src;
 
             const customOverlayContent = `
              <div style="padding:6px; font-size:10px; color:#333; background-color:white; border:1px solid #ccc; border-radius:5px; min-width: 100px;">
@@ -58,9 +66,9 @@ export default function KakaoMap({ address }: Props) {
                 <span style="color:#777;">${address}</span><br>
                 <a href="${mapLink}" target="_blank" style="text-decoration:none; color:#333;">
                   <div style="display: flex; align-items: center; margin-top: 6px;">
-                    <img src="${kakaoMapImgUrl}" alt="카카오맵 아이콘" style="width:20px; height:20px; margin-right:5px;" />
+                    <img src="${KakaoMapImgUrl}" alt="카카오맵 아이콘" style="width:20px; height:20px; margin-right:5px;" />
                     <p style="margin:0;">카카오 맵 ▶</p>
-                  </div>  
+                  </div>
                 </a>
               </div>
             `;
