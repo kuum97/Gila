@@ -18,12 +18,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className="relative">
+      <body className="relative bg-gray_100">
         <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
         <Toaster />
         <div className="w-full tall:my-0 tall:mx-auto tall:flex justify-center">
           <GilaLayout />
-          <div className="max-w-[420px] mx-auto tall:mx-0">{children}</div>
+          <div className="max-w-[420px] mx-auto tall:mx-0 bg-white_light tall:w-[420px]">
+            {children}
+          </div>
         </div>
       </body>
     </html>
