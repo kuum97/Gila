@@ -36,7 +36,7 @@ export default function DeleteAlertModal({
           {content}
         </AlertDialogTrigger>
       )}
-      <AlertDialogContent className="bg-white w-80 rounded-lg">
+      <AlertDialogContent className="bg-white w-80 rounded-lg tall:left-[calc(50vw+30px)] tall:translate-x-0 tall:max-w-[420px]">
         <AlertDialogHeader>
           <AlertDialogTitle>정말 {content}하시나요?</AlertDialogTitle>
           <AlertDialogDescription aria-describedby={undefined} />

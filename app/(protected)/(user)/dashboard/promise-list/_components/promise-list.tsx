@@ -58,7 +58,7 @@ export default function PromiseList({ promiseList, cursorId }: Props) {
 
   return (
     <>
-      <ul className="flex flex-col w-full gap-6">
+      <ul className="flex flex-col w-full gap-4">
         {infinityPromise.map((item) => (
           <li key={item.id} className="relative">
             <PromiseListCard promise={item} />

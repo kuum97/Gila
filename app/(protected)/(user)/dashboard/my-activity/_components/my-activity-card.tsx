@@ -80,7 +80,7 @@ export default function MyActivityCard({ activity }: Props) {
         />
       </div>
       <Dialog open={isEditModalOpen} onOpenChange={setEditModalOpen}>
-        <DialogContent className="h-screen overflow-y-auto bg-white">
+        <DialogContent className="h-screen overflow-y-auto bg-white tall:left-[calc(50vw-10px)] tall:translate-x-0 tall:max-w-[420px]">
           <DialogTitle className="text-2xl font-semibold">길라 활동 수정</DialogTitle>
           <DialogDescription aria-describedby={undefined} />
           <ActivityEditForm activity={activity} onClose={() => setEditModalOpen(false)} />

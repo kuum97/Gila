@@ -10,6 +10,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        tall: { raw: '(min-width: 820px)' },
+      },
       height: {
         'screen-minus-134': 'calc(100vh - 134px)',
         'screen-minus-63': 'calc(100vh - 63px)',

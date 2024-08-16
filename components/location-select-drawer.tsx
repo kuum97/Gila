@@ -83,7 +83,7 @@ export default function LocationSelectDrawer({ defaultLocation, onChange }: Prop
         />
         <Map className="w-10 h-10 p-1 text-white rounded-r size-5 bg-primary" />
       </DrawerTrigger>
-      <DrawerContent className="bg-white_light">
+      <DrawerContent className="bg-white_light tall:left-[calc(50vw-10px)] tall:max-w-[420px]">
         <DrawerHeader>
           <DrawerTitle className="text-2xl">지역을 선택하세요</DrawerTitle>
           <DrawerDescription className="">

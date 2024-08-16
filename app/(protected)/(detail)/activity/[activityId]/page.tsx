@@ -10,7 +10,7 @@ export default async function Page({ params }: { params: Params }) {
   const activity = await getActivityById(params.activityId);
 
   return (
-    <>
+    <div>
       <DetailContent detail={activity} />
       <PromiseRequestForm
         startDate={activity.startDate}
@@ -18,6 +18,6 @@ export default async function Page({ params }: { params: Params }) {
         maxCount={activity.maximumCount}
         activityId={activity.id}
       />
-    </>
+    </div>
   );
 }

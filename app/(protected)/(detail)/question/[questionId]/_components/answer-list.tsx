@@ -50,19 +50,20 @@ export default function AnswerList({
         <p className="text-lg font-semibold text-left">받은 답변 {totalCount}</p>
       </div>
       <div className="w-full">
-        <ul className="flex flex-col overflow-y-scroll max-h-[500px] gap-2">
-          {totalCount === 0 && (
-            <div className="bg-gray-100 h-20 rounded-lg flex flex-col items-center justify-center font-semibold">
-              아직 답변이 없습니다!
-            </div>
-          )}
-          {answerList.map((answer) => (
-            <li key={answer.id}>
-              <AnswerItem answer={answer} userId={userId} />
-            </li>
-          ))}
-          <div ref={observer} />
-        </ul>
+        {totalCount === 0 ? (
+          <div className="bg-gray-100 h-20 rounded-lg flex flex-col items-center justify-center font-semibold">
+            아직 답변이 없습니다!
+          </div>
+        ) : (
+          <ul className="flex flex-col overflow-y-scroll max-h-[500px] gap-2">
+            {answerList.map((answer) => (
+              <li key={answer.id}>
+                <AnswerItem answer={answer} userId={userId} />
+              </li>
+            ))}
+            <div ref={observer} />
+          </ul>
+        )}
       </div>
       {isPending && <Spinner />}
     </div>
