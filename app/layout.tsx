@@ -1,18 +1,10 @@
 import type { Metadata } from 'next';
-import KakaoScript from '@/KakaoScript';
 import { extractRouterConfig } from 'uploadthing/server';
 import { NextSSRPlugin } from '@uploadthing/react/next-ssr-plugin';
 import { ourFileRouter } from '@/app/api/uploadthing/core';
 import Toaster from '@/components/ui/sonner';
-import './globals.css';
 import GilaLayout from './_components/gila-layout';
-
-declare global {
-  interface Window {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    kakao: any;
-  }
-}
+import './globals.css';
 
 export const metadata: Metadata = {
   title: 'Gila',
@@ -34,7 +26,6 @@ export default function RootLayout({
           <div className="max-w-[420px] mx-auto tall:mx-0">{children}</div>
         </div>
       </body>
-      <KakaoScript />
     </html>
   );
 }
