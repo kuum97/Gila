@@ -32,7 +32,7 @@ export default function Page() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-between w-screen h-screen">
+    <div className="flex flex-col items-center justify-between w-[420px] h-screen">
       <div className="flex flex-col items-center justify-center gap-2">
         <p className="mt-10 text-3xl font-bold">나에 대해서 알려주세요!</p>
         <p className="text-sm text-center text-gray_600">

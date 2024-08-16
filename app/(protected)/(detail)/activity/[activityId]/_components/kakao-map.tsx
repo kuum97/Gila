@@ -4,13 +4,6 @@ import { useCallback, useEffect } from 'react';
 import MapImg from '@/public/map.png';
 import KakaoMapImg from '@/public/kakaomap.png';
 
-declare global {
-  interface Window {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    kakao: any;
-  }
-}
-
 interface Props {
   address: string;
 }
@@ -106,5 +99,5 @@ export default function KakaoMap({ address }: Props) {
     }
   }, [address, onLoadKakaoMap]);
 
-  return <div id="map" className="mt-1 w-full h-64 md:w-[790px] md:h-[450px] rounded-lg" />;
+  return <div id="map" className="mt-1 w-full h-64 rounded-lg" />;
 }

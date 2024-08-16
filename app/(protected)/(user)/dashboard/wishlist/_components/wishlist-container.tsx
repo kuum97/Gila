@@ -60,7 +60,7 @@ export default function WishListContainer({ initialFavorites, initialCursorId }:
 
   return (
     <>
-      <ul className="flex flex-col w-full gap-6">
+      <ul className="flex flex-col w-full gap-4">
         {favorites.map(({ activity }) => (
           <li key={activity.id} className="relative">
             <Link href={`/activity/${activity.id}`} passHref>

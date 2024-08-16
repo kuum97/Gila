@@ -17,8 +17,8 @@ export default function SharePopover({ activityId, shareImage }: Props) {
   };
 
   const shareKakao = () => {
-    const { Kakao } = window;
-    Kakao.Share.sendDefault({
+    const { kakao } = window;
+    kakao.Share.sendDefault({
       objectType: 'feed',
       content: {
         title: 'Gila',
@@ -44,7 +44,7 @@ export default function SharePopover({ activityId, shareImage }: Props) {
       <PopoverTrigger asChild>
         <ExternalLink width={20} className="cursor-pointer" />
       </PopoverTrigger>
-      <PopoverContent className="bg-white w-full flex gap-4">
+      <PopoverContent className="bg-white w-full flex gap-4" align="end">
         <div
           className="w-8 h-8 rounded-full flex justify-center items-center border-2 shadow-md"
           onClick={copyLink}

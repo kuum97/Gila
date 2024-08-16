@@ -19,7 +19,7 @@ export default async function Page({
   });
 
   return (
-    <main className="w-full pb-20">
+    <main className="w-full">
       <div className="relative flex flex-col items-center w-full gap-4 p-5">
         <h1 className="text-2xl font-semibold">
           <span className="text-3xl font-bold text-primary">길라</span>에게 바로 물어보세요!
