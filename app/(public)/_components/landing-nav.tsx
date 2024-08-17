@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function LandingNavigation() {
   return (
-    <nav className="sticky top-0 z-50 flex items-center justify-between h-16 px-3 bg-white border-b bg-opacity-95">
+    <nav className="tall:sticky fixed left-0 w-screen tall:w-full top-0 z-50 flex items-center justify-between h-16 px-3 bg-white border-b bg-opacity-95">
       <div className="w-[70px] h-[60px] relative">
         <Image fill src="/GilaName.png" alt="logo-to-home" style={{ objectFit: 'contain' }} />
       </div>

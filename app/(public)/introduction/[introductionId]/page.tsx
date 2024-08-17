@@ -13,7 +13,7 @@ export default async function Page({ params }: { params: Params }) {
   const userData = await getUserProfileWithIntroducedInfos(id);
 
   return (
-    <main className="p-5 w-[420px]">
+    <main className="p-5 max-w-[420px] h-full">
       <div className="py-5">
         <BackButton />
       </div>

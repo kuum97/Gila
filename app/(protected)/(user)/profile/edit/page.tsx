@@ -13,10 +13,10 @@ export default async function Page() {
   const userData = await getUserProfileWithIntroducedInfos(userId);
 
   return (
-    <main className="p-5 h-[calc(100vh-64px-71px)]">
+    <main className="p-5 tall:h-[calc(100vh-64px-71px)] pb-20">
       <Card className="shadow-md">
         <CardHeader className="flex flex-col gap-5">
-          <CardTitle className="font-bold">
+          <CardTitle className="font-bold text-center">
             <span className="text-3xl text-primary">{userData.user.nickname}</span>님의 개인정보
           </CardTitle>
           <EditImageForm userImg={user.image ?? '/default-profile-image.png'} />
