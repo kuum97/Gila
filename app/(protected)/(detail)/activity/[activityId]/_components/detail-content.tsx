@@ -9,7 +9,7 @@ export default function DetailContent({ detail }: { detail: ActivityWithUserAndF
   return (
     <div>
       <DetailCarousel thumbnails={detail.thumbnails} />
-      <div className="flex flex-col gap-6 m-4">
+      <div className="flex flex-col gap-6 m-4 pb-20 tall:pb-0">
         <DetailTitle activityDetail={detail} />
         <DetailDescription description={detail.description} locations={detail.location} />
         <AuthorInfo ownerId={detail.userId} />

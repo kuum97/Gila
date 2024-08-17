@@ -11,7 +11,7 @@ export default async function Page() {
   return (
     <main className="p-5 min-h-[calc(100vh-64px-86px)] flex flex-col gap-4">
       <h1 className="w-full text-2xl font-bold">
-        <span className="text-3xl text-primary">{user.nickname}</span>님과 함께하고 싶데요!
+        <span className="text-3xl text-primary">{user.nickname}</span>님과 함께하고 싶대요!
       </h1>
       <Suspense fallback={<Loading />}>
         <PromisedList promisedActivities={requests} cursorId={cursorId} />
