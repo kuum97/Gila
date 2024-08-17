@@ -8,7 +8,7 @@ export default async function NavigationBase({ children }: { children?: ReactNod
   const { image } = await getCurrentUser();
 
   return (
-    <nav className="sticky top-0 z-50 flex items-center justify-between h-16 p-3 bg-white border-b bg-opacity-95 w-full">
+    <nav className="tall:sticky fixed left-0 top-0 z-50 flex items-center justify-between h-16 p-3 bg-white border-b bg-opacity-95 w-full">
       <div className="w-[70px] flex items-center justify-start">
         <Link href="/activity-list">
           <div className="w-[55px] h-[35px] relative">
