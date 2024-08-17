@@ -90,7 +90,7 @@ export default function ActivityCarousel({ userLocation }: { userLocation: strin
       });
       setRecommentList([...result.activities]);
     };
-    if (userLocation) {
+    if (userLocation.length > 0) {
       test(userLocation);
     }
   }, [userLocation]);
@@ -103,18 +103,22 @@ export default function ActivityCarousel({ userLocation }: { userLocation: strin
             나랑 가까운
             <span className="text-xl text-primary"> 길라</span>를 추천해드릴께요!
           </p>
-          <div className="overflow-x-scroll [&::-webkit-scrollbar]:hidden">
-            <ul className="flex gap-4  w-fit">
-              {recommendList.map((item, index) => (
-                <li
-                  key={item.id}
-                  className={`w-[280px] ${index === 0 && 'ml-5'} ${recommendList.length - 1 === index && 'mr-5'}`}
-                >
-                  <ActivityListCard activity={item} />
-                </li>
-              ))}
-            </ul>
-          </div>
+          {recommendList ? (
+            <div className="overflow-x-scroll [&::-webkit-scrollbar]:hidden">
+              <ul className="flex gap-4  w-fit">
+                {recommendList.map((item, index) => (
+                  <li
+                    key={item.id}
+                    className={`w-[280px] ${index === 0 && 'ml-5'} ${recommendList.length - 1 === index && 'mr-5'}`}
+                  >
+                    <ActivityListCard activity={item} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <p className="text-lg font-bold">근처에서 길라를 찾을 수 없어요!</p>
+          )}
         </>
       ) : (
         <>

@@ -21,7 +21,12 @@ export default async function Page({
           <h1 className="px-4 pt-4 text-xl font-semibold">현재 주목받는 길라들</h1>
           <MainCarousel />
         </div>
-        <ActivityContainer activities={activities} cursorId={cursorId} sort={sort} />
+        <ActivityContainer
+          activities={activities}
+          cursorId={cursorId}
+          sort={sort}
+          location={location}
+        />
         <div className="fixed w-8 bottom-24 right-[20px] z-50 tall:right-[calc(50vw-380px)]">
           <Link href="/dashboard/my-activity/create">
             <PlusDiv />

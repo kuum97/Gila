@@ -14,11 +14,12 @@ interface Props {
   activities: ActivityWithUserAndFavoCount[];
   cursorId: string | null;
   sort: Sort;
+  location: string;
 }
 
-export default function ActivityList({ activities, cursorId, sort }: Props) {
+export default function ActivityList({ activities, cursorId, sort, location }: Props) {
   const [infinityActivities, setInfinityActivities] = useState<ActivityWithUserAndFavoCount[]>([]);
-  const [infinityCursorId, setInfinityCursorId] = useState<string | null>(cursorId);
+  const [infinityCursorId, setInfinityCursorId] = useState<string | null>('');
   const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
   const [userLocation, setUserLocation] = useState([]);
@@ -30,11 +31,12 @@ export default function ActivityList({ activities, cursorId, sort }: Props) {
         type: sort,
         cursor: infinityCursorId,
         size: 5,
+        location,
       });
       setInfinityCursorId(result.cursorId);
       setInfinityActivities((prev) => [...prev, ...result.activities]);
     });
-  }, [infinityCursorId, sort]);
+  }, [infinityCursorId, location, sort]);
 
   const observer = useInfiniteScroll({
     callback: loadMoreActivities,
@@ -45,12 +47,12 @@ export default function ActivityList({ activities, cursorId, sort }: Props) {
   useEffect(() => {
     setInfinityActivities([...activities]);
     setInfinityCursorId(cursorId);
-    const location = localStorage.getItem('location');
-    if (location) {
-      const stringifyLocation = JSON.parse(location);
+    const currentLocation = localStorage.getItem('location');
+    if (currentLocation) {
+      const stringifyLocation = JSON.parse(currentLocation);
       setUserLocation(stringifyLocation);
     }
-  }, [activities, cursorId, sort]);
+  }, [activities, cursorId, location, sort]);
 
   if (activities.length === 0 && searchParams.get('sort') === 'tag') {
     return (
