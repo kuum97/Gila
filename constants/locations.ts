@@ -158,7 +158,7 @@ const LOCATIONS: Locations = {
       { state: '연천군', location: { latitude: 38.084, longitude: 127.177 } }, // 연천군청
     ],
   },
-  강원도: {
+  강원특별자치도: {
     id: 12,
     list: [
       { state: '춘천시', location: { latitude: 37.8804, longitude: 127.7263 } }, // 춘천시청
@@ -267,7 +267,7 @@ const LOCATIONS: Locations = {
       { state: '합천군', location: { latitude: 35.5686, longitude: 128.1595 } }, // 합천군청
     ],
   },
-  전라북도: {
+  전북특별자치도: {
     id: 17,
     list: [
       { state: '전주시', location: { latitude: 35.8244, longitude: 127.148 } }, // 전주시청

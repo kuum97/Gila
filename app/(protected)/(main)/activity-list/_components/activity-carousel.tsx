@@ -11,17 +11,17 @@ import LOCATIONS from '@/constants/locations';
 import calculateDistanceInMeters from '@/utils/calculateDistance';
 import ActivityListCard from './activity-list-card';
 
-export default function ActivityCarousel({ userLocation }: { userLocation: string[] }) {
+export default function ActivityCarousel() {
   const [recommendList, setRecommentList] = useState<ActivityWithUserAndFavoCount[]>([]);
+  const [userLocation, setUserLocation] = useState<string[]>([]);
 
   const getAddress = (mapResult: any, mapStatus: any) => {
     if (mapStatus === window.kakao.maps.services.Status.OK) {
-      const currentLocation = `${mapResult[0].region_1depth_name} ${mapResult[0].region_2depth_name}`;
+      const replaceEmpty = mapResult[0].region_2depth_name.split(' ');
+      const currentLocation = `${mapResult[0].region_1depth_name} ${replaceEmpty[0]}`;
       const { id, list } = LOCATIONS[mapResult[0].region_1depth_name];
       if (id > 10) {
-        const singleLocation = [currentLocation];
-        const jsonLocation = JSON.stringify(singleLocation);
-        localStorage.setItem('location', jsonLocation);
+        setUserLocation([currentLocation]);
         return;
       }
       let firstDistance = 0;
@@ -49,8 +49,7 @@ export default function ActivityCarousel({ userLocation }: { userLocation: strin
         currentLocation,
         `${mapResult[0].region_1depth_name} ${nearByLocation}`,
       ];
-      const jsonLocation = JSON.stringify(userLocationList);
-      localStorage.setItem('location', jsonLocation);
+      setUserLocation([...userLocationList]);
     }
   };
 
@@ -81,29 +80,31 @@ export default function ActivityCarousel({ userLocation }: { userLocation: strin
     }
   }, [onLoadKakaoMap]);
 
+  const activityByLocation = async (location: string[]) => {
+    const result = await getActivitiesByLocation({
+      location: location[0],
+      secondeLocation: location[1],
+      size: 5,
+    });
+    setRecommentList([...result.activities]);
+  };
+
   useEffect(() => {
-    const test = async (location: string[]) => {
-      const result = await getActivitiesByLocation({
-        location: location[0],
-        secondeLocation: location[1],
-        size: 5,
-      });
-      setRecommentList([...result.activities]);
-    };
     if (userLocation.length > 0) {
-      test(userLocation);
+      activityByLocation(userLocation);
     }
   }, [userLocation]);
 
   return (
     <div className="bg-gray_200 py-5 flex flex-col gap-5 mt-6 rounded-lg">
-      {userLocation ? (
+      {userLocation[0] ? (
         <>
           <p className="text-xl font-semibold px-5">
             나랑 가까운
             <span className="text-xl text-primary"> 길라</span>를 추천해드릴께요!
+            {}
           </p>
-          {recommendList ? (
+          {recommendList[0] ? (
             <div className="overflow-x-scroll [&::-webkit-scrollbar]:hidden">
               <ul className="flex gap-4  w-fit">
                 {recommendList.map((item, index) => (
@@ -117,19 +118,26 @@ export default function ActivityCarousel({ userLocation }: { userLocation: strin
               </ul>
             </div>
           ) : (
-            <p className="text-lg font-bold">근처에서 길라를 찾을 수 없어요!</p>
+            <div className="px-5">
+              <div>
+                <p className="text-xl font-semibold">근처에서 길라를 찾을 수 없어요!</p>
+              </div>
+              <div>
+                <ActivityCardSkeleton />
+              </div>
+            </div>
           )}
         </>
       ) : (
-        <>
+        <div className="px-5">
           <div>
-            <p className="text-lg font-semibold">위치 권한을 허용해주세요!</p>
+            <p className="text-xl font-semibold">위치 권한을 허용해주세요!</p>
             <p className="text-sm">접속하신 지역을 기준으로 길라를 추천해드릴께요!</p>
           </div>
           <div>
             <ActivityCardSkeleton />
           </div>
-        </>
+        </div>
       )}
     </div>
   );
