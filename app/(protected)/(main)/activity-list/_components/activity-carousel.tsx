@@ -96,16 +96,15 @@ export default function ActivityCarousel() {
   }, [userLocation]);
 
   return (
-    <div className="bg-gray_200 py-5 flex flex-col gap-5 mt-6 rounded-lg">
+    <div className="border py-5 flex flex-col gap-5 mb-6 rounded-lg">
       {userLocation[0] ? (
         <>
           <p className="text-xl font-semibold px-5">
             나랑 가까운
             <span className="text-xl text-primary"> 길라</span>를 추천해드릴께요!
-            {}
           </p>
           {recommendList[0] ? (
-            <div className="overflow-x-scroll [&::-webkit-scrollbar]:hidden">
+            <div className="overflow-x-scroll [&::-webkit-scrollbar]:hidden h-full">
               <ul className="flex gap-4  w-fit">
                 {recommendList.map((item, index) => (
                   <li

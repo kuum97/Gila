@@ -71,10 +71,10 @@ export default function ActivityList({ activities, cursorId, sort, location }: P
   return (
     <>
       <ul className="flex flex-col w-full gap-6">
-        {infinityActivities.map((activity, index) => (
+        <ActivityCarousel />
+        {infinityActivities.map((activity) => (
           <li key={activity.id}>
             <ActivityListCard activity={activity} />
-            {index === 4 && <ActivityCarousel />}
           </li>
         ))}
         <div ref={observer} />
