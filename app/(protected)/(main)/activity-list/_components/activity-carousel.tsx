@@ -96,7 +96,7 @@ export default function ActivityCarousel() {
   }, [userLocation]);
 
   return (
-    <div className="border py-5 flex flex-col gap-5 mb-6 rounded-lg">
+    <div className="border py-5 flex flex-col gap-5 rounded-lg">
       {userLocation[0] ? (
         <>
           <p className="text-xl font-semibold px-5">
