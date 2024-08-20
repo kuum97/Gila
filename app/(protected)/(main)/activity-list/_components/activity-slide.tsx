@@ -3,6 +3,7 @@
 import ActivityCardSkeleton from '@/components/skeletons/activity-card-skeleton';
 import { ActivityWithUserAndFavoCount } from '@/type';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useThrottle from '@/hooks/useThrottle';
 import ActivityListCard from './activity-list-card';
 import SlideButtonContainer from './slide-button-container';
 
@@ -30,11 +31,15 @@ export default function ActivitySlide({
     }
   };
 
+  const throttleClickNext = useThrottle({ callback: nextSlide, limit: 300 });
+
   const prevSlide = () => {
     if (slideRef.current) {
       slideRef.current.scrollBy({ left: -slideScrollDistance, behavior: 'smooth' });
     }
   };
+
+  const throttleClickPrev = useThrottle({ callback: prevSlide, limit: 300 });
 
   useEffect(() => {
     if (slideRef.current) {
@@ -62,8 +67,8 @@ export default function ActivitySlide({
     <div className="relative">
       {recommendList[0] && (
         <SlideButtonContainer
-          handleNext={nextSlide}
-          handlePrev={prevSlide}
+          handleNext={throttleClickNext}
+          handlePrev={throttleClickPrev}
           isNextDisabled={isNextDisabled}
           isPrevDisabled={isPrevDisabled}
         />
