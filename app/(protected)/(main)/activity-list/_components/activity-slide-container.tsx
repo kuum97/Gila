@@ -3,17 +3,18 @@
 
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, useTransition } from 'react';
 import { getActivitiesByLocation } from '@/app/data/activity';
 import { ActivityWithUserAndFavoCount } from '@/type';
 import ActivityCardSkeleton from '@/components/skeletons/activity-card-skeleton';
 import LOCATIONS from '@/constants/locations';
 import calculateDistanceInMeters from '@/utils/calculateDistance';
-import ActivityListCard from './activity-list-card';
+import ActivitySlide from './activity-slide';
 
-export default function ActivityCarousel() {
+export default function ActivitySlideContainer() {
   const [recommendList, setRecommentList] = useState<ActivityWithUserAndFavoCount[]>([]);
   const [userLocation, setUserLocation] = useState<string[]>([]);
+  const [isPending, startTransition] = useTransition();
 
   const getAddress = (mapResult: any, mapStatus: any) => {
     if (mapStatus === window.kakao.maps.services.Status.OK) {
@@ -80,13 +81,15 @@ export default function ActivityCarousel() {
     }
   }, [onLoadKakaoMap]);
 
-  const activityByLocation = async (location: string[]) => {
-    const result = await getActivitiesByLocation({
-      location: location[0],
-      secondeLocation: location[1],
-      size: 5,
+  const activityByLocation = (location: string[]) => {
+    startTransition(async () => {
+      const result = await getActivitiesByLocation({
+        location: location[0],
+        secondeLocation: location[1],
+        size: 5,
+      });
+      setRecommentList([...result.activities]);
     });
-    setRecommentList([...result.activities]);
   };
 
   useEffect(() => {
@@ -96,47 +99,21 @@ export default function ActivityCarousel() {
   }, [userLocation]);
 
   return (
-    <div className="bg-gray_200 py-5 flex flex-col gap-5 mt-6 rounded-lg">
-      {userLocation[0] ? (
-        <>
-          <p className="text-xl font-semibold px-5">
-            나랑 가까운
-            <span className="text-xl text-primary"> 길라</span>를 추천해드릴께요!
-            {}
-          </p>
-          {recommendList[0] ? (
-            <div className="overflow-x-scroll [&::-webkit-scrollbar]:hidden">
-              <ul className="flex gap-4  w-fit">
-                {recommendList.map((item, index) => (
-                  <li
-                    key={item.id}
-                    className={`w-[280px] ${index === 0 && 'ml-5'} ${recommendList.length - 1 === index && 'mr-5'}`}
-                  >
-                    <ActivityListCard activity={item} />
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ) : (
-            <div className="px-5">
-              <div>
-                <p className="text-xl font-semibold">근처에서 길라를 찾을 수 없어요!</p>
-              </div>
-              <div>
-                <ActivityCardSkeleton />
-              </div>
-            </div>
-          )}
-        </>
+    <div className="border py-5 flex flex-col gap-5 rounded-lg">
+      <div className="flex flex-col gap-1 px-5">
+        <p className="text-xl font-semibold">
+          나랑 가까운
+          <span className="text-xl text-primary"> 길라</span>를 추천해드릴께요!
+        </p>
+        {!userLocation[0] && (
+          <p className="text-xs">※ 위치 권한 설정을 하지 않으면 이용할 수 없는 기능입니다.</p>
+        )}
+      </div>
+      {userLocation[0] && !isPending ? (
+        <ActivitySlide recommendList={recommendList} />
       ) : (
         <div className="px-5">
-          <div>
-            <p className="text-xl font-semibold">위치 권한을 허용해주세요!</p>
-            <p className="text-sm">접속하신 지역을 기준으로 길라를 추천해드릴께요!</p>
-          </div>
-          <div>
-            <ActivityCardSkeleton />
-          </div>
+          <ActivityCardSkeleton />
         </div>
       )}
     </div>

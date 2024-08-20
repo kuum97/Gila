@@ -16,6 +16,8 @@ interface Props {
 export default function PromiseRequestForm({ startDate, endDate, maxCount, activityId }: Props) {
   const [isPending, startTransition] = useTransition();
   const formatDate = formatDateRange({ startDateString: startDate, endDateString: endDate });
+  const nowDate = new Date();
+  const activityStatus = endDate < nowDate;
 
   const applyActivity = () => {
     startTransition(async () => {
@@ -34,7 +36,7 @@ export default function PromiseRequestForm({ startDate, endDate, maxCount, activ
         type="button"
         className="px-4 py-2 text-sm font-semibold text-white border border-none rounded-md bg-primary hover:bg-primary_dark"
         onClick={applyActivity}
-        disabled={isPending}
+        disabled={isPending || activityStatus}
       >
         약속잡기
       </Button>

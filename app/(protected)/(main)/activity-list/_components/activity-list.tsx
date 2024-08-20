@@ -8,7 +8,7 @@ import { getActivities } from '@/app/data/activity';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { ActivityWithUserAndFavoCount, Sort } from '@/type';
 import ActivityCardSkeleton from '@/components/skeletons/activity-card-skeleton';
-import ActivityCarousel from './activity-carousel';
+import ActivitySlideContainer from './activity-slide-container';
 
 interface Props {
   activities: ActivityWithUserAndFavoCount[];
@@ -71,10 +71,10 @@ export default function ActivityList({ activities, cursorId, sort, location }: P
   return (
     <>
       <ul className="flex flex-col w-full gap-6">
-        {infinityActivities.map((activity, index) => (
+        <ActivitySlideContainer />
+        {infinityActivities.map((activity) => (
           <li key={activity.id}>
             <ActivityListCard activity={activity} />
-            {index === 4 && <ActivityCarousel />}
           </li>
         ))}
         <div ref={observer} />
