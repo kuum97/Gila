@@ -8,6 +8,7 @@ import { FavoriteWithActivity } from '@/type';
 import Link from 'next/link';
 import WishlistImageCard from '@/app/(protected)/(user)/dashboard/wishlist/_components/wishlist-image-card';
 import WishlistHeartIcon from '@/app/(protected)/(user)/dashboard/wishlist/_components/wishlist-heart-icon';
+import Image from 'next/image';
 
 interface Props {
   initialFavorites: FavoriteWithActivity[];
@@ -46,8 +47,11 @@ export default function WishListContainer({ initialFavorites, initialCursorId }:
   if (initialFavorites.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center gap-4 font-semibold -translate-y-16 h-screen-minus-134">
-        <p>저장하신 활동이 없습니다.</p>
-        <p className="text-sm font-normal">활동을 둘러보고 관심있는 활동을 저장해보세요!</p>
+        <Image src="/GrayLogo.svg" width={150} height={50} alt="회색 로고" />
+        <div className="text-center flex flex-col gap-1">
+          <p className="text-lg">저장하신 활동이 없습니다.</p>
+          <p className="text-sm font-normal">활동을 둘러보고 관심있는 활동을 저장해보세요!</p>
+        </div>
         <Link
           href="/activity-list"
           className="flex items-center justify-center px-4 py-3 font-semibold rounded-lg bg-primary text-white_light hover:bg-primary_dark"

@@ -6,6 +6,7 @@ import { QuestionWithUserAndAnswers } from '@/type';
 import React, { useCallback, useEffect, useState, useTransition } from 'react';
 import Spinner from '@/components/ui/spinner';
 import MyQuestionCard from '@/app/(protected)/(user)/dashboard/my-question/_components/my-question-card';
+import Image from 'next/image';
 
 interface Props {
   myQuestions: QuestionWithUserAndAnswers[];
@@ -44,7 +45,12 @@ export default function MyQuestionList({ myQuestions, myQuestionCursorId }: Prop
   if (myQuestions.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center gap-4 font-semibold -translate-y-16 h-screen-minus-134">
-        <p>아직 아무 질문을 하지 않으셨습니다.</p>
+        <Image src="/GrayLogo.svg" width={150} height={50} alt="회색 로고" />
+        <p className="text-center text-lg">
+          오른쪽 위에 플러스 버튼을 눌러
+          <br />
+          질문해 보세요!
+        </p>
       </div>
     );
   }
