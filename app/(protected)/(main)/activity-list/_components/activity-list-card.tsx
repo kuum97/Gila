@@ -13,12 +13,16 @@ interface Props {
 export default function ActivityListCard({ activity }: Props) {
   const { title, startDate, endDate, location, views, _count, user, thumbnails } = activity;
   const formatDate = formatDateRange({ startDateString: startDate, endDateString: endDate });
+  const nowDate = new Date();
 
   return (
     <Link href={`/activity/${activity.id}`}>
-      <Card className="h-[400px] flex flex-col items-start border-none shadow-md hover:shadow-xl bg-white">
+      <Card className="h-[400px] flex flex-col items-start border-none shadow-md hover:shadow-xl bg-white relative">
+        {endDate < nowDate && (
+          <div className="absolute inset-0 opacity-50 bg-gray_300 rounded-lg z-10 flex flex-col justify-center items-center" />
+        )}
         <div className="flex justify-center w-full h-full row-span-2 px-2 pt-2 rounded-md">
-          <div className="relative w-full h-full rounded-md">
+          <div className="relative w-full h-full rounded-md flex justify-center items-center">
             <Image
               src={thumbnails[0] || '/default-carousel-image.png'}
               alt="thumbnail"
@@ -26,6 +30,9 @@ export default function ActivityListCard({ activity }: Props) {
               sizes="(max-width: 768px) 100vw"
               style={{ objectFit: 'cover', borderRadius: '8px' }}
             />
+            {endDate < nowDate && (
+              <p className="absolute font-bold text-xl z-30">지난 활동입니다!</p>
+            )}
           </div>
         </div>
         <div className="flex flex-col w-full row-span-1 gap-1 p-2">
