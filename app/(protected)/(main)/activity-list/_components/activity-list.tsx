@@ -10,7 +10,6 @@ import { ActivityWithUserAndFavoCount, Sort } from '@/type';
 import ActivityCardSkeleton from '@/components/skeletons/activity-card-skeleton';
 import Image from 'next/image';
 import ActivitySlideContainer from './activity-slide-container';
-import { Button } from '@/components/ui/button';
 
 interface Props {
   activities: ActivityWithUserAndFavoCount[];
@@ -72,8 +71,11 @@ export default function ActivityList({ activities, cursorId, sort, location }: P
           <span className="text-xl text-primary">{location}</span>에<br /> 아직 등록된 길라가
           없습니다.
         </p>
-        <Link href="/activity-list">
-          <Button>메인 리스트 둘러보기</Button>
+        <Link
+          href="/activity-list"
+          className="flex items-center justify-center px-4 py-3 font-semibold rounded-lg bg-primary text-white_light hover:bg-primary_dark"
+        >
+          전체 리스트 둘러보기
         </Link>
       </div>
     );
