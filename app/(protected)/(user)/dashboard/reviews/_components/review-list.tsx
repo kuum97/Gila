@@ -8,6 +8,7 @@ import ReviewsCard from '@/app/(protected)/(user)/dashboard/reviews/_components/
 import { ActivityWithUser } from '@/type';
 import { getAvailableReviewActivities } from '@/app/data/activity';
 import Link from 'next/link';
+import Image from 'next/image';
 
 type Props = {
   activities: ActivityWithUser[];
@@ -40,8 +41,11 @@ export default function ReviewList({ activities, cursorId }: Props) {
   if (activities.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center gap-4 font-semibold -translate-y-16 h-screen-minus-134">
-        <p>아직 리뷰가능한 활동이 없습니다.</p>
-        <p className="text-sm font-normal">아직 길라를 한 번도 경험해 본 적이 없으시다면?</p>
+        <Image src="/GrayLogo.svg" width={150} height={50} alt="회색 로고" />
+        <div className="text-center flex flex-col gap-1">
+          <p className="text-lg">아직 리뷰가능한 활동이 없습니다.</p>
+          <p className="text-sm font-normal">아직 길라를 한 번도 경험해 본 적이 없으시다면?</p>
+        </div>
         <Link
           href="/activity-list"
           className="flex items-center justify-center px-4 py-3 font-semibold rounded-lg bg-primary text-white_light hover:bg-primary_dark"

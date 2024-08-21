@@ -8,6 +8,7 @@ import { getActivities } from '@/app/data/activity';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { ActivityWithUserAndFavoCount, Sort } from '@/type';
 import ActivityCardSkeleton from '@/components/skeletons/activity-card-skeleton';
+import Image from 'next/image';
 import ActivitySlideContainer from './activity-slide-container';
 
 interface Props {
@@ -64,7 +65,19 @@ export default function ActivityList({ activities, cursorId, sort, location }: P
 
   if (activities.length === 0) {
     return (
-      <div className="flex items-center justify-center">현재 활동중인 길라가 아무도 없습니다.</div>
+      <div className="flex items-center justify-center flex-col h-[50vh] gap-5">
+        <Image src="/GrayLogo.svg" width={150} height={50} alt="회색 로고" />
+        <p className="text-center text-xl font-bold">
+          <span className="text-xl text-primary">{location}</span>에<br /> 아직 등록된 길라가
+          없습니다.
+        </p>
+        <Link
+          href="/activity-list"
+          className="flex items-center justify-center px-4 py-3 font-semibold rounded-lg bg-primary text-white_light hover:bg-primary_dark"
+        >
+          전체 리스트 둘러보기
+        </Link>
+      </div>
     );
   }
 
