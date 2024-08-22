@@ -12,6 +12,7 @@ import {
   LayoutDashboard,
   UserRoundPen,
   UserRound,
+  MessageCircle,
 } from 'lucide-react';
 
 const dashboardPrefix = '/dashboard';
@@ -29,6 +30,7 @@ export const DASHBOARD_ROUTES: Route[] = [
   { icon: Heart, label: '저장한 활동', href: `${dashboardPrefix}/wishlist` },
   { icon: HelpCircle, label: '내 질문', href: `${dashboardPrefix}/my-question` },
   { icon: Star, label: '리뷰', href: `${dashboardPrefix}/reviews` },
+  { icon: MessageCircle, label: '채팅', href: `${dashboardPrefix}/my-chat` },
 ];
 
 export const MAIN_ROUTES: Route[] = [
