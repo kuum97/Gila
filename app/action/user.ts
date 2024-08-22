@@ -10,12 +10,40 @@ import { AuthError } from 'next-auth';
 import { cookies } from 'next/headers';
 import { getCurrentUserId } from '../data/user';
 
+export const findUserByNickname = async (nickname: string): Promise<ActionType<User> | null> => {
+  try {
+    const user = await db.user.findFirst({
+      where: {
+        nickname,
+      },
+    });
+
+    if (user) {
+      return {
+        success: false,
+        message: '동일한 닉네임이 존재합니다.',
+      };
+    } else {
+      return null;
+    }
+  } catch (error) {
+    return {
+      success: false,
+      message: '닉네임 중복 확인중 에러가 발생했습니다.',
+    };
+  }
+};
+
 export const register = async (form: RegisterSchemaType): Promise<ActionType<User>> => {
   try {
     const validate = RegisterSchema.safeParse(form);
     if (!validate.success) return { success: false, message: '올바른 값을 입력해 주세요.' };
 
     const { email, password, nickname } = validate.data;
+
+    const checkNickName = await findUserByNickname(nickname);
+
+    if (checkNickName) return { success: false, message: '이미 사용중인 닉네임입니다.' };
 
     const checkExistingUser = await db.user.findUnique({
       where: {
@@ -101,6 +129,8 @@ export const logout = async (): Promise<ActionType<null>> => {
 export const editNickname = async (newNickname: string): Promise<ActionType<User>> => {
   const userId = await getCurrentUserId();
   try {
+    const checkNickName = await findUserByNickname(newNickname);
+    if (checkNickName) return { success: false, message: '이미 사용중인 닉네임입니다.' };
     const updatedUser = await db.user.update({
       where: { id: userId },
       data: { nickname: newNickname },
