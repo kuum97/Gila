@@ -6,6 +6,12 @@ import { useChannel } from 'ably/react';
 import { useReducer, useEffect, useRef } from 'react';
 import MessageInput from './message-input';
 import MessageList from './message-list';
+import { User } from '@/type';
+
+interface Props {
+  channelName: string;
+  user: User;
+}
 
 const ADD = 'ADD';
 
@@ -19,11 +25,8 @@ const reducer = (prev, event) => {
   }
 };
 
-export default function Chat({ channelName }: { channelName: string }) {
+export default function Chat({ channelName, user }: Props) {
   // 👉 Placeholder user to be replaced with the authenticated user later
-  const user = {
-    imageUrl: 'https://ui-avatars.com/api/?name=Alex',
-  };
   const [messages, dispatch] = useReducer(reducer, []);
   // 👉 useChannel accepts the channel name and a function to invoke when
   //    new messages are received. We pass dispatch.
@@ -36,7 +39,7 @@ export default function Chat({ channelName }: { channelName: string }) {
       name: ADD,
       data: {
         text,
-        avatarUrl: user.imageUrl,
+        avatarUrl: user.image,
       },
     });
   };
@@ -61,11 +64,11 @@ export default function Chat({ channelName }: { channelName: string }) {
 
   return (
     <>
-      <div className="overflow-y-auto p-5">
+      <div className="overflow-y-auto p-5 h-[calc(100vh-75px)]">
         <MessageList messages={messages} />
         <div ref={scrollRef} />
       </div>
-      <div className="mt-auto p-5">
+      <div className="mt-auto p-5 sticky bottom-0">
         <MessageInput onSubmit={publishMessage} />
       </div>
     </>
