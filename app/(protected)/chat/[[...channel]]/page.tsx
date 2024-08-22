@@ -3,7 +3,6 @@ import ChatPage from './_components/chat-page';
 
 export default async function Page({ params }: { params: { channel: string } }) {
   const user = await getCurrentUser();
-  console.log(user);
 
   return <ChatPage channel={params.channel} user={user} />;
 }

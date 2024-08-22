@@ -1,11 +1,18 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { User } from '@/type';
 import MessageCard from './message-card';
 
-export default function MessageList({ messages }) {
+interface Props {
+  user: User;
+  messages: any;
+}
+
+export default function MessageList({ messages, user }: Props) {
   return (
     <ul>
-      {messages.map((item) => (
-        <li key={item.id} className="bg-slate-50 group my-2 flex justify-between p-3">
-          <MessageCard message={item} />
+      {messages.map((item: any) => (
+        <li key={item.id} className={`flex p-3 ${user.id === item.clientId && 'flex-row-reverse'}`}>
+          <MessageCard message={item} user={user} />
         </li>
       ))}
     </ul>

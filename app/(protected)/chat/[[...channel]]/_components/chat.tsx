@@ -4,9 +4,9 @@
 
 import { useChannel } from 'ably/react';
 import { useReducer, useEffect, useRef } from 'react';
+import { User } from '@/type';
 import MessageInput from './message-input';
 import MessageList from './message-list';
-import { User } from '@/type';
 
 interface Props {
   channelName: string;
@@ -65,7 +65,7 @@ export default function Chat({ channelName, user }: Props) {
   return (
     <>
       <div className="overflow-y-auto p-5 h-[calc(100vh-75px)]">
-        <MessageList messages={messages} />
+        <MessageList messages={messages} user={user} />
         <div ref={scrollRef} />
       </div>
       <div className="mt-auto p-5 sticky bottom-0">
