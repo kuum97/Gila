@@ -15,26 +15,21 @@ interface Props {
 
 const ADD = 'ADD';
 
-// eslint-disable-next-line consistent-return
-const reducer = (prev, event) => {
-  // eslint-disable-next-line default-case
+const reducer = (prev: any, event: any) => {
   switch (event.name) {
-    // 👉 Append the message to messages
     case ADD:
       return [...prev, event];
+    default:
+      prev;
   }
 };
 
 export default function Chat({ channelName, user }: Props) {
-  // 👉 Placeholder user to be replaced with the authenticated user later
   const [messages, dispatch] = useReducer(reducer, []);
-  // 👉 useChannel accepts the channel name and a function to invoke when
-  //    new messages are received. We pass dispatch.
   const { channel, publish } = useChannel(channelName, dispatch);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const publishMessage = (text: string) => {
-    // 👉 Publish event through Ably
     publish({
       name: ADD,
       data: {
@@ -64,7 +59,7 @@ export default function Chat({ channelName, user }: Props) {
 
   return (
     <>
-      <div className="overflow-y-auto p-5 h-[calc(100vh-75px)]">
+      <div className="overflow-y-auto p-5 h-[calc(100vh-75px-80px)]">
         <MessageList messages={messages} user={user} />
         <div ref={scrollRef} />
       </div>

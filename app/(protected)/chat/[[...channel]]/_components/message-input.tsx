@@ -24,7 +24,7 @@ export default function MessageInput({ onSubmit }: Props) {
         type="text"
         value={inputValue}
         onChange={handleChange}
-        placeholder="Your message here"
+        placeholder="메세지를 입력하세요"
       />
     </form>
   );

@@ -44,10 +44,7 @@ export default function ChatChannelList({ myActivities, activityCursorId }: Prop
     return (
       <div className="flex flex-col items-center justify-center font-semibold -translate-y-16 h-screen-minus-134 gap-5">
         <Image src="/GrayLogo.svg" width={150} height={50} alt="회색 로고" />
-        <p className="text-center text-lg">
-          오른쪽 위에 플러스 버튼을 눌러
-          <br /> 길라가 되어보세요!
-        </p>
+        <p className="text-center text-lg">활동을 등록해 다른 길라들과 소통해보세요!</p>
       </div>
     );
   }
