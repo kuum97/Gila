@@ -23,9 +23,8 @@ export const findUserByNickname = async (nickname: string): Promise<ActionType<U
         success: false,
         message: '동일한 닉네임이 존재합니다.',
       };
-    } else {
-      return null;
     }
+    return null;
   } catch (error) {
     return {
       success: false,
