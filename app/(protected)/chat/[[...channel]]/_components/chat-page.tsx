@@ -14,13 +14,11 @@ export default function ChatPage({ channel, user }: Props) {
   // 👉 Instantiate Ably client
   const client = new Realtime({
     key: '9bHIxw.wgXGGA:wE33mIt3P8z80cfkKZumcqb6NPL9AbQUKU_SZZ1oZ3M',
-    clientId: user.id,
+    clientId: user.nickname,
   });
   const channelName = `chat:${channel}`;
 
   return (
-    // 👉 Wrap chat app in AblyProvider and ChannelProvider necessary to
-    // use Ably hooks
     <AblyProvider client={client}>
       <ChannelProvider channelName={channelName}>
         <div>
