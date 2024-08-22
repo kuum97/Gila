@@ -20,7 +20,7 @@ const reducer = (prev: any, event: any) => {
     case ADD:
       return [...prev, event];
     default:
-      prev;
+      return prev;
   }
 };
 
@@ -55,7 +55,7 @@ export default function Chat({ channelName, user }: Props) {
     if (scrollRef.current) {
       scrollRef.current.scrollIntoView();
     }
-  }, [messages.length]);
+  }, [messages]);
 
   return (
     <>

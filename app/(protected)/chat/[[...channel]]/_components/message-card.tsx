@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { User } from '@/type';
 import calculateDate from '@/utils/calculateData';
