@@ -21,11 +21,7 @@ export default function ChatPage({ channel, user }: Props) {
   return (
     <AblyProvider client={client}>
       <ChannelProvider channelName={channelName}>
-        <div>
-          <div className="col-span-2">
-            <Chat channelName={channelName} user={user} />
-          </div>
-        </div>
+        <Chat channelName={channelName} user={user} />
       </ChannelProvider>
     </AblyProvider>
   );
