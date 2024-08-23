@@ -15,9 +15,7 @@ export default async function Page() {
           <h1 className="text-2xl font-bold">
             <span className="text-3xl text-primary">{user.nickname}</span>님이 등록한 채팅
           </h1>
-          <p className="text-base font-medium">
-            여기서 {user.nickname}님의 활동 참가자들과 소통하세요!
-          </p>
+          <p className="text-base font-medium">등록한 활동의 참가자들과 소통해보세요!</p>
         </div>
       </div>
       <Suspense fallback={<Loading />}>

@@ -8,7 +8,7 @@ interface Props {
 export default function Channel({ activity }: Props) {
   return (
     <Link href={`/chat/${activity.id}`}>
-      <div>{activity.title}</div>
+      <div className="border rounded-lg h-20">{activity.title}</div>
     </Link>
   );
 }
