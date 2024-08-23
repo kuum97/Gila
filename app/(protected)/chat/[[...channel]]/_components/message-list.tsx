@@ -11,10 +11,7 @@ export default function MessageList({ messages, user }: Props) {
   return (
     <ul>
       {messages.map((item: any) => (
-        <li
-          key={item.id}
-          className={`flex p-3 ${user.nickname === item.clientId && 'flex-row-reverse'}`}
-        >
+        <li key={item.id} className={`flex p-3 ${user.id === item.clientId && 'flex-row-reverse'}`}>
           <MessageCard message={item} user={user} />
         </li>
       ))}

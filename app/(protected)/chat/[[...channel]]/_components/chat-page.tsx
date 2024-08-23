@@ -14,7 +14,7 @@ export default function ChatPage({ channel, user }: Props) {
   // 👉 Instantiate Ably client
   const client = new Realtime({
     key: '9bHIxw.wgXGGA:wE33mIt3P8z80cfkKZumcqb6NPL9AbQUKU_SZZ1oZ3M',
-    clientId: user.nickname,
+    clientId: user.id,
   });
   const channelName = `chat:${channel}`;
 

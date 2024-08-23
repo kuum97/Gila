@@ -13,23 +13,23 @@ export default function MessageCard({ message, user }: Props) {
 
   return (
     <div className="flex text-sm">
-      {user.nickname !== message.clientId && (
+      {user.id !== message.clientId && (
         <Avatar className="mr-2">
           <AvatarImage src={message.data.avatarUrl} />
         </Avatar>
       )}
       <div className="flex flex-col gap-3">
-        {user.nickname !== message.clientId && <p className="text-xs">{message.clientId}</p>}
+        {user.id !== message.clientId && <p className="text-xs">{message.data.nickname}</p>}
         <div
-          className={`flex items-end gap-1 ${user.nickname === message.clientId && 'flex-row-reverse'}`}
+          className={`flex items-end gap-1 ${user.id === message.clientId && 'flex-row-reverse'}`}
         >
           <p
-            className={`px-2 py-1 rounded-lg max-w-52 ${user.nickname === message.clientId ? 'bg-primary' : 'bg-gray_300'}`}
+            className={`px-2 py-1 rounded-lg max-w-52 ${user.id === message.clientId ? 'bg-primary' : 'bg-gray_300'}`}
           >
             {message.data.text}
           </p>
           <p
-            className={`text-[10px] w-10 text-nowrap ${user.nickname === message.clientId ? 'text-end' : 'text-start'}`}
+            className={`text-[10px] w-10 text-nowrap ${user.id === message.clientId ? 'text-end' : 'text-start'}`}
           >{`${createAt.time}${createAt.result}전`}</p>
         </div>
       </div>

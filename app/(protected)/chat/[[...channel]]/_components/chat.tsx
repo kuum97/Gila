@@ -35,6 +35,7 @@ export default function Chat({ channelName, user }: Props) {
       data: {
         text,
         avatarUrl: user.image,
+        nickname: user.nickname,
       },
     });
   };
