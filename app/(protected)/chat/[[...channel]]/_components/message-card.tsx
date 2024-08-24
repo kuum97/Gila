@@ -15,7 +15,7 @@ export default function MessageCard({ message, user }: Props) {
     <div className="flex text-sm">
       {user.id !== message.clientId && (
         <Avatar className="mr-2">
-          <AvatarImage src={message.data.avatarUrl} />
+          <AvatarImage src={message.data.avatarUrl || '/default-profile-image.png'} />
         </Avatar>
       )}
       <div className="flex flex-col gap-3">

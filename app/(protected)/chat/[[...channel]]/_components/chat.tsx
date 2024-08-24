@@ -60,11 +60,14 @@ export default function Chat({ channelName, user }: Props) {
 
   return (
     <>
-      <div className="overflow-y-auto p-5 h-[calc(100vh-75px-80px)]">
+      <div className="overflow-y-scroll p-5 pb-0 h-[calc(100vh-64px-66px)] bg-white_light">
+        <p className="text-xs text-center text-gray-400">
+          ※ 24시간이 지난 대화는 저장되지 않습니다!
+        </p>
         <MessageList messages={messages} user={user} />
         <div ref={scrollRef} />
       </div>
-      <div className="mt-auto p-5 tall:sticky fixed left-0 bottom-0 right-0">
+      <div className="mt-auto p-3 tall:sticky fixed left-0 bottom-0 right-0 border">
         <MessageInput onSubmit={publishMessage} />
       </div>
     </>
