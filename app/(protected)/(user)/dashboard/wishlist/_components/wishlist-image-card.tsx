@@ -1,16 +1,14 @@
 'use client';
 
 import formatDateRange from '@/utils/formatDateRange';
+import { User } from 'lucide-react';
 import Image from 'next/image';
-import React, { ReactNode } from 'react';
 
 interface Props {
   title: string;
   startDate: Date;
   endDate: Date;
   participants?: number;
-  topContent?: ReactNode;
-  bottomContent?: ReactNode;
   imageSrc?: string[];
 }
 
@@ -19,8 +17,6 @@ export default function WishlistImageCard({
   startDate,
   endDate,
   participants,
-  topContent,
-  bottomContent,
   imageSrc,
 }: Props) {
   const imgSrc = imageSrc && imageSrc.length > 0 ? imageSrc[0] : '/default-carousel-image.png';
@@ -35,13 +31,12 @@ export default function WishlistImageCard({
         <h1 className="w-full text-xl font-bold truncate">{title}</h1>
         <div className="flex flex-col gap-2 text-xs">
           <p>{formatDate}</p>
-          <div className="flex items-center gap-3">
-            {participants && <p className="text-sm font-bold">{participants} 명</p>}
+          <div className="flex items-center gap-2">
+            <User width={14} height={14} />
+            {participants && <p className="text-sm font-bold">{participants}명</p>}
           </div>
         </div>
-        {bottomContent && <div>{bottomContent}</div>}
       </div>
-      {topContent && <div className="absolute top-0 right-0">{topContent}</div>}
     </div>
   );
 }
