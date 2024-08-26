@@ -15,7 +15,7 @@ export default async function Page() {
         <p className="text-base font-medium">신청이 수락되면 참가자들과 소통할 수 있어요!</p>
       </h1>
       <Suspense fallback={<Loading />}>
-        <PromiseList promiseList={myPromise.requests} cursorId={myPromise.cursorId} />
+        <PromiseList promiseList={myPromise.validRequests} cursorId={myPromise.cursorId} />
       </Suspense>
     </main>
   );

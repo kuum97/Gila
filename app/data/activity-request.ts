@@ -11,8 +11,9 @@ export const getMySentRequests = async ({
 }: {
   cursor?: string;
   take?: number;
-}): Promise<{ requests: RequestWithActivity[]; cursorId: string | null }> => {
+}): Promise<{ validRequests: RequestWithActivity[]; cursorId: string | null }> => {
   const userId = await getCurrentUserId();
+  const nowDate = new Date();
   try {
     const requests = await db.activityRequest.findMany({
       where: { requestUserId: userId },
@@ -27,10 +28,21 @@ export const getMySentRequests = async ({
       },
     });
 
-    const lastActivityRequest = requests[requests.length - 1];
+    // eslint-disable-next-line prefer-const
+    let validRequests = [];
+    if (requests) {
+      // eslint-disable-next-line no-plusplus
+      for (let i = 0; requests.length > i; i++) {
+        if (requests[i].activity.endDate > nowDate) {
+          validRequests.push(requests[i]);
+        }
+      }
+    }
+
+    const lastActivityRequest = validRequests[validRequests.length - 1];
     const cursorId = lastActivityRequest ? lastActivityRequest.id : null;
 
-    return { requests, cursorId };
+    return { validRequests, cursorId };
   } catch (error) {
     throw new Error('활동 요청을 가져오는 중에 에러가 발생하였습니다.');
   }
