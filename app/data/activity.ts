@@ -18,11 +18,10 @@ export const getMyActivities = async ({
   take?: number;
 }): Promise<{ activities: ActivityWithFavoriteAndCount[]; cursorId: string | null }> => {
   const userId = await getCurrentUserId();
-  const nowDate = new Date();
 
   try {
     const myActivities = await db.activity.findMany({
-      where: { userId, endDate: { gte: nowDate } },
+      where: { userId },
       include: {
         _count: {
           select: { favorites: true },
