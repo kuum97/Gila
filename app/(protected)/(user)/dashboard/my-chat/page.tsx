@@ -9,7 +9,7 @@ export default async function Page() {
   const user = await getCurrentUser();
 
   return (
-    <main className="p-5 min-h-[calc(100vh-64px-86px)]">
+    <main className="p-5 min-h-[calc(100vh-64px-71px)]">
       <div className="flex items-center justify-between w-full pb-5">
         <div>
           <h1 className="text-2xl font-bold">
