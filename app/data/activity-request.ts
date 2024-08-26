@@ -57,9 +57,10 @@ export const getMyReceivedRequests = async ({
 }): Promise<{ requests: RequestWithReqUserAndActivity[]; cursorId: string | null }> => {
   try {
     const currentUserId = await getCurrentUserId();
+    const nowDate = new Date();
 
     const userActivities = await db.activity.findMany({
-      where: { userId: currentUserId },
+      where: { userId: currentUserId, endDate: { gte: nowDate } },
       select: {
         activityRequests: {
           where: {
