@@ -1,11 +1,11 @@
-import { getMyActivities } from '@/app/data/activity';
 import { getCurrentUser } from '@/app/data/user';
 import { Suspense } from 'react';
+import getMyChat from '@/app/data/chat';
 import Loading from '../loading';
 import ChatChannelList from './_components/chat-channel-list';
 
 export default async function Page() {
-  const { activities, cursorId } = await getMyActivities({ take: 7 });
+  const { activities, cursorId } = await getMyChat({ take: 7 });
   const user = await getCurrentUser();
 
   return (
