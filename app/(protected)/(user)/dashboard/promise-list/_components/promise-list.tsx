@@ -27,7 +27,7 @@ export default function PromiseList({ promiseList, cursorId }: Props) {
         cursor: infinityCursorId,
       });
       setInfinityCursorId(result.cursorId);
-      setInfinityPromise((prev) => [...prev, ...result.requests]);
+      setInfinityPromise((prev) => [...prev, ...result.validRequests]);
     });
   }, [infinityCursorId]);
 

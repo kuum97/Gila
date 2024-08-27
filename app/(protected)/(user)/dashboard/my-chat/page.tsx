@@ -1,15 +1,15 @@
-import { getMyActivities } from '@/app/data/activity';
 import { getCurrentUser } from '@/app/data/user';
 import { Suspense } from 'react';
+import getMyChat from '@/app/data/chat';
 import Loading from '../loading';
 import ChatChannelList from './_components/chat-channel-list';
 
 export default async function Page() {
-  const { activities, cursorId } = await getMyActivities({ take: 7 });
+  const { activities, cursorId } = await getMyChat({ take: 7 });
   const user = await getCurrentUser();
 
   return (
-    <main className="p-5 min-h-[calc(100vh-64px-86px)]">
+    <main className="p-5 min-h-[calc(100vh-64px-71px)]">
       <div className="flex items-center justify-between w-full pb-5">
         <div>
           <h1 className="text-2xl font-bold">

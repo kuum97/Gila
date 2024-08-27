@@ -19,6 +19,7 @@ export default function MyActivityCard({ activity }: Props) {
   const dateRange = formatDateRange({ startDateString: startDate, endDateString: endDate });
   const [isPending, startTransition] = useTransition();
   const [isEditModalOpen, setEditModalOpen] = useState<boolean>(false);
+  const nowDate = new Date();
 
   const handleClickEditFormOpen: MouseEventHandler = (e) => {
     e.preventDefault();
@@ -63,14 +64,16 @@ export default function MyActivityCard({ activity }: Props) {
                 <p>조회수 {views}</p>
               </div>
               <div className="flex w-full gap-2">
-                <Button
-                  disabled={isPending}
-                  type="button"
-                  className="w-full text-base font-medium text-white shadow"
-                  onClick={handleClickEditFormOpen}
-                >
-                  수정
-                </Button>
+                {endDate > nowDate && (
+                  <Button
+                    disabled={isPending}
+                    type="button"
+                    className="w-full text-base font-medium text-white shadow"
+                    onClick={handleClickEditFormOpen}
+                  >
+                    수정
+                  </Button>
+                )}
                 <div className="w-full" onClick={(e) => e.preventDefault()}>
                   <DeleteAlertModal deleteAction={handleDelete} isButton content="삭제" />
                 </div>
