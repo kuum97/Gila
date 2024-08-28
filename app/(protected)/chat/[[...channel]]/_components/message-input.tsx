@@ -27,7 +27,9 @@ export default function MessageInput({ onSubmit }: Props) {
         onChange={handleChange}
         placeholder="메세지를 입력하세요"
       />
-      <Button className="text-white font-semibold">전송</Button>
+      <Button className="text-white font-semibold" disabled={inputValue.length === 0}>
+        전송
+      </Button>
     </form>
   );
 }
