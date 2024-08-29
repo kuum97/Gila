@@ -8,9 +8,10 @@ import Chat from './chat';
 interface Props {
   channel: string;
   user: User;
+  activityTitle: string;
 }
 
-export default function ChatPage({ channel, user }: Props) {
+export default function ChatPage({ channel, user, activityTitle }: Props) {
   const client = new Realtime({
     key: '9bHIxw.wgXGGA:wE33mIt3P8z80cfkKZumcqb6NPL9AbQUKU_SZZ1oZ3M',
     clientId: user.id,
@@ -20,7 +21,7 @@ export default function ChatPage({ channel, user }: Props) {
   return (
     <AblyProvider client={client}>
       <ChannelProvider channelName={channelName}>
-        <Chat channelName={channelName} user={user} />
+        <Chat channelName={channelName} user={user} activityTitle={activityTitle} />
       </ChannelProvider>
     </AblyProvider>
   );

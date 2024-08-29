@@ -4,7 +4,7 @@ import { Circle } from 'lucide-react';
 export default function ChatOnlineUser({ user }: { user: any }) {
   return (
     <div className="flex items-center">
-      <Circle className="mr-1" size={8} fill="#01FE19" color="#01FE19" />
+      <Circle className="mr-2" size={8} fill="#01FE19" color="#01FE19" />
       {user.data.fullName}
     </div>
   );
