@@ -65,7 +65,7 @@ export default function Chat({ channelName, user, activityTitle }: Props) {
 
   return (
     <>
-      <div className="tall:sticky fixed left-0 top-0 right-0 p-3.5 z-30 border">
+      <div className="tall:sticky fixed left-0 top-0 right-0 p-3.5 z-30 border bg-white_light">
         <div className="flex items-center justify-between">
           <BackButton />
           <p className="font-semibold">{activityTitle}</p>

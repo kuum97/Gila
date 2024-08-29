@@ -13,7 +13,7 @@ interface Props {
 
 export default function ChatPage({ channel, user, activityTitle }: Props) {
   const client = new Realtime({
-    key: '9bHIxw.wgXGGA:wE33mIt3P8z80cfkKZumcqb6NPL9AbQUKU_SZZ1oZ3M',
+    key: process.env.NEXT_PUBLIC_ABLY_KEY,
     clientId: user.id,
   });
   const channelName = `chat:${channel[0]}`;
