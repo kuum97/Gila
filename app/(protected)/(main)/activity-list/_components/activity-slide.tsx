@@ -45,7 +45,7 @@ export default function ActivitySlide({
     if (slideRef.current) {
       if (slideRef.current.firstElementChild) {
         setSlideScrollDistance(
-          slideRef.current.firstElementChild.clientWidth / recommendList.length,
+          slideRef.current.firstElementChild.scrollWidth / recommendList.length,
         );
       }
     }
@@ -65,7 +65,7 @@ export default function ActivitySlide({
 
   return (
     <div className="relative">
-      {recommendList[0] && (
+      {recommendList[1] && (
         <SlideButtonContainer
           handleNext={throttleClickNext}
           handlePrev={throttleClickPrev}

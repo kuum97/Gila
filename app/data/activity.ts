@@ -18,6 +18,7 @@ export const getMyActivities = async ({
   take?: number;
 }): Promise<{ activities: ActivityWithFavoriteAndCount[]; cursorId: string | null }> => {
   const userId = await getCurrentUserId();
+
   try {
     const myActivities = await db.activity.findMany({
       where: { userId },
