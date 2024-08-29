@@ -81,7 +81,7 @@ export default function DetailCarousel({ thumbnails }: { thumbnails: string[] })
 
       {selectedImage && (
         <Dialog open={!!selectedImage} onOpenChange={handleClose}>
-          <DialogContent className="z-50 w-full h-auto max-w-md p-4 mx-auto my-8 border-none">
+          <DialogContent className="z-50 w-full h-auto max-w-md p-4 mx-auto my-8 border-none tall:left-[calc(50vw-10px)] tall:translate-x-0 tall:max-w-[420px]">
             <DialogTitle aria-describedby={undefined} />
             <DialogDescription aria-describedby={undefined} />
             <div className="relative w-full h-full max-w-full max-h-full">

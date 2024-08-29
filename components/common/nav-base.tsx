@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { getCurrentUser } from '@/app/data/user';
-import NavDropdown from '@/components/common/nav-dropdown';
+import NavSideMenu from './nav-sidemenu';
 
 export default async function NavigationBase({ children }: { children?: ReactNode }) {
   const { image } = await getCurrentUser();
@@ -25,7 +25,7 @@ export default async function NavigationBase({ children }: { children?: ReactNod
       </div>
       {children && <div className="col-span-2">{children}</div>}
       <div className="flex items-center justify-end w-[70px]">
-        <NavDropdown userAvatar={image} />
+        <NavSideMenu userAvatar={image} />
       </div>
     </nav>
   );
