@@ -20,7 +20,7 @@ export default function MessageInput({ onSubmit }: Props) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-2">
+    <form onSubmit={handleSubmit} className="flex gap-2 bg-white">
       <Input
         type="text"
         value={inputValue}
