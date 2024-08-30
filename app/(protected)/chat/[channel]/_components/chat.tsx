@@ -79,7 +79,7 @@ export default function Chat({ channelName, user, activityTitle }: Props) {
         <MessageList messages={messages} user={user} />
         <div ref={scrollRef} />
       </div>
-      <div className="mt-auto p-3 tall:sticky fixed left-0 bottom-0 right-0 border">
+      <div className="mt-auto p-3 tall:sticky fixed left-0 bottom-0 right-0 border bg-white_light">
         <MessageInput onSubmit={publishMessage} />
       </div>
     </>
