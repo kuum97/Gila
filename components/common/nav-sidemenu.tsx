@@ -8,7 +8,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import Image from 'next/image';
-import { CircleUserRound, LogOut } from 'lucide-react';
+import { LogOut, Menu } from 'lucide-react';
 import { useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 import { logout } from '@/app/action/user';
@@ -63,7 +63,7 @@ export default function NavSideMenu({ userAvatar }: Props) {
             className="absolute right-0 top-0 flex items-center justify-center w-[35px] h-[35px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"
             aria-label="profile"
           >
-            <CircleUserRound className="size-5" />
+            <Menu className="size-5" />
           </button>
         </div>
       </SheetTrigger>
