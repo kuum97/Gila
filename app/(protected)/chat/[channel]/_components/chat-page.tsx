@@ -16,7 +16,7 @@ export default function ChatPage({ channel, user, activityTitle }: Props) {
     key: process.env.NEXT_PUBLIC_ABLY_KEY,
     clientId: user.id,
   });
-  const channelName = `chat:${channel[0]}`;
+  const channelName = `chat:${channel}`;
 
   return (
     <AblyProvider client={client}>
