@@ -40,5 +40,5 @@ export const MAIN_ROUTES: Route[] = [
 
 export const PROFILE_ROUTES: Route[] = [
   { icon: UserRound, label: '프로필', href: '/profile' },
-  { icon: UserRoundPen, label: '개인정보', href: '/profile/edit' },
+  { icon: UserRoundPen, label: '내 정보 수정', href: '/profile/edit' },
 ];
