@@ -8,15 +8,13 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import Image from 'next/image';
-import { CircleUserRound } from 'lucide-react';
-import Link from 'next/link';
-import { cn } from '@/lib/utils';
+import { CircleUserRound, LogOut } from 'lucide-react';
 import { useTransition } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { logout } from '@/app/action/user';
 import { toast } from 'sonner';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
-import { Separator } from '../ui/separator';
+import ProfileAccordion from './sidemenu-accordion';
 
 interface Props {
   userAvatar: string | null;
@@ -25,7 +23,6 @@ interface Props {
 export default function NavSideMenu({ userAvatar }: Props) {
   const [isPending, startTrasition] = useTransition();
   const router = useRouter();
-  const pathname = usePathname();
 
   const Logout = async () => {
     startTrasition(async () => {
@@ -73,24 +70,16 @@ export default function NavSideMenu({ userAvatar }: Props) {
       <SheetContent className="border-none bg-opacity-90 bg-white_light" side="left">
         <SheetTitle>메뉴</SheetTitle>
         <SheetDescription aria-describedby={undefined} />
-        <div className="flex flex-col p-2 gap-2">
-          <Link
-            href="/profile"
-            className={cn(
-              pathname === '/profile' && 'bg-gray-200',
-              'flex items-center justify-center w-full  hover:bg-gray-300 h-14 rounded-lg',
-            )}
-          >
-            <p className="text-black font-semibold">프로필</p>
-          </Link>
-          <Separator className="bg-gray_300" />
+        <div className="flex flex-col justify-between h-full py-4">
+          <ProfileAccordion />
           <button
             disabled={isPending}
             onClick={Logout}
             type="button"
-            className="flex items-center justify-center w-full text-black hover:bg-gray-300 h-14 rounded-lg"
+            className="flex items-center text-black transition-all h-10 rounded-lg w-fit hover:text-primary gap-2"
           >
-            <p className="text-black font-semibold">로그아웃</p>
+            <LogOut width={20} height={20} />
+            <p className="font-semibold text-sm">로그아웃</p>
           </button>
         </div>
       </SheetContent>
