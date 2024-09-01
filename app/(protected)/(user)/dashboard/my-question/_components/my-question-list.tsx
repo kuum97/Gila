@@ -57,7 +57,7 @@ export default function MyQuestionList({ myQuestions, myQuestionCursorId }: Prop
 
   return (
     <>
-      <ul className="flex flex-col w-full gap-4 pb-20 tall:pb-0">
+      <ul className="flex flex-col w-full gap-4">
         {myQuestionList.map((myQuestion) => (
           <li key={myQuestion.id}>
             <MyQuestionCard myQuestionItem={myQuestion} />
