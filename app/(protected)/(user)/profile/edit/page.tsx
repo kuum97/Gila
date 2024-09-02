@@ -13,7 +13,7 @@ export default async function Page() {
   const userData = await getUserProfileWithIntroducedInfos(userId);
 
   return (
-    <main className="p-5 tall:min-h-screen tall:pb-5 pb-20">
+    <main className="p-5">
       <Card className="shadow-md">
         <CardHeader className="flex flex-col gap-5">
           <CardTitle className="font-bold text-center">

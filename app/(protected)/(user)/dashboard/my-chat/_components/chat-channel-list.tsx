@@ -51,7 +51,7 @@ export default function ChatChannelList({ myActivities, activityCursorId }: Prop
 
   return (
     <>
-      <ul className="flex flex-col w-full gap-6 pb-20 tall:pb-0">
+      <ul className="flex flex-col w-full gap-6">
         {activityList.map((myActivity) => (
           <li key={myActivity.id}>
             <Channel activity={myActivity} />

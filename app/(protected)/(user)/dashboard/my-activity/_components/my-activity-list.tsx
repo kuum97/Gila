@@ -54,7 +54,7 @@ export default function MyActivityList({ myActivities, activityCursorId }: Props
 
   return (
     <>
-      <ul className="flex flex-col w-full gap-6 pb-20 tall:pb-0">
+      <ul className="flex flex-col w-full gap-6">
         {activityList.map((myActivity) => (
           <li key={myActivity.id}>
             <MyActivityCard activity={myActivity} />

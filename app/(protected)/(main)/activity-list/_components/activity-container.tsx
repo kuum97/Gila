@@ -12,7 +12,7 @@ interface Props {
 
 export default function ActivityContainer({ activities, cursorId, sort, location }: Props) {
   return (
-    <section className="flex flex-col gap-2 p-4 pb-20 tall:pb-2">
+    <section className="flex flex-col gap-2 p-4 tall:pb-2">
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-semibold">길라 목록</h1>
         <SortingDropdown sorts={ACTIVITYSORTS} />

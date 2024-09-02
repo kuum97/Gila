@@ -10,7 +10,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <NavigationBase>
         <LocationSelectDrawerForNav />
       </NavigationBase>
-      {children}
+      <div className="max-h-[calc(100vh-64px-71px)] overflow-y-scroll">{children}</div>
       <FooterNavigation routes={MAIN_ROUTES} />
     </div>
   );

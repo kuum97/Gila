@@ -6,7 +6,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <div className="tall:w-[420px]">
       <NavigationBase />
-      {children}
+      <div className="max-h-[calc(100vh-64px)] overflow-y-scroll">{children}</div>
       <KakaoScript />
     </div>
   );
