@@ -3,7 +3,7 @@ import BackButton from '@/components/common/back-button';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative flex flex-col max-w-[420px] bg-white_light tall:w-[420px] tall:h-full h-[calc(100vh-68px)] gap-5 tall:gap-0">
+    <div className="relative flex flex-col max-w-[420px] bg-white_light tall:w-[420px] h-[calc(100vh-68px)] gap-5 tall:gap-0">
       <div className="flex flex-col items-center w-full gap-5 top-0 pt-5">
         <div className="relative size-14">
           <Image fill src="/GilaLogo.png" alt="logo-to-home" style={{ objectFit: 'contain' }} />
@@ -15,7 +15,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </p>
         </div>
       </div>
-      <main className="w-full tall:h-[calc(100vh-132px-68px)] flex flex-col justify-center pb-20 tall:pb-0">
+      <main className="w-full min-h-[calc(100vh-132px-68px)] overflow-y-scroll flex flex-col pb-20 tall:pb-0">
         {children}
       </main>
       <div className="tall:sticky fixed bottom-0 p-4 border-t border-gray-300 left-0 w-screen bg-[#ffffff] tall:w-full">
