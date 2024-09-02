@@ -5,7 +5,7 @@ interface Props {
   disabledOption?: boolean;
 }
 
-export default function SubmitButton({ text, disabledOption }: Props) {
+export default function PrimarySubmitButton({ text, disabledOption }: Props) {
   return (
     <Button
       disabled={disabledOption}
