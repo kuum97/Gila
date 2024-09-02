@@ -70,7 +70,7 @@ export default function ActivitySlideContainer() {
     } else {
       const mapScript = document.createElement('script');
       mapScript.async = true;
-      mapScript.src = `//dapi.Kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_API_KEY}&autoload=false&libraries=services,clusterer,drawing`;
+      mapScript.src = `//dapi.Kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_API_KEY}&autoload=false&libraries=services`;
       document.head.appendChild(mapScript);
       mapScript.addEventListener('load', onLoadKakaoMap);
 

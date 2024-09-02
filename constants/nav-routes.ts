@@ -24,7 +24,7 @@ export interface Route {
 }
 
 export const DASHBOARD_ROUTES: Route[] = [
-  { icon: LayoutDashboard, label: '대시보드', href: `${dashboardPrefix}/my-activity` },
+  { icon: LayoutDashboard, label: '등록한 활동', href: `${dashboardPrefix}/my-activity` },
   { icon: Clipboard, label: '신청한 활동', href: `${dashboardPrefix}/promise-list` },
   { icon: CheckCircle, label: '신청 현황', href: `${dashboardPrefix}/promised-list` },
   { icon: Heart, label: '저장한 활동', href: `${dashboardPrefix}/wishlist` },
@@ -36,10 +36,9 @@ export const DASHBOARD_ROUTES: Route[] = [
 export const MAIN_ROUTES: Route[] = [
   { icon: HeartHandshake, label: '길라 찾기', href: '/activity-list' },
   { icon: MessageCircleQuestion, label: '질문 하기', href: '/question-list' },
-  { icon: LayoutDashboard, label: '대시보드', href: `${dashboardPrefix}/my-activity` },
 ];
 
 export const PROFILE_ROUTES: Route[] = [
   { icon: UserRound, label: '프로필', href: '/profile' },
-  { icon: UserRoundPen, label: '개인정보', href: '/profile/edit' },
+  { icon: UserRoundPen, label: '내 정보 수정', href: '/profile/edit' },
 ];

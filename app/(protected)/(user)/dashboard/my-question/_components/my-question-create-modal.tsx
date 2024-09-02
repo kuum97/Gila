@@ -25,7 +25,7 @@ export default function MyQuestionCreateModal() {
           <PlusButton />
         </div>
       </DialogTrigger>
-      <DialogContent className="bg-white">
+      <DialogContent className="bg-white tall:left-[calc(50vw-10px)] tall:translate-x-0 tall:max-w-[420px]">
         <DialogTitle>질문하기</DialogTitle>
         <DialogDescription aria-describedby={undefined} />
         <MyQuestionForm toggleModal={toggleModal} />

@@ -57,7 +57,7 @@ export default function ReviewList({ activities, cursorId }: Props) {
   }
 
   return (
-    <ul className="flex flex-col gap-4 pb-20 tall:pb-0">
+    <ul className="flex flex-col gap-4">
       {initActivities.map((activity) => (
         <li key={activity.id}>
           <ReviewsCard

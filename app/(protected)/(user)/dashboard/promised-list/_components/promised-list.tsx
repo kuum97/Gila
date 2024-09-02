@@ -53,7 +53,7 @@ export default function PromisedList({ promisedActivities, cursorId }: Props) {
 
   return (
     <>
-      <ul className="flex flex-col w-full gap-4 pb-20 tall:pb-0">
+      <ul className="flex flex-col w-full gap-4">
         {infinityPromisedActivities.map((activity) => (
           <li key={activity.id}>
             <PromisedListCard promisedActivity={activity} />
