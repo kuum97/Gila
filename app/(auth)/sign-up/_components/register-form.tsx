@@ -3,8 +3,6 @@
 import { RegisterSchema } from '@/schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-
-import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -21,6 +19,7 @@ import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import PasswordInput from '@/components/ui/password-input';
 import { cn } from '@/lib/utils';
+import PrimarySubmitButton from '@/components/common/primary-submit-button';
 
 const registerFields = [
   { name: 'nickname', label: '닉네임', placeholder: '닉네임을 입력해 주세요', type: 'text' },
@@ -126,13 +125,10 @@ export default function RegisterForm() {
             )}
           />
         ))}
-        <Button
-          disabled={isPending || !form.formState.isValid}
-          type="submit"
-          className="w-full py-3 text-lg font-semibold text-white disabled:bg-primary_dark"
-        >
-          회원가입
-        </Button>
+        <PrimarySubmitButton
+          text="회원가입"
+          disabledOption={isPending || !form.formState.isValid}
+        />
       </form>
     </Form>
   );
