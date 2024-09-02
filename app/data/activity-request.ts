@@ -39,7 +39,7 @@ export const getMySentRequests = async ({
       }
     }
 
-    const lastActivityRequest = validRequests[validRequests.length - 1];
+    const lastActivityRequest = requests[requests.length - 1];
     const cursorId = lastActivityRequest ? lastActivityRequest.id : null;
 
     return { validRequests, cursorId };
