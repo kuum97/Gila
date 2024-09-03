@@ -35,6 +35,10 @@ export type ActivityWithUser = Activity & { user: User };
 export type ActivityWithUserAndFavorite = ActivityWithFavoCount & {
   isFavorite: boolean;
 };
+export type ActivityWithRequest = ActivityWithUserAndFavorite & {
+  activityRequests: ActivityRequest[];
+};
+
 export type ActivityWithFavoriteAndCount = Activity & {
   isFavorite: boolean;
 } & {
