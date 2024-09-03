@@ -21,7 +21,7 @@ import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import PasswordInput from '@/components/ui/password-input';
 import { cn } from '@/lib/utils';
-import sendEmail from '@/app/action/mail';
+import { sendEmail } from '@/app/action/mail';
 
 const registerFields = [
   { name: 'nickname', label: '닉네임', placeholder: '닉네임을 입력해 주세요', type: 'text' },
@@ -70,7 +70,7 @@ export default function RegisterForm() {
 
   const requsetKey = async () => {
     setIsCheck(true);
-    const result = await sendEmail({ email: form.getValues('email'), type: 'auth' });
+    const result = await sendEmail(form.getValues('email'));
     setEmailKey(result.key);
     toast.message('이메일을 확인해주세요.(스팸메일함도 확인해주세요.)');
   };
