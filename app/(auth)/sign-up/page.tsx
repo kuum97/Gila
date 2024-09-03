@@ -7,7 +7,7 @@ export default function Page() {
       <RegisterForm />
       <div className="flex items-center justify-center gap-x-2">
         <p className="text-gray-500">
-          이미 길라와 연결되셨다면?{' '}
+          이미 길라와 연결되셨다면?
           <Link
             href="/sign-in"
             className="font-semibold underline text-primary hover:text-primary_dark focus:text-primary_dark"
