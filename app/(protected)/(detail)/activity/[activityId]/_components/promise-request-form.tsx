@@ -3,18 +3,15 @@
 import { createActivityRequest } from '@/app/action/activity-request';
 import { requestMail } from '@/app/action/mail';
 import { Button } from '@/components/ui/button';
-import { ActivityWithUserAndFavorite } from '@/type';
+import { ActivityWithRequest } from '@/type';
 import formatDateRange from '@/utils/formatDateRange';
-import { useTransition } from 'react';
+import { useState, useTransition } from 'react';
 import { toast } from 'sonner';
 
-export default function PromiseRequestForm({
-  activity,
-}: {
-  activity: ActivityWithUserAndFavorite;
-}) {
-  const { startDate, endDate, id, maximumCount } = activity;
+export default function PromiseRequestForm({ activity }: { activity: ActivityWithRequest }) {
+  const { startDate, endDate, id, maximumCount, activityRequests } = activity;
   const [isPending, startTransition] = useTransition();
+  const [isDisabled, setIsDisabled] = useState(!!activityRequests[0]);
   const formatDate = formatDateRange({ startDateString: startDate, endDateString: endDate });
   const nowDate = new Date();
   const activityStatus = endDate < nowDate;
@@ -23,6 +20,7 @@ export default function PromiseRequestForm({
     startTransition(async () => {
       const result = await createActivityRequest(id);
       toast.message(result.message);
+      setIsDisabled(true);
       if (result.success) {
         const request = await requestMail(activity);
         toast.message(request.message);
@@ -40,9 +38,9 @@ export default function PromiseRequestForm({
         type="button"
         className="px-4 py-2 text-sm font-semibold text-white border border-none rounded-md bg-primary hover:bg-primary_dark"
         onClick={applyActivity}
-        disabled={isPending || activityStatus}
+        disabled={isPending || activityStatus || isDisabled}
       >
-        약속잡기
+        {isDisabled ? '약속 요청함' : '약속잡기'}
       </Button>
     </div>
   );
