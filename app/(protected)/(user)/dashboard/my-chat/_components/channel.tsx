@@ -1,11 +1,11 @@
-import { ActivityWithFavoriteAndCount } from '@/type';
+import { ActivityWithUserAndRequest } from '@/type';
 import formatDateRange from '@/utils/formatDateRange';
 import { User } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
 interface Props {
-  activity: ActivityWithFavoriteAndCount;
+  activity: ActivityWithUserAndRequest;
 }
 
 export default function Channel({ activity }: Props) {
@@ -31,7 +31,9 @@ export default function Channel({ activity }: Props) {
             <p>{dateRange}</p>
             <div className="flex items-center gap-2">
               <User width={14} height={14} />
-              <p className="text-sm font-bold">{activity.maximumCount}명</p>
+              <p className="text-sm font-bold">
+                {activity.activityRequests.length} / {activity.maximumCount} 명
+              </p>
             </div>
           </div>
         </div>

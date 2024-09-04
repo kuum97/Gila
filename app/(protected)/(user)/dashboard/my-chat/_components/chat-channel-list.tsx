@@ -4,19 +4,19 @@
 
 import React, { useCallback, useState, useEffect, useTransition } from 'react';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
-import { ActivityWithFavoriteAndCount } from '@/type';
+import { ActivityWithUserAndRequest } from '@/type';
 import Spinner from '@/components/ui/spinner';
 import Image from 'next/image';
 import getMyChat from '@/app/data/chat';
 import Channel from './channel';
 
 interface Props {
-  myActivities: ActivityWithFavoriteAndCount[];
+  myActivities: ActivityWithUserAndRequest[];
   activityCursorId: string | null;
 }
 
 export default function ChatChannelList({ myActivities, activityCursorId }: Props) {
-  const [activityList, setActivityList] = useState<ActivityWithFavoriteAndCount[]>([]);
+  const [activityList, setActivityList] = useState<ActivityWithUserAndRequest[]>([]);
   const [cursorId, setCursorId] = useState<string | null>('');
   const [isPending, startTransition] = useTransition();
 
