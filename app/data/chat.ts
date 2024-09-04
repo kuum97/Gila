@@ -38,7 +38,7 @@ const getMyChat = async ({
       cursor: cursor ? { id: cursor } : undefined,
       skip: cursor ? 1 : 0,
       orderBy: {
-        createdAt: 'asc',
+        createdAt: 'desc',
       },
     });
 
