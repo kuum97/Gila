@@ -8,7 +8,13 @@ import formatDateRange from '@/utils/formatDateRange';
 import { useState, useTransition } from 'react';
 import { toast } from 'sonner';
 
-export default function PromiseRequestForm({ activity }: { activity: ActivityWithRequest }) {
+export default function PromiseRequestForm({
+  activity,
+  currentUser,
+}: {
+  activity: ActivityWithRequest;
+  currentUser: string;
+}) {
   const { startDate, endDate, id, maximumCount, activityRequests } = activity;
   const [isPending, startTransition] = useTransition();
   const [isDisabled, setIsDisabled] = useState(!!activityRequests[0]);
@@ -34,14 +40,16 @@ export default function PromiseRequestForm({ activity }: { activity: ActivityWit
         <p className="text-sm text-white">최대 인원 {maximumCount}명</p>
         <p className="text-xs text-white">{formatDate}</p>
       </div>
-      <Button
-        type="button"
-        className="px-4 py-2 text-sm font-semibold text-white border border-none rounded-md bg-primary hover:bg-primary_dark"
-        onClick={applyActivity}
-        disabled={isPending || activityStatus || isDisabled}
-      >
-        {isDisabled ? '약속 요청함' : '약속잡기'}
-      </Button>
+      {activity.userId !== currentUser && (
+        <Button
+          type="button"
+          className="px-4 py-2 text-sm font-semibold text-white border border-none rounded-md bg-primary hover:bg-primary_dark"
+          onClick={applyActivity}
+          disabled={isPending || activityStatus || isDisabled}
+        >
+          {isDisabled ? '약속 요청함' : '약속잡기'}
+        </Button>
+      )}
     </div>
   );
 }
