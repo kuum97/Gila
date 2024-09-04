@@ -1,6 +1,7 @@
 'use client';
 
 import { approveActivityRequest, rejectActivityRequest } from '@/app/action/activity-request';
+import { responseMail } from '@/app/action/mail';
 import SmallButton from '@/components/small-button';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import UserIcon from '@/components/user-icon';
@@ -28,6 +29,8 @@ export default function PromisedListCard({ promisedActivity }: Props) {
         return;
       }
       toast.success(action.message);
+      const response = await responseMail(activity, requestUser, 'approve');
+      toast.success(response.message);
     });
   };
 
@@ -40,6 +43,8 @@ export default function PromisedListCard({ promisedActivity }: Props) {
         return;
       }
       toast.success(action.message);
+      const response = await responseMail(activity, requestUser, 'reject');
+      toast.success(response.message);
     });
   };
 

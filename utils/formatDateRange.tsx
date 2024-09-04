@@ -1,4 +1,4 @@
-import { format } from 'date-fns';
+import { formatInTimeZone } from 'date-fns-tz';
 
 const formatDateRange = ({
   startDateString,
@@ -7,8 +7,8 @@ const formatDateRange = ({
   startDateString: Date;
   endDateString: Date;
 }) => {
-  const formattedStartDate = format(startDateString, 'yyyy.MM.dd');
-  const formattedEndDate = format(endDateString, 'yyyy.MM.dd');
+  const formattedStartDate = formatInTimeZone(startDateString, 'Asia/Seoul', 'yyyy.MM.dd');
+  const formattedEndDate = formatInTimeZone(endDateString, 'Asia/Seoul', 'yyyy.MM.dd');
 
   return `${formattedStartDate} ~ ${formattedEndDate}`;
 };

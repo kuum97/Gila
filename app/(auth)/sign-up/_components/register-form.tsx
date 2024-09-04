@@ -21,10 +21,17 @@ import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import PasswordInput from '@/components/ui/password-input';
 import { cn } from '@/lib/utils';
+import { sendEmail } from '@/app/action/mail';
 
 const registerFields = [
   { name: 'nickname', label: '닉네임', placeholder: '닉네임을 입력해 주세요', type: 'text' },
   { name: 'email', label: '이메일', placeholder: '이메일을 입력해 주세요', type: 'text' },
+  {
+    name: 'emailCheck',
+    label: '인증번호입력',
+    placeholder: '인증번호를 입력해 주세요',
+    type: 'text',
+  },
   {
     name: 'password',
     label: '비밀번호',
@@ -40,6 +47,9 @@ const registerFields = [
 ];
 
 export default function RegisterForm() {
+  const [isCheck, setIsCheck] = useState(false);
+  const [emailKey, setEmailKey] = useState('');
+  const [validEmail, setValidEmail] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isConfirmVisible, setIsConfirmVisible] = useState(false);
   const router = useRouter();
@@ -51,11 +61,32 @@ export default function RegisterForm() {
     defaultValues: {
       nickname: '',
       email: '',
+      emailCheck: '',
       password: '',
       confirmPassword: '',
     },
-    mode: 'onBlur',
+    mode: 'all',
   });
+
+  const requsetKey = async () => {
+    setIsCheck(true);
+    const result = await sendEmail(form.getValues('email'));
+    setEmailKey(result.key);
+    toast.message('이메일을 확인해주세요.(스팸메일함도 확인해주세요.)');
+  };
+
+  const checkKey = () => {
+    if (emailKey !== form.getValues('emailCheck')) {
+      setValidEmail(false);
+      form.setError('emailCheck', {
+        type: 'manual',
+        message: '인증번호가 일치하지 않습니다.',
+      });
+    } else {
+      setValidEmail(true);
+      toast.message('이메일 인증에 성공했습니다.');
+    }
+  };
 
   function onSubmit(values: RegisterSchemaType) {
     startTransition(async () => {
@@ -99,6 +130,7 @@ export default function RegisterForm() {
                       type={settingPasswordInputType(field.name) ? 'text' : 'password'}
                       handleToggle={() => handleVisibility(field.name)}
                       placeholder={field.placeholder}
+                      autoComplete="off"
                       className={cn(
                         form.getFieldState(field.name as keyof RegisterSchemaType).error &&
                           'bg-red bg-opacity-10 border-red',
@@ -107,16 +139,35 @@ export default function RegisterForm() {
                       {...controllerField}
                     />
                   ) : (
-                    <Input
-                      type={field.type}
-                      placeholder={field.placeholder}
-                      className={cn(
-                        form.getFieldState(field.name as keyof RegisterSchemaType).error &&
-                          'bg-red bg-opacity-10 border-red',
-                        'border border-gray-300',
+                    <div className="relative">
+                      <Input
+                        disabled={field.name === 'emailCheck' && !isCheck}
+                        type={field.type}
+                        placeholder={field.placeholder}
+                        className={cn(
+                          form.getFieldState(field.name as keyof RegisterSchemaType).error &&
+                            'bg-red bg-opacity-10 border-red',
+                          'border border-gray-300',
+                        )}
+                        {...controllerField}
+                      />
+                      {(field.name === 'email' || field.name === 'emailCheck') && (
+                        <Button
+                          type="button"
+                          className="text-white absolute top-1/2 right-1 -translate-y-1/2 w-10 h-8"
+                          onClick={field.name === 'email' ? requsetKey : checkKey}
+                          disabled={
+                            field.name === 'email'
+                              ? isCheck ||
+                                !form.getValues('email') ||
+                                !!form.getFieldState('email').invalid
+                              : !isCheck
+                          }
+                        >
+                          {field.name === 'email' ? '인증' : '확인'}
+                        </Button>
                       )}
-                      {...controllerField}
-                    />
+                    </div>
                   )}
                 </FormControl>
                 <div className="h-5">
@@ -127,7 +178,7 @@ export default function RegisterForm() {
           />
         ))}
         <Button
-          disabled={isPending || !form.formState.isValid}
+          disabled={isPending || !form.formState.isValid || !validEmail}
           type="submit"
           className="w-full py-3 text-lg font-semibold text-white disabled:bg-primary_dark"
         >
