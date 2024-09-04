@@ -23,7 +23,7 @@ export default function PromisedListCard({ promisedActivity }: Props) {
   const approve: MouseEventHandler = (e) => {
     e.preventDefault();
     startTransition(async () => {
-      const action = await approveActivityRequest(id);
+      const action = await approveActivityRequest(id, activity.id);
       if (!action.success) {
         toast.error(action.message);
         return;

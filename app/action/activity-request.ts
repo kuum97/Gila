@@ -51,8 +51,23 @@ export const createActivityRequest = async (
 
 export const approveActivityRequest = async (
   requestId: string,
+  activityId: string,
 ): Promise<ActionType<ActivityRequest>> => {
   try {
+    const approvedRequest = await db.activity.findUnique({
+      where: { id: activityId },
+      include: {
+        activityRequests: { where: { status: 'APPROVE' } },
+      },
+    });
+
+    if (
+      approvedRequest &&
+      approvedRequest.activityRequests.length === approvedRequest.maximumCount
+    ) {
+      return { success: false, message: '최대 인원 이상 요청을 수락할 수 없습니다.' };
+    }
+
     const activityRequest = await db.activityRequest.update({
       where: { id: requestId },
       data: { status: 'APPROVE' },
