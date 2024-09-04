@@ -1,3 +1,5 @@
+'use server';
+
 import { getCurrentUserId } from '@/app/data/user';
 import db from '@/lib/db';
 import { ActivityWithFavoriteAndCount } from '@/type';
