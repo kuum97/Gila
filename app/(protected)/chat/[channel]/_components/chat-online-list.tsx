@@ -7,9 +7,15 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
+import { RequestWithReqUser } from '@/type';
 import ChatOnlineUser from './chat-online-user';
 
-export default function ChatOnlineList({ users }: { users: any }) {
+interface Props {
+  member: RequestWithReqUser[];
+  users: any;
+}
+
+export default function ChatOnlineList({ users, member }: Props) {
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -21,7 +27,7 @@ export default function ChatOnlineList({ users }: { users: any }) {
         <SheetTitle>접속 유저</SheetTitle>
         <SheetDescription aria-describedby={undefined} />
         <ul className="flex flex-col mt-2 gap-2">
-          {users.map((item: any) => (
+          {member.map((item: RequestWithReqUser) => (
             <li key={item.id}>
               <ChatOnlineUser user={item} />
             </li>
