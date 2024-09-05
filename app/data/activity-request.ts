@@ -24,7 +24,7 @@ export const getMySentRequests = async ({
       skip: cursor ? 1 : 0,
       take,
       orderBy: {
-        id: 'asc',
+        createdAt: 'desc',
       },
     });
 

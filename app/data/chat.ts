@@ -2,7 +2,7 @@
 
 import { getCurrentUserId } from '@/app/data/user';
 import db from '@/lib/db';
-import { ActivityWithFavoriteAndCount } from '@/type';
+import { ActivityWithUserAndRequest } from '@/type';
 
 const getMyChat = async ({
   cursor,
@@ -10,23 +10,27 @@ const getMyChat = async ({
 }: {
   cursor?: string;
   take?: number;
-}): Promise<{ activities: ActivityWithFavoriteAndCount[]; cursorId: string | null }> => {
+}): Promise<{ activities: ActivityWithUserAndRequest[]; cursorId: string | null }> => {
   const userId = await getCurrentUserId();
   const nowDate = new Date();
 
   try {
-    const myActivities = await db.activity.findMany({
+    const myChat = await db.activity.findMany({
       where: { userId, endDate: { gte: nowDate } },
       include: {
-        _count: {
-          select: { favorites: true },
-        },
-        favorites: {
-          where: {
-            userId,
-          },
+        user: {
           select: {
             id: true,
+            nickname: true,
+            email: true,
+            image: true,
+            tags: true,
+            createdAt: true,
+          },
+        },
+        activityRequests: {
+          where: {
+            status: 'APPROVE',
           },
         },
       },
@@ -34,20 +38,14 @@ const getMyChat = async ({
       cursor: cursor ? { id: cursor } : undefined,
       skip: cursor ? 1 : 0,
       orderBy: {
-        createdAt: 'asc',
+        createdAt: 'desc',
       },
     });
 
-    const lastActivity = myActivities[myActivities.length - 1];
-    const cursorId = lastActivity ? lastActivity.id : null;
+    const lastChat = myChat[myChat.length - 1];
+    const cursorId = lastChat ? lastChat.id : null;
 
-    // Map over activities and add `isFavo` property
-    const activitiesWithFavo = myActivities.map((activity) => {
-      const isFavorite = activity.favorites.length > 0;
-      return { ...activity, isFavorite };
-    });
-
-    return { activities: activitiesWithFavo, cursorId };
+    return { activities: myChat, cursorId };
   } catch (error) {
     throw new Error('활동을 가져오는 중에 에러가 발생하였습니다.');
   }
