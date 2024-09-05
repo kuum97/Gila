@@ -12,6 +12,7 @@ export default async function Page({ params }: { params: { channel: string } }) 
       user={user}
       activityTitle={activity.title}
       member={activity.activityRequests}
+      owner={activity.user}
     />
   );
 }

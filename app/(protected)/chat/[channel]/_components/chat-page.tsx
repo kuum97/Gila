@@ -10,9 +10,10 @@ interface Props {
   user: User;
   activityTitle: string;
   member: RequestWithReqUser[];
+  owner: User;
 }
 
-export default function ChatPage({ channel, user, activityTitle, member }: Props) {
+export default function ChatPage({ channel, user, activityTitle, member, owner }: Props) {
   const client = new Realtime({
     key: process.env.NEXT_PUBLIC_ABLY_KEY,
     clientId: user.id,
@@ -22,7 +23,13 @@ export default function ChatPage({ channel, user, activityTitle, member }: Props
   return (
     <AblyProvider client={client}>
       <ChannelProvider channelName={channelName}>
-        <Chat channelName={channelName} user={user} activityTitle={activityTitle} member={member} />
+        <Chat
+          channelName={channelName}
+          user={user}
+          activityTitle={activityTitle}
+          member={member}
+          owner={owner}
+        />
       </ChannelProvider>
     </AblyProvider>
   );
