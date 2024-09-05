@@ -27,6 +27,9 @@ export type RequestWithReqUserAndActivity = ActivityRequest & {
   requestUser: User;
   activity: Activity;
 };
+export type RequestWithReqUser = ActivityRequest & {
+  requestUser: User;
+};
 
 // Activity
 export type ActivityWithFavoCount = Activity & { _count: { favorites: number } };
@@ -39,6 +42,9 @@ export type ActivityWithRequest = ActivityWithUserAndFavorite & {
   activityRequests: ActivityRequest[];
 };
 export type ActivityWithUserAndRequest = ActivityWithUser & { activityRequests: ActivityRequest[] };
+export type ActivityWithUserandReqUser = ActivityWithUser & {
+  activityRequests: RequestWithReqUser[];
+};
 
 export type ActivityWithFavoriteAndCount = Activity & {
   isFavorite: boolean;
