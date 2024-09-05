@@ -1,6 +1,6 @@
 import { getCurrentUser } from '@/app/data/user';
 import { Suspense } from 'react';
-import getMyChat from '@/app/data/chat';
+import { getMyChat } from '@/app/data/chat';
 import Loading from '../loading';
 import ChatChannelList from './_components/chat-channel-list';
 

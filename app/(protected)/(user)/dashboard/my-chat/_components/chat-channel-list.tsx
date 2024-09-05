@@ -7,7 +7,7 @@ import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { ActivityWithUserAndRequest } from '@/type';
 import Spinner from '@/components/ui/spinner';
 import Image from 'next/image';
-import getMyChat from '@/app/data/chat';
+import { getMyChat } from '@/app/data/chat';
 import Channel from './channel';
 
 interface Props {
