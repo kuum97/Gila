@@ -94,7 +94,7 @@ export const getMyReceivedRequests = async ({
     const lastRequest = requests[requests.length - 1];
     const cursorId = lastRequest ? lastRequest.id : null;
 
-    revalidatePath('/promised-list');
+    revalidatePath('/dashboard/promised-list');
 
     return { requests, cursorId };
   } catch (error) {

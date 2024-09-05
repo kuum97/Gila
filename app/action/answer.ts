@@ -28,7 +28,7 @@ export const createAnswer = async ({
 
     if (!newAnswer) return { success: false, message: '답변 생성에 실패하였습니다.' };
 
-    revalidatePath('/question-list');
+    revalidatePath(`/question/${questionId}`, 'page');
 
     return {
       success: true,
@@ -60,7 +60,7 @@ export const editAnswer = async ({
 
     if (!updatedAnswer) return { success: false, message: '답변 수정에 실패하였습니다.' };
 
-    revalidatePath('/question-list');
+    revalidatePath(`/question/${updatedAnswer.questionId}`, 'page');
 
     return {
       success: true,
@@ -80,7 +80,7 @@ export const deleteAnswer = async (answerId: string): Promise<ActionType<Answer>
 
     if (!deletedAnswer) return { success: false, message: '답변 삭제에 실패하였습니다.' };
 
-    revalidatePath('/question-list');
+    revalidatePath(`/question/${deletedAnswer.questionId}`, 'page');
 
     return { success: true, message: '답변 삭제에 성공하였습니다.' };
   } catch (error) {

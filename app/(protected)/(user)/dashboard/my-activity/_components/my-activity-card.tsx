@@ -8,6 +8,7 @@ import { ActivityWithFavoriteAndCount } from '@/type';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
 import DeleteAlertModal from '@/components/delete-alert-modal';
+import { useRouter } from 'next/navigation';
 import ActivityEditForm from './activity-edit-form';
 
 interface Props {
@@ -19,6 +20,7 @@ export default function MyActivityCard({ activity }: Props) {
   const dateRange = formatDateRange({ startDateString: startDate, endDateString: endDate });
   const [isPending, startTransition] = useTransition();
   const [isEditModalOpen, setEditModalOpen] = useState<boolean>(false);
+  const router = useRouter();
   const nowDate = new Date();
 
   const handleClickEditFormOpen: MouseEventHandler = (e) => {
@@ -35,6 +37,7 @@ export default function MyActivityCard({ activity }: Props) {
         return;
       }
       toast.success(action.message);
+      router.refresh();
     });
   };
 
