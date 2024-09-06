@@ -24,6 +24,7 @@ import {
 import LOCATIONS from '@/constants/locations';
 import { Compass } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import PrimaryCTAButton from '@/components/common/primary-CTA-button';
 
 export default function LocationSelectDrawerForNav() {
   const [isDrawOpen, setIsDrawOpen] = useState(false);
@@ -153,9 +154,7 @@ export default function LocationSelectDrawerForNav() {
               초기화
             </Button>
             <DrawerClose asChild>
-              <Button variant="outline" className="text-base text-white shadow-md bg-primary">
-                확정
-              </Button>
+              <PrimaryCTAButton text="확정" type="button" disabled={!province} />
             </DrawerClose>
           </DrawerFooter>
         </DrawerContent>
