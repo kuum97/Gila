@@ -28,7 +28,7 @@ export const createQuestion = async ({
 
     if (!question) return { success: false, message: '질문 생성에 실패하였습니다.' };
 
-    revalidatePath('/question-list');
+    revalidatePath('/question-list', 'page');
 
     return {
       success: true,
@@ -66,7 +66,7 @@ export const editQuestion = async ({
 
     if (!question) return { success: false, message: '질문 수정에 실패하였습니다.' };
 
-    revalidatePath('/question-list');
+    revalidatePath('/dashboard/my-question', 'page');
 
     return {
       success: true,
@@ -89,7 +89,8 @@ export const deleteQuestion = async (requestId: string): Promise<ActionType<Ques
 
     if (!question) return { success: false, message: '질문 삭제에 실패하였습니다.' };
 
-    revalidatePath('/my-qustion');
+    revalidatePath('/dashboard/my-question', 'page');
+
     return { success: true, message: '질문 삭제에 성공하였습니다.' };
   } catch (error) {
     return {
