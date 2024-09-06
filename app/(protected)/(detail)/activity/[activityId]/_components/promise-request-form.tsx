@@ -26,6 +26,7 @@ export default function PromiseRequestForm({ startDate, endDate, maxCount, activ
     });
   };
 
+  // 이 부분은 form으로 개선이 필요해 보여서 버튼 적용은 추후에 진행해야 할 듯 합니다.
   return (
     <div className="tall:sticky fixed inset-x-0 bottom-0 w-full tall:max-w-[420px] h-20 bg-[#1B1B1B] z-50 flex justify-between gap-8 items-center px-8 py-0">
       <div className="flex flex-col items-center justify-between w-full gap-2">
