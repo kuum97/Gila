@@ -19,7 +19,7 @@ import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import PasswordInput from '@/components/ui/password-input';
 import { cn } from '@/lib/utils';
-import PrimarySubmitButton from '@/components/common/primary-submit-button';
+import PrimaryCTAButton from '@/components/common/primary-CTA-button';
 
 const registerFields = [
   { name: 'nickname', label: '닉네임', placeholder: '닉네임을 입력해 주세요', type: 'text' },
@@ -125,9 +125,10 @@ export default function RegisterForm() {
             )}
           />
         ))}
-        <PrimarySubmitButton
+        <PrimaryCTAButton
           text="회원가입"
-          disabledOption={isPending || !form.formState.isValid}
+          type="submit"
+          disabled={isPending || !form.formState.isValid}
         />
       </form>
     </Form>

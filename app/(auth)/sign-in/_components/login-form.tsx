@@ -19,7 +19,7 @@ import { login } from '@/app/action/user';
 import { useRouter } from 'next/navigation';
 import PasswordInput from '@/components/ui/password-input';
 import { cn } from '@/lib/utils';
-import PrimarySubmitButton from '@/components/common/primary-submit-button';
+import PrimaryCTAButton from '@/components/common/primary-CTA-button';
 
 const loginFields = [
   { name: 'email', label: '이메일', placeholder: '이메일을 입력해 주세요', type: 'text' },
@@ -106,7 +106,11 @@ export default function LoginForm() {
             )}
           />
         ))}
-        <PrimarySubmitButton text="로그인" disabledOption={isPending || !form.formState.isValid} />
+        <PrimaryCTAButton
+          text="로그인"
+          type="submit"
+          disabled={isPending || !form.formState.isValid}
+        />
       </form>
     </Form>
   );
