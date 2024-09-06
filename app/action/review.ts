@@ -43,7 +43,7 @@ const createReview = async ({
 
     if (!newReview) return { success: false, message: '리뷰 생성에 실패하였습니다.' };
 
-    revalidatePath('/reviews', 'page');
+    revalidatePath('/dashboard/reviews', 'page');
     return {
       success: true,
       message: '리뷰 생성에 성공하였습니다.',
