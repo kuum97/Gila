@@ -2,9 +2,9 @@
 
 import { getCurrentUserId } from '@/app/data/user';
 import db from '@/lib/db';
-import { ActivityWithUserAndRequest } from '@/type';
+import { ActivityWithUserAndRequest, ActivityWithUserandReqUser } from '@/type';
 
-const getMyChat = async ({
+export const getMyChat = async ({
   cursor,
   take = 10,
 }: {
@@ -51,4 +51,48 @@ const getMyChat = async ({
   }
 };
 
-export default getMyChat;
+export const getChannelById = async (id: string): Promise<ActivityWithUserandReqUser> => {
+  try {
+    const activity = await db.activity.findUnique({
+      where: { id },
+      include: {
+        user: {
+          select: {
+            id: true,
+            nickname: true,
+            email: true,
+            image: true,
+            tags: true,
+            createdAt: true,
+          },
+        },
+        activityRequests: {
+          where: { status: 'APPROVE' },
+          include: {
+            requestUser: {
+              select: {
+                id: true,
+                nickname: true,
+                email: true,
+                image: true,
+                tags: true,
+                createdAt: true,
+              },
+            },
+            activity: true,
+          },
+        },
+      },
+    });
+
+    if (!activity) {
+      throw new Error('활동을 찾을 수 없습니다.');
+    }
+
+    return {
+      ...activity,
+    };
+  } catch (error) {
+    throw new Error('활동을 가져오는 중에 에러가 발생하였습니다.');
+  }
+};

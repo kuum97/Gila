@@ -15,7 +15,7 @@ export default function Channel({ activity }: Props) {
   });
 
   return (
-    <Link href={`/chat/${activity.id}`}>
+    <Link href={`/chat/${activity.id}`} scroll={false}>
       <div className="relative flex w-full gap-6 p-3 border rounded-lg">
         <div className="w-[110px] h-[110px] relative rounded-lg overflow-hidden flex-shrink-0">
           <Image
