@@ -20,17 +20,6 @@ export const getQuestions = async ({
   cursor?: string | null;
 }): Promise<{ questions: QuestionWithUserAndAnswers[]; cursorId: string | null }> => {
   try {
-    let questions;
-    let locationQuestions: string | any[] = [];
-    let otherQuestions: {
-      id: string;
-      title: string;
-      content: string;
-      location: string;
-      userId: string;
-      createdAt: Date;
-      updatedAt: Date;
-    }[] = [];
     const baseInclude = {
       answers: {
         include: {
@@ -67,38 +56,17 @@ export const getQuestions = async ({
       },
     };
 
-    if (location) {
-      locationQuestions = await db.question.findMany({
-        where: { location },
-        include: baseInclude,
-        take,
-        cursor: cursor ? { id: cursor } : undefined,
-        skip: cursor ? 1 : 0,
-        orderBy:
-          order === 'recent'
-            ? { createdAt: 'desc' as const }
-            : [{ answers: { _count: 'desc' as const } }, { createdAt: 'desc' as const }],
-      });
-    }
-
-    const remainingTake = take - locationQuestions.length;
-
-    if (remainingTake > 0) {
-      otherQuestions = await db.question.findMany({
-        where: location ? { location: { not: location } } : {},
-        include: baseInclude,
-        take: remainingTake,
-        cursor: cursor ? { id: cursor } : undefined,
-        skip: cursor ? 1 : 0,
-        orderBy:
-          order === 'recent'
-            ? { createdAt: 'desc' as const }
-            : [{ answers: { _count: 'desc' as const } }, { createdAt: 'desc' as const }],
-      });
-    }
-
-    // eslint-disable-next-line prefer-const
-    questions = [...locationQuestions, ...otherQuestions];
+    const questions = await db.question.findMany({
+      where: location ? { location } : {},
+      include: baseInclude,
+      take,
+      cursor: cursor ? { id: cursor } : undefined,
+      skip: cursor ? 1 : 0,
+      orderBy:
+        order === 'recent'
+          ? { createdAt: 'desc' as const }
+          : [{ answers: { _count: 'desc' as const } }, { createdAt: 'desc' as const }],
+    });
 
     const lastQuestion = questions[questions.length - 1];
     const newCursorId = lastQuestion ? lastQuestion.id : null;
