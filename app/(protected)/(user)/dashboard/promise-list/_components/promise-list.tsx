@@ -5,9 +5,9 @@ import { useCallback, useEffect, useState, useTransition } from 'react';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { getMySentRequests } from '@/app/data/activity-request';
 import PromiseListCard from '@/app/(protected)/(user)/dashboard/promise-list/_components/promise-list-card';
-import Spinner from '@/components/ui/spinner';
 import Link from 'next/link';
 import Image from 'next/image';
+import MyActivityCardSkeleton from '@/components/skeletons/my-activity-card-skeleton';
 
 interface Props {
   promiseList: RequestWithActivity[];
@@ -72,7 +72,7 @@ export default function PromiseList({ promiseList, cursorId }: Props) {
       </ul>
       {isPending && (
         <div className="flex justify-center w-full">
-          <Spinner />
+          <MyActivityCardSkeleton />
         </div>
       )}
     </>
