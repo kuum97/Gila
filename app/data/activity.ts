@@ -131,12 +131,18 @@ export const getActivities = async ({
 
         activities = await db.activity.findMany({
           ...baseQuery,
-          where: {
-            location,
-            tags: {
-              hasSome: currentUser.tags,
-            },
-          },
+          where: location
+            ? {
+                location,
+                tags: {
+                  hasSome: currentUser.tags,
+                },
+              }
+            : {
+                tags: {
+                  hasSome: currentUser.tags,
+                },
+              },
           orderBy: {
             createdAt: 'desc',
           },
