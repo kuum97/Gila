@@ -113,7 +113,7 @@ export default function LocationSelectDrawerForNav() {
                           onSelect={handleSelectProvince}
                           className={cn(
                             province === _province && 'bg-gray-200',
-                            'flex items-center justify-center p-2 font-medium rounded-lg shadow-md hover:bg-gray-100',
+                            'flex items-center justify-center p-2 font-medium rounded-lg shadow-md hover:bg-gray-100 text-nowrap',
                           )}
                         >
                           {_province}

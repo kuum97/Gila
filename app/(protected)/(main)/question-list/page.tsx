@@ -26,12 +26,16 @@ export default async function Page({
         </h1>
         <QuestionForm />
       </div>
-      <div className="flex flex-col items-start w-full gap-2 p-5">
+      <div className="flex flex-col items-center w-full gap-2 p-5">
         <div className="flex items-center justify-between w-full">
           <h2 className="text-xl font-semibold">질문 목록</h2>
           <SortingDropdown sorts={QUESTIONSORTS} />
         </div>
-        <QuestionList questions={qusetions.questions} questionCursorId={qusetions.cursorId} />
+        <QuestionList
+          questions={qusetions.questions}
+          questionCursorId={qusetions.cursorId}
+          location={location}
+        />
       </div>
     </main>
   );

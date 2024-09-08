@@ -1,5 +1,9 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Menu } from 'lucide-react';
+
+'use client';
+
+import { Circle, Crown, Menu } from 'lucide-react';
 import {
   Sheet,
   SheetContent,
@@ -7,9 +11,28 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
+import { RequestWithReqUser, User } from '@/type';
+import { useEffect, useState } from 'react';
 import ChatOnlineUser from './chat-online-user';
 
-export default function ChatOnlineList({ users }: { users: any }) {
+interface Props {
+  member: RequestWithReqUser[];
+  users: any[];
+  owner: User;
+}
+
+export default function ChatOnlineList({ users, member, owner }: Props) {
+  const [ownerConnected, setOwnerConnected] = useState(false);
+
+  useEffect(() => {
+    for (let i = 0; users.length > i; i++) {
+      if (users[i].clientId === owner.id) {
+        setOwnerConnected(true);
+        break;
+      }
+    }
+  }, [owner, users]);
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -21,9 +44,20 @@ export default function ChatOnlineList({ users }: { users: any }) {
         <SheetTitle>접속 유저</SheetTitle>
         <SheetDescription aria-describedby={undefined} />
         <ul className="flex flex-col mt-2 gap-2">
-          {users.map((item: any) => (
+          <li>
+            <div className="flex items-center gap-2">
+              <Circle
+                size={8}
+                fill={ownerConnected ? '#01FE19' : '#848484'}
+                color={ownerConnected ? '#01FE19' : '#848484'}
+              />
+              {owner.nickname}
+              <Crown size={15} fill="#ffcf00" color="#ffcf00" />
+            </div>
+          </li>
+          {member.map((item: RequestWithReqUser) => (
             <li key={item.id}>
-              <ChatOnlineUser user={item} />
+              <ChatOnlineUser user={item} connectedUser={users} />
             </li>
           ))}
         </ul>
