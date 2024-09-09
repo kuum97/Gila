@@ -5,9 +5,9 @@
 import React, { useCallback, useState, useEffect, useTransition } from 'react';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { ActivityWithUserAndRequest } from '@/type';
-import Spinner from '@/components/ui/spinner';
 import Image from 'next/image';
 import { getMyChat } from '@/app/data/chat';
+import WishCardSkeleton from '@/components/skeletons/wish-card-skeleton';
 import Channel from './channel';
 
 interface Props {
@@ -61,7 +61,7 @@ export default function ChatChannelList({ myActivities, activityCursorId }: Prop
       </ul>
       {isPending && (
         <div className="flex justify-center w-full">
-          <Spinner />
+          <WishCardSkeleton />
         </div>
       )}
     </>

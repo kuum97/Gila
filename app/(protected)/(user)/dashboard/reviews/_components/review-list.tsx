@@ -9,6 +9,7 @@ import { ActivityWithUser } from '@/type';
 import { getAvailableReviewActivities } from '@/app/data/activity';
 import Link from 'next/link';
 import Image from 'next/image';
+import ReviewCardSkeleton from '@/components/skeletons/review-card-skeleton';
 
 type Props = {
   activities: ActivityWithUser[];
@@ -57,21 +58,28 @@ export default function ReviewList({ activities, cursorId }: Props) {
   }
 
   return (
-    <ul className="flex flex-col gap-4">
-      {initActivities.map((activity) => (
-        <li key={activity.id}>
-          <ReviewsCard
-            activityId={activity.id}
-            title={activity.title}
-            startDate={activity.startDate}
-            endDate={activity.endDate}
-            userImg={activity.user.image!}
-            nickname={activity.user.nickname}
-            removeActivity={removeActivity}
-          />
-        </li>
-      ))}
-      <div ref={observer} />
-    </ul>
+    <>
+      <ul className="flex flex-col gap-4">
+        {initActivities.map((activity) => (
+          <li key={activity.id}>
+            <ReviewsCard
+              activityId={activity.id}
+              title={activity.title}
+              startDate={activity.startDate}
+              endDate={activity.endDate}
+              userImg={activity.user.image!}
+              nickname={activity.user.nickname}
+              removeActivity={removeActivity}
+            />
+          </li>
+        ))}
+        <div ref={observer} />
+      </ul>
+      {isPending && (
+        <div className="flex justify-center w-full">
+          <ReviewCardSkeleton />
+        </div>
+      )}
+    </>
   );
 }

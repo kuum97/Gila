@@ -7,8 +7,8 @@ import MyActivityCard from '@/app/(protected)/(user)/dashboard/my-activity/_comp
 import { getMyActivities } from '@/app/data/activity';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { ActivityWithFavoriteAndCount } from '@/type';
-import Spinner from '@/components/ui/spinner';
 import Image from 'next/image';
+import MyActivityCardSkeleton from '@/components/skeletons/my-activity-card-skeleton';
 
 interface Props {
   myActivities: ActivityWithFavoriteAndCount[];
@@ -64,7 +64,7 @@ export default function MyActivityList({ myActivities, activityCursorId }: Props
       </ul>
       {isPending && (
         <div className="flex justify-center w-full">
-          <Spinner />
+          <MyActivityCardSkeleton />
         </div>
       )}
     </>
