@@ -49,9 +49,9 @@ export default function PromisedListCard({ promisedActivity }: Props) {
   };
 
   return (
-    <Card className="flex items-center gap-2 justify-between w-full h-[130px] p-2 text-base">
+    <Card className="flex items-center justify-between w-full h-[130px] p-3 gap-6 text-base">
       <CardHeader className="w-full h-full p-0">
-        <div className="relative w-[120px] h-full">
+        <div className="relative w-[110px] h-full">
           <Image
             src={thumbnails[0] || '/default-profile-image.png'}
             alt="thumbnail"

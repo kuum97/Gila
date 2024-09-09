@@ -3,12 +3,12 @@
 import { useState, useCallback, useEffect, useTransition } from 'react';
 import getMyFavorites from '@/app/data/favorite';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
-import Spinner from '@/components/ui/spinner';
 import { FavoriteWithActivity } from '@/type';
 import Link from 'next/link';
 import WishlistImageCard from '@/app/(protected)/(user)/dashboard/wishlist/_components/wishlist-image-card';
 import WishlistHeartIcon from '@/app/(protected)/(user)/dashboard/wishlist/_components/wishlist-heart-icon';
 import Image from 'next/image';
+import WishCardSkeleton from '@/components/skeletons/wish-card-skeleton';
 
 interface Props {
   initialFavorites: FavoriteWithActivity[];
@@ -86,7 +86,7 @@ export default function WishListContainer({ initialFavorites, initialCursorId }:
       </ul>
       {isPending && (
         <div className="flex justify-center w-full">
-          <Spinner />
+          <WishCardSkeleton />
         </div>
       )}
     </>

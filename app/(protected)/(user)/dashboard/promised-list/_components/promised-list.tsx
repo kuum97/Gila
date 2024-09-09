@@ -5,8 +5,8 @@ import PromisedListCard from '@/app/(protected)/(user)/dashboard/promised-list/_
 import { useCallback, useEffect, useState, useTransition } from 'react';
 import { getMyReceivedRequests } from '@/app/data/activity-request';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
-import Spinner from '@/components/ui/spinner';
 import Image from 'next/image';
+import PromisedCardSkeleton from '@/components/skeletons/promised-card-skeleton';
 
 interface Props {
   promisedActivities: RequestWithReqUserAndActivity[];
@@ -63,7 +63,7 @@ export default function PromisedList({ promisedActivities, cursorId }: Props) {
       </ul>
       {isPending && (
         <div className="flex justify-center w-full">
-          <Spinner />
+          <PromisedCardSkeleton />
         </div>
       )}
     </>

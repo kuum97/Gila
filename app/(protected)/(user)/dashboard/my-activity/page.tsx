@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { getMyActivities } from '@/app/data/activity';
 import { getCurrentUser } from '@/app/data/user';
 import MyActivityList from '@/app/(protected)/(user)/dashboard/my-activity/_components/my-activity-list';
-import Loading from '@/app/(protected)/(user)/dashboard/loading';
 import PlusDiv from '@/components/common/plus-div';
+import MyActivityCardSkeleton from '@/components/skeletons/my-activity-card-skeleton';
 
 export default async function Page() {
   const { activities, cursorId } = await getMyActivities({ take: 7 });
@@ -27,7 +27,7 @@ export default async function Page() {
           </Link>
         </div>
       </div>
-      <Suspense fallback={<Loading />}>
+      <Suspense fallback={<MyActivityCardSkeleton />}>
         <MyActivityList myActivities={activities} activityCursorId={cursorId} />
       </Suspense>
     </main>
