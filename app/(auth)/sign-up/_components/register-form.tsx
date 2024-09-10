@@ -151,7 +151,7 @@ export default function RegisterForm() {
                         {...controllerField}
                       />
                       {(field.name === 'email' || field.name === 'emailCheck') && (
-                        <Button
+                        <PrimaryCTAButton
                           type="button"
                           className="text-white absolute top-1/2 right-1 -translate-y-1/2 w-10 h-8"
                           onClick={field.name === 'email' ? requsetKey : checkKey}
@@ -162,9 +162,8 @@ export default function RegisterForm() {
                                 !!form.getFieldState('email').invalid
                               : !isCheck
                           }
-                        >
-                          {field.name === 'email' ? '인증' : '확인'}
-                        </Button>
+                          text={field.name === 'email' ? '인증' : '확인'}
+                        />
                       )}
                     </div>
                   )}

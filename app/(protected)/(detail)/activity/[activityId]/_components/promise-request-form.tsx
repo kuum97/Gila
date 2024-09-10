@@ -34,7 +34,7 @@ export default function PromiseRequestForm({
       }
     });
   };
-  
+
   // 이 부분은 form으로 개선이 필요해 보여서 버튼 적용은 추후에 진행해야 할 듯 합니다.
   useEffect(() => {
     if (!activityRequests[0]) {
