@@ -21,6 +21,7 @@ import PasswordInput from '@/components/ui/password-input';
 import { cn } from '@/lib/utils';
 import PrimaryCTAButton from '@/components/common/primary-CTA-button';
 import { sendEmail } from '@/app/action/mail';
+import { Button } from '@/components/ui/button';
 
 const registerFields = [
   { name: 'nickname', label: '닉네임', placeholder: '닉네임을 입력해 주세요', type: 'text' },
@@ -151,7 +152,7 @@ export default function RegisterForm() {
                         {...controllerField}
                       />
                       {(field.name === 'email' || field.name === 'emailCheck') && (
-                        <PrimaryCTAButton
+                        <Button
                           type="button"
                           className="text-white absolute top-1/2 right-1 -translate-y-1/2 w-10 h-8"
                           onClick={field.name === 'email' ? requsetKey : checkKey}
@@ -162,8 +163,9 @@ export default function RegisterForm() {
                                 !!form.getFieldState('email').invalid
                               : !isCheck
                           }
-                          text={field.name === 'email' ? '인증' : '확인'}
-                        />
+                        >
+                          {field.name === 'email' ? '인증' : '확인'}
+                        </Button>
                       )}
                     </div>
                   )}
