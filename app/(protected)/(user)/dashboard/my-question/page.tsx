@@ -5,7 +5,7 @@ import MyQuestionCreateModal from '@/app/(protected)/(user)/dashboard/my-questio
 import QuestionCardSkeleton from '@/components/skeletons/question-card-skeleton';
 
 export default async function Page() {
-  const myQuestions = await getMyQuestions({ take: 10, answerTake: 5 });
+  const myQuestions = await getMyQuestions({ take: 7, answerTake: 5 });
   return (
     <div className="p-5">
       <div className="flex justify-between w-full mb-5">
