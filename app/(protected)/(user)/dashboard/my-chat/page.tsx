@@ -1,7 +1,7 @@
 import { getCurrentUser } from '@/app/data/user';
 import { Suspense } from 'react';
-import getMyChat from '@/app/data/chat';
-import Loading from '../loading';
+import { getMyChat } from '@/app/data/chat';
+import WishCardSkeleton from '@/components/skeletons/wish-card-skeleton';
 import ChatChannelList from './_components/chat-channel-list';
 
 export default async function Page() {
@@ -18,7 +18,7 @@ export default async function Page() {
           <p className="text-base font-medium">등록한 활동의 참가자들과 소통해보세요!</p>
         </div>
       </div>
-      <Suspense fallback={<Loading />}>
+      <Suspense fallback={<WishCardSkeleton />}>
         <ChatChannelList myActivities={activities} activityCursorId={cursorId} />
       </Suspense>
     </main>

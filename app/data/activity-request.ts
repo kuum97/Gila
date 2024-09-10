@@ -24,7 +24,7 @@ export const getMySentRequests = async ({
       skip: cursor ? 1 : 0,
       take,
       orderBy: {
-        id: 'asc',
+        createdAt: 'desc',
       },
     });
 
@@ -39,7 +39,7 @@ export const getMySentRequests = async ({
       }
     }
 
-    const lastActivityRequest = validRequests[validRequests.length - 1];
+    const lastActivityRequest = requests[requests.length - 1];
     const cursorId = lastActivityRequest ? lastActivityRequest.id : null;
 
     return { validRequests, cursorId };
@@ -94,7 +94,7 @@ export const getMyReceivedRequests = async ({
     const lastRequest = requests[requests.length - 1];
     const cursorId = lastRequest ? lastRequest.id : null;
 
-    revalidatePath('/promised-list');
+    revalidatePath('/dashboard/promised-list');
 
     return { requests, cursorId };
   } catch (error) {

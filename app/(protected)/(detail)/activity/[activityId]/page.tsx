@@ -1,6 +1,7 @@
 import PromiseRequestForm from '@/app/(protected)/(detail)/activity/[activityId]/_components/promise-request-form';
 import { getActivityById } from '@/app/data/activity';
 import DetailContent from '@/app/(protected)/(detail)/activity/[activityId]/_components/detail-content';
+import { getCurrentUserId } from '@/app/data/user';
 
 interface Params {
   activityId: string;
@@ -8,16 +9,12 @@ interface Params {
 
 export default async function Page({ params }: { params: Params }) {
   const activity = await getActivityById(params.activityId);
+  const currentUser = await getCurrentUserId();
 
   return (
     <div>
       <DetailContent detail={activity} />
-      <PromiseRequestForm
-        startDate={activity.startDate}
-        endDate={activity.endDate}
-        maxCount={activity.maximumCount}
-        activityId={activity.id}
-      />
+      <PromiseRequestForm activity={activity} currentUser={currentUser} />
     </div>
   );
 }

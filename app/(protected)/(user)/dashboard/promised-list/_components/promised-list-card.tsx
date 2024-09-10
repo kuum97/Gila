@@ -1,6 +1,7 @@
 'use client';
 
 import { approveActivityRequest, rejectActivityRequest } from '@/app/action/activity-request';
+import { responseMail } from '@/app/action/mail';
 import SmallButton from '@/components/small-button';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import UserIcon from '@/components/user-icon';
@@ -22,12 +23,14 @@ export default function PromisedListCard({ promisedActivity }: Props) {
   const approve: MouseEventHandler = (e) => {
     e.preventDefault();
     startTransition(async () => {
-      const action = await approveActivityRequest(id);
+      const action = await approveActivityRequest(id, activity.id);
       if (!action.success) {
         toast.error(action.message);
         return;
       }
       toast.success(action.message);
+      const response = await responseMail(activity, requestUser, 'approve');
+      toast.success(response.message);
     });
   };
 
@@ -40,13 +43,15 @@ export default function PromisedListCard({ promisedActivity }: Props) {
         return;
       }
       toast.success(action.message);
+      const response = await responseMail(activity, requestUser, 'reject');
+      toast.success(response.message);
     });
   };
 
   return (
-    <Card className="flex items-center gap-2 justify-between w-full h-[130px] p-2 text-base">
+    <Card className="flex items-center justify-between w-full h-[130px] p-3 gap-6 text-base">
       <CardHeader className="w-full h-full p-0">
-        <div className="relative w-[120px] h-full">
+        <div className="relative w-[110px] h-full">
           <Image
             src={thumbnails[0] || '/default-profile-image.png'}
             alt="thumbnail"

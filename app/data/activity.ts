@@ -5,8 +5,8 @@ import db from '@/lib/db';
 import {
   ActivityWithUser,
   ActivityWithUserAndFavoCount,
-  ActivityWithUserAndFavorite,
   ActivityWithFavoriteAndCount,
+  ActivityWithRequest,
 } from '@/type';
 import { RequestStatus } from '@prisma/client';
 
@@ -39,7 +39,7 @@ export const getMyActivities = async ({
       cursor: cursor ? { id: cursor } : undefined,
       skip: cursor ? 1 : 0,
       orderBy: {
-        createdAt: 'asc',
+        createdAt: 'desc',
       },
     });
 
@@ -131,12 +131,18 @@ export const getActivities = async ({
 
         activities = await db.activity.findMany({
           ...baseQuery,
-          where: {
-            location,
-            tags: {
-              hasSome: currentUser.tags,
-            },
-          },
+          where: location
+            ? {
+                location,
+                tags: {
+                  hasSome: currentUser.tags,
+                },
+              }
+            : {
+                tags: {
+                  hasSome: currentUser.tags,
+                },
+              },
           orderBy: {
             createdAt: 'desc',
           },
@@ -173,7 +179,7 @@ export const getActivities = async ({
   }
 };
 
-export const getActivityById = async (id: string): Promise<ActivityWithUserAndFavorite> => {
+export const getActivityById = async (id: string): Promise<ActivityWithRequest> => {
   const userId = await getCurrentUserId();
   try {
     const activity = await db.activity.findUnique({
@@ -202,6 +208,7 @@ export const getActivityById = async (id: string): Promise<ActivityWithUserAndFa
             favorites: true,
           },
         },
+        activityRequests: { where: { requestUserId: userId } },
       },
     });
 

@@ -1,6 +1,5 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 import db from '@/lib/db';
 import { ActionType } from '@/type';
@@ -44,8 +43,6 @@ export const createActivity = async ({
     });
 
     if (!newActivity) return { success: false, message: '활동 생성에 실패하였습니다.' };
-
-    revalidatePath('/dashboard/my-activity');
 
     return {
       success: true,
@@ -114,7 +111,6 @@ export const deleteActivity = async (activityId: string): Promise<ActionType<Act
 
     if (!deletedActivity) return { success: false, message: '활동 삭제에 실패하였습니다.' };
 
-    revalidatePath('/my-activity', 'page');
     return { success: true, message: '활동 삭제에 성공하였습니다.' };
   } catch (error) {
     return { success: false, message: '활동 삭제 중에 에러가 발생하였습니다.' };

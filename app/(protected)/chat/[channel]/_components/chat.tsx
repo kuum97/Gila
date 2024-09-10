@@ -4,7 +4,7 @@
 
 import { useChannel, usePresence, usePresenceListener } from 'ably/react';
 import { useReducer, useEffect, useRef } from 'react';
-import { User } from '@/type';
+import { RequestWithReqUser, User } from '@/type';
 import BackButton from '@/components/common/back-button';
 import MessageInput from './message-input';
 import MessageList from './message-list';
@@ -14,6 +14,8 @@ interface Props {
   channelName: string;
   user: User;
   activityTitle: string;
+  member: RequestWithReqUser[];
+  owner: User;
 }
 
 const ADD = 'ADD';
@@ -27,7 +29,7 @@ const reducer = (prev: any, event: any) => {
   }
 };
 
-export default function Chat({ channelName, user, activityTitle }: Props) {
+export default function Chat({ channelName, user, activityTitle, member, owner }: Props) {
   const [messages, dispatch] = useReducer(reducer, []);
   const { channel, publish } = useChannel(channelName, dispatch);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -69,7 +71,7 @@ export default function Chat({ channelName, user, activityTitle }: Props) {
         <div className="flex items-center justify-between">
           <BackButton />
           <p className="font-semibold">{activityTitle}</p>
-          <ChatOnlineList users={presenceData} />
+          <ChatOnlineList users={presenceData} member={member} owner={owner} />
         </div>
       </div>
       <div className="overflow-y-scroll p-5 pb-0 h-[calc(100vh-64px-66px)] bg-white_light">

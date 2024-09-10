@@ -3,27 +3,27 @@
 /* eslint-disable no-underscore-dangle */
 
 import React, { useCallback, useState, useEffect, useTransition } from 'react';
-import { getMyActivities } from '@/app/data/activity';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
-import { ActivityWithFavoriteAndCount } from '@/type';
-import Spinner from '@/components/ui/spinner';
+import { ActivityWithUserAndRequest } from '@/type';
 import Image from 'next/image';
+import { getMyChat } from '@/app/data/chat';
+import WishCardSkeleton from '@/components/skeletons/wish-card-skeleton';
 import Channel from './channel';
 
 interface Props {
-  myActivities: ActivityWithFavoriteAndCount[];
+  myActivities: ActivityWithUserAndRequest[];
   activityCursorId: string | null;
 }
 
 export default function ChatChannelList({ myActivities, activityCursorId }: Props) {
-  const [activityList, setActivityList] = useState<ActivityWithFavoriteAndCount[]>([]);
-  const [cursorId, setCursorId] = useState(activityCursorId);
+  const [activityList, setActivityList] = useState<ActivityWithUserAndRequest[]>([]);
+  const [cursorId, setCursorId] = useState<string | null>('');
   const [isPending, startTransition] = useTransition();
 
   const loadMoreActivities = useCallback(async () => {
     startTransition(async () => {
       if (!cursorId) return;
-      const result = await getMyActivities({ take: 7, cursor: cursorId });
+      const result = await getMyChat({ take: 7, cursor: cursorId });
       setActivityList((prev) => [...prev, ...result.activities]);
       setCursorId(result.cursorId);
     });
@@ -61,7 +61,7 @@ export default function ChatChannelList({ myActivities, activityCursorId }: Prop
       </ul>
       {isPending && (
         <div className="flex justify-center w-full">
-          <Spinner />
+          <WishCardSkeleton />
         </div>
       )}
     </>

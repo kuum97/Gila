@@ -4,9 +4,9 @@ import { getMyQuestions } from '@/app/data/question';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { QuestionWithUserAndAnswers } from '@/type';
 import React, { useCallback, useEffect, useState, useTransition } from 'react';
-import Spinner from '@/components/ui/spinner';
 import MyQuestionCard from '@/app/(protected)/(user)/dashboard/my-question/_components/my-question-card';
 import Image from 'next/image';
+import QuestionCardSkeleton from '@/components/skeletons/question-card-skeleton';
 
 interface Props {
   myQuestions: QuestionWithUserAndAnswers[];
@@ -67,7 +67,7 @@ export default function MyQuestionList({ myQuestions, myQuestionCursorId }: Prop
       </ul>
       {isPending && (
         <div className="flex justify-center w-full">
-          <Spinner />
+          <QuestionCardSkeleton />
         </div>
       )}
     </>

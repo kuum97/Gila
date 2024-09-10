@@ -77,7 +77,7 @@ export default function ActivityEditForm({ activity, onClose }: Props) {
       }
       toast.success(action.message);
       onClose();
-      router.replace('/dashboard/my-activity');
+      router.refresh();
     });
   };
 
