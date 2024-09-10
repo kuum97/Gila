@@ -3,8 +3,6 @@
 import { LoginSchema } from '@/schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-
-import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -21,6 +19,7 @@ import { login } from '@/app/action/user';
 import { useRouter } from 'next/navigation';
 import PasswordInput from '@/components/ui/password-input';
 import { cn } from '@/lib/utils';
+import PrimaryCTAButton from '@/components/common/primary-CTA-button';
 
 const loginFields = [
   { name: 'email', label: '이메일', placeholder: '이메일을 입력해 주세요', type: 'text' },
@@ -107,13 +106,11 @@ export default function LoginForm() {
             )}
           />
         ))}
-        <Button
-          disabled={isPending || !form.formState.isValid}
+        <PrimaryCTAButton
+          text="로그인"
           type="submit"
-          className="w-full py-3 text-lg font-semibold text-white disabled:bg-primary_dark"
-        >
-          로그인
-        </Button>
+          disabled={isPending || !form.formState.isValid}
+        />
       </form>
     </Form>
   );

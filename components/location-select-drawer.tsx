@@ -23,6 +23,7 @@ import { Input } from '@/components/ui/input';
 import LOCATIONS from '@/constants/locations';
 import { Map } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import PrimaryCTAButton from '@/components/common/primary-CTA-button';
 
 interface Props {
   defaultLocation?: string;
@@ -139,9 +140,7 @@ export default function LocationSelectDrawer({ defaultLocation, onChange }: Prop
             초기화
           </Button>
           <DrawerClose asChild>
-            <Button variant="outline" className="text-base text-white shadow-md bg-primary">
-              확정
-            </Button>
+            <PrimaryCTAButton text="확정" type="button" disabled={!province} />
           </DrawerClose>
         </DrawerFooter>
       </DrawerContent>
