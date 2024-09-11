@@ -1,6 +1,5 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -12,6 +11,7 @@ import QuestionTipPopOver from '@/app/(protected)/(main)/question-list/_componen
 import { toast } from 'sonner';
 import { useTransition } from 'react';
 import LocationSelectDrawer from '@/components/location-select-drawer';
+import PrimaryCTAButton from '@/components/common/primary-CTA-button';
 
 const FormFields = [
   {
@@ -129,13 +129,11 @@ export default function QuestionForm() {
             )}
           />
           <div>
-            <Button
-              disabled={isPending || !form.formState.isValid}
+            <PrimaryCTAButton
               type="submit"
-              className="w-full px-4 py-1 mb-6 text-base font-medium text-white rounded-md"
-            >
-              물어보기
-            </Button>
+              text="물어보기"
+              disabled={isPending || !form.formState.isValid}
+            />
           </div>
         </div>
         <QuestionTipPopOver />

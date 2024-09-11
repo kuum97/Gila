@@ -2,7 +2,7 @@
 
 import QuestionListCard from '@/app/(protected)/(main)/question-list/_components/question-list-card';
 import { getQuestions } from '@/app/data/question';
-import Spinner from '@/components/ui/spinner';
+import QuestionCardSkeleton from '@/components/skeletons/question-card-skeleton';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { QuestionWithUserAndAnswers } from '@/type';
 import Image from 'next/image';
@@ -81,7 +81,7 @@ export default function QuestionList({ questions, questionCursorId, location }: 
       </ul>
       {isPending && (
         <div className="flex justify-center w-full">
-          <Spinner />
+          <QuestionCardSkeleton />
         </div>
       )}
     </>
