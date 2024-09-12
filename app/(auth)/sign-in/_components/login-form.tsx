@@ -110,6 +110,7 @@ export default function LoginForm() {
           text="로그인"
           type="submit"
           disabled={isPending || !form.formState.isValid}
+          isPending={isPending}
         />
       </form>
     </Form>
