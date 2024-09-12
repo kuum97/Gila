@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/sheet';
 import { RequestWithReqUser, User } from '@/type';
 import { useEffect, useState } from 'react';
-import ChatOnlineUser from './chat-online-user';
+import ChatOnlineUser from '@/app/(protected)/chat/[channel]/_components/chat-online-user';
 
 interface Props {
   member: RequestWithReqUser[];

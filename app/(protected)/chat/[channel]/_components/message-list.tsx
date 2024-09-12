@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { User } from '@/type';
-import MessageCard from './message-card';
+import MessageCard from '@/app/(protected)/chat/[channel]/_components/message-card';
 
 interface Props {
   user: User;

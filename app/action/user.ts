@@ -8,7 +8,7 @@ import { ActionType, LoginSchemaType, RegisterSchemaType } from '@/type';
 import { User } from '@prisma/client';
 import { AuthError } from 'next-auth';
 import { cookies } from 'next/headers';
-import { getCurrentUserId } from '../data/user';
+import { getCurrentUserId } from '@/app/data/user';
 
 export const findUserByNickname = async (nickname: string): Promise<ActionType<User> | null> => {
   try {

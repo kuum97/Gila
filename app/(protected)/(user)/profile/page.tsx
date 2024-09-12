@@ -11,7 +11,7 @@ export default async function Page() {
     <main className="p-5">
       <Card className="shadow-md">
         <CardHeader className="flex flex-col gap-5">
-          <CardTitle className="font-bold">
+          <CardTitle className="font-bold text-center">
             <span className="text-3xl text-primary">{userData.user.nickname}</span>님의 프로필
           </CardTitle>
           <ProfileImage image={userData.user.image} />

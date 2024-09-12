@@ -2,8 +2,8 @@ import { User } from '@/type';
 import ProfileTopic from '@/app/(protected)/(user)/profile/_components/profile-topic';
 import ProfileRank from '@/app/(public)/introduction/[introductionId]/_components/profile-rank';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
-import ProfileScoreTip from './profile-score-tip';
-import { Separator } from './ui/separator';
+import { Separator } from '@/components/ui/separator';
+import ProfileScoreTip from '@/components/profile-score-tip';
 
 interface UserData {
   user: User;

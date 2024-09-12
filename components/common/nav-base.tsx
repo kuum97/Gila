@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { getCurrentUser } from '@/app/data/user';
-import NavSideMenu from './nav-sidemenu';
+import NavSideMenu from '@/components/common/nav-sidemenu';
 
 export default async function NavigationBase({ children }: { children?: ReactNode }) {
   const { image } = await getCurrentUser();
