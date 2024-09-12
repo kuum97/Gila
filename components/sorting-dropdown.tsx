@@ -48,7 +48,7 @@ export default function SortingDropdown({ sorts }: Props) {
   }, [searchParams]);
 
   return (
-    <DropdownMenu open={isOpen} onOpenChange={setIsOpen} modal={false}>
+    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
         <Button
           type="button"
