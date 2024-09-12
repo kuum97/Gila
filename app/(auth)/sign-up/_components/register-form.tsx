@@ -181,6 +181,7 @@ export default function RegisterForm() {
           text="회원가입"
           disabled={isPending || !form.formState.isValid || !validEmail}
           type="submit"
+          isPending={isPending}
         />
       </form>
     </Form>

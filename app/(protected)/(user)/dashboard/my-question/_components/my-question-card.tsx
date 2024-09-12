@@ -1,8 +1,8 @@
 'use client';
 
 /* eslint-disable no-underscore-dangle */
-import { Loader2, MessageCircle } from 'lucide-react';
-import React, { useTransition } from 'react';
+import { MessageCircle } from 'lucide-react';
+import { useTransition } from 'react';
 import { QuestionWithUserAndAnswers } from '@/type';
 import calculateDate from '@/utils/calculateData';
 import { deleteQuestion } from '@/app/action/question';
@@ -10,6 +10,7 @@ import { toast } from 'sonner';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import MyQuestionKebab from '@/app/(protected)/(user)/dashboard/my-question/_components/my-question-kebab';
 import Link from 'next/link';
+import LoadingSpinner from '@/components/loading-spinner';
 
 interface Props {
   myQuestionItem: QuestionWithUserAndAnswers;
@@ -35,16 +36,7 @@ export default function MyQuestionCard({ myQuestionItem }: Props) {
   return (
     <Link href={`/question/${myQuestionItem.id}`}>
       <div className="relative">
-        {isPending && (
-          <div
-            className="absolute inset-0 z-10 flex items-center justify-center rounded-md cursor-not-allowed bg-black/50"
-            onClick={(e: React.MouseEvent<HTMLDivElement>) => {
-              e.preventDefault();
-            }}
-          >
-            <Loader2 className="w-8 h-8 animate-spin" />
-          </div>
-        )}
+        {isPending && <LoadingSpinner />}
         <Card className="flex flex-col items-start w-full p-0 overflow-hidden border border-gray-200 rounded-md shadow-md hover:shadow-lg">
           <CardHeader className="flex flex-row w-full gap-1 px-2 py-3">
             <CardTitle className="w-full text-2xl font-semibold truncate">
