@@ -4,7 +4,7 @@ import formatDateRange from '@/utils/formatDateRange';
 import nodemailer from 'nodemailer';
 import { ActivityWithUserAndFavorite, User } from '@/type';
 import { Activity } from '@prisma/client';
-import { getCurrentUser, getUserProfileWithIntroducedInfos } from '../data/user';
+import { getCurrentUser, getUserProfileWithIntroducedInfos } from '@/app/data/user';
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',

@@ -6,9 +6,9 @@ import { useChannel, usePresence, usePresenceListener } from 'ably/react';
 import { useReducer, useEffect, useRef } from 'react';
 import { RequestWithReqUser, User } from '@/type';
 import BackButton from '@/components/common/back-button';
-import MessageInput from './message-input';
-import MessageList from './message-list';
-import ChatOnlineList from './chat-online-list';
+import ChatOnlineList from '@/app/(protected)/chat/[channel]/_components/chat-online-list';
+import MessageInput from '@/app/(protected)/chat/[channel]/_components/message-input';
+import MessageList from '@/app/(protected)/chat/[channel]/_components/message-list';
 
 interface Props {
   channelName: string;

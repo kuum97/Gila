@@ -8,7 +8,7 @@ import { ActivityWithUserAndRequest } from '@/type';
 import Image from 'next/image';
 import { getMyChat } from '@/app/data/chat';
 import WishCardSkeleton from '@/components/skeletons/wish-card-skeleton';
-import Channel from './channel';
+import Channel from '@/app/(protected)/(user)/dashboard/my-chat/_components/channel';
 
 interface Props {
   myActivities: ActivityWithUserAndRequest[];

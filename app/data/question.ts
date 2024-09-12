@@ -4,7 +4,7 @@
 
 import db from '@/lib/db';
 import { QuestionWithUserAndAnswers } from '@/type';
-import { getCurrentUserId } from './user';
+import { getCurrentUserId } from '@/app/data/user';
 
 export const getQuestions = async ({
   order = 'recent',

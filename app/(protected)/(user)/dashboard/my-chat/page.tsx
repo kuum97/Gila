@@ -1,6 +1,6 @@
 import { getCurrentUser } from '@/app/data/user';
 import { getMyChat } from '@/app/data/chat';
-import ChatChannelList from './_components/chat-channel-list';
+import ChatChannelList from '@/app/(protected)/(user)/dashboard/my-chat/_components/chat-channel-list';
 
 export default async function Page() {
   const { activities, cursorId } = await getMyChat({ take: 7 });

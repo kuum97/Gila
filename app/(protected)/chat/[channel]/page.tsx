@@ -1,6 +1,6 @@
 import { getCurrentUser } from '@/app/data/user';
 import { getChannelById } from '@/app/data/chat';
-import ChatPage from './_components/chat-page';
+import ChatPage from '@/app/(protected)/chat/[channel]/_components/chat-page';
 
 export default async function Page({ params }: { params: { channel: string } }) {
   const user = await getCurrentUser();
