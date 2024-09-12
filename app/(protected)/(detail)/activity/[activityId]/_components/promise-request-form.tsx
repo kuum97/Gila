@@ -3,6 +3,7 @@
 import { createActivityRequest } from '@/app/action/activity-request';
 import { requestMail } from '@/app/action/mail';
 import { Button } from '@/components/ui/button';
+import REQUEST_STATUS from '@/constants/request';
 import { ActivityWithRequest } from '@/type';
 import formatDateRange from '@/utils/formatDateRange';
 import { useEffect, useState, useTransition } from 'react';
@@ -18,7 +19,7 @@ export default function PromiseRequestForm({
   const { startDate, endDate, id, maximumCount, activityRequests } = activity;
   const [isPending, startTransition] = useTransition();
   const [isDisabled, setIsDisabled] = useState(!!activityRequests[0]);
-  const [buttonStatus, setButtonStatus] = useState('');
+  const [buttonStatus, setButtonStatus] = useState(REQUEST_STATUS.DEFAULT);
   const formatDate = formatDateRange({ startDateString: startDate, endDateString: endDate });
   const nowDate = new Date();
   const deactivateActivity = endDate > nowDate;
@@ -27,6 +28,7 @@ export default function PromiseRequestForm({
     startTransition(async () => {
       const result = await createActivityRequest(id);
       toast.message(result.message);
+      setButtonStatus(REQUEST_STATUS.PENDING);
       setIsDisabled(true);
       if (result.success) {
         const request = await requestMail(activity);
@@ -35,24 +37,9 @@ export default function PromiseRequestForm({
     });
   };
 
-  // 이 부분은 form으로 개선이 필요해 보여서 버튼 적용은 추후에 진행해야 할 듯 합니다.
   useEffect(() => {
-    if (!activityRequests[0]) {
-      setButtonStatus('약속잡기');
-    } else {
-      switch (activityRequests[0].status) {
-        case 'APPROVE':
-          setButtonStatus('수락됨');
-          break;
-        case 'PENDING':
-          setButtonStatus('대기중');
-          break;
-        case 'REJECT':
-          setButtonStatus('거절됨');
-          break;
-        default:
-          setButtonStatus('약속잡기');
-      }
+    if (activityRequests[0]) {
+      setButtonStatus(REQUEST_STATUS[activityRequests[0].status]);
     }
   }, [activityRequests]);
 
