@@ -32,7 +32,7 @@ export default function Channel({ activity }: Props) {
             <div className="flex items-center gap-2">
               <User width={14} height={14} />
               <p className="text-sm font-bold">
-                {activity.activityRequests.length} / {activity.maximumCount} 명
+                {activity.activityRequests.length + 1} / {activity.maximumCount + 1} 명
               </p>
             </div>
           </div>
