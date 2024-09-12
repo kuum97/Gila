@@ -4,7 +4,7 @@ import LoadingSpinner from '../loading-spinner';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
-  isPending: boolean;
+  isPending?: boolean;
 }
 
 export default function PrimaryCTAButton({ text, disabled, type, isPending }: Props) {

@@ -133,6 +133,7 @@ export default function QuestionForm() {
               type="submit"
               text="물어보기"
               disabled={isPending || !form.formState.isValid}
+              isPending={isPending}
             />
           </div>
         </div>
