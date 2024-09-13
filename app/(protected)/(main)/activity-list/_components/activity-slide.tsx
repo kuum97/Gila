@@ -10,7 +10,7 @@ import SlideButtonContainer from './slide-button-container';
 export default function ActivitySlide({
   recommendList,
 }: {
-  recommendList: ActivityWithUserAndFavoCount[];
+  recommendList?: ActivityWithUserAndFavoCount[];
 }) {
   const [slideScrollDistance, setSlideScrollDistance] = useState(0);
   const [isPrevDisabled, setIsPrevDisabled] = useState(true);
@@ -43,7 +43,7 @@ export default function ActivitySlide({
 
   useEffect(() => {
     if (slideRef.current) {
-      if (slideRef.current.firstElementChild) {
+      if (slideRef.current.firstElementChild && recommendList) {
         setSlideScrollDistance(
           slideRef.current.firstElementChild.scrollWidth / recommendList.length,
         );
@@ -61,7 +61,22 @@ export default function ActivitySlide({
         slide.removeEventListener('scroll', settingSlide);
       }
     };
-  }, [settingSlide]);
+  }, [settingSlide, recommendList]);
+
+  if (!recommendList || recommendList.length === 0) {
+    return (
+      <div className="relative">
+        <div className="px-5">
+          <div>
+            <p className="text-lg font-semibold">근처의 길라를 찾을 수 없어요!</p>
+          </div>
+          <div>
+            <ActivityCardSkeleton />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative">
@@ -73,7 +88,7 @@ export default function ActivitySlide({
           isPrevDisabled={isPrevDisabled}
         />
       )}
-      {recommendList[0] ? (
+      {recommendList[0] && (
         <div className="overflow-x-scroll [&::-webkit-scrollbar]:hidden h-full" ref={slideRef}>
           <ul className="flex gap-4 w-fit">
             {recommendList.map((item, index) => (
@@ -85,15 +100,6 @@ export default function ActivitySlide({
               </li>
             ))}
           </ul>
-        </div>
-      ) : (
-        <div className="px-5">
-          <div>
-            <p className="text-lg font-semibold">근처의 길라를 찾을 수 없어요!</p>
-          </div>
-          <div>
-            <ActivityCardSkeleton />
-          </div>
         </div>
       )}
     </div>
