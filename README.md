@@ -5,19 +5,6 @@
 
 Gila와 함께 새로운 사람들과의 만남을 통해 잊지 못할 추억을 만들어 보세요.
 
-## 팀원 소개
-
-## Team
-|<img src="https://avatars.githubusercontent.com/u/137033202?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/113277713?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/118117392?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/159929147?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/150333046?v=4" width="150" height="150"/>|
-|:-:|:-:|:-:|:-:|:-:|
-|팀장: 박상준<br/>[@sj0724](https://github.com/sj0724)|팀원: 권주현<br/>[@kuum97](https://github.com/kuum97)|팀원: 박성재<br/>[@Batrnan](https://github.com/Batrnan)|팀원: 이주안<br/>[@juan0444](https://github.com/juan0444)|팀원: 홍진호<br/>[@jinho0941](https://github.com/jinho0941)|
-
-- 박상준: product managing, 질문 페이지, 대시보드 - 받은 신청, 토픽 페이지
-- 권주현: product managing, 활동 페이지, 대시보드 - 활동/보낸 신청
-- 박성재: design, 대시보드 페이지, 대시보드 - 질문
-- 이주안: design, 프로필 페이지, 대시보드 - 찜
-- 홍진호: back-end, 인증 페이지, 대시보드 - 리뷰
-
 ## 개발 기간
   전체 개발 기간 : 2024-07-03 ~ <br>
   기획 : 2024-07-03 ~ 2024-07.22 <br>
@@ -86,6 +73,19 @@ Gila와 함께 새로운 사람들과의 만남을 통해 잊지 못할 추억�
 - 활동 신청, 신청 수락 시 메일 발송
 
 - 리스트(활동, 질문) 정렬(최신순, 관련도순, 조회순, 즐겨찾기순, 특정 위치)
+
+## 팀원 소개
+
+## Team
+|<img src="https://avatars.githubusercontent.com/u/137033202?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/113277713?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/118117392?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/159929147?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/150333046?v=4" width="150" height="150"/>|
+|:-:|:-:|:-:|:-:|:-:|
+|팀장: 박상준<br/>[@sj0724](https://github.com/sj0724)|팀원: 권주현<br/>[@kuum97](https://github.com/kuum97)|팀원: 박성재<br/>[@Batrnan](https://github.com/Batrnan)|팀원: 이주안<br/>[@juan0444](https://github.com/juan0444)|팀원: 홍진호<br/>[@jinho0941](https://github.com/jinho0941)|
+
+- 박상준: product managing, 질문 페이지, 대시보드 - 받은 신청, 토픽 페이지
+- 권주현: product managing, 활동 페이지, 대시보드 - 활동/보낸 신청
+- 박성재: design, 대시보드 페이지, 대시보드 - 질문
+- 이주안: design, 프로필 페이지, 대시보드 - 찜
+- 홍진호: back-end, 인증 페이지, 대시보드 - 리뷰
 
 ## 코드 실행 가이드
 
