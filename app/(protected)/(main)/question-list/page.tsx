@@ -1,9 +1,8 @@
 import QuestionForm from '@/app/(protected)/(main)/question-list/_components/question-form';
-import { getQuestions } from '@/app/data/question';
-import QuestionList from '@/app/(protected)/(main)/question-list/_components/question-list';
-import SortingDropdown from '@/components/sorting-dropdown';
-import { QUESTIONSORTS } from '@/constants/sort';
 import { QuestionSort } from '@/type';
+import { Suspense } from 'react';
+import QuestionContainer from './_components/question-container';
+import QuestionListSkeleton from './_components/question-list-skeleton';
 
 export default async function Page({
   searchParams,
@@ -11,12 +10,6 @@ export default async function Page({
   searchParams: { sort: QuestionSort; location: string };
 }) {
   const { sort, location } = searchParams;
-  const qusetions = await getQuestions({
-    take: 7,
-    order: sort,
-    answerTake: 5,
-    location,
-  });
 
   return (
     <main className="w-full">
@@ -27,15 +20,9 @@ export default async function Page({
         <QuestionForm />
       </div>
       <div className="flex flex-col items-center w-full gap-2 p-5">
-        <div className="flex items-center justify-between w-full">
-          <h2 className="text-xl font-semibold">질문 목록</h2>
-          <SortingDropdown sorts={QUESTIONSORTS} />
-        </div>
-        <QuestionList
-          questions={qusetions.questions}
-          questionCursorId={qusetions.cursorId}
-          location={location}
-        />
+        <Suspense fallback={<QuestionListSkeleton />}>
+          <QuestionContainer sort={sort} location={location} />
+        </Suspense>
       </div>
     </main>
   );
