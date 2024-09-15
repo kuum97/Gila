@@ -1,16 +1,17 @@
-import { ActivityWithUserAndFavoCount, Sort } from '@/type';
+import { Sort } from '@/type';
 import ActivityList from '@/app/(protected)/(main)/activity-list/_components/activity-list';
 import SortingDropdown from '@/components/sorting-dropdown';
 import { ACTIVITYSORTS } from '@/constants/sort';
+import { getActivities } from '@/app/data/activity';
 
 interface Props {
-  activities: ActivityWithUserAndFavoCount[];
-  cursorId: string | null;
   sort: Sort;
   location: string;
 }
 
-export default function ActivityContainer({ activities, cursorId, sort, location }: Props) {
+export default async function ActivityContainer({ sort, location }: Props) {
+  const { activities, cursorId } = await getActivities({ type: sort, location, size: 5 });
+
   return (
     <section className="flex flex-col gap-2 p-4 tall:pb-2">
       <div className="flex items-center justify-between">
