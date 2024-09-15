@@ -13,8 +13,8 @@ import { useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 import { logout } from '@/app/action/user';
 import { toast } from 'sonner';
-import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
-import ProfileAccordion from './sidemenu-accordion';
+import SideMenuAccordion from '@/components/common/sidemenu-accordion';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 interface Props {
   userAvatar: string | null;
@@ -71,7 +71,7 @@ export default function NavSideMenu({ userAvatar }: Props) {
         <SheetTitle>메뉴</SheetTitle>
         <SheetDescription aria-describedby={undefined} />
         <div className="flex flex-col justify-between h-full py-4">
-          <ProfileAccordion />
+          <SideMenuAccordion />
           <button
             disabled={isPending}
             onClick={Logout}

@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
 import DeleteAlertModal from '@/components/delete-alert-modal';
 import { useRouter } from 'next/navigation';
-import ActivityEditForm from './activity-edit-form';
+import ActivityEditForm from '@/app/(protected)/(user)/dashboard/my-activity/_components/activity-edit-form';
 
 interface Props {
   activity: ActivityWithFavoriteAndCount;

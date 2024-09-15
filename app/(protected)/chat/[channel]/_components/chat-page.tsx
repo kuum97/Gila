@@ -7,7 +7,7 @@ import { AblyProvider, ChannelProvider } from 'ably/react';
 import { RequestWithReqUser, User } from '@/type';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import Chat from './chat';
+import Chat from '@/app/(protected)/chat/[channel]/_components/chat';
 
 interface Props {
   channel: string;

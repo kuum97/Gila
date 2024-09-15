@@ -3,18 +3,26 @@
 
 'use client';
 
-import { useCallback, useEffect, useState, useTransition } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getActivitiesByLocation } from '@/app/data/activity';
-import { ActivityWithUserAndFavoCount } from '@/type';
 import ActivityCardSkeleton from '@/components/skeletons/activity-card-skeleton';
 import LOCATIONS from '@/constants/locations';
 import calculateDistanceInMeters from '@/utils/calculateDistance';
+import { useQuery } from '@tanstack/react-query';
 import ActivitySlide from './activity-slide';
 
 export default function ActivitySlideContainer() {
-  const [recommendList, setRecommentList] = useState<ActivityWithUserAndFavoCount[]>([]);
   const [userLocation, setUserLocation] = useState<string[]>([]);
-  const [isPending, startTransition] = useTransition();
+  const { data } = useQuery({
+    queryKey: ['activityByLocation', userLocation],
+    queryFn: () =>
+      getActivitiesByLocation({
+        location: userLocation[0],
+        secondeLocation: userLocation[1],
+        size: 5,
+      }),
+    enabled: userLocation.length > 0,
+  });
 
   const getAddress = (mapResult: any, mapStatus: any) => {
     if (mapStatus === window.kakao.maps.services.Status.OK) {
@@ -81,23 +89,6 @@ export default function ActivitySlideContainer() {
     }
   }, [onLoadKakaoMap]);
 
-  const activityByLocation = (location: string[]) => {
-    startTransition(async () => {
-      const result = await getActivitiesByLocation({
-        location: location[0],
-        secondeLocation: location[1],
-        size: 5,
-      });
-      setRecommentList([...result.activities]);
-    });
-  };
-
-  useEffect(() => {
-    if (userLocation.length > 0) {
-      activityByLocation(userLocation);
-    }
-  }, [userLocation]);
-
   return (
     <div className="border py-5 flex flex-col gap-5 rounded-lg">
       <div className="flex flex-col gap-1 px-5">
@@ -105,12 +96,9 @@ export default function ActivitySlideContainer() {
           나랑 가까운
           <span className="text-xl text-primary"> 길라</span>를 추천해드릴께요!
         </p>
-        {!userLocation[0] && (
-          <p className="text-xs">※ 위치 권한 설정을 하지 않으면 이용할 수 없는 기능입니다.</p>
-        )}
       </div>
-      {userLocation[0] && !isPending ? (
-        <ActivitySlide recommendList={recommendList} />
+      {userLocation[0] ? (
+        <ActivitySlide recommendList={data?.activities} />
       ) : (
         <div className="px-5">
           <ActivityCardSkeleton />

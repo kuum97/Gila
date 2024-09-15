@@ -21,7 +21,7 @@ export default function AnswerKebab({ handleDelete, handleEdit }: Props) {
 
   return (
     <>
-      <DropdownMenu modal={false}>
+      <DropdownMenu>
         <DropdownMenuTrigger className="transition rounded-full outline-none hover:bg-slate-200">
           <EllipsisVertical className="w-5 h-5" />
         </DropdownMenuTrigger>
