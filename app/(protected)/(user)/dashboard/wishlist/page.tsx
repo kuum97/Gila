@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
-import WishListContainer from './_components/wishList-container';
 import WishListSkeleton from './_components/wishList-skeleton';
+import WishListContainer from './_components/wishlist-container';
 
 export default async function Page() {
   return (
