@@ -1,16 +1,11 @@
 import EditProfileItem from '@/app/(protected)/(user)/profile/edit/_components/edit-profile-item';
-import {
-  getCurrentUser,
-  getCurrentUserId,
-  getUserProfileWithIntroducedInfos,
-} from '@/app/data/user';
+import { getCurrentUser, getUserProfileWithIntroducedInfos } from '@/app/data/user';
 import EditImageForm from '@/app/(protected)/(user)/profile/edit/_components/edit-image-form';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default async function Page() {
-  const userId = await getCurrentUserId();
   const user = await getCurrentUser();
-  const userData = await getUserProfileWithIntroducedInfos(userId);
+  const userData = await getUserProfileWithIntroducedInfos(user.id);
 
   return (
     <main className="p-5">

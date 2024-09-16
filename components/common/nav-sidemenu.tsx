@@ -17,7 +17,7 @@ import SideMenuAccordion from '@/components/common/sidemenu-accordion';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 interface Props {
-  userAvatar: string | null;
+  userAvatar: string | null | undefined;
 }
 
 export default function NavSideMenu({ userAvatar }: Props) {
