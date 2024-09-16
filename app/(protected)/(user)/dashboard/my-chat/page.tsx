@@ -1,9 +1,9 @@
 import { getCurrentUser } from '@/app/data/user';
-import { getMyChat } from '@/app/data/chat';
-import ChatChannelList from '@/app/(protected)/(user)/dashboard/my-chat/_components/chat-channel-list';
+import { Suspense } from 'react';
+import ChatContainer from './_components/chat-container';
+import WishListSkeleton from '../wishlist/_components/wishList-skeleton';
 
 export default async function Page() {
-  const { activities, cursorId } = await getMyChat({ take: 7 });
   const user = await getCurrentUser();
 
   return (
@@ -16,7 +16,9 @@ export default async function Page() {
           <p className="text-base font-medium">등록한 활동의 참가자들과 소통해보세요!</p>
         </div>
       </div>
-      <ChatChannelList myActivities={activities} activityCursorId={cursorId} />
+      <Suspense fallback={<WishListSkeleton />}>
+        <ChatContainer />
+      </Suspense>
     </main>
   );
 }

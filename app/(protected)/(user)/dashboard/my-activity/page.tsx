@@ -1,11 +1,11 @@
 import Link from 'next/link';
-import { getMyActivities } from '@/app/data/activity';
 import { getCurrentUser } from '@/app/data/user';
-import MyActivityList from '@/app/(protected)/(user)/dashboard/my-activity/_components/my-activity-list';
 import PlusDiv from '@/components/common/plus-div';
+import { Suspense } from 'react';
+import MyActivityContainer from './_components/my-activity-container';
+import MyActivitySkeleton from './_components/my-activity-skeleton';
 
 export default async function Page() {
-  const { activities, cursorId } = await getMyActivities({ take: 7 });
   const user = await getCurrentUser();
 
   return (
@@ -25,7 +25,9 @@ export default async function Page() {
           </Link>
         </div>
       </div>
-      <MyActivityList myActivities={activities} activityCursorId={cursorId} />
+      <Suspense fallback={<MyActivitySkeleton />}>
+        <MyActivityContainer />
+      </Suspense>
     </main>
   );
 }
