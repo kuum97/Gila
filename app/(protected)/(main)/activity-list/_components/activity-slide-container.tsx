@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-continue */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 'use client';
@@ -33,30 +33,26 @@ export default function ActivitySlideContainer() {
         setUserLocation([currentLocation]);
         return;
       }
-      let firstDistance = 0;
-      let secondeDistance = 0;
-      let nearByLocation;
+      let closestDistance = Infinity;
+      let closestLocation = null;
       // eslint-disable-next-line no-plusplus
       for (let i = 0; i < list.length; i++) {
-        if (mapResult[0].region_2depth_name !== list[i].state) {
-          const distance = calculateDistanceInMeters(
-            mapResult[0].y,
-            mapResult[0].x,
-            list[i].location.latitude,
-            list[i].location.longitude,
-          );
-          secondeDistance = Number((distance / 1000).toFixed(2));
-          if (!firstDistance) {
-            firstDistance = secondeDistance;
-          } else if (firstDistance > secondeDistance) {
-            firstDistance = secondeDistance;
-            nearByLocation = list[i].state;
-          }
+        if (mapResult[0].region_2depth_name === list[i].state) continue;
+        const distance = calculateDistanceInMeters(
+          mapResult[0].y,
+          mapResult[0].x,
+          list[i].location.latitude,
+          list[i].location.longitude,
+        );
+        const distanceInKm = Number((distance / 1000).toFixed(2));
+        if (distanceInKm < closestDistance) {
+          closestDistance = distanceInKm;
+          closestLocation = list[i].state;
         }
       }
       const userLocationList = [
         currentLocation,
-        `${mapResult[0].region_1depth_name} ${nearByLocation}`,
+        `${mapResult[0].region_1depth_name} ${closestLocation}`,
       ];
       setUserLocation([...userLocationList]);
     }
@@ -97,8 +93,8 @@ export default function ActivitySlideContainer() {
           <span className="text-xl text-primary"> 길라</span>를 추천해드릴께요!
         </p>
       </div>
-      {userLocation[0] ? (
-        <ActivitySlide recommendList={data?.activities} />
+      {userLocation[0] && data ? (
+        <ActivitySlide recommendList={data.activities} />
       ) : (
         <div className="px-5">
           <ActivityCardSkeleton />
